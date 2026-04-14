@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DVK Studio — Facilitateur de projets immobiliers basé à Gannes (Oise). Projections 2D/3D, aide à la décision, accompagnement pour particuliers et professionnels.">
+<title>DVK Studio — Facilitateur de projets immobiliers</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════════
+   RESET & VARIABLES
+══════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --teal:        #2B6E7A;
+  --teal-dark:   #1E505A;
+  --teal-light:  #3D8A98;
+  --copper:      #C4622D;
+  --copper-light:#D4753F;
+  --beige:       #F5F0EA;
+  --beige-dark:  #EDE6DC;
+  --cream:       #FAF7F3;
+  --text:        #1C2B2E;
+  --text-mid:    #4A5C60;
+  --text-light:  #7A8C90;
+  --white:       #FFFFFF;
+  --r:           3px;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+/* ══════════════════════════════════════════════
+   UTILITIES
+══════════════════════════════════════════════ */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--copper);
+  background: rgba(196,98,45,0.08);
+  padding: 6px 16px;
+  border-radius: var(--r);
+  border-left: 3px solid var(--copper);
+}
+
+.tag--light {
+  color: var(--copper-light);
+  background: rgba(196,98,45,0.12);
+  border-color: var(--copper-light);
+}
+
+.btn {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--copper);
+  color: white;
+}
+.btn--primary:hover {
+  background: var(--copper-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(196,98,45,0.28);
+  color: white;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--teal);
+  border: 2px solid var(--teal);
+}
+.btn--outline:hover {
+  background: var(--teal);
+  color: white;
+}
+
+.btn--outline-white {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.35);
+}
+.btn--outline-white:hover {
+  border-color: white;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(250,247,243,0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(196,98,45,0.10);
+  transition: box-shadow 0.3s ease;
+}
+
+.nav.scrolled {
+  box-shadow: 0 2px 24px rgba(43,110,122,0.10);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav__logo-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.nav__logo-text {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  line-height: 1;
+}
+
+.nav__logo-sub {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper);
+  display: block;
+  margin-top: 3px;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav__links a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--copper);
+  transition: width 0.25s ease;
+}
+
+.nav__links a:hover { color: var(--copper); }
+.nav__links a:hover::after { width: 100%; }
+
+.nav__cta {
+  background: var(--copper) !important;
+  color: white !important;
+  padding: 9px 22px !important;
+  border-radius: var(--r) !important;
+  transition: background 0.25s ease !important;
+}
+.nav__cta::after { display: none !important; }
+.nav__cta:hover { background: var(--copper-light) !important; color: white !important; }
+
+/* Mobile nav */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav__burger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav__mobile {
+  display: none;
+  flex-direction: column;
+  background: var(--cream);
+  padding: 24px 40px;
+  border-top: 1px solid var(--beige-dark);
+}
+
+.nav__mobile a {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(43,110,122,0.08);
+  display: block;
+}
+
+.nav__mobile a:last-child { border-bottom: none; }
+
+/* ══════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+  padding-top: 72px;
+}
+
+/* Formes organiques */
+.hero__shape {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.hero__shape--1 {
+  width: 480px; height: 380px;
+  background: rgba(43,110,122,0.07);
+  top: -80px; right: -80px;
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 60%;
+  animation: morph 14s ease-in-out infinite;
+}
+
+.hero__shape--2 {
+  width: 300px; height: 300px;
+  background: rgba(196,98,45,0.06);
+  bottom: -60px; left: -40px;
+  border-radius: 30% 70% 50% 50% / 60% 40% 60% 40%;
+  animation: morph 10s ease-in-out infinite reverse;
+}
+
+.hero__shape--3 {
+  width: 180px; height: 180px;
+  background: rgba(43,110,122,0.05);
+  bottom: 15%; right: 8%;
+  animation: floaty 8s ease-in-out infinite;
+}
+
+.hero__shape--4 {
+  width: 100px; height: 100px;
+  background: rgba(196,98,45,0.07);
+  top: 30%; left: 4%;
+  animation: floaty 11s ease-in-out infinite 2s;
+}
+
+@keyframes morph {
+  0%,100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 60%; transform: translate(0,0) rotate(0deg); }
+  33%      { border-radius: 40% 60% 30% 70% / 60% 40% 60% 30%; transform: translate(10px,-14px) rotate(4deg); }
+  66%      { border-radius: 70% 30% 50% 50% / 30% 70% 40% 60%; transform: translate(-8px,10px) rotate(-3deg); }
+}
+
+@keyframes floaty {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
+
+/* Grid lines déco */
+.hero__grid {
+  position: absolute;
+  top: 100px; right: 80px;
+  width: 140px; height: 140px;
+  opacity: 0.08;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.hero__tag {
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero__title {
+  font-size: clamp(32px, 6vw, 60px);
+  font-weight: 900;
+  color: var(--teal-dark);
+  line-height: 1.08;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero__title em {
+  color: var(--copper);
+  font-style: normal;
+  display: block;
+}
+
+.hero__sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.75;
+  max-width: 580px;
+  margin: 0 auto 44px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.hero__ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+/* Stats bar */
+.hero__stats {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid rgba(43,110,122,0.08);
+  box-shadow: 0 8px 32px rgba(43,110,122,0.07);
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1s;
+}
+
+.hero__stat {
+  flex: 1;
+  padding: 24px 20px;
+  text-align: center;
+  border-right: 1px solid var(--beige-dark);
+  transition: background 0.2s;
+}
+
+.hero__stat:last-child { border-right: none; }
+.hero__stat:hover { background: var(--cream); }
+
+.hero__stat-num {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.hero__stat-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Gradient line bottom */
+.hero__line {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--copper), var(--teal), transparent);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════════
+   PROBLEM / SOLUTION
+══════════════════════════════════════════════ */
+.problem {
+  background: var(--teal-dark);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.problem::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: rgba(196,98,45,0.05);
+  border-radius: 50%;
+  top: -200px; right: -100px;
+  pointer-events: none;
+}
+
+.problem::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 50%;
+  bottom: -100px; left: 5%;
+  pointer-events: none;
+}
+
+.problem__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.problem__tag { margin-bottom: 20px; }
+
+.problem__title {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 800;
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.problem__sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.60);
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+.problem__items {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.problem__item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.problem__item-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(196,98,45,0.12);
+  border: 1px solid rgba(196,98,45,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.problem__item-body strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.problem__item-body p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+}
+
+/* Solution box */
+.solution {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 4px;
+  padding: 44px;
+  position: relative;
+}
+
+.solution::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--copper), var(--teal-light));
+  border-radius: 4px 4px 0 0;
+}
+
+.solution h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.solution p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.60);
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.solution__results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.solution__result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+}
+
+.solution__result::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--copper);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   ÉTAPES
+══════════════════════════════════════════════ */
+.steps {
+  padding: 100px 0;
+  background: var(--beige);
+}
+
+.steps__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.steps__header .tag { margin-bottom: 16px; }
+
+.steps__title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--teal-dark);
+  margin-bottom: 12px;
+}
+
+.steps__sub {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.steps__grid {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr 48px 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+.step {
+  background: white;
+  border-radius: 4px;
+  padding: 40px 28px;
+  text-align: center;
+  border: 1px solid rgba(43,110,122,0.08);
+  transition: all 0.3s ease;
+}
+
+.step:hover {
+  border-color: rgba(196,98,45,0.20);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 56px rgba(43,110,122,0.10);
+}
+
+.step__num {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--copper);
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--copper);
+  margin: 0 auto 24px;
+}
+
+.step__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  margin-bottom: 12px;
+}
+
+.step__desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.70;
+}
+
+.step__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 32px;
+  font-size: 24px;
+  color: var(--copper);
+  opacity: 0.30;
+}
+
+/* ══════════════════════════════════════════════
+   OFFRES
+══════════════════════════════════════════════ */
+.offers {
+  padding: 100px 0;
+  background: var(--cream);
+}
+
+.offers__header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.offers__header .tag { margin-bottom: 16px; }
+
+.offers__title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--teal-dark);
+}
+
+/* Tabs */
+.offers__tabs {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin: 32px 0 48px;
+}
+
+.offers__tab {
+  padding: 10px 28px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  background: var(--beige);
+  color: var(--text-light);
+  cursor: pointer;
+  border-radius: var(--r);
+  transition: all 0.25s;
+}
+
+.offers__tab.active {
+  background: white;
+  color: var(--teal);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.offers__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.offer-card {
+  background: white;
+  border-radius: 4px;
+  padding: 36px 32px;
+  border: 1px solid rgba(43,110,122,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.offer-card:hover {
+  border-color: rgba(196,98,45,0.22);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 56px rgba(43,110,122,0.10);
+}
+
+.offer-card--featured {
+  background: var(--teal-dark);
+  border-color: var(--copper);
+}
+
+.offer-card--featured::before {
+  content: 'RECOMMANDÉ';
+  position: absolute;
+  top: 18px; right: -32px;
+  background: var(--copper);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 4px 44px;
+  transform: rotate(45deg);
+}
+
+.offer__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 10px;
+}
+
+.offer__name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--teal-dark);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.offer-card--featured .offer__name { color: white; }
+
+.offer__price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--beige-dark);
+}
+
+.offer-card--featured .offer__price { border-color: rgba(255,255,255,0.1); }
+
+.offer__price-amount {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--teal);
+}
+
+.offer-card--featured .offer__price-amount { color: var(--copper-light); }
+
+.offer__price-unit {
+  font-size: 13px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.offer-card--featured .offer__price-unit { color: rgba(255,255,255,0.45); }
+
+.offer__desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.70;
+  margin-bottom: 24px;
+}
+
+.offer-card--featured .offer__desc { color: rgba(255,255,255,0.60); }
+
+.offer__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.offer__features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.offer-card--featured .offer__features li { color: rgba(255,255,255,0.85); }
+
+.offer__features li::before {
+  content: '';
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--teal);
+  background: rgba(43,110,122,0.06);
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%232B6E7A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.offer-card--featured .offer__features li::before {
+  border-color: var(--copper);
+  background-color: rgba(196,98,45,0.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%23C4622D' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.offer__btn {
+  width: 100%;
+  padding: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 2px solid var(--teal);
+  background: transparent;
+  color: var(--teal);
+  cursor: pointer;
+  border-radius: var(--r);
+  transition: all 0.25s;
+}
+
+.offer__btn:hover {
+  background: var(--teal);
+  color: white;
+}
+
+.offer-card--featured .offer__btn {
+  background: var(--copper);
+  border-color: var(--copper);
+  color: white;
+}
+
+.offer-card--featured .offer__btn:hover {
+  background: var(--copper-light);
+  border-color: var(--copper-light);
+}
+
+/* ══════════════════════════════════════════════
+   POUR QUI
+══════════════════════════════════════════════ */
+.targets {
+  padding: 100px 0;
+  background: var(--beige-dark);
+}
+
+.targets__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+
+.targets__header .tag { margin-bottom: 16px; }
+
+.targets__title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--teal-dark);
+  line-height: 1.15;
+}
+
+.targets__sub {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+.targets__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.target {
+  background: white;
+  border-radius: 4px;
+  padding: 32px 24px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.target:hover {
+  border-left-color: var(--copper);
+  transform: translateX(4px);
+  box-shadow: 0 8px 32px rgba(43,110,122,0.08);
+}
+
+.target__icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.target__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  margin-bottom: 8px;
+}
+
+.target__desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════════
+   HEMEA (PLACEHOLDER)
+══════════════════════════════════════════════ */
+.hemea {
+  padding: 100px 0;
+  background: white;
+  border-top: 1px solid var(--beige-dark);
+}
+
+.hemea__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hemea__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--beige);
+  border: 1px solid var(--beige-dark);
+  border-radius: var(--r);
+  padding: 7px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+}
+
+.hemea__badge-dot {
+  width: 8px; height: 8px;
+  background: #F5A623;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.6; transform: scale(0.85); }
+}
+
+.hemea__title {
+  font-size: clamp(24px, 3.5vw, 38px);
+  font-weight: 800;
+  color: var(--teal-dark);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.hemea__desc {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.hemea__visual {
+  background: var(--beige);
+  border-radius: 4px;
+  padding: 48px 40px;
+  text-align: center;
+  border: 2px dashed rgba(43,110,122,0.18);
+}
+
+.hemea__visual-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.hemea__visual h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--teal-dark);
+  margin-bottom: 12px;
+}
+
+.hemea__visual p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.70;
+}
+
+/* ══════════════════════════════════════════════
+   CTA FINAL
+══════════════════════════════════════════════ */
+.cta {
+  background: var(--teal-dark);
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  background: rgba(196,98,45,0.05);
+  border-radius: 50%;
+  top: -300px; left: -150px;
+  pointer-events: none;
+}
+
+.cta::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 50%;
+  bottom: -150px; right: 5%;
+  pointer-events: none;
+}
+
+.cta__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta__tag { margin-bottom: 24px; }
+
+.cta__title {
+  font-size: clamp(32px, 5.5vw, 56px);
+  font-weight: 800;
+  color: white;
+  line-height: 1.08;
+  margin-bottom: 20px;
+}
+
+.cta__sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.60);
+  line-height: 1.75;
+  margin-bottom: 48px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta__btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.cta__contacts {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  margin-bottom: 48px;
+}
+
+.cta__contact-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 6px;
+}
+
+.cta__contact-val {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+/* Zones */
+.cta__zones {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.cta__zones-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+
+.cta__zones-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.cta__zone {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.70);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px;
+  padding: 5px 14px;
+}
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+.footer {
+  background: #111E21;
+  padding: 32px 0;
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer__brand {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.footer__links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer__links a {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.footer__links a:hover { color: rgba(255,255,255,0.60); }
+
+.footer__copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.20);
+  letter-spacing: 0.05em;
+}
+
+/* ══════════════════════════════════════════════
+   BOUTON FLOTTANT
+══════════════════════════════════════════════ */
+.floating-rdv {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.floating-rdv a {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: var(--r);
+  border: 2px solid var(--copper);
+  color: var(--copper);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: var(--cream);
+  font-size: 11px;
+  box-shadow: 0 4px 20px rgba(196,98,45,0.20);
+  transition: all 0.25s ease;
+}
+
+.floating-rdv a:hover {
+  background: var(--copper);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(196,98,45,0.30);
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .nav__links { display: none; }
+  .nav__burger { display: flex; }
+  .nav__mobile.open { display: flex; }
+
+  .hero__stats { flex-wrap: wrap; }
+  .hero__stat {
+    flex: 1 1 40%;
+    border-right: none;
+    border-bottom: 1px solid var(--beige-dark);
+  }
+  .hero__stat:nth-child(odd) { border-right: 1px solid var(--beige-dark); }
+  .hero__stat:last-child, .hero__stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+
+  .problem__grid { grid-template-columns: 1fr; gap: 48px; }
+  .steps__grid { grid-template-columns: 1fr; gap: 16px; }
+  .step__arrow { transform: rotate(90deg); padding: 0; height: 32px; display: flex; }
+  .offers__grid { grid-template-columns: 1fr; }
+  .targets__header { grid-template-columns: 1fr; gap: 24px; }
+  .targets__grid { grid-template-columns: 1fr 1fr; }
+  .hemea__inner { grid-template-columns: 1fr; gap: 40px; }
+  .cta__contacts { gap: 28px; }
+  .footer__inner { justify-content: center; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 20px; }
+  .hero__ctas { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 300px; text-align: center; }
+  .targets__grid { grid-template-columns: 1fr; }
+  .cta__btns { flex-direction: column; align-items: center; }
+  .floating-rdv { bottom: 16px; right: 16px; }
+  .floating-rdv a { padding: 10px 18px; font-size: 10px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="navbar">
+  <div class="nav__inner">
+    <a href="#accueil" class="nav__logo">
+      <svg class="nav__logo-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 30 L30 22 L38 30 L38 42 L22 42 Z" stroke="#2B6E7A" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+        <rect x="26" y="34" width="8" height="8" stroke="#2B6E7A" stroke-width="2" fill="none"/>
+        <ellipse cx="30" cy="22" rx="4" ry="10" stroke="#C4622D" stroke-width="2" fill="none" transform="rotate(-30 30 22)"/>
+        <ellipse cx="30" cy="22" rx="4" ry="10" stroke="#C4622D" stroke-width="2" fill="none" transform="rotate(30 30 22)"/>
+        <ellipse cx="30" cy="22" rx="4" ry="10" stroke="#2B6E7A" stroke-width="2" fill="none"/>
+        <ellipse cx="30" cy="22" rx="4" ry="10" stroke="#2B6E7A" stroke-width="2" fill="none" transform="rotate(-60 30 22)"/>
+        <ellipse cx="30" cy="22" rx="4" ry="10" stroke="#2B6E7A" stroke-width="2" fill="none" transform="rotate(60 30 22)"/>
+        <path d="M30 44 L30 52 M26 50 L30 52 L34 50" stroke="#2B6E7A" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div>
+        <div class="nav__logo-text">DVK Studio</div>
+        <span class="nav__logo-sub">Facilitateur immobilier</span>
+      </div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#methode">Comment ça marche</a></li>
+      <li><a href="#offres">Offres</a></li>
+      <li><a href="#contact" class="nav__cta">Prendre contact</a></li>
+    </ul>
+    <div class="nav__burger" id="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="nav__mobile" id="mobileMenu">
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#methode" onclick="toggleMenu()">Comment ça marche</a>
+    <a href="#offres" onclick="toggleMenu()">Offres</a>
+    <a href="#contact" onclick="toggleMenu()">Prendre contact</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="accueil">
+  <div class="hero__shape hero__shape--1"></div>
+  <div class="hero__shape hero__shape--2"></div>
+  <div class="hero__shape hero__shape--3"></div>
+  <div class="hero__shape hero__shape--4"></div>
+  <svg class="hero__grid" viewBox="0 0 140 140" fill="none">
+    <rect x="0" y="0" width="140" height="140" stroke="#2B6E7A" stroke-width="1"/>
+    <rect x="20" y="20" width="100" height="100" stroke="#2B6E7A" stroke-width="1"/>
+    <rect x="40" y="40" width="60" height="60" stroke="#2B6E7A" stroke-width="1"/>
+  </svg>
+  <div class="hero__inner container">
+    <div class="hero__tag tag">Facilitateur de projets immobiliers</div>
+    <h1 class="hero__title">
+      Vos clients voient le potentiel.
+      <em>Vos ventes décollent.</em>
+    </h1>
+    <p class="hero__sub">DVK Studio transforme un bien difficile à imaginer en opportunité concrète. Projections rapides, plans intelligents, vision technique — pour que chaque décision se prenne avec clarté.</p>
+    <div class="hero__ctas">
+      <a href="#offres" class="btn btn--primary">Voir les offres</a>
+      <a href="#methode" class="btn btn--outline">Comment ça marche</a>
+    </div>
+    <div class="hero__stats reveal">
+      <div class="hero__stat">
+        <span class="hero__stat-num">48h</span>
+        <span class="hero__stat-label">Délai moyen</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-num">2D / 3D</span>
+        <span class="hero__stat-label">Projections claires</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-num">Pro & Part.</span>
+        <span class="hero__stat-label">Offres adaptées</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-num">Sans engagement</span>
+        <span class="hero__stat-label">Formule partenaire</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero__line"></div>
+</section>
+
+<!-- ─── PROBLÈME / SOLUTION ─── -->
+<section class="problem" id="services">
+  <div class="container">
+    <div class="problem__grid">
+      <div>
+        <div class="tag tag--light reveal">Le constat</div>
+        <h2 class="problem__title reveal reveal-d1">Un client qui hésite,<br>c'est une vente perdue.</h2>
+        <p class="problem__sub reveal reveal-d2">Dans la majorité des projets bloqués, le problème n'est pas le prix ni le bien — c'est l'incapacité à se projeter.</p>
+        <div class="problem__items">
+          <div class="problem__item reveal reveal-d2">
+            <div class="problem__item-icon">⏸</div>
+            <div class="problem__item-body">
+              <strong>Les décisions traînent</strong>
+              <p>Un acquéreur qui n'imagine pas le résultat reporte indéfiniment sa décision.</p>
+            </div>
+          </div>
+          <div class="problem__item reveal reveal-d3">
+            <div class="problem__item-icon">❓</div>
+            <div class="problem__item-body">
+              <strong>Le potentiel est invisible</strong>
+              <p>Un bien mal agencé ou à rénover cache sa valeur derrière son état actuel.</p>
+            </div>
+          </div>
+          <div class="problem__item reveal reveal-d4">
+            <div class="problem__item-icon">📉</div>
+            <div class="problem__item-body">
+              <strong>Les opportunités se perdent</strong>
+              <p>Sans projection concrète, un investisseur doute et finit par passer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="solution reveal reveal-d2">
+        <h3>La réponse DVK Studio</h3>
+        <p>Je traduis le potentiel d'un bien en images concrètes et analyses claires — pour que votre client comprenne, décide, et agisse.</p>
+        <div class="solution__results">
+          <div class="solution__result">Vos clients comprennent le projet immédiatement</div>
+          <div class="solution__result">Les décisions sont prises plus vite</div>
+          <div class="solution__result">Les ventes et chantiers se déclenchent</div>
+          <div class="solution__result">Vous gagnez du temps sur chaque dossier</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ÉTAPES ─── -->
+<section class="steps" id="methode">
+  <div class="container">
+    <div class="steps__header">
+      <div class="tag reveal">Processus</div>
+      <h2 class="steps__title reveal reveal-d1">Simple. Rapide. Efficace.</h2>
+      <p class="steps__sub reveal reveal-d2">3 étapes pour transformer un bien difficile à imaginer en projet décidé.</p>
+    </div>
+    <div class="steps__grid">
+      <div class="step reveal reveal-d1">
+        <div class="step__num">1</div>
+        <div class="step__title">Vous identifiez le bien</div>
+        <p class="step__desc">Un client hésite sur un bien à rénover ou mal agencé ? C'est le signal pour faire appel à DVK Studio.</p>
+      </div>
+      <div class="step__arrow reveal">→</div>
+      <div class="step reveal reveal-d2">
+        <div class="step__num">2</div>
+        <div class="step__title">Je réalise la projection</div>
+        <p class="step__desc">Relevé, analyse du potentiel, plans 2D/3D et vues d'aménagement réalisés rapidement avec une lecture technique claire.</p>
+      </div>
+      <div class="step__arrow reveal">→</div>
+      <div class="step reveal reveal-d3">
+        <div class="step__num">3</div>
+        <div class="step__title">Votre client se projette</div>
+        <p class="step__desc">Grâce à une visualisation concrète, votre client prend sa décision en confiance. La vente se débloque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OFFRES ─── -->
+<section class="offers" id="offres">
+  <div class="container">
+    <div class="offers__header">
+      <div class="tag reveal">Prestations</div>
+      <h2 class="offers__title reveal reveal-d1">Des offres adaptées à chaque besoin</h2>
+    </div>
+    <div class="offers__tabs">
+      <button class="offers__tab active" onclick="switchTab('pro', this)">Professionnels</button>
+      <button class="offers__tab" onclick="switchTab('part', this)">Particuliers</button>
+    </div>
+
+    <!-- PRO -->
+    <div id="tab-pro" class="offers__grid">
+      <div class="offer-card reveal reveal-d1">
+        <div class="offer__label">Essentiel</div>
+        <div class="offer__name">Projection Rapide</div>
+        <div class="offer__price">
+          <span class="offer__price-amount">300€</span>
+          <span class="offer__price-unit">HT · partenaire 250€</span>
+        </div>
+        <p class="offer__desc">Visualisation simple et efficace du potentiel d'un bien. Idéal pour lever un doute et appuyer un argument commercial.</p>
+        <ul class="offer__features">
+          <li>Relevé 2D/3D simplifié</li>
+          <li>Support d'aide à la vente</li>
+          <li>Délai 48h</li>
+        </ul>
+        <button class="offer__btn" onclick="window.location.href='mailto:contact@dvkstudio.fr'">Demander un devis</button>
+      </div>
+      <div class="offer-card offer-card--featured reveal reveal-d2">
+        <div class="offer__label">Complet</div>
+        <div class="offer__name">Aide à la Décision</div>
+        <div class="offer__price">
+          <span class="offer__price-amount">600€</span>
+          <span class="offer__price-unit">HT · partenaire 450€</span>
+        </div>
+        <p class="offer__desc">Analyse approfondie pour sécuriser une décision d'achat grâce à une vision claire des possibilités d'aménagement.</p>
+        <ul class="offer__features">
+          <li>Projection 2D/3D réaliste</li>
+          <li>Rapport d'analyse inclus</li>
+          <li>Support client premium</li>
+          <li>Délai sous 5 jours</li>
+        </ul>
+        <button class="offer__btn" onclick="window.location.href='mailto:contact@dvkstudio.fr'">Devenir partenaire</button>
+      </div>
+      <div class="offer-card reveal reveal-d3">
+        <div class="offer__label">Abonnement</div>
+        <div class="offer__name">Formule Partenaire</div>
+        <div class="offer__price">
+          <span class="offer__price-amount">500€</span>
+          <span class="offer__price-unit">HT / mois · sans engagement</span>
+        </div>
+        <p class="offer__desc">Pour les professionnels actifs. Intégrez DVK Studio comme outil d'aide à la décision récurrent dans vos projets.</p>
+        <ul class="offer__features">
+          <li>3 projections rapides / mois</li>
+          <li>ou 1 projection + 1 aide à la décision</li>
+          <li>Priorité agenda</li>
+          <li>Tarifs préférentiels</li>
+        </ul>
+        <button class="offer__btn" onclick="window.location.href='mailto:contact@dvkstudio.fr'">Prendre contact</button>
+      </div>
+    </div>
+
+    <!-- PARTICULIERS -->
+    <div id="tab-part" class="offers__grid" style="display:none;">
+      <div class="offer-card reveal reveal-d1">
+        <div class="offer__label">Essentiel</div>
+        <div class="offer__name">Visite Avant Achat</div>
+        <div class="offer__price">
+          <span class="offer__price-amount">180€</span>
+          <span class="offer__price-unit">TTC</span>
+        </div>
+        <p class="offer__desc">Visite de conseil avant acquisition pour évaluer le bien avec un œil technique et objectif.</p>
+        <ul class="offer__features">
+          <li>Analyse du potentiel du bien</li>
+          <li>Identification des contraintes</li>
+          <li>Recommandations d'aménagement</li>
+          <li>Points de vigilance avant achat</li>
+        </ul>
+        <button class="offer__btn" onclick="window.location.href='mailto:contact@dvkstudio.fr'">Prendre RDV</button>
+      </div>
+      <div class="offer-card reveal reveal-d2">
+        <div class="offer__label">Conseil</div>
+        <div class="offer__name">Visite Aménagement & Déco</div>
+        <div class="offer__price">
+          <span class="offer__price-amount">180€</span>
+          <span class="offer__price-unit">TTC</span>
+        </div>
+        <p class="offer__desc">Accompagnement pour optimiser votre intérieur avec analyse des volumes, circulations et orientations décoratives.</p>
+        <ul class="offer__features">
+          <li>Analyse des volumes et usages</li>
+          <li>Étude des circulations</li>
+          <li>Recommandations d'agencement</li>
+          <li>Orientations esthétiques</li>
+        </ul>
+        <button class="offer__btn" onclick="window.location.href='mailto:contact@dvkstudio.fr'">Prendre RDV</button>
+      </div>
+      <div class="offer-card offer-card--featured reveal reveal-d3">
+        <div class="offer__label">Pack complet</div>
+        <div class="offer__name">Projection Express</div>
+        <div class="offer__price">
+          <span class="offer__price-amount">600€</span>
+          <span class="offer__price-unit">TTC</span>
+        </div>
+        <p class="offer__desc">Mission complète d'aide à la décision pour préparer votre projet de A à Z avec plans et modélisation.</p>
+        <ul class="offer__features">
+          <li>Visite de conseil incluse</li>
+          <li>Plans 2D simplifiés</li>
+          <li>Modélisation 3D simplifiée</li>
+          <li>Vues de projection</li>
+        </ul>
+        <button class="offer__btn" onclick="window.location.href='mailto:contact@dvkstudio.fr'">Prendre RDV</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── POUR QUI ─── -->
+<section class="targets">
+  <div class="container">
+    <div class="targets__header">
+      <div>
+        <div class="tag reveal">Pour qui ?</div>
+        <h2 class="targets__title reveal reveal-d1">Un outil au service<br>des professionnels</h2>
+      </div>
+      <p class="targets__sub reveal reveal-d2">DVK Studio s'intègre naturellement dans le flux de travail des acteurs de l'immobilier et de la rénovation.</p>
+    </div>
+    <div class="targets__grid">
+      <div class="target reveal reveal-d1"><span class="target__icon">🏠</span><div class="target__title">Agents immobiliers</div><p class="target__desc">Débloquez les dossiers où vos clients hésitent. Accélérez vos ventes sur les biens à rénover.</p></div>
+      <div class="target reveal reveal-d2"><span class="target__icon">📊</span><div class="target__title">Marchands de biens</div><p class="target__desc">Visualisez le potentiel de vos acquisitions avant travaux. Sécurisez vos décisions d'achat-revente.</p></div>
+      <div class="target reveal reveal-d3"><span class="target__icon">💼</span><div class="target__title">Investisseurs</div><p class="target__desc">Obtenez une lecture claire d'un bien avant de vous engager. Validez la rentabilité par la projection.</p></div>
+      <div class="target reveal reveal-d1"><span class="target__icon">🔧</span><div class="target__title">Entreprises de rénovation</div><p class="target__desc">Proposez une vision du résultat avant chantier. Réduisez les hésitations et sécurisez vos devis.</p></div>
+      <div class="target reveal reveal-d2"><span class="target__icon">📐</span><div class="target__title">Architectes & concepteurs</div><p class="target__desc">Un regard complémentaire pour les phases de pré-projet et d'aide à la décision.</p></div>
+      <div class="target reveal reveal-d3"><span class="target__icon">🏗️</span><div class="target__title">Courtiers en rénovation</div><p class="target__desc">Appuyez vos recommandations avec des projections concrètes. Facilitez le passage à l'acte.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HEMEA ─── -->
+<section class="hemea">
+  <div class="container">
+    <div class="hemea__inner">
+      <div class="reveal">
+        <div class="hemea__badge"><span class="hemea__badge-dot"></span> Prochainement disponible</div>
+        <h2 class="hemea__title">Courtage en travaux<br>avec HEMEA</h2>
+        <p class="hemea__desc">DVK Studio intègre bientôt une offre de courtage en travaux en partenariat avec HEMEA — pour aller encore plus loin dans l'accompagnement de vos projets de rénovation.</p>
+        <a href="mailto:contact@dvkstudio.fr" class="btn btn--primary">Être informé en priorité</a>
+      </div>
+      <div class="hemea__visual reveal reveal-d2">
+        <div class="hemea__visual-label">🚧 En cours de déploiement</div>
+        <h3>Votre projet clé en main</h3>
+        <p>Projection + mise en relation avec des entreprises de rénovation qualifiées via le réseau HEMEA. Du plan au chantier, un seul interlocuteur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta__inner">
+      <div class="tag tag--light reveal">Contact</div>
+      <h2 class="cta__title reveal reveal-d1">Parlons de votre projet.</h2>
+      <p class="cta__sub reveal reveal-d2">Un bien difficile à vendre ? Un client qui hésite ? Contactez-moi directement — je vous réponds sous 24h.</p>
+      <div class="cta__btns reveal reveal-d3">
+        <a href="tel:+33640324752" class="btn btn--primary">06 40 32 47 52</a>
+        <a href="mailto:contact@dvkstudio.fr" class="btn btn--outline-white">Envoyer un message</a>
+      </div>
+      <div class="cta__contacts reveal reveal-d4">
+        <div>
+          <div class="cta__contact-label">Téléphone</div>
+          <div class="cta__contact-val">06 40 32 47 52</div>
+        </div>
+        <div>
+          <div class="cta__contact-label">Email</div>
+          <div class="cta__contact-val">contact@dvkstudio.fr</div>
+        </div>
+        <div>
+          <div class="cta__contact-label">Réponse</div>
+          <div class="cta__contact-val">Sous 24h</div>
+        </div>
+      </div>
+      <div class="cta__zones reveal">
+        <div class="cta__zones-label">Zones d'intervention</div>
+        <div class="cta__zones-list">
+          <span class="cta__zone">Chantilly</span>
+          <span class="cta__zone">Senlis</span>
+          <span class="cta__zone">Creil</span>
+          <span class="cta__zone">Clermont</span>
+          <span class="cta__zone">Compiègne</span>
+          <span class="cta__zone">Beauvais</span>
+          <span class="cta__zone">Soissons</span>
+          <span class="cta__zone">Laon</span>
+          <span class="cta__zone">Amiens</span>
+          <span class="cta__zone">& alentours</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">DVK Studio · Kévin De Vlieger</div>
+      <div class="footer__links">
+        <a href="#">Mentions légales</a>
+        <a href="#">CGV</a>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="footer__copy">RCS Paris 943 613 455 00014</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── BOUTON FLOTTANT ─── -->
+<div class="floating-rdv" id="floatingRdv">
+  <a href="mailto:contact@dvkstudio.fr">Prendre rendez-vous</a>
+</div>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// Tab switching
+function switchTab(tab, btn) {
+  document.getElementById('tab-pro').style.display = tab === 'pro' ? 'grid' : 'none';
+  document.getElementById('tab-part').style.display = tab === 'part' ? 'grid' : 'none';
+  document.querySelectorAll('.offers__tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#tab-' + tab + ' .reveal').forEach(el => {
+    el.classList.remove('visible');
+    setTimeout(() => el.classList.add('visible'), 80);
+  });
+}
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Floating btn hide on contact section
+const contactSection = document.getElementById('contact');
+const floatingBtn = document.getElementById('floatingRdv');
+window.addEventListener('scroll', () => {
+  if (!contactSection) return;
+  const rect = contactSection.getBoundingClientRect();
+  const inView = rect.top < window.innerHeight && rect.bottom > 0;
+  floatingBtn.style.opacity = inView ? '0' : '1';
+  floatingBtn.style.pointerEvents = inView ? 'none' : 'auto';
+}, { passive: true });
+</script>
+
+</body>
+</html>
