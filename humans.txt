@@ -1,0 +1,22 @@
+/* TEAM */
+Facilitateur immobilier : Kévin De Vlieger
+Contact : contact@dvkstudio.fr
+Téléphone : 06 40 32 47 52
+Localisation : Gannes, Oise, Hauts-de-France, France
+
+/* ENTREPRISE */
+DVK Studio
+SIREN : 892 737 156
+SIRET : 89273715600026
+APE : 7410Z (Activités spécialisées de design)
+RNE : 18/03/2026
+Statut : Entrepreneur individuel
+
+/* SITE */
+Standards : HTML5, CSS3
+Accessibilité : WCAG 2.1 AA
+Dernière mise à jour : 2026-04-18
+Langue : Français
+
+/* MERCI */
+Merci de votre visite sur DVK Studio.

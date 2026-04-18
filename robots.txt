@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /*.json$
+
+# Crawl-delay pour éviter surcharge serveur
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://dvkstudio.fr/sitemap.xml
+
+# Réseaux sociaux - autoriser crawlers spécifiques
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
