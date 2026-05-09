@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité | DVK Studio</title>
+<meta name="description" content="Politique de confidentialité RGPD de DVK Studio – Tally, Calendly, GitHub Pages.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%231a3f4d"/><path d="M14,44 C6,35 4,22 12,14 C15,21 14,33 14,44Z" fill="none" stroke="%23225560" stroke-width="2"/><path d="M24,46 C18,34 14,20 20,10 C25,21 24,34 24,46Z" fill="none" stroke="%23225560" stroke-width="2"/><path d="M30,47 C24,33 24,18 30,7 C36,18 36,33 30,47Z" fill="none" stroke="%23D96C4C" stroke-width="2.2"/><path d="M38,47 C34,33 34,18 38,7 C42,18 42,33 38,47Z" fill="none" stroke="%23D96C4C" stroke-width="2.2"/><path d="M44,46 C44,34 43,21 49,10 C55,20 52,34 44,46Z" fill="none" stroke="%23225560" stroke-width="2"/><path d="M54,44 C54,33 53,21 56,14 C64,22 62,35 54,44Z" fill="none" stroke="%23225560" stroke-width="2"/><polyline points="22,32 34,16 46,32" fill="none" stroke="white" stroke-width="2.2" stroke-linejoin="round"/><rect x="26" y="32" width="16" height="14" fill="none" stroke="white" stroke-width="2" rx="1"/><rect x="30" y="35" width="8" height="7" fill="none" stroke="white" stroke-width="1.5" rx="1"/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* DVK STUDIO — SHARED CSS */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --petrol:      #225560;
+  --petrol-deep: #1a3f4d;
+  --petrol-mid:  #2d6e7e;
+  --petrol-pale: #6FA8AD;
+  --terra:       #D96C4C;
+  --terra-light: #e8835f;
+  --terra-pale:  #F2C1B1;
+  --cream:       #F7F3EE;
+  --beige:       #EDE8E0;
+  --beige-mid:   #DDD8D0;
+  --sand:        #C8C0B4;
+  --warm-gray:   #8C857C;
+  --dark:        #1C1A18;
+  --white:       #FFFFFF;
+  --font: 'Montserrat', sans-serif;
+  --r: 6px; --r-lg: 12px; --r-xl: 20px;
+  --sh-sm: 0 2px 12px rgba(34,85,96,.07);
+  --sh: 0 4px 28px rgba(34,85,96,.10);
+  --sh-lg: 0 12px 56px rgba(34,85,96,.14);
+  --sh-xl: 0 24px 80px rgba(34,85,96,.18);
+  --ease: .35s cubic-bezier(.4,0,.2,1);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--cream); color: var(--dark); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(247,243,238,.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(34,85,96,.08); transition: box-shadow var(--ease); }
+nav.scrolled { box-shadow: var(--sh); }
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo img { height: 50px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { font-family: var(--font); font-size: 11.5px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; color: var(--warm-gray); text-decoration: none; transition: color var(--ease); }
+.nav-links a:hover { color: var(--petrol); }
+.nav-cta { background: var(--terra); color: var(--white) !important; padding: 10px 22px; border-radius: var(--r); transition: background var(--ease), transform var(--ease) !important; }
+.nav-cta:hover { background: var(--terra-light) !important; transform: translateY(-1px); }
+.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+.burger span { display: block; width: 22px; height: 2px; background: var(--petrol-deep); border-radius: 2px; transition: var(--ease); }
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mob-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--beige-mid); padding: 20px 28px; flex-direction: column; gap: 4px; z-index: 999; box-shadow: var(--sh); }
+.mob-menu.open { display: flex; }
+.mob-menu a { font-family: var(--font); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--warm-gray); padding: 12px 0; text-decoration: none; border-bottom: 1px solid rgba(34,85,96,.07); transition: color var(--ease); }
+.mob-menu a:hover { color: var(--petrol); }
+.mob-cta-mob { background: var(--terra); color: var(--white) !important; text-align: center; padding: 14px !important; border-radius: var(--r); border-bottom: none !important; margin-top: 12px; }
+
+/* PAGE HERO */
+.page-hero { background: var(--petrol-deep); padding: 108px 0 60px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(111,168,173,.18) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(217,108,76,.1) 0%, transparent 55%); }
+.page-hero .cnt { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+/* LAYOUT */
+.cnt { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+.section { padding: 96px 0; }
+
+/* EYEBROW */
+.eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--terra); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--terra-pale); flex-shrink: 0; }
+.eyebrow-light { color: var(--terra-pale) !important; }
+.eyebrow-light::before { background: rgba(242,193,177,.4) !important; }
+
+/* BTNS */
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; padding: 15px 30px; border-radius: var(--r); transition: var(--ease); line-height: 1; }
+.btn::after { content: '→'; font-size: 14px; }
+.btn-petrol { background: var(--petrol-deep); color: var(--white); }
+.btn-petrol:hover { background: var(--petrol-mid); transform: translateY(-2px); box-shadow: var(--sh); }
+.btn-terra { background: var(--terra); color: var(--white); }
+.btn-terra:hover { background: var(--terra-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,108,76,.3); }
+.btn-white { background: var(--white); color: var(--terra); }
+.btn-white:hover { background: var(--cream); transform: translateY(-2px); }
+.btn-outline-white { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.5); }
+.btn-outline-white:hover { background: rgba(255,255,255,.12); border-color: var(--white); }
+
+/* FOOTER */
+footer { background: var(--dark); padding: 60px 0 0; }
+.footer-bottom { padding: 22px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 12px; color: rgba(255,255,255,.22); text-decoration: none; transition: color var(--ease); }
+.footer-legal a:hover { color: rgba(255,255,255,.5); }
+
+/* FADE IN */
+.fi { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.fi.v { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .burger { display: flex; }
+  .section { padding: 68px 0; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+</style>
+<style>
+.legal-content { max-width: 780px; margin: 0 auto; }
+.legal-content h2 { font-family: var(--font); font-size: 19px; color: var(--petrol); margin: 32px 0 10px; padding-top: 24px; border-top: 1px solid var(--beige-mid); }
+.legal-content h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.legal-content p { font-size: 14.5px; color: var(--warm-gray); line-height: 1.78; margin-bottom: 10px; }
+.legal-content ul { margin: 8px 0 14px 22px; font-size: 14.5px; color: var(--warm-gray); line-height: 1.78; }
+.legal-content a { color: var(--petrol); }
+.legal-content strong { color: var(--petrol-deep); }
+.legal-content table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
+.legal-content td { padding: 10px 14px; border: 1px solid var(--beige-mid); color: var(--warm-gray); vertical-align: top; }
+.legal-content td:first-child { font-weight: 600; color: var(--petrol-deep); width: 36%; background: var(--cream); }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 76" height="50" aria-label="DVK Studio" style="display:block">
+  <g transform="translate(6,2) scale(0.68)">
+    <!-- Pétales bleu pétrole gauche ext -->
+    <path d="M28,70 C8,56 4,34 19,19 C24,30 27,46 28,70Z" fill="none" stroke="#225560" stroke-width="2.3" stroke-linejoin="round"/>
+    <path d="M46,72 C33,53 23,31 34,14 C41,28 44,49 46,72Z" fill="none" stroke="#225560" stroke-width="2.3" stroke-linejoin="round"/>
+    <!-- Pétales terracotta centre -->
+    <path d="M57,74 C46,53 46,29 57,10 C64,27 64,53 57,74Z" fill="none" stroke="#D96C4C" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M73,74 C66,53 66,27 73,10 C80,27 80,53 73,74Z" fill="none" stroke="#D96C4C" stroke-width="2.6" stroke-linejoin="round"/>
+    <!-- Pétales bleu pétrole droite ext -->
+    <path d="M84,72 C86,49 89,28 96,14 C107,31 97,53 84,72Z" fill="none" stroke="#225560" stroke-width="2.3" stroke-linejoin="round"/>
+    <path d="M102,70 C103,46 106,30 111,19 C126,34 122,56 102,70Z" fill="none" stroke="#225560" stroke-width="2.3" stroke-linejoin="round"/>
+    <!-- Tige + graine -->
+    <line x1="65" y1="74" x2="65" y2="86" stroke="#225560" stroke-width="2"/>
+    <line x1="65" y1="80" x2="65" y2="74" stroke="#225560" stroke-width="1.5"/>
+    <path d="M57,86 Q65,80 73,86 Q65,96 57,86Z" fill="none" stroke="#225560" stroke-width="2"/>
+    <!-- TOIT maison -->
+    <polyline points="41,43 65,17 89,43" fill="none" stroke="#225560" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Cheminée -->
+    <rect x="74" y="21" width="7" height="11" fill="none" stroke="#225560" stroke-width="2.1" rx="1"/>
+    <!-- Murs -->
+    <rect x="47" y="43" width="36" height="28" fill="none" stroke="#225560" stroke-width="2.3" rx="1"/>
+    <!-- Fenêtre 2x2 -->
+    <rect x="56" y="49" width="18" height="14" fill="none" stroke="#225560" stroke-width="1.9" rx="1"/>
+    <line x1="65" y1="49" x2="65" y2="63" stroke="#225560" stroke-width="1.3"/>
+    <line x1="56" y1="56" x2="74" y2="56" stroke="#225560" stroke-width="1.3"/>
+  </g>
+  <!-- TEXTE -->
+  <text x="110" y="32" font-family="Montserrat,sans-serif" font-weight="800" font-size="18" letter-spacing="3.5" fill="#1a3f4d">DVK STUDIO</text>
+  <text x="111" y="48" font-family="Montserrat,sans-serif" font-weight="500" font-size="8.5" letter-spacing="2.8" fill="#8C857C">FACILITATEUR IMMOBILIER</text>
+</svg></a>
+    <ul class="nav-links">
+      <li><a href="index.html#particulier">Particuliers</a></li>
+      <li><a href="index.html#professionnel">Professionnels</a></li>
+      <li><a href="index.html#offres">Offres</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="contact.html" class="nav-cta">Préparer mon projet</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-menu" id="mobmenu">
+  <a href="index.html" onclick="closeMob()">Accueil</a>
+  <a href="index.html#offres" onclick="closeMob()">Nos offres</a>
+  <a href="contact.html" class="mob-cta-mob" onclick="closeMob()">Préparer mon projet →</a>
+</div>
+<div class="page-hero">
+  <div class="cnt">
+    <div class="eyebrow eyebrow-light">Légal</div>
+    <h1 style="color:var(--white);font-size:clamp(26px,4vw,44px);font-weight:800;letter-spacing:-.5px;margin-bottom:12px">Politique de confidentialité</h1>
+    <p style="color:rgba(255,255,255,.6);font-size:14.5px">Conforme RGPD – En vigueur au 1er avril 2026</p>
+  </div>
+</div>
+<section class="section" style="background:var(--white)">
+  <div class="cnt">
+    <div class="legal-content">
+<h2>Responsable du traitement</h2>
+<p>Kevin De Vlieger – DVK Studio – 17 Rue Machaut, 60120 Gannes – <a href="mailto:contact@dvkstudio.fr">contact@dvkstudio.fr</a></p>
+<h2>Données collectées</h2>
+<ul>
+<li>Nom, prénom, email, téléphone</li>
+<li>Description du projet immobilier et localisation du bien</li>
+<li>Données de prise de rendez-vous (Calendly)</li>
+<li>Données de navigation techniques (GitHub Pages)</li>
+</ul>
+<h2>Finalité du traitement</h2>
+<p>Données utilisées exclusivement pour répondre à vos demandes et qualifier votre projet. Non transmises à des tiers à des fins commerciales.</p>
+<h2>Outils tiers</h2>
+<p><strong>Tally</strong> (tally.so) : formulaires – politique de confidentialité Tally applicable.</p>
+<p><strong>Calendly</strong> (calendly.com) : prise de rendez-vous – politique Calendly applicable.</p>
+<p><strong>GitHub Pages</strong> (github.com) : hébergement – peut collecter des données techniques (logs, IP).</p>
+<p><strong>Google Fonts</strong> : polices chargées depuis Google – politique Google applicable.</p>
+<h2>Réseaux sociaux</h2>
+<p>Ce site contient des liens vers Instagram, Facebook et LinkedIn. DVK Studio ne contrôle pas les données collectées par ces plateformes.</p>
+<h2>Conservation</h2>
+<p>Données conservées 3 ans maximum à compter du dernier contact, ou jusqu'à exercice de votre droit de suppression.</p>
+<h2>Vos droits (RGPD)</h2>
+<p>Droit d'accès, rectification, suppression, portabilité, opposition. Contact : <a href="mailto:contact@dvkstudio.fr">contact@dvkstudio.fr</a><br>Réclamation possible auprès de la CNIL : <a href="https://www.cnil.fr" target="_blank">cnil.fr</a></p>
+</div>
+  </div>
+</section>
+<footer>
+  <div class="cnt">
+    <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,.07);padding-top:24px;margin-top:0">
+      <p style="font-size:12px;color:rgba(255,255,255,.22)">© 2026 DVK Studio – EI Kevin De Vlieger · SIRET 892 737 156 00026 · TVA FR [à compléter] · 17 Rue Machaut, 60120 Gannes</p>
+      <div class="footer-legal">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="cgv.html">CGV</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = document.getElementById('nav');
+  if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), {passive:true});
+  const burger = document.getElementById('burger');
+  const mob = document.getElementById('mobmenu');
+  if (burger && mob) {
+    burger.addEventListener('click', () => { burger.classList.toggle('open'); mob.classList.toggle('open'); });
+    document.addEventListener('click', e => { if (!nav.contains(e.target) && !mob.contains(e.target)) { burger.classList.remove('open'); mob.classList.remove('open'); } });
+  }
+  window.closeMob = function() { if(burger) burger.classList.remove('open'); if(mob) mob.classList.remove('open'); };
+  window.toggleFaq = function(btn) {
+    const ans = btn.nextElementSibling;
+    const open = ans.classList.contains('open');
+    document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+    if (!open) { btn.classList.add('active'); ans.classList.add('open'); }
+  };
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
+  }, { threshold: .08, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+  if (document.querySelector('[data-tally-src]')) {
+    var s = document.createElement('script'); s.src = 'https://tally.so/widgets/embed.js'; s.async = true; document.head.appendChild(s);
+  }
+  if (document.querySelector('.calendly-inline-widget')) {
+    var c = document.createElement('script'); c.src = 'https://assets.calendly.com/assets/external/widget.js'; c.async = true; document.head.appendChild(c);
+  }
+});
+
+</script>
+</body>
+</html>
