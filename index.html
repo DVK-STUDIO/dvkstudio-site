@@ -70,6 +70,16 @@
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
+
+/* Texture subtile sur le fond */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: .4;
+}
+
 body {
   font-family: var(--font);
   background: var(--cream);
@@ -203,64 +213,101 @@ nav.scrolled { box-shadow: var(--sh); }
   overflow: hidden;
 }
 
-/* Texture de fond */
+/* Texture de fond — renforcée */
 #hero::before {
   content: '';
   position: absolute; inset: 0;
   background-image:
-    radial-gradient(ellipse 80% 60% at 100% 20%, rgba(217,108,76,.09) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 70% at 0% 80%, rgba(34,85,96,.08) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 75% 85%, rgba(242,193,177,.15) 0%, transparent 50%);
+    radial-gradient(ellipse 70% 55% at 95% 15%, rgba(217,108,76,.22) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 65% at 2% 85%, rgba(34,85,96,.18) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 70% 90%, rgba(242,193,177,.30) 0%, transparent 52%),
+    radial-gradient(ellipse 35% 35% at 15% 20%, rgba(111,168,173,.12) 0%, transparent 50%);
   pointer-events: none;
 }
 
-/* Lignes architecturales fines */
+/* Lignes architecturales — renforcées */
 #hero::after {
   content: '';
   position: absolute;
-  top: 15%; right: 8%;
-  width: 180px; height: 180px;
-  border: 1px solid rgba(34,85,96,.12);
+  top: 12%; right: 6%;
+  width: 260px; height: 260px;
+  border: 1.5px solid rgba(34,85,96,.18);
   border-radius: 50%;
   pointer-events: none;
 }
 
 .hero-arch-1 {
   position: absolute;
-  top: 20%; right: 12%;
-  width: 120px; height: 120px;
-  border: 1px solid rgba(34,85,96,.08);
+  top: 18%; right: 10%;
+  width: 160px; height: 160px;
+  border: 1px solid rgba(34,85,96,.12);
   border-radius: 50%;
 }
 .hero-arch-2 {
   position: absolute;
-  bottom: 15%; left: 5%;
-  width: 200px; height: 200px;
-  border: 1px solid rgba(217,108,76,.1);
+  bottom: 12%; left: 4%;
+  width: 280px; height: 280px;
+  border: 1.5px solid rgba(217,108,76,.16);
   border-radius: 50%;
 }
 .hero-arch-3 {
   position: absolute;
-  top: 30%; right: 6%;
-  width: 60px; height: 60px;
-  border: 1px solid rgba(34,85,96,.15);
+  top: 25%; right: 4%;
+  width: 90px; height: 90px;
+  border: 1.5px solid rgba(34,85,96,.22);
   border-radius: 50%;
+}
+
+/* Lignes supplémentaires */
+.hero-arch-4 {
+  position: absolute;
+  bottom: 20%; left: 8%;
+  width: 140px; height: 140px;
+  border: 1px solid rgba(217,108,76,.12);
+  border-radius: 50%;
+}
+.hero-arch-5 {
+  position: absolute;
+  top: 8%; left: 12%;
+  width: 80px; height: 80px;
+  border: 1px solid rgba(34,85,96,.1);
+  border-radius: 50%;
+}
+.hero-line-h {
+  position: absolute;
+  top: 50%; right: 0;
+  width: 120px; height: 1px;
+  background: linear-gradient(to left, transparent, rgba(34,85,96,.15));
+}
+.hero-line-v {
+  position: absolute;
+  top: 0; right: 18%;
+  width: 1px; height: 80px;
+  background: linear-gradient(to bottom, transparent, rgba(217,108,76,.2), transparent);
 }
 
 /* Blobs organiques */
 .hero-blob-1 {
   position: absolute;
-  top: -60px; right: -80px;
-  width: 450px; height: 450px;
-  background: radial-gradient(ellipse, rgba(217,108,76,.12) 0%, transparent 65%);
+  top: -80px; right: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse at 40% 40%, rgba(217,108,76,.22) 0%, rgba(242,193,177,.1) 40%, transparent 70%);
   border-radius: 50%;
 }
 .hero-blob-2 {
   position: absolute;
-  bottom: -100px; left: -100px;
-  width: 500px; height: 500px;
-  background: radial-gradient(ellipse, rgba(34,85,96,.09) 0%, transparent 65%);
+  bottom: -120px; left: -120px;
+  width: 650px; height: 650px;
+  background: radial-gradient(ellipse at 60% 60%, rgba(34,85,96,.18) 0%, rgba(111,168,173,.08) 40%, transparent 70%);
   border-radius: 50%;
+}
+.hero-blob-3 {
+  position: absolute;
+  top: 40%; left: 35%;
+  width: 300px; height: 300px;
+  background: radial-gradient(ellipse, rgba(242,193,177,.12) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -443,6 +490,17 @@ nav.scrolled { box-shadow: var(--sh); }
 .section-alt { background: var(--white); }
 .section-dark { background: var(--petrol-deep); }
 .section-beige { background: var(--beige); }
+.section-beige.section { position: relative; }
+.section-beige.section::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: radial-gradient(circle, rgba(34,85,96,.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: .5;
+}
+.section-beige.section .cnt { position: relative; z-index: 1; }
 
 .cnt {
   max-width: 1200px; margin: 0 auto;
@@ -486,6 +544,15 @@ h2.sec-title-light { color: var(--white); }
   background: var(--white);
   position: relative; overflow: hidden;
 }
+#particulier::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 300px; height: 300px;
+  border: 1px solid rgba(34,85,96,.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
 #particulier::before {
   content: '';
   position: absolute; top: -100px; right: -100px;
@@ -498,6 +565,19 @@ h2.sec-title-light { color: var(--white); }
 #professionnel {
   background: var(--petrol-deep);
   position: relative; overflow: hidden;
+}
+#professionnel .cnt { position: relative; z-index: 1; }
+/* Grid pattern sur section pro */
+#professionnel > .cnt::before {
+  content: '';
+  position: absolute;
+  inset: -96px -28px;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
 }
 #professionnel::before {
   content: '';
@@ -1168,9 +1248,14 @@ footer {
 <section id="hero">
   <div class="hero-blob-1"></div>
   <div class="hero-blob-2"></div>
+  <div class="hero-blob-3"></div>
   <div class="hero-arch-1"></div>
   <div class="hero-arch-2"></div>
   <div class="hero-arch-3"></div>
+  <div class="hero-arch-4"></div>
+  <div class="hero-arch-5"></div>
+  <div class="hero-line-h"></div>
+  <div class="hero-line-v"></div>
 
   <div class="hero-content">
     <div class="hero-eyebrow">Facilitateur de projets immobiliers</div>
