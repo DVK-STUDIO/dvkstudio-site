@@ -61,7 +61,7 @@
   /* Shadows */
   --sh-sm: 0 2px 12px rgba(34,85,96,.07);
   --sh:    0 4px 28px rgba(34,85,96,.10);
-  --sh-lg: 0 12px 56px rgba(34,85,96,.14);
+  --sh-lg: 0 12px 56px rgba(34,85,96,.32);
   --sh-xl: 0 24px 80px rgba(34,85,96,.18);
 
   /* Transitions */
@@ -172,10 +172,7 @@ nav.scrolled { box-shadow: var(--sh); }
   height: 72px;
 }
 
-.nav-logo {
-  display: flex; align-items: center; gap: 12px;
-  text-decoration: none;
-}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; overflow: visible; }
 .nav-logo img { height: 50px; width: auto; display: block; }
 
 .nav-links {
@@ -249,18 +246,18 @@ nav.scrolled { box-shadow: var(--sh); }
   overflow: hidden;
 }
 
-/* Grands blobs colorés très visibles */
+/* Fond hero avec blobs intégrés */
 #hero::before {
   content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 55% 50% at 92% 10%, rgba(217,108,76,.28) 0%, rgba(242,193,177,.15) 35%, transparent 60%),
-    radial-gradient(ellipse 50% 55% at 5% 90%, rgba(34,85,96,.22) 0%, rgba(111,168,173,.1) 35%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 75% 88%, rgba(242,193,177,.35) 0%, transparent 55%),
-    radial-gradient(ellipse 30% 30% at 10% 15%, rgba(111,168,173,.18) 0%, transparent 50%),
-    radial-gradient(ellipse 25% 35% at 55% 5%, rgba(217,108,76,.12) 0%, transparent 50%);
-  pointer-events: none;
+  position: absolute;
+  inset: 0;
   z-index: 0;
+  background:
+    radial-gradient(ellipse 48% 44% at 94% 6%,  rgba(217,108,76,.50) 0%, rgba(242,193,177,.28) 30%, transparent 55%),
+    radial-gradient(ellipse 46% 50% at 3%  94%,  rgba(34,85,96,.45)  0%, rgba(111,168,173,.20) 30%, transparent 55%),
+    radial-gradient(ellipse 36% 36% at 74% 92%,  rgba(242,193,177,.55) 0%, transparent 50%),
+    radial-gradient(ellipse 26% 26% at 6%  10%,  rgba(111,168,173,.30) 0%, transparent 46%);
+  pointer-events: none;
 }
 
 /* Grande forme organique terracotta top-right */
@@ -268,12 +265,10 @@ nav.scrolled { box-shadow: var(--sh); }
   position: absolute;
   top: -120px; right: -150px;
   width: 700px; height: 700px;
-  background: radial-gradient(ellipse at 35% 35%,
-    rgba(217,108,76,.32) 0%,
-    rgba(242,193,177,.2) 30%,
-    rgba(242,193,177,.08) 50%,
-    transparent 70%);
+  background: radial-gradient(ellipse at 35% 35%, rgba(217,108,76,.40) 0%, rgba(242,193,177,.25) 30%, rgba(242,193,177,.08) 55%, transparent 72%);
   border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  z-index: 0;
+  pointer-events: none;
   animation: morphBlob1 12s ease-in-out infinite;
 }
 
@@ -282,12 +277,10 @@ nav.scrolled { box-shadow: var(--sh); }
   position: absolute;
   bottom: -150px; left: -150px;
   width: 750px; height: 750px;
-  background: radial-gradient(ellipse at 65% 65%,
-    rgba(34,85,96,.26) 0%,
-    rgba(111,168,173,.15) 30%,
-    rgba(111,168,173,.05) 55%,
-    transparent 70%);
+  background: radial-gradient(ellipse at 65% 65%, rgba(34,85,96,.35) 0%, rgba(111,168,173,.18) 30%, rgba(111,168,173,.06) 55%, transparent 72%);
   border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+  z-index: 0;
+  pointer-events: none;
   animation: morphBlob2 15s ease-in-out infinite;
 }
 
@@ -296,11 +289,9 @@ nav.scrolled { box-shadow: var(--sh); }
   position: absolute;
   top: 30%; right: 5%;
   width: 400px; height: 400px;
-  background: radial-gradient(ellipse,
-    rgba(242,193,177,.2) 0%,
-    rgba(217,108,76,.08) 40%,
-    transparent 65%);
+  background: radial-gradient(ellipse, rgba(242,193,177,.30) 0%, rgba(217,108,76,.12) 40%, transparent 65%);
   border-radius: 50%;
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -321,7 +312,7 @@ nav.scrolled { box-shadow: var(--sh); }
   position: absolute;
   top: 10%; right: 5%;
   width: 320px; height: 320px;
-  border: 1.5px solid rgba(34,85,96,.2);
+  border: 1.5px solid rgba(34,85,96,.40);
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
@@ -330,28 +321,28 @@ nav.scrolled { box-shadow: var(--sh); }
   position: absolute; z-index: 1;
   top: 16%; right: 9%;
   width: 200px; height: 200px;
-  border: 1px solid rgba(34,85,96,.14);
+  border: 1px solid rgba(34,85,96,.32);
   border-radius: 50%;
 }
 .hero-arch-2 {
   position: absolute; z-index: 1;
   bottom: 8%; left: 3%;
   width: 340px; height: 340px;
-  border: 1.5px solid rgba(217,108,76,.2);
+  border: 1.5px solid rgba(217,108,76,.38);
   border-radius: 50%;
 }
 .hero-arch-3 {
   position: absolute; z-index: 1;
   top: 22%; right: 3%;
   width: 110px; height: 110px;
-  border: 2px solid rgba(34,85,96,.25);
+  border: 2px solid rgba(34,85,96,.45);
   border-radius: 50%;
 }
 .hero-arch-4 {
   position: absolute; z-index: 1;
   bottom: 18%; left: 7%;
   width: 180px; height: 180px;
-  border: 1px solid rgba(217,108,76,.16);
+  border: 1px solid rgba(217,108,76,.32);
   border-radius: 50%;
 }
 .hero-arch-5 {
@@ -366,7 +357,7 @@ nav.scrolled { box-shadow: var(--sh); }
   position: absolute; z-index: 1;
   top: 45%; right: 0;
   width: 180px; height: 1px;
-  background: linear-gradient(to left, transparent, rgba(34,85,96,.2), transparent);
+  background: linear-gradient(to left, transparent, rgba(34,85,96,.40), transparent);
 }
 .hero-line-v {
   position: absolute; z-index: 1;
@@ -376,7 +367,7 @@ nav.scrolled { box-shadow: var(--sh); }
 }
 
 .hero-content {
-  position: relative; z-index: 2;
+  position: relative; z-index: 3;
   max-width: 1200px; margin: 0 auto;
   padding: 80px 28px 100px;
   width: 100%;
@@ -455,7 +446,7 @@ nav.scrolled { box-shadow: var(--sh); }
   box-shadow: var(--sh-xl);
 }
 .tunnel-card:hover::before { opacity: 1; }
-.tunnel-card-part:hover { border-color: rgba(34,85,96,.25); }
+.tunnel-card-part:hover { border-color: rgba(34,85,96,.45); }
 .tunnel-card-pro:hover  { border-color: rgba(217,108,76,.3); }
 
 /* Accent bar top */
@@ -746,7 +737,7 @@ h2.sec-title-light { color: var(--white); }
 .vc3 {
   width: 80px; height: 80px;
   top: 20%; right: 20%;
-  border-color: rgba(217,108,76,.2);
+  border-color: rgba(217,108,76,.38);
 }
 .vc4 {
   width: 120px; height: 120px;
@@ -802,7 +793,7 @@ h2.sec-title-light { color: var(--white); }
 .offer-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--sh-lg);
-  border-color: rgba(34,85,96,.2);
+  border-color: rgba(34,85,96,.40);
 }
 .offer-card.featured {
   background: var(--petrol-deep);
@@ -1273,27 +1264,25 @@ footer {
 <nav id="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" height="46" width="46" style="display:block;flex-shrink:0">
-  <g transform="translate(4,3) scale(0.92)">
-    <path d="M8,84 C-2,68 -3,46 8,30 C13,42 12,60 8,84Z" fill="none" stroke="#225560" stroke-width="2.8" stroke-linejoin="round"/>
-    <path d="M24,88 C16,68 10,44 18,22 C25,38 25,62 24,88Z" fill="none" stroke="#225560" stroke-width="2.8" stroke-linejoin="round"/>
-    <path d="M36,90 C26,66 26,38 36,14 C46,34 46,66 36,90Z" fill="none" stroke="#D96C4C" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M52,90 C44,66 44,34 52,14 C60,34 60,66 52,90Z" fill="none" stroke="#D96C4C" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M64,88 C63,62 63,38 70,22 C80,44 76,68 64,88Z" fill="none" stroke="#225560" stroke-width="2.8" stroke-linejoin="round"/>
-    <path d="M80,84 C76,60 75,42 80,30 C92,46 92,68 80,84Z" fill="none" stroke="#225560" stroke-width="2.8" stroke-linejoin="round"/>
-    <line x1="44" y1="90" x2="44" y2="100" stroke="#225560" stroke-width="2.2"/>
-    <path d="M36,100 Q44,94 52,100 Q44,110 36,100Z" fill="none" stroke="#225560" stroke-width="2.2"/>
-    <polyline points="20,56 44,26 68,56" fill="none" stroke="#225560" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-    <rect x="54" y="30" width="8" height="12" fill="none" stroke="#225560" stroke-width="2.3" rx="1"/>
-    <rect x="26" y="56" width="36" height="28" fill="none" stroke="#225560" stroke-width="2.6" rx="1"/>
-    <rect x="33" y="63" width="22" height="14" fill="none" stroke="#225560" stroke-width="2" rx="1"/>
-    <line x1="44" y1="63" x2="44" y2="77" stroke="#225560" stroke-width="1.4"/>
-    <line x1="33" y1="70" x2="55" y2="70" stroke="#225560" stroke-width="1.4"/>
-  </g>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="54" height="54" style="display:block;flex-shrink:0">
+  <path d="M12,100 C0,80 -2,56 10,38 C16,52 15,74 12,100Z" fill="none" stroke="#225560" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M30,104 C20,80 14,54 26,28 C34,48 34,76 30,104Z" fill="none" stroke="#225560" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M44,106 C32,78 32,46 44,18 C56,42 56,78 44,106Z" fill="none" stroke="#D96C4C" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M64,106 C56,78 56,42 64,18 C72,42 72,78 64,106Z" fill="none" stroke="#D96C4C" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M78,104 C74,76 74,48 82,28 C96,54 90,80 78,104Z" fill="none" stroke="#225560" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M96,100 C93,74 92,52 98,38 C110,56 112,80 96,100Z" fill="none" stroke="#225560" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="54" y1="106" x2="54" y2="116" stroke="#225560" stroke-width="2.5"/>
+  <path d="M46,116 Q54,110 62,116 Q54,126 46,116Z" fill="none" stroke="#225560" stroke-width="2.5"/>
+  <polyline points="30,68 54,38 78,68" fill="none" stroke="#225560" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="66" y="43" width="10" height="15" fill="none" stroke="#225560" stroke-width="2.8" rx="1"/>
+  <rect x="34" y="68" width="40" height="32" fill="none" stroke="#225560" stroke-width="3" rx="1"/>
+  <rect x="42" y="76" width="24" height="17" fill="none" stroke="#225560" stroke-width="2.4" rx="1"/>
+  <line x1="54" y1="76" x2="54" y2="93" stroke="#225560" stroke-width="1.6"/>
+  <line x1="42" y1="84.5" x2="66" y2="84.5" stroke="#225560" stroke-width="1.6"/>
 </svg>
-  <div style="display:flex;flex-direction:column;line-height:1.2;margin-left:2px">
-    <span style="font-family:Montserrat,sans-serif;font-size:14.5px;font-weight:800;letter-spacing:2.8px;text-transform:uppercase;color:#1a3f4d;white-space:nowrap">DVK STUDIO</span>
-    <span style="font-family:Montserrat,sans-serif;font-size:8px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#8C857C;white-space:nowrap">Facilitateur immobilier</span>
+  <div style="display:flex;flex-direction:column;line-height:1.2">
+    <span style="font-family:Montserrat,sans-serif;font-size:13.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#1a3f4d;white-space:nowrap">DVK STUDIO</span>
+    <span style="font-family:Montserrat,sans-serif;font-size:7.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:#8C857C;white-space:nowrap">Facilitateur immobilier</span>
   </div>
 </a>
     <ul class="nav-links">
