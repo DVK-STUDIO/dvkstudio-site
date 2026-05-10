@@ -858,50 +858,147 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
 
 <!-- ═══ PROCESSUS ═══ -->
 <section id="process">
+<style>
+/* ── PROCESS ANIMATION ── */
+.process-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;position:relative}
+
+/* Ligne de progression animée */
+.process-track{position:absolute;top:32px;left:12.5%;right:12.5%;height:2px;background:var(--beige-m);z-index:0;overflow:hidden}
+.process-track-fill{position:absolute;inset:0;background:linear-gradient(to right,var(--terra),var(--petrol-d));transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.4,0,.2,1)}
+.process-track-fill.run{transform:scaleX(1)}
+
+/* Étapes */
+.pstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;position:relative;z-index:1;opacity:0;transform:translateY(28px);transition:opacity .5s ease, transform .5s ease}
+.pstep.visible{opacity:1;transform:translateY(0)}
+.pstep:nth-child(1){transition-delay:.1s}
+.pstep:nth-child(2){transition-delay:.35s}
+.pstep:nth-child(3){transition-delay:.6s}
+.pstep:nth-child(4){transition-delay:.85s}
+
+/* Numéro */
+.pnum{width:64px;height:64px;border-radius:50%;border:2px solid var(--beige-m);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--petrol);letter-spacing:.5px;margin-bottom:24px;position:relative;transition:all .4s ease;box-shadow:0 2px 12px rgba(34,85,96,.06)}
+.pnum::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid transparent;transition:border-color .4s ease, transform .4s ease}
+.pstep.active .pnum{background:var(--terra);border-color:var(--terra);color:var(--white);box-shadow:0 6px 24px rgba(217,108,76,.38);transform:scale(1.1)}
+.pstep.active .pnum::after{border-color:rgba(217,108,76,.22);transform:scale(1.15)}
+
+/* Icône */
+.picon{font-size:22px;margin-bottom:14px;display:block;transition:transform .3s ease}
+.pstep:hover .picon{transform:scale(1.15)}
+
+/* Texte */
+.ptitle{font-size:14px;font-weight:700;color:var(--petrol-d);margin-bottom:8px;transition:color .3s}
+.pstep.active .ptitle{color:var(--terra)}
+.pdesc{font-size:12.5px;color:var(--gray);line-height:1.65;max-width:180px}
+
+/* Connecteur flèche entre étapes */
+.pstep:not(:last-child)::before{content:'→';position:absolute;top:19px;right:-14px;font-size:18px;color:var(--beige-m);font-weight:300;transition:color .4s ease;z-index:2}
+.pstep.active:not(:last-child)::before{color:var(--terra)}
+
+/* Pill badge */
+.pbadge{display:inline-flex;align-items:center;gap:6px;background:rgba(217,108,76,.08);border:1px solid rgba(217,108,76,.2);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--terra);margin-bottom:12px;opacity:0;transition:opacity .3s ease .2s}
+.pstep.active .pbadge{opacity:1}
+
+/* Mobile */
+@media(max-width:768px){
+  .process-timeline{grid-template-columns:1fr;gap:16px}
+  .process-track{display:none}
+  .pstep:not(:last-child)::before{display:none}
+  .pstep{flex-direction:row;text-align:left;gap:20px;align-items:flex-start;padding:20px;background:var(--white);border-radius:14px;border:1px solid var(--beige-m)}
+  .pnum{margin-bottom:0;flex-shrink:0;width:52px;height:52px}
+  .picon{display:none}
+  .pbadge{display:none}
+}
+</style>
+
   <div class="wrap">
     <div class="fi" style="text-align:center;max-width:560px;margin:0 auto">
       <div class="eyebrow" style="justify-content:center">Comment ça fonctionne</div>
       <h2>4 étapes. Simple. Rapide.</h2>
     </div>
-    <div class="steps">
-      <div class="step fi fd1">
-        <div class="step-num act">01</div>
-        <div class="step-title">Formulaire Tally</div>
-        <div class="step-desc">Remplissez notre formulaire en 3 min pour présenter votre projet.</div>
+
+    <div class="process-timeline" id="processTimeline">
+      <div class="process-track"><div class="process-track-fill" id="trackFill"></div></div>
+
+      <div class="pstep" data-step="0">
+        <span class="pbadge">Étape 1</span>
+        <div class="pnum">01</div>
+        <span class="picon">📋</span>
+        <div class="ptitle">Formulaire Tally</div>
+        <div class="pdesc">Remplissez notre formulaire en 3 min pour présenter votre projet.</div>
       </div>
-      <div class="step fi fd2">
-        <div class="step-num">02</div>
-        <div class="step-title">Appel découverte</div>
-        <div class="step-desc">Réservez votre créneau Calendly après le formulaire. 20 min, gratuit.</div>
+
+      <div class="pstep" data-step="1">
+        <span class="pbadge">Étape 2</span>
+        <div class="pnum">02</div>
+        <span class="picon">📞</span>
+        <div class="ptitle">Appel découverte</div>
+        <div class="pdesc">Réservez votre créneau Calendly après le formulaire. 20 min, gratuit.</div>
       </div>
-      <div class="step fi fd3">
-        <div class="step-num">03</div>
-        <div class="step-title">Visite & projection</div>
-        <div class="step-desc">Visite sur site, plans simplifiés et enveloppe indicative.</div>
-        <div style="margin-top:18px;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(34,85,96,.12)">
-          <img src="/expert-projection-immobiliere-oise.webp"
-               alt="Expert projection immobilière et rénovation dans l'Oise"
-               title="Expert projection immobilière terrain – DVK Studio"
-               loading="lazy"
-               width="480" height="270"
-               style="width:100%;height:auto;display:block">
-        </div>
+
+      <div class="pstep" data-step="2">
+        <span class="pbadge">Étape 3</span>
+        <div class="pnum">03</div>
+        <span class="picon">🏠</span>
+        <div class="ptitle">Visite &amp; projection</div>
+        <div class="pdesc">Visite sur site, plans simplifiés et enveloppe indicative.</div>
       </div>
-      <div class="step fi fd4">
-        <div class="step-num">04</div>
-        <div class="step-title">Décision éclairée</div>
-        <div class="step-desc">Vision claire pour avancer avec vos partenaires travaux.</div>
-        <div style="margin-top:18px;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(34,85,96,.12)">
-          <img src="/analyse-potentiel-immobilier.webp"
-               alt="Analyse du potentiel d'un bien immobilier avant rénovation"
-               title="Analyse potentiel immobilier – DVK Studio"
-               loading="lazy"
-               width="480" height="270"
-               style="width:100%;height:auto;display:block">
-        </div>
+
+      <div class="pstep" data-step="3">
+        <span class="pbadge">Étape 4</span>
+        <div class="pnum">04</div>
+        <span class="picon">✅</span>
+        <div class="ptitle">Décision éclairée</div>
+        <div class="pdesc">Vision claire pour avancer avec vos partenaires travaux.</div>
       </div>
     </div>
   </div>
+
+  <script>
+  (function(){
+    var steps = document.querySelectorAll('.pstep');
+    var fill  = document.getElementById('trackFill');
+    var tl    = document.getElementById('processTimeline');
+    var active = -1;
+
+    // IntersectionObserver : entrée en viewport → apparition des étapes
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          // Apparition séquentielle
+          steps.forEach(function(s){ s.classList.add('visible'); });
+          // Ligne de progression
+          setTimeout(function(){ fill && fill.classList.add('run'); }, 200);
+          // Activation automatique séquentielle
+          runAuto();
+          io.disconnect();
+        }
+      });
+    }, {threshold:0.3});
+    if(tl) io.observe(tl);
+
+    // Auto-cycle : active chaque étape à tour de rôle
+    function runAuto(){
+      var i = 0;
+      function activate(idx){
+        steps.forEach(function(s,j){
+          s.classList.toggle('active', j <= idx);
+        });
+      }
+      var t = setInterval(function(){
+        activate(i);
+        i++;
+        if(i >= steps.length){ clearInterval(t); }
+      }, 400);
+    }
+
+    // Hover manuel
+    steps.forEach(function(s, i){
+      s.addEventListener('mouseenter', function(){
+        steps.forEach(function(st,j){ st.classList.toggle('active', j <= i); });
+      });
+    });
+  })();
+  </script>
 </section>
 
 <!-- ═══ OFFRES ═══ -->
