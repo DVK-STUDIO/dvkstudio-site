@@ -569,21 +569,21 @@ p{line-height:1.75;color:var(--gray)}
     <div class="p-cards sr">
       <div class="pc d1">
       <div class="pc-n">01</div>
-      <div class="pc-img"><img src="/dvk-webp/encart-projection.webp" alt="Projection avant achat" loading="lazy" width="600" height="300"></div>
+      <div class="pc-img"><img src="/encart-projection.webp" alt="Projection avant achat" loading="lazy" width="600" height="300"></div>
       <div class="pc-ico">🔍</div>
       <h4>Projection avant achat</h4>
       <p>Visualisez le potentiel réel et estimez les travaux avant de signer. Évitez les mauvaises surprises.</p>
     </div>
       <div class="pc d2">
       <div class="pc-n">02</div>
-      <div class="pc-img"><img src="/dvk-webp/encart-optimisation.webp" alt="Optimisation des espaces" loading="lazy" width="600" height="300"></div>
+      <div class="pc-img"><img src="/encart-optimisation.webp" alt="Optimisation des espaces" loading="lazy" width="600" height="300"></div>
       <div class="pc-ico">📐</div>
       <h4>Optimisation des espaces</h4>
       <p>Plans simplifiés, aménagement sur-mesure et visualisation de votre futur intérieur en 48h.</p>
     </div>
       <div class="pc d3">
       <div class="pc-n">03</div>
-      <div class="pc-img"><img src="/dvk-webp/encart-aide-decision.webp" alt="Aide à la décision" loading="lazy" width="600" height="300"></div>
+      <div class="pc-img"><img src="/encart-aide-decision.webp" alt="Aide à la décision" loading="lazy" width="600" height="300"></div>
       <div class="pc-ico">✅</div>
       <h4>Aide à la décision</h4>
       <p>Enveloppe travaux indicative et orientations claires pour avancer sereinement avec vos artisans.</p>
@@ -591,11 +591,11 @@ p{line-height:1.75;color:var(--gray)}
     </div>
     <div class="p-feat sr d2">
       <div class="pf">
-      <div class="pf-img"><img src="/dvk-webp/encart-declaration.webp" alt="Déclaration préalable" loading="lazy" width="80" height="80"></div>
+      <div class="pf-img"><img src="/encart-declaration.webp" alt="Déclaration préalable" loading="lazy" width="80" height="80"></div>
       <div><h4>Déclaration préalable simplifiée</h4><p>Accompagnement de vos démarches administratives pour les projets simples.</p></div>
     </div>
       <div class="pf">
-      <div class="pf-img"><img src="/dvk-webp/encart-reseau.webp" alt="Réseau artisans" loading="lazy" width="80" height="80"></div>
+      <div class="pf-img"><img src="/encart-reseau.webp" alt="Réseau artisans" loading="lazy" width="80" height="80"></div>
       <div><h4>Réseau artisans qualifiés</h4><p>Mise en relation avec des professionnels du bâtiment adaptés à votre projet.</p></div>
     </div>
     </div>
@@ -1003,6 +1003,10 @@ function mob(){
     m.classList.remove('open');
     document.body.style.overflow = '';
   } else {
+    m.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+} else {
     m.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
