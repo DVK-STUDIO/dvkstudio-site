@@ -129,8 +129,8 @@ p{line-height:1.75;color:var(--gray)}
 .h-pnl img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);transition:transform 1.4s var(--ease)}
 .h-pnl img.kn{transform:scale(1.01)}
 .h-pnl-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,11,.6) 0%,transparent 55%);pointer-events:none}
-.h-lbl{position:absolute;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--white);background:rgba(13,12,11,.58);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:5px 13px;border-radius:var(--rpill);white-space:nowrap;opacity:0;transition:opacity .6s ease 1s, transform .6s ease 1s}
-.h-lbl.sh{opacity:1;transform:translateX(-50%) translateY(0)}
+.h-lbl{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--white);background:rgba(13,12,11,.58);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:5px 13px;border-radius:var(--rpill);white-space:nowrap}
+
 .h-div{position:absolute;top:0;bottom:0;left:50%;width:2px;background:linear-gradient(to bottom,transparent,rgba(200,185,154,.85) 25%,rgba(200,185,154,.85) 75%,transparent);transform:translateX(-50%);z-index:3}
 .h-div-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.3)}
 
@@ -145,17 +145,17 @@ p{line-height:1.75;color:var(--gray)}
 .h-lh{top:42%;left:0;right:0;height:1px}
 .h-lv{width:1px;height:100%;top:0;right:22%;background:linear-gradient(to bottom,transparent,rgba(196,96,60,.15) 30%,rgba(196,96,60,.15) 70%,transparent)}
 .h-blob{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(27,79,90,.22) 0%,transparent 65%);bottom:-200px;left:-100px;filter:blur(40px)}
-.h-tag{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,185,154,.65);margin-bottom:36px;opacity:0;animation:fu .7s ease .3s forwards}
+.h-tag{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,185,154,.65);margin-bottom:36px}
 .h-tag-ln{width:22px;height:1px;background:rgba(200,185,154,.4)}
-.h-h1{position:relative;z-index:1;font-size:clamp(36px,4.2vw,64px);color:var(--white);font-weight:900;letter-spacing:-.04em;line-height:1.07;margin-bottom:26px;opacity:0;animation:fu .7s ease .48s forwards}
+.h-h1{position:relative;z-index:1;font-size:clamp(36px,4.2vw,64px);color:var(--white);font-weight:900;letter-spacing:-.04em;line-height:1.07;margin-bottom:26px}
 .h-h1 span{color:var(--terra)}
-.h-sub{position:relative;z-index:1;font-size:15px;color:rgba(255,255,255,.48);line-height:1.75;max-width:360px;margin-bottom:52px;opacity:0;animation:fu .7s ease .66s forwards}
-.h-ctas{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px;margin-bottom:68px;opacity:0;animation:fu .7s ease .84s forwards}
-.h-stats{position:relative;z-index:1;display:flex;gap:36px;padding-top:36px;border-top:1px solid rgba(255,255,255,.07);opacity:0;animation:fu .6s ease 1.02s forwards}
+.h-sub{position:relative;z-index:1;font-size:15px;color:rgba(255,255,255,.48);line-height:1.75;max-width:360px;margin-bottom:52px}
+.h-ctas{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px;margin-bottom:68px}
+.h-stats{position:relative;z-index:1;display:flex;gap:36px;padding-top:36px;border-top:1px solid rgba(255,255,255,.07)}
 .hs-n{font-size:24px;font-weight:800;color:var(--white);letter-spacing:-.03em}
 .hs-l{font-size:10px;color:rgba(255,255,255,.38);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
 
-.h-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;z-index:10;opacity:0;animation:fu .5s ease 1.3s forwards}
+.h-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;z-index:10}
 .h-scroll span{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)}
 .h-scroll-b{width:1px;height:36px;background:linear-gradient(to bottom,rgba(255,255,255,.28),transparent);animation:sb 2.2s ease-in-out infinite}
 @keyframes sb{0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
