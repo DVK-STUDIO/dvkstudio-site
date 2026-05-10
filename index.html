@@ -258,8 +258,8 @@ nav.up{box-shadow:var(--s2)}
 @keyframes blob1{0%,100%{border-radius:60% 40% 70% 30%/50% 60% 40% 50%;transform:translate(0,0)}50%{border-radius:40% 60% 40% 60%/60% 40% 60% 40%;transform:translate(-18px,14px)}}
 @keyframes blob2{0%,100%{border-radius:40% 60% 30% 70%/60% 40% 60% 40%;transform:translate(0,0)}50%{border-radius:60% 40% 60% 40%/40% 60% 40% 60%;transform:translate(14px,-18px)}}
 
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,26,24,.72) 0%,rgba(28,26,24,.45) 50%,rgba(34,85,96,.35) 100%);z-index:1}
-.hero-inner{position:relative;z-index:2;
+/* removed */
+/* removed */
   position:relative;z-index:2;
   max-width:1160px;margin:0 auto;
   padding:72px 24px 96px;
@@ -280,9 +280,9 @@ nav.up{box-shadow:var(--s2)}
 .badge-dot{width:6px;height:6px;background:var(--terra);border-radius:50%;animation:pulse 2.2s ease infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
 
-.hero-title{color:var(--white);margin-bottom:20px;text-shadow:0 2px 12px rgba(0,0,0,.3);text-align:center}
+/* removed */
 .hero-title em{font-style:normal;color:var(--terra)}
-.hero-sub{font-size:16.5px;color:rgba(255,255,255,.85);line-height:1.75;max-width:600px;margin:0 auto 52px;text-align:center}
+/* removed */
 
 /* Tunnel cards */
 .tunnel{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:800px;margin:0 auto}
@@ -742,50 +742,270 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
-  <div id="hero-img-wrap">
-    <img src="/projection-3d-avant-apres-renovation-oise.webp"
-         alt="Projection 3D avant après rénovation appartement Oise par DVK Studio"
-         title="Visualisation avant rénovation – DVK Studio Oise"
-         loading="eager"
-         fetchpriority="high"
-         width="1920" height="900">
-  </div>
-  <div class="blob-terra"></div>
-  <div class="blob-petrol"></div>
-  <div class="arc arc-1"></div>
-  <div class="arc arc-2"></div>
-  <div class="arc arc-3"></div>
-  <div class="arc arc-4"></div>
-  <div class="arc arc-5"></div>
-  <div class="arc-line-h"></div>
-  <div class="arc-line-v"></div>
+<style>
+/* ═══ HERO SPLIT ═══ */
+#hero{
+  display:grid;
+  grid-template-columns:55% 45%;
+  min-height:100svh;
+  padding-top:0 !important;
+  background:var(--cream);
+}
 
-  <div class="hero-inner">
-    <div class="hero-badge"><span class="badge-dot"></span>Facilitateur de projets immobiliers</div>
-    <h1 class="hero-title">Projetez votre rénovation<br>avant de vous <em>lancer.</em></h1>
-    <p class="hero-sub">DVK Studio accompagne particuliers et professionnels dans la <strong style="font-weight:600;color:var(--petrol-d)">projection avant rénovation</strong>, l'optimisation des espaces et la préparation de leurs projets immobiliers en Oise, Somme et Aisne.</p>
+/* Panneau gauche — image split avant/après */
+.hero-visual{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.hero-panel{
+  position:relative;
+  overflow:hidden;
+  height:100%;
+}
+.hero-panel img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  transform:scale(1.04);
+  transition:transform 8s ease;
+}
+.hero-panel img.loaded{transform:scale(1)}
+.hero-label{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.52);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:6px 14px;
+  border-radius:20px;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity .6s ease .8s;
+}
+.hero-label.show{opacity:1}
+.hero-divider{
+  position:absolute;
+  top:0;bottom:0;
+  left:50%;
+  width:3px;
+  background:linear-gradient(to bottom,transparent,rgba(212,175,55,.9),transparent);
+  transform:translateX(-50%);
+  z-index:2;
+}
+.hero-divider::before{
+  content:'↔';
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(212,175,55,.95);
+  color:#fff;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  box-shadow:0 2px 12px rgba(0,0,0,.25);
+}
 
-    <div class="tunnel">
-      <a href="#particulier" class="t-card part">
-        <div class="t-dots"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>
-        <span class="t-icon">🏠</span>
-        <span class="t-label">Particulier</span>
-        <div class="t-title">Je prépare mon projet de rénovation</div>
-        <p class="t-desc">Projection, visualisation, aide à la décision et accompagnement avant travaux.</p>
-        <button class="t-btn" data-tally-open="9qp9X5" data-tally-width="500" data-tally-emoji-text="🏠">Préparer mon projet</button>
-      </a>
-      <a href="#professionnel" class="t-card pro">
-        <div class="t-dots"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>
-        <span class="t-icon">🏢</span>
-        <span class="t-label">Professionnel</span>
-        <div class="t-title">Je valorise un bien ou accompagne un client</div>
-        <p class="t-desc">Aide à la commercialisation, projection rapide et accompagnement investisseurs.</p>
-        <button class="t-btn" data-tally-open="9qp9X5" data-tally-width="500" data-tally-emoji-text="🏢">Échanger sur mon besoin</button>
-      </a>
+/* Panneau droit — contenu texte */
+.hero-content{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:100px 56px 60px 52px;
+  position:relative;
+  background:var(--cream);
+}
+.hero-content::before{
+  content:'';
+  position:absolute;
+  top:-80px;right:-80px;
+  width:320px;height:320px;
+  background:radial-gradient(ellipse,rgba(217,108,76,.10) 0%,transparent 65%);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+/* Badge animé */
+.hero-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(217,108,76,.08);
+  border:1px solid rgba(217,108,76,.22);
+  border-radius:24px;padding:7px 16px;
+  font-size:11px;font-weight:700;
+  color:var(--terra);letter-spacing:.6px;text-transform:uppercase;
+  margin-bottom:28px;width:fit-content;
+  opacity:0;transform:translateY(16px);
+  animation:hSlideUp .6s ease .2s forwards;
+}
+.hero-pill-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--terra);
+  animation:pulse 2s ease infinite;
+}
+
+/* Titre */
+.hero-h1{
+  font-size:clamp(32px,3.8vw,52px);
+  font-weight:800;
+  color:var(--petrol-d);
+  line-height:1.12;
+  margin-bottom:20px;
+  opacity:0;transform:translateY(20px);
+  animation:hSlideUp .6s ease .35s forwards;
+}
+.hero-h1 em{font-style:normal;color:var(--terra)}
+
+/* Sous-titre */
+.hero-p{
+  font-size:15.5px;color:var(--gray);
+  line-height:1.75;margin-bottom:40px;
+  max-width:400px;
+  opacity:0;transform:translateY(16px);
+  animation:hSlideUp .6s ease .5s forwards;
+}
+
+/* Cards CTA */
+.hero-cards{
+  display:flex;flex-direction:column;gap:14px;
+  opacity:0;transform:translateY(16px);
+  animation:hSlideUp .6s ease .65s forwards;
+}
+.hcard{
+  display:flex;align-items:center;gap:16px;
+  background:var(--white);
+  border:1.5px solid var(--beige-m);
+  border-radius:14px;
+  padding:18px 20px;
+  text-decoration:none;
+  transition:all .3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.hcard::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;border-radius:3px 0 0 3px;
+  background:var(--petrol-d);
+  transform:scaleY(0);transform-origin:center;
+  transition:transform .3s ease;
+}
+.hcard.pro::before{background:var(--terra)}
+.hcard:hover{border-color:rgba(34,85,96,.25);transform:translateX(6px);box-shadow:0 4px 20px rgba(34,85,96,.08)}
+.hcard.pro:hover{border-color:rgba(217,108,76,.25)}
+.hcard:hover::before{transform:scaleY(1)}
+.hcard-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+  background:rgba(34,85,96,.07);
+  transition:background .3s;
+}
+.hcard.pro .hcard-icon{background:rgba(217,108,76,.09)}
+.hcard:hover .hcard-icon{background:rgba(34,85,96,.12)}
+.hcard.pro:hover .hcard-icon{background:rgba(217,108,76,.15)}
+.hcard-body{flex:1}
+.hcard-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--petrol-p);display:block;margin-bottom:3px}
+.hcard.pro .hcard-label{color:var(--terra-p)}
+.hcard-title{font-size:13.5px;font-weight:700;color:var(--petrol-d);line-height:1.35}
+.hcard-arrow{font-size:18px;color:var(--beige-m);transition:color .3s,transform .3s;flex-shrink:0}
+.hcard:hover .hcard-arrow{color:var(--petrol-d);transform:translateX(4px)}
+.hcard.pro:hover .hcard-arrow{color:var(--terra)}
+
+/* Stat bar bas de page */
+.hero-stats{
+  display:flex;gap:28px;margin-top:36px;
+  opacity:0;animation:hSlideUp .5s ease .85s forwards;
+}
+.hstat{display:flex;flex-direction:column;gap:2px}
+.hstat-n{font-size:22px;font-weight:800;color:var(--petrol-d)}
+.hstat-l{font-size:11px;color:var(--gray)}
+
+/* Animations */
+@keyframes hSlideUp{to{opacity:1;transform:translateY(0)}}
+
+/* Mobile */
+@media(max-width:860px){
+  #hero{grid-template-columns:1fr;min-height:auto}
+  .hero-visual{height:52vw;min-height:240px}
+  .hero-content{padding:48px 20px 52px}
+  .hero-stats{gap:18px}
+  .hstat-n{font-size:18px}
+}
+@media(max-width:480px){
+  .hero-visual{height:220px}
+  .hero-h1{font-size:28px}
+}
+</style>
+
+  <!-- Panneau gauche : split avant/après -->
+  <div class="hero-visual">
+    <div class="hero-panel">
+      <img src="/projection-3d-avant-apres-renovation-oise.webp"
+           alt="Salon avant rénovation – DVK Studio"
+           loading="eager" fetchpriority="high"
+           width="960" height="1080"
+           style="object-position:left center"
+           onload="this.classList.add('loaded')">
+      <div class="hero-label show">AVANT</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-panel">
+      <img src="/projection-3d-avant-apres-renovation-oise.webp"
+           alt="Salon après projection DVK Studio"
+           loading="eager" fetchpriority="high"
+           width="960" height="1080"
+           style="object-position:right center"
+           onload="this.classList.add('loaded')">
+      <div class="hero-label show">APRÈS DVK STUDIO</div>
     </div>
   </div>
 
-  <div class="scroll-hint"><span>Découvrir</span><div class="scroll-line"></div></div>
+  <!-- Panneau droit : texte + CTA -->
+  <div class="hero-content">
+    <div class="hero-pill"><span class="hero-pill-dot"></span>Facilitateur de projets immobiliers</div>
+
+    <h1 class="hero-h1">Projetez votre rénovation<br>avant de vous <em>lancer.</em></h1>
+
+    <p class="hero-p">DVK Studio vous donne une vision claire de ce que peut devenir votre bien — avant de vous engager dans les travaux.</p>
+
+    <div class="hero-cards">
+      <a href="#particulier" class="hcard part">
+        <div class="hcard-icon">🏠</div>
+        <div class="hcard-body">
+          <span class="hcard-label">Particulier</span>
+          <div class="hcard-title">Je prépare mon projet de rénovation</div>
+        </div>
+        <span class="hcard-arrow">→</span>
+      </a>
+      <a href="#professionnel" class="hcard pro">
+        <div class="hcard-icon">🏢</div>
+        <div class="hcard-body">
+          <span class="hcard-label">Professionnel</span>
+          <div class="hcard-title">Je valorise un bien ou accompagne un client</div>
+        </div>
+        <span class="hcard-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n">48h</span><span class="hstat-l">Délai de livraison</span></div>
+      <div class="hstat"><span class="hstat-n">+25%</span><span class="hstat-l">Taux de closing</span></div>
+      <div class="hstat"><span class="hstat-n">3 dépt.</span><span class="hstat-l">Zone d'intervention</span></div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ═══ PARTICULIER ═══ -->
@@ -806,7 +1026,7 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
           <button data-tally-open="9qp9X5" data-tally-width="500" data-tally-emoji-text="🏠" class="btn btn-petrol">Préparer mon projet</button>
         </div>
       </div>
-      <div class="col-visual fi fd2" style="display:none">
+      <div class="col-visual fi fd2">
         <div class="visual-box" style="padding:0;overflow:hidden;border-radius:16px">
           <img src="/aide-decision-achat-immobilier-chantilly.webp"
                alt="Aide à la décision avant achat immobilier à Chantilly"
