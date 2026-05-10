@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>À propos — DVK Studio | Facilitateur de projets immobiliers en Oise</title>
+<meta name="description" content="DVK Studio accompagne particuliers et professionnels dans la projection, l'optimisation et la préparation de leurs projets immobiliers. Découvrez notre approche humaine et claire.">
+<link rel="canonical" href="https://dvkstudio.fr/a-propos.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F8F5F0;--white:#FFFFFF;--black:#0D0C0B;--ink:#1A1917;
+  --petrol:#1B4F5A;--petrol-l:#2D6E7E;--petrol-d:#0F3039;
+  --terra:#C4603C;--terra-l:#D4724E;
+  --sand:#C8B99A;--gray:#6B6560;--gray-l:#9B948E;
+  --beige:#EDE8E0;--beige-d:#D8D0C4;
+  --r12:12px;--r16:16px;--r24:24px;--rpill:999px;
+  --ease:.4s cubic-bezier(.25,.46,.45,.94);
+  --s2:0 4px 16px rgba(13,12,11,.08),0 2px 6px rgba(13,12,11,.05);
+  --s3:0 16px 48px rgba(13,12,11,.12),0 6px 18px rgba(13,12,11,.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;cursor:none}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:none;border:none;background:none}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--terra);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:multiply}
+#cur-r{position:fixed;width:36px;height:36px;border:1.5px solid var(--petrol);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.45;transition:width .3s,height .3s}
+@media(hover:none){#cur,#cur-r{display:none}body{cursor:auto}button,a{cursor:pointer}}
+
+/* LAYOUT */
+.wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+@media(max-width:768px){.wrap{padding:0 20px}}
+
+/* SCROLL REVEAL */
+.sr{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.sr.in{opacity:1;transform:none}
+.sr-l{opacity:0;transform:translateX(-36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.sr-l.in{opacity:1;transform:none}
+.sr-r{opacity:0;transform:translateX(36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.sr-r.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+/* TYPO */
+h1,h2,h3,h4{font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--ink)}
+h1{font-size:clamp(40px,5vw,76px)}
+h2{font-size:clamp(28px,3.5vw,52px)}
+h3{font-size:clamp(18px,1.8vw,24px);font-weight:700}
+h4{font-size:17px;font-weight:700;letter-spacing:-.015em}
+p{line-height:1.75;color:var(--gray)}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.eyebrow::before{content:'';width:24px;height:1.5px;background:currentColor;flex-shrink:0}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;padding:15px 26px;border-radius:var(--rpill);transition:all var(--ease);cursor:none}
+.btn-dark{background:var(--ink);color:var(--white)}
+.btn-dark:hover{background:var(--petrol);transform:translateY(-2px);box-shadow:var(--s3)}
+.btn-terra{background:var(--terra);color:var(--white)}
+.btn-terra:hover{background:var(--terra-l);transform:translateY(-2px);box-shadow:0 12px 32px rgba(196,96,60,.32)}
+.btn-ol{background:transparent;color:var(--ink);border:1.5px solid var(--beige-d)}
+.btn-ol:hover{border-color:var(--ink);background:var(--ink);color:var(--white)}
+.ba{transition:transform var(--ease)}.btn:hover .ba{transform:translateX(4px)}
+
+/* ═══ NAV ═══ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:18px 48px;background:rgba(248,245,240,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(13,12,11,.06)}
+.n-logo{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink)}
+.n-links{display:flex;align-items:center;gap:28px}
+.n-lnk{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);transition:color var(--ease)}
+.n-lnk:hover,.n-lnk.active{color:var(--ink)}
+.n-cta{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:11px 20px;border-radius:var(--rpill);background:var(--terra);color:var(--white);transition:all var(--ease);cursor:none}
+.n-cta:hover{background:var(--terra-l)}
+.n-burger{display:none;flex-direction:column;gap:5px;cursor:none;padding:6px}
+.n-burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
+@media(max-width:860px){#nav{padding:14px 20px}.n-links{display:none}.n-burger{display:flex}.n-cta{display:none}}
+#mob-menu{display:none;position:fixed;inset:0;z-index:850;background:var(--ink);flex-direction:column;justify-content:center;align-items:center;gap:6px;padding:80px 32px 40px}
+#mob-menu.open{display:flex}
+.m-lnk{font-size:28px;font-weight:800;color:var(--white);letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);width:100%;text-align:center}
+.m-close{position:absolute;top:22px;right:22px;font-size:26px;color:rgba(255,255,255,.5);cursor:none}
+
+/* ═══ HERO ═══ */
+#hero-ap{
+  min-height:100svh;
+  padding-top:80px;
+  display:grid;
+  grid-template-columns:45% 55%;
+  background:var(--cream);
+  position:relative;
+  overflow:hidden;
+}
+/* Éléments graphiques charte */
+.ap-deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.ap-arc{position:absolute;border-radius:50%}
+.ap-arc1{width:600px;height:600px;top:-200px;right:-100px;border:1px solid rgba(27,79,90,.07)}
+.ap-arc2{width:350px;height:350px;top:10%;right:8%;border:1px solid rgba(196,96,60,.1)}
+.ap-arc3{width:160px;height:160px;top:18%;right:20%;border:2px solid rgba(27,79,90,.12)}
+.ap-line-h{position:absolute;top:52%;left:40%;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(27,79,90,.1))}
+.ap-line-v{position:absolute;width:1px;top:0;bottom:0;left:43%;background:linear-gradient(to bottom,transparent 5%,rgba(200,185,154,.15) 30%,rgba(200,185,154,.15) 70%,transparent 95%)}
+.ap-blob{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,96,60,.07) 0%,transparent 65%);top:-100px;right:0;filter:blur(60px)}
+
+/* Colonne gauche : texte */
+.ap-left{display:flex;flex-direction:column;justify-content:center;padding:80px 72px 80px 0;position:relative;z-index:1}
+.ap-tag{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(27,79,90,.6);margin-bottom:32px;opacity:0;animation:fu .7s ease .3s forwards}
+.ap-tag-ln{width:22px;height:1px;background:var(--petrol);opacity:.4}
+.ap-h1{margin-bottom:24px;opacity:0;animation:fu .7s ease .5s forwards;font-style:normal}
+.ap-h1 em{font-style:italic;font-weight:300;color:var(--terra)}
+.ap-sub{font-size:15.5px;color:var(--gray);line-height:1.8;max-width:420px;margin-bottom:44px;opacity:0;animation:fu .7s ease .7s forwards}
+.ap-ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fu .6s ease .9s forwards}
+
+/* Colonne droite : photo */
+.ap-right{position:relative;z-index:1;overflow:hidden}
+.ap-img-wrap{
+  position:absolute;inset:0;
+}
+.ap-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.ap-img-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,var(--cream) 0%,transparent 25%),
+             linear-gradient(to top,rgba(248,245,240,.3) 0%,transparent 30%);
+}
+.ap-img-badge{
+  position:absolute;bottom:36px;right:36px;
+  background:rgba(248,245,240,.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--beige-d);
+  border-radius:var(--r16);padding:20px 24px;
+  opacity:0;animation:fu .6s ease 1.1s forwards;
+}
+.ap-img-badge strong{display:block;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.ap-img-badge span{font-size:11px;color:var(--gray-l)}
+
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+@media(max-width:860px){
+  #hero-ap{grid-template-columns:1fr;min-height:auto;padding-top:72px}
+  .ap-right{height:60vw;min-height:260px}
+  .ap-left{padding:52px 0 48px}
+  .ap-img-wrap{position:relative;height:100%}
+  .ap-img-ov{background:linear-gradient(to top,var(--cream) 0%,transparent 30%)}
+}
+@media(max-width:480px){.ap-ctas{flex-direction:column}}
+
+/* ═══ SECTION VISION ═══ */
+#vision{padding:152px 0;background:var(--white);position:relative;overflow:hidden}
+#vision::before{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(27,79,90,.05) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+.vis-g{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.vis-num{font-size:140px;font-weight:900;color:var(--beige);letter-spacing:-.08em;line-height:1;margin-bottom:-32px;margin-left:-4px}
+.vis-h2{margin-bottom:20px}
+.vis-h2 em{font-style:italic;font-weight:300;color:var(--terra)}
+.vis-p{font-size:15.5px;line-height:1.88;color:var(--gray);margin-bottom:0}
+.vis-right{display:flex;flex-direction:column;gap:28px}
+.vis-item{display:flex;gap:20px;align-items:flex-start;padding:28px;border-radius:var(--r12);background:var(--cream);transition:background var(--ease);cursor:default}
+.vis-item:hover{background:var(--beige)}
+.vis-dot{width:10px;height:10px;border-radius:50%;background:var(--terra);flex-shrink:0;margin-top:5px}
+.vis-item p{font-size:14px;line-height:1.72;margin:0}
+@media(max-width:860px){#vision{padding:96px 0}.vis-g{grid-template-columns:1fr;gap:52px}.vis-num{font-size:80px;margin-bottom:-18px}}
+
+/* ═══ SECTION APPROCHE ═══ */
+#approche{padding:152px 0;background:var(--petrol);position:relative;overflow:hidden}
+#approche::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.apr-g{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.apr-img{border-radius:var(--r24);overflow:hidden;position:relative}
+.apr-img img{width:100%;height:500px;object-fit:cover;display:block;transition:transform .8s var(--ease)}
+.apr-img:hover img{transform:scale(1.03)}
+.apr-img-tag{position:absolute;bottom:20px;left:20px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:rgba(13,12,11,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px;border-radius:var(--rpill)}
+.apr-right .eyebrow{color:rgba(200,185,154,.65)}
+.apr-right .eyebrow::before{background:rgba(200,185,154,.65)}
+.apr-h2{color:var(--white);margin-bottom:20px}
+.apr-p{color:rgba(255,255,255,.52);max-width:420px;margin-bottom:40px;font-size:15px;line-height:1.82}
+.apr-items{display:flex;flex-direction:column;gap:0}
+.apr-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px;color:rgba(255,255,255,.65);transition:color var(--ease);cursor:default}
+.apr-item:last-child{border-bottom:none}
+.apr-item:hover{color:var(--white)}
+.apr-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0}
+@media(max-width:860px){#approche{padding:96px 0}.apr-g{grid-template-columns:1fr;gap:52px}.apr-img img{height:280px}}
+
+/* ═══ SECTION DIFFÉRENCES ═══ */
+#diff{padding:152px 0;background:var(--cream);position:relative}
+.diff-hd{text-align:center;max-width:560px;margin:0 auto 72px}
+.diff-hd h2{margin-bottom:14px}
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--beige-d);border:2px solid var(--beige-d);border-radius:var(--r16);overflow:hidden}
+.diff-c{background:var(--white);padding:44px 36px;position:relative;overflow:hidden;transition:background var(--ease);cursor:default}
+.diff-c::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--terra),var(--petrol));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.diff-c:hover{background:var(--cream)}
+.diff-c:hover::after{transform:scaleX(1)}
+.diff-n{font-size:10px;font-weight:700;color:var(--beige-d);letter-spacing:.08em;margin-bottom:20px}
+.diff-ico{font-size:32px;margin-bottom:20px;display:block}
+.diff-c h4{font-size:16px;margin-bottom:10px}
+.diff-c p{font-size:13px;color:var(--gray-l);line-height:1.65;margin:0}
+@media(max-width:860px){#diff{padding:96px 0}.diff-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.diff-grid{grid-template-columns:1fr}}
+
+/* ═══ SECTION VALEURS ═══ */
+#valeurs{padding:152px 0;background:var(--white)}
+.val-g{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.val-left h2{margin-bottom:20px}
+.val-left p{font-size:15px;line-height:1.82;max-width:420px}
+.val-right{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--beige-d);border:2px solid var(--beige-d);border-radius:var(--r16);overflow:hidden}
+.val-c{background:var(--white);padding:36px 28px;transition:background var(--ease);cursor:default}
+.val-c:hover{background:var(--cream)}
+.val-num{font-size:10px;font-weight:700;color:var(--beige-d);letter-spacing:.08em;margin-bottom:14px}
+.val-c h4{font-size:15px;margin-bottom:8px;color:var(--petrol)}
+.val-c p{font-size:12.5px;color:var(--gray-l);line-height:1.62;margin:0}
+@media(max-width:860px){#valeurs{padding:96px 0}.val-g{grid-template-columns:1fr;gap:52px}.val-right{grid-template-columns:1fr}}
+
+/* ═══ CTA FINAL ═══ */
+#cta-ap{padding:152px 0;background:var(--petrol);position:relative;overflow:hidden;text-align:center}
+#cta-ap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(196,96,60,.2) 0%,transparent 60%);pointer-events:none}
+#cta-ap::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.cta-ap-ey{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,185,154,.55);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px;position:relative;z-index:1}
+.cta-ap-ey::before,.cta-ap-ey::after{content:'';width:36px;height:1px;background:rgba(200,185,154,.28)}
+.cta-ap-h2{font-size:clamp(32px,4.5vw,64px);color:var(--white);margin-bottom:18px;max-width:700px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+.cta-ap-h2 em{font-style:italic;font-weight:300;color:rgba(200,185,154,.85)}
+.cta-ap-p{color:rgba(255,255,255,.42);font-size:15px;line-height:1.78;margin-bottom:48px;max-width:440px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+.cta-ap-btns{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
+.btn-olw{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.28)}
+.btn-olw:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.55)}
+.cta-ap-note{margin-top:24px;font-size:11px;color:rgba(255,255,255,.22);letter-spacing:.07em;position:relative;z-index:1}
+
+/* FOOTER MINI */
+#foot{background:var(--black);padding:48px 0 32px;border-top:1px solid rgba(255,255,255,.03)}
+.foot-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.foot-br{display:flex;flex-direction:column;gap:16px}
+.foot-logo{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--white)}
+.foot-desc{font-size:12.5px;color:rgba(255,255,255,.32);line-height:1.75;max-width:260px;margin:0}
+.foot-soc{display:flex;gap:10px}
+.foot-s{width:34px;height:34px;border-radius:7px;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.36);transition:all var(--ease);cursor:none}
+.foot-s:hover{background:rgba(255,255,255,.06);color:var(--white);border-color:rgba(255,255,255,.18)}
+.foot-col h5{font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.27);margin-bottom:16px}
+.foot-lnks{display:flex;flex-direction:column;gap:9px}
+.foot-lnk{font-size:13px;color:rgba(255,255,255,.42);transition:color var(--ease);cursor:none}
+.foot-lnk:hover{color:var(--white)}
+.foot-bot{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.04);flex-wrap:wrap;gap:12px}
+.foot-cp{font-size:11px;color:rgba(255,255,255,.18)}
+.foot-leg{display:flex;gap:20px}
+.foot-leg a{font-size:11px;color:rgba(255,255,255,.18);transition:color var(--ease);cursor:none}
+.foot-leg a:hover{color:rgba(255,255,255,.45)}
+@media(max-width:860px){.foot-g{grid-template-columns:1fr 1fr;gap:32px}.foot-br{grid-column:1/-1}}
+@media(max-width:480px){.foot-g{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="n-logo">
+    <img src="/logo-nav.png" alt="DVK Studio" width="34" height="34" style="border-radius:7px;display:block">
+    DVK Studio
+  </a>
+  <div class="n-links">
+    <a href="/#part" class="n-lnk">Particuliers</a>
+    <a href="/#pro" class="n-lnk">Professionnels</a>
+    <a href="/#offres" class="n-lnk">Offres</a>
+    <a href="/a-propos.html" class="n-lnk active">À propos</a>
+    <a href="/#faq" class="n-lnk">FAQ</a>
+  </div>
+  <a href="#" class="n-cta" data-tally-open="9qp9X5" data-tally-width="500">Préparer mon projet →</a>
+  <button class="n-burger" onclick="mob()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="mob-menu">
+  <button class="m-close" onclick="mob()">✕</button>
+  <a href="/#part" class="m-lnk" onclick="mob()">Particuliers</a>
+  <a href="/#pro" class="m-lnk" onclick="mob()">Professionnels</a>
+  <a href="/#offres" class="m-lnk" onclick="mob()">Offres</a>
+  <a href="/a-propos.html" class="m-lnk" onclick="mob()">À propos</a>
+  <a href="/#faq" class="m-lnk" onclick="mob()">FAQ</a>
+  <a href="#" class="m-lnk" data-tally-open="9qp9X5" onclick="mob()">Démarrer →</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero-ap">
+  <div class="ap-deco">
+    <div class="ap-arc ap-arc1"></div>
+    <div class="ap-arc ap-arc2"></div>
+    <div class="ap-arc ap-arc3"></div>
+    <div class="ap-line-h"></div>
+    <div class="ap-line-v"></div>
+    <div class="ap-blob"></div>
+  </div>
+
+  <div class="ap-left wrap" style="max-width:none;padding-left:48px;padding-right:0">
+    <div class="ap-tag"><div class="ap-tag-ln"></div>DVK Studio — À propos</div>
+    <h1 class="ap-h1">Faciliter les projets<br>immobiliers avant<br>qu'ils ne deviennent<br>des <em>travaux.</em></h1>
+    <p class="ap-sub">DVK Studio accompagne particuliers et professionnels dans la projection, l'optimisation et la préparation de leurs projets immobiliers — grâce à une approche humaine, claire et orientée aide à la décision.</p>
+    <div class="ap-ctas">
+      <a href="#" class="btn btn-terra" data-tally-open="9qp9X5" data-tally-width="500">Préparer mon projet <span class="ba">→</span></a>
+      <a href="/" class="btn btn-ol">Voir les offres</a>
+    </div>
+  </div>
+
+  <div class="ap-right">
+    <div class="ap-img-wrap">
+      <img src="/dvk-webp/kevin-dvk-studio.webp"
+           alt="Kevin De Vlieger — Fondateur DVK Studio, facilitateur de projets immobiliers en Oise"
+           loading="eager" fetchpriority="high"
+           width="800" height="1024">
+      <div class="ap-img-ov"></div>
+    </div>
+    <div class="ap-img-badge">
+      <strong>Kevin De Vlieger</strong>
+      <span>Fondateur — DVK Studio</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VISION ═══ -->
+<section id="vision">
+  <div class="wrap">
+    <div class="vis-g">
+      <div class="sr-l">
+        <div class="vis-num">02</div>
+        <div class="eyebrow">Notre vision</div>
+        <h2 class="vis-h2">Voir avant<br>de <em>décider.</em></h2>
+        <p class="vis-p">De nombreux projets immobiliers bloquent non pas par manque d'envie, mais parce qu'il est difficile de se projeter clairement avant travaux ou avant achat. DVK Studio existe pour changer ça.</p>
+      </div>
+      <div class="vis-right sr-r">
+        <div class="vis-item d1">
+          <div class="vis-dot"></div>
+          <p><strong style="color:var(--ink);display:block;margin-bottom:4px">Révéler le potentiel d'un bien</strong>Ce que vous voyez lors d'une visite n'est jamais tout ce qu'un bien peut offrir. Nous vous montrons ce qu'il peut devenir.</p>
+        </div>
+        <div class="vis-item d2">
+          <div class="vis-dot"></div>
+          <p><strong style="color:var(--ink);display:block;margin-bottom:4px">Simplifier les décisions</strong>Un projet clair, c'est une décision plus sereine. Nous transformons le flou en vision concrète avant chaque engagement.</p>
+        </div>
+        <div class="vis-item d3">
+          <div class="vis-dot"></div>
+          <p><strong style="color:var(--ink);display:block;margin-bottom:4px">Apporter un regard extérieur</strong>Ni promoteur, ni entrepreneur, ni architecte. Un regard neutre, orienté client, pour vous aider à choisir avec discernement.</p>
+        </div>
+        <div class="vis-item d4">
+          <div class="vis-dot"></div>
+          <p><strong style="color:var(--ink);display:block;margin-bottom:4px">Rendre les projets plus fluides</strong>Moins de blocages, moins d'hésitations, plus de confiance dans les décisions. C'est notre mission au quotidien.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPROCHE ═══ -->
+<section id="approche">
+  <div class="wrap">
+    <div class="apr-g">
+      <div class="apr-img sr-l">
+        <img src="/dvk-webp/apropos-terrain.webp"
+             alt="DVK Studio en intervention terrain — projection immobilière"
+             loading="lazy" width="900" height="600">
+        <div class="apr-img-tag">Sur le terrain</div>
+      </div>
+      <div class="apr-right sr-r">
+        <div class="eyebrow">Notre approche</div>
+        <h2 class="apr-h2">Une méthode<br>pensée pour<br>vous.</h2>
+        <p class="apr-p">DVK Studio combine vision terrain, compréhension immobilière et projection spatiale pour vous donner une lecture claire et complète de votre projet — sans jargon, sans complexité inutile.</p>
+        <div class="apr-items">
+          <div class="apr-item">Vision terrain et prise de mesures</div>
+          <div class="apr-item">Compréhension des contraintes réelles</div>
+          <div class="apr-item">Projection spatiale et optimisation</div>
+          <div class="apr-item">Logique rénovation et estimation</div>
+          <div class="apr-item">Pédagogie et accompagnement humain</div>
+          <div class="apr-item">Aide à la décision claire et structurée</div>
+        </div>
+        <div style="margin-top:40px">
+          <a href="/#offres" class="btn btn-terra">Voir nos offres <span class="ba">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFFÉRENCES ═══ -->
+<section id="diff">
+  <div class="wrap">
+    <div class="diff-hd sr">
+      <div class="eyebrow" style="justify-content:center">Ce qui nous différencie</div>
+      <h2>Une approche<br>unique en son genre.</h2>
+      <p style="font-size:15px">Ni maître d'œuvre, ni bureau d'études, ni entreprise de travaux. DVK Studio occupe une place à part — celle du facilitateur.</p>
+    </div>
+    <div class="diff-grid sr">
+      <div class="diff-c d1">
+        <div class="diff-n">01</div>
+        <span class="diff-ico">🔍</span>
+        <h4>Projection avant achat</h4>
+        <p>Comprendre le potentiel réel d'un bien avant de signer. Visualiser, estimer, décider en connaissance de cause.</p>
+      </div>
+      <div class="diff-c d2">
+        <div class="diff-n">02</div>
+        <span class="diff-ico">👁</span>
+        <h4>Visualisation du potentiel</h4>
+        <p>Des rendus clairs qui parlent à tout le monde — pas des plans techniques incompréhensibles.</p>
+      </div>
+      <div class="diff-c d3">
+        <div class="diff-n">03</div>
+        <span class="diff-ico">✅</span>
+        <h4>Aide à la décision</h4>
+        <p>Orientation claire sur les priorités, les travaux incontournables et les arbitrages à faire.</p>
+      </div>
+      <div class="diff-c d4">
+        <div class="diff-n">04</div>
+        <span class="diff-ico">📐</span>
+        <h4>Optimisation des espaces</h4>
+        <p>Faire mieux avec ce qui existe. Révéler les volumes cachés, optimiser les circulations, améliorer le confort.</p>
+      </div>
+      <div class="diff-c d5">
+        <div class="diff-n">05</div>
+        <span class="diff-ico">🏗</span>
+        <h4>Accompagnement avant travaux</h4>
+        <p>Préparer le terrain pour que le chantier démarre dans les meilleures conditions — humaines et techniques.</p>
+      </div>
+      <div class="diff-c d6">
+        <div class="diff-n">06</div>
+        <span class="diff-ico">💬</span>
+        <h4>Approche claire et simplifiée</h4>
+        <p>Un interlocuteur unique, un langage accessible, des livrables concrets livrés sous 48h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALEURS ═══ -->
+<section id="valeurs">
+  <div class="wrap">
+    <div class="val-g">
+      <div class="val-left sr-l">
+        <div class="eyebrow">Nos valeurs</div>
+        <h2>Ce en quoi<br>nous croyons.</h2>
+        <p>Ces valeurs ne sont pas des mots sur une plaquette. Elles définissent chaque échange, chaque livrable et chaque décision prise chez DVK Studio.</p>
+      </div>
+      <div class="val-right sr-r">
+        <div class="val-c d1"><div class="val-num">01</div><h4>Simplicité</h4><p>Le complexe n'impressionne personne. Un message clair est toujours plus efficace qu'un jargon savant.</p></div>
+        <div class="val-c d2"><div class="val-num">02</div><h4>Clarté</h4><p>Vous savez toujours où vous en êtes. Aucune zone d'ombre, aucune mauvaise surprise.</p></div>
+        <div class="val-c d3"><div class="val-num">03</div><h4>Réactivité</h4><p>48h de délai, réponses rapides, respect des engagements. Votre temps est aussi précieux que le nôtre.</p></div>
+        <div class="val-c d4"><div class="val-num">04</div><h4>Écoute</h4><p>Chaque projet est différent. Nous prenons le temps de comprendre avant de proposer.</p></div>
+        <div class="val-c d5"><div class="val-num">05</div><h4>Fluidité</h4><p>Un processus sans friction du premier contact à la livraison des livrables.</p></div>
+        <div class="val-c d6"><div class="val-num">06</div><h4>Accompagnement</h4><p>Vous n'êtes jamais seul face à votre projet. DVK Studio reste présent jusqu'à la décision.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- AVIS DANS À PROPOS -->
+<section style="padding:96px 0;background:var(--cream);overflow:hidden">
+  <div class="wrap">
+    <div class="sr" style="text-align:center;max-width:520px;margin:0 auto 48px">
+      <div class="eyebrow" style="justify-content:center">Avis Google</div>
+      <h2 style="margin-bottom:10px">Ce qu'ils<br>disent de nous.</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px">
+        <div style="display:flex;gap:3px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span style="font-size:13px;font-weight:700;color:var(--ink)">5.0</span>
+        <span style="font-size:13px;color:var(--gray-l)">— 5 avis Google vérifiés</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" class="sr">
+      <div style="background:var(--white);border:1px solid var(--beige-d);border-radius:16px;padding:28px">
+        <div style="display:flex;gap:3px;margin-bottom:14px"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p style="font-size:13.5px;color:var(--gray);line-height:1.7;font-style:italic;margin-bottom:18px">« Kevin est professionnel, humain, patient et inspiré. Je le recommande les yeux fermés. »</p>
+        <div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:50%;background:var(--petrol);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">L</div><div><strong style="display:block;font-size:13px;color:var(--ink)">Lucie De Brito</strong><span style="font-size:11px;color:var(--gray-l)">Mai 2026</span></div></div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--beige-d);border-radius:16px;padding:28px">
+        <div style="display:flex;gap:3px;margin-bottom:14px"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p style="font-size:13.5px;color:var(--gray);line-height:1.7;font-style:italic;margin-bottom:18px">« Ses projections 3D nous ont vraiment permis de visualiser les espaces autrement. Kévin a été très à l'écoute, professionnel et force de proposition. Nous recommandons sans hésiter ! »</p>
+        <div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:50%;background:var(--petrol-l,#2D6E7E);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">N</div><div><strong style="display:block;font-size:13px;color:var(--ink)">N Kell</strong><span style="font-size:11px;color:var(--gray-l)">Maison à Gouvieux</span></div></div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--beige-d);border-radius:16px;padding:28px">
+        <div style="display:flex;gap:3px;margin-bottom:14px"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#F4B400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p style="font-size:13.5px;color:var(--gray);line-height:1.7;font-style:italic;margin-bottom:18px">« Nous sommes ravis du résultat. Kevin pour la qualité de son accompagnement tout au long du projet. Ses propositions créatives nous ont permis de nous projeter concrètement. Nous recommandons fortement ! »</p>
+        <div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:50%;background:var(--terra);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">H</div><div><strong style="display:block;font-size:13px;color:var(--ink)">Hervé Amiot</strong><span style="font-size:11px;color:var(--gray-l)">Appartement à Chantilly</span></div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://g.page/r/dvkstudio/review" target="_blank" rel="noopener" class="btn btn-ol" style="display:inline-flex">Laisser un avis Google <span class="ba">→</span></a>
+    </div>
+  </div>
+</section>
+<style>@media(max-width:768px){div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}}</style>
+
+<!-- ═══ CTA FINAL ═══ -->
+<section id="cta-ap">
+  <div class="wrap">
+    <div class="cta-ap-ey sr">Votre projet nous intéresse</div>
+    <h2 class="cta-ap-h2 sr d2">Parlons de votre <em>projet.</em></h2>
+    <p class="cta-ap-p sr d3">Chaque projet immobilier est différent. DVK Studio vous accompagne pour révéler son potentiel et préparer les bonnes décisions avant travaux.</p>
+    <div class="cta-ap-btns sr d4">
+      <a href="#" class="btn btn-terra" data-tally-open="9qp9X5" data-tally-width="500" data-tally-emoji-text="👋">Préparer mon projet <span class="ba">→</span></a>
+      <a href="tel:+33640324752" class="btn btn-olw">06 40 32 47 52</a>
+    </div>
+    <p class="cta-ap-note sr d5">Gratuit · Sans engagement · Réponse sous 24h</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="foot">
+  <div class="wrap">
+    <div class="foot-g">
+      <div class="foot-br">
+        <div class="foot-logo">
+          <img src="/logo-dvk-blanc.png" alt="DVK Studio" height="40" style="display:block;height:40px;width:auto;filter:brightness(0) invert(1);opacity:.85">
+          DVK Studio
+        </div>
+        <p class="foot-desc">Facilitateur de projets immobiliers. Projection, optimisation et préparation avant travaux — Oise, Somme, Aisne.</p>
+        <div class="foot-soc">
+          <a href="https://www.instagram.com/dvk_studio_officiel/" target="_blank" rel="noopener" class="foot-s" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575906091084" target="_blank" rel="noopener" class="foot-s" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/kevin-de-vlieger-88b261364/" target="_blank" rel="noopener" class="foot-s" aria-label="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Offres</h5><div class="foot-lnks"><a href="/#offres" class="foot-lnk">Visite Conseil — 180€</a><a href="/#offres" class="foot-lnk">Projection — dès 360€</a><a href="/#offres" class="foot-lnk">Déclaration préalable</a><a href="/#offres" class="foot-lnk">Accompagnement projet</a></div></div>
+      <div class="foot-col"><h5>Navigation</h5><div class="foot-lnks"><a href="/#part" class="foot-lnk">Particuliers</a><a href="/#pro" class="foot-lnk">Professionnels</a><a href="/a-propos.html" class="foot-lnk">À propos</a><a href="/#faq" class="foot-lnk">FAQ</a></div></div>
+      <div class="foot-col"><h5>Contact</h5><div class="foot-lnks"><a href="tel:+33640324752" class="foot-lnk">06 40 32 47 52</a><a href="mailto:contact@dvkstudio.fr" class="foot-lnk">contact@dvkstudio.fr</a><span class="foot-lnk" style="cursor:default">17 Rue Machaut, 60120 Gannes</span></div></div>
+    </div>
+    <div class="foot-bot">
+      <span class="foot-cp">© 2026 DVK Studio — EI Kevin De Vlieger · SIRET 892 737 156 00026</span>
+      <div class="foot-leg"><a href="/mentions-legales.html">Mentions légales</a><a href="/confidentialite.html">Confidentialité</a><a href="/cgv.html">CGV</a></div>
+    </div>
+  </div>
+</footer>
+
+<script async src="https://tally.so/widgets/embed.js"></script>
+<script>
+/* CURSOR */
+var c=document.getElementById('cur'),r=document.getElementById('cur-r'),mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button').forEach(function(el){
+  el.addEventListener('mouseenter',function(){c.style.width='14px';c.style.height='14px';c.style.background='var(--petrol)';r.style.width='48px';r.style.height='48px'});
+  el.addEventListener('mouseleave',function(){c.style.width='10px';c.style.height='10px';c.style.background='var(--terra)';r.style.width='36px';r.style.height='36px'});
+});
+
+/* SCROLL REVEAL */
+(function(){
+  var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+  document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(function(el){io.observe(el)});
+})();
+
+/* MOB MENU */
+function mob(){
+  var m=document.getElementById('mob-menu');
+  if(!m) return;
+  var open=m.classList.contains('open');
+  if(open){m.classList.remove('open');document.body.style.overflow=''}
+  else{m.classList.add('open');document.body.style.overflow='hidden'}
+}
+</script>
+</body>
+</html>
