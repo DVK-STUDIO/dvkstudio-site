@@ -197,7 +197,7 @@ nav.up{box-shadow:var(--s2)}
 ───────────────────────────────────── */
 #hero{
   position:relative;
-  min-height:100vh;
+  min-height:72vh;
   display:flex;align-items:center;
   padding-top:72px;
   overflow:hidden;
@@ -258,7 +258,8 @@ nav.up{box-shadow:var(--s2)}
 @keyframes blob1{0%,100%{border-radius:60% 40% 70% 30%/50% 60% 40% 50%;transform:translate(0,0)}50%{border-radius:40% 60% 40% 60%/60% 40% 60% 40%;transform:translate(-18px,14px)}}
 @keyframes blob2{0%,100%{border-radius:40% 60% 30% 70%/60% 40% 60% 40%;transform:translate(0,0)}50%{border-radius:60% 40% 60% 40%/40% 60% 40% 60%;transform:translate(14px,-18px)}}
 
-.hero-inner{
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,26,24,.72) 0%,rgba(28,26,24,.45) 50%,rgba(34,85,96,.35) 100%);z-index:1}
+.hero-inner{position:relative;z-index:2;
   position:relative;z-index:2;
   max-width:1160px;margin:0 auto;
   padding:72px 24px 96px;
@@ -266,7 +267,7 @@ nav.up{box-shadow:var(--s2)}
 }
 
 /* Badge */
-.hero-badge{
+.hero-badge{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2);
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(242,193,177,.18);
   border:1px solid rgba(242,193,177,.30);
@@ -279,14 +280,14 @@ nav.up{box-shadow:var(--s2)}
 .badge-dot{width:6px;height:6px;background:var(--terra);border-radius:50%;animation:pulse 2.2s ease infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
 
-.hero-title{color:var(--petrol-d);margin-bottom:20px}
+.hero-title{color:var(--white);margin-bottom:20px;text-shadow:0 2px 12px rgba(0,0,0,.3);text-align:center}
 .hero-title em{font-style:normal;color:var(--terra)}
-.hero-sub{font-size:16.5px;color:var(--gray);line-height:1.75;max-width:540px;margin:0 auto 52px}
+.hero-sub{font-size:16.5px;color:rgba(255,255,255,.85);line-height:1.75;max-width:600px;margin:0 auto 52px;text-align:center}
 
 /* Tunnel cards */
 .tunnel{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:800px;margin:0 auto}
-.t-card{
-  position:relative;background:var(--white);
+.t-card{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  position:relative;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border:1.5px solid var(--beige-m);border-radius:var(--r3);
   padding:36px 32px 32px;
   text-align:left;text-decoration:none;cursor:pointer;
@@ -805,7 +806,7 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
           <button data-tally-open="9qp9X5" data-tally-width="500" data-tally-emoji-text="🏠" class="btn btn-petrol">Préparer mon projet</button>
         </div>
       </div>
-      <div class="col-visual fi fd2">
+      <div class="col-visual fi fd2" style="display:none">
         <div class="visual-box" style="padding:0;overflow:hidden;border-radius:16px">
           <img src="/aide-decision-achat-immobilier-chantilly.webp"
                alt="Aide à la décision avant achat immobilier à Chantilly"
