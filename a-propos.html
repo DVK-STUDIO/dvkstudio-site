@@ -279,38 +279,154 @@ p{line-height:1.75;color:var(--gray)}
 
 <!-- ═══ HERO ═══ -->
 <section id="hero-ap">
+<style>
+#hero-ap{
+  min-height:100svh;
+  padding-top:80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background:var(--cream);
+  position:relative;
+  overflow:hidden;
+  align-items:center;
+}
+/* Éléments graphiques */
+.ap-deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.ap-arc{position:absolute;border-radius:50%}
+.ap-arc1{width:500px;height:500px;top:-150px;right:-80px;border:1px solid rgba(27,79,90,.07)}
+.ap-arc2{width:280px;height:280px;top:15%;right:12%;border:1px solid rgba(196,96,60,.1)}
+.ap-line-h{position:absolute;top:55%;left:42%;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(27,79,90,.08))}
+.ap-blob{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,96,60,.06) 0%,transparent 65%);top:-80px;right:0;filter:blur(60px)}
+
+/* Colonne gauche : texte */
+.ap-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:60px 56px 60px 48px;
+  position:relative;z-index:1;
+}
+.ap-tag{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(27,79,90,.55);margin-bottom:28px}
+.ap-tag-ln{width:20px;height:1px;background:var(--petrol);opacity:.4}
+.ap-h1{font-size:clamp(32px,3.8vw,56px);font-weight:900;letter-spacing:-.03em;line-height:1.08;margin-bottom:22px;color:var(--ink)}
+.ap-h1 em{font-style:italic;font-weight:300;color:var(--terra)}
+.ap-sub{font-size:15px;color:var(--gray);line-height:1.8;max-width:420px;margin-bottom:40px}
+.ap-ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Colonne droite : photo encadrée */
+.ap-right{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 48px 60px 24px;
+  position:relative;z-index:1;
+}
+.ap-photo-wrap{
+  position:relative;
+  width:100%;max-width:380px;
+}
+/* Cadre décoratif derrière la photo */
+.ap-photo-frame{
+  position:absolute;
+  top:16px;left:16px;right:-16px;bottom:-16px;
+  border:2px solid rgba(27,79,90,.15);
+  border-radius:20px;
+  z-index:0;
+}
+.ap-photo-frame::before{
+  content:'';position:absolute;
+  top:-8px;left:-8px;
+  width:32px;height:32px;
+  border-top:2px solid var(--terra);
+  border-left:2px solid var(--terra);
+  border-radius:4px 0 0 0;
+}
+.ap-photo-frame::after{
+  content:'';position:absolute;
+  bottom:-8px;right:-8px;
+  width:32px;height:32px;
+  border-bottom:2px solid var(--terra);
+  border-right:2px solid var(--terra);
+  border-radius:0 0 4px 0;
+}
+.ap-photo{
+  position:relative;z-index:1;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 24px 64px rgba(13,12,11,.14),0 8px 24px rgba(13,12,11,.08);
+}
+.ap-photo img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:cover;
+  object-position:center top;
+}
+/* Carte identité sous la photo */
+.ap-id{
+  margin-top:20px;
+  background:var(--white);
+  border:1px solid var(--beige-d);
+  border-radius:12px;
+  padding:16px 22px;
+  display:flex;align-items:center;gap:14px;
+  width:100%;max-width:380px;
+  box-shadow:0 4px 16px rgba(13,12,11,.06);
+}
+.ap-id-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--terra);flex-shrink:0;
+}
+.ap-id-name{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.ap-id-role{font-size:11px;color:var(--gray-l);letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
+
+/* Mobile */
+@media(max-width:860px){
+  #hero-ap{grid-template-columns:1fr;padding-top:72px;min-height:auto}
+  .ap-left{padding:48px 20px 32px;order:2}
+  .ap-right{padding:32px 20px 24px;order:1}
+  .ap-photo-wrap{max-width:260px}
+  .ap-id{max-width:260px}
+  .ap-h1{font-size:28px}
+}
+@media(max-width:480px){
+  .ap-ctas{flex-direction:column}
+  .ap-ctas .btn{justify-content:center}
+}
+</style>
+
   <div class="ap-deco">
     <div class="ap-arc ap-arc1"></div>
     <div class="ap-arc ap-arc2"></div>
-    <div class="ap-arc ap-arc3"></div>
     <div class="ap-line-h"></div>
-    <div class="ap-line-v"></div>
     <div class="ap-blob"></div>
   </div>
 
-  <div class="ap-left wrap" style="max-width:none;padding-left:48px;padding-right:0">
+  <div class="ap-left">
     <div class="ap-tag"><div class="ap-tag-ln"></div>DVK Studio — À propos</div>
     <h1 class="ap-h1">Faciliter les projets<br>immobiliers avant<br>qu'ils ne deviennent<br>des <em>travaux.</em></h1>
     <p class="ap-sub">DVK Studio accompagne particuliers et professionnels dans la projection, l'optimisation et la préparation de leurs projets immobiliers — grâce à une approche humaine, claire et orientée aide à la décision.</p>
     <div class="ap-ctas">
       <a href="#" class="btn btn-terra" data-tally-open="9qp9X5" data-tally-width="500">Préparer mon projet <span class="ba">→</span></a>
-      <a href="/" class="btn btn-ol">Voir les offres</a>
+      <a href="/#offres" class="btn btn-ol">Voir les offres</a>
     </div>
   </div>
 
   <div class="ap-right">
-    <div class="ap-img-wrap">
-      <img src="/kevin-dvk-studio.webp"
-           alt="Kevin De Vlieger — Fondateur DVK Studio, facilitateur de projets immobiliers en Oise"
-           loading="eager" fetchpriority="high"
-           width="800" height="1024">
-      <div class="ap-img-ov"></div>
+    <div class="ap-photo-wrap">
+      <div class="ap-photo-frame"></div>
+      <div class="ap-photo">
+        <img src="/kevin-dvk-studio.webp"
+             alt="Kevin De Vlieger — Fondateur DVK Studio"
+             loading="eager" fetchpriority="high"
+             width="380" height="480">
+      </div>
     </div>
-    <div class="ap-img-badge">
-      <strong>Kevin De Vlieger</strong>
-      <span>Fondateur — DVK Studio</span>
+    <div class="ap-id">
+      <div class="ap-id-dot"></div>
+      <div>
+        <div class="ap-id-name">Kevin De Vlieger</div>
+        <div class="ap-id-role">Fondateur — DVK Studio</div>
+      </div>
     </div>
   </div>
+
 </section>
 
 <!-- ═══ VISION ═══ -->
@@ -537,29 +653,48 @@ p{line-height:1.75;color:var(--gray)}
 
 <script async src="https://tally.so/widgets/embed.js"></script>
 <script>
-/* CURSOR */
-var c=document.getElementById('cur'),r=document.getElementById('cur-r'),mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'});
-(function a(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(a)})();
-document.querySelectorAll('a,button').forEach(function(el){
-  el.addEventListener('mouseenter',function(){c.style.width='14px';c.style.height='14px';c.style.background='var(--petrol)';r.style.width='48px';r.style.height='48px'});
-  el.addEventListener('mouseleave',function(){c.style.width='10px';c.style.height='10px';c.style.background='var(--terra)';r.style.width='36px';r.style.height='36px'});
+/* CURSOR desktop uniquement */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches) return;
+  var c=document.getElementById('cur'),r=document.getElementById('cur-r');
+  if(!c||!r) return;
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'},{passive:true});
+  (function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop)})();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){c.style.width='14px';c.style.height='14px';c.style.background='var(--petrol)';r.style.width='48px';r.style.height='48px'});
+    el.addEventListener('mouseleave',function(){c.style.width='10px';c.style.height='10px';c.style.background='var(--terra)';r.style.width='36px';r.style.height='36px'});
+  });
+})();
+
+/* BURGER MOBILE */
+function mob(){
+  var m=document.getElementById('mob-menu');
+  if(!m) return;
+  if(m.classList.contains('open')){
+    m.classList.remove('open');
+    document.body.style.overflow='';
+  } else {
+    m.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('#mob-menu a').forEach(function(l){
+    l.addEventListener('click',function(){
+      var m=document.getElementById('mob-menu');
+      if(m){m.classList.remove('open');document.body.style.overflow='';}
+    });
+  });
 });
 
 /* SCROLL REVEAL */
 (function(){
-  var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')});
+  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(function(el){io.observe(el)});
 })();
-
-/* MOB MENU */
-function mob(){
-  var m=document.getElementById('mob-menu');
-  if(!m) return;
-  var open=m.classList.contains('open');
-  if(open){m.classList.remove('open');document.body.style.overflow=''}
-  else{m.classList.add('open');document.body.style.overflow='hidden'}
-}
 </script>
 </body>
 </html>

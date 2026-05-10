@@ -44,7 +44,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 ul{list-style:none}
 
 /* CURSOR */
-@media(hover:hover){body{cursor:none}a,button{cursor:none}}
+@media(hover:hover){body{}a,button{cursor:none}}
 #cur{position:fixed;width:10px;height:10px;background:var(--terra);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:multiply}
 #cur-r{position:fixed;width:36px;height:36px;border:1.5px solid var(--petrol);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.45;transition:width .3s,height .3s}
 @media(hover:none){#cur,#cur-r{display:none}}
@@ -1084,6 +1084,96 @@ function faq(btn){
     if(b.nextElementSibling) b.nextElementSibling.classList.remove('on');
   });
   if(!open){ btn.classList.add('on'); if(a) a.classList.add('on'); }
+}
+</script>
+<script>
+/* CURSOR — desktop avec souris uniquement */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches) return;
+  var c=document.getElementById('cur'),r=document.getElementById('cur-r');
+  if(!c||!r) return;
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){
+    mx=e.clientX;my=e.clientY;
+    c.style.left=mx+'px';c.style.top=my+'px';
+  },{passive:true});
+  (function loop(){
+    rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
+    r.style.left=rx+'px';r.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){c.style.width='14px';c.style.height='14px';c.style.background='var(--petrol)';r.style.width='48px';r.style.height='48px'});
+    el.addEventListener('mouseleave',function(){c.style.width='10px';c.style.height='10px';c.style.background='var(--terra)';r.style.width='36px';r.style.height='36px'});
+  });
+})();
+
+/* NAV SOLID */
+window.addEventListener('scroll',function(){
+  var n=document.getElementById('nav');
+  if(n) n.classList.toggle('solid',window.scrollY>60);
+},{passive:true});
+
+/* BURGER MOBILE */
+function mob(){
+  var m=document.getElementById('mob-menu');
+  if(!m) return;
+  if(m.classList.contains('open')){
+    m.classList.remove('open');
+    document.body.style.overflow='';
+  } else {
+    m.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('#mob-menu a').forEach(function(l){
+    l.addEventListener('click',function(){
+      var m=document.getElementById('mob-menu');
+      if(m){m.classList.remove('open');document.body.style.overflow='';}
+    });
+  });
+});
+
+/* SCROLL REVEAL */
+(function(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')});
+  },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.sr,.sr-l,.sr-r,.sr-s').forEach(function(el){io.observe(el)});
+})();
+
+/* HERO badges */
+setTimeout(function(){
+  var l1=document.getElementById('lb1'),l2=document.getElementById('lb2');
+  if(l1)l1.style.opacity='1';
+  if(l2)l2.style.opacity='1';
+  document.querySelectorAll('.h-pnl img').forEach(function(img){img.classList.add('kn')});
+},800);
+
+/* PROCESSUS */
+(function(){
+  var steps=document.querySelectorAll('.pst'),tr=document.getElementById('ptr'),wrap=document.getElementById('pst'),done=false;
+  if(!wrap)return;
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&!done){
+        done=true;
+        if(tr)setTimeout(function(){tr.classList.add('run')},200);
+        var i=0;var t=setInterval(function(){if(i<steps.length)steps[i++].classList.add('act');else clearInterval(t)},300);
+      }
+    });
+  },{threshold:.25}).observe(wrap);
+  steps.forEach(function(s,i){
+    s.addEventListener('mouseenter',function(){steps.forEach(function(st,j){st.classList.toggle('act',j<=i)})});
+  });
+})();
+
+/* FAQ */
+function faq(btn){
+  var a=btn.nextElementSibling,open=btn.classList.contains('on');
+  document.querySelectorAll('.faq-q.on').forEach(function(b){b.classList.remove('on');if(b.nextElementSibling)b.nextElementSibling.classList.remove('on')});
+  if(!open&&a){btn.classList.add('on');a.classList.add('on');}
 }
 </script>
 </body>
