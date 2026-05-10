@@ -499,7 +499,7 @@ nav.up{box-shadow:var(--s2)}
 .gi-a{grid-column:span 7;aspect-ratio:16/10}
 .gi-b{grid-column:span 5;aspect-ratio:4/3}
 .gi-c,.gi-d,.gi-e{grid-column:span 4;aspect-ratio:4/3}
-.gi-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--petrol-d) 0%,var(--petrol-m) 100%)}
+.gi-ph{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--petrol-d) 0%,var(--petrol-m) 100%)}
 .gi-ph span{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);text-align:center;padding:0 12px}
 .gi-ph em{font-size:28px;opacity:.3}
 .gi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,63,77,.9) 0%,transparent 55%);opacity:0;transition:opacity var(--ease);display:flex;align-items:flex-end;padding:18px}
@@ -741,6 +741,14 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
+  <div id="hero-img-wrap">
+    <img src="/images/projection-3d-avant-apres-renovation-oise.webp"
+         alt="Projection 3D avant après rénovation appartement Oise par DVK Studio"
+         title="Visualisation avant rénovation – DVK Studio Oise"
+         loading="eager"
+         fetchpriority="high"
+         width="1920" height="900">
+  </div>
   <div class="blob-terra"></div>
   <div class="blob-petrol"></div>
   <div class="arc arc-1"></div>
@@ -798,9 +806,13 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
         </div>
       </div>
       <div class="col-visual fi fd2">
-        <div class="visual-box">
-          <div class="visual-rings"><div class="vr vr1"></div><div class="vr vr2"></div><div class="vr vr3"></div><div class="vr vr4"></div></div>
-          <span class="visual-emoji">🏠</span>
+        <div class="visual-box" style="padding:0;overflow:hidden;border-radius:16px">
+          <img src="/images/aide-decision-achat-immobilier-chantilly.webp"
+               alt="Aide à la décision avant achat immobilier à Chantilly"
+               title="Aide à la décision achat immobilier – DVK Studio"
+               loading="lazy"
+               width="800" height="600"
+               style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px">
         </div>
         <div class="badge-float br"><span class="bf-icon">📐</span><div class="bf-text"><strong>Plans simplifiés</strong><span>Livraison sous 48h</span></div></div>
         <div class="badge-float tl"><span class="bf-icon">💡</span><div class="bf-text"><strong>Projection réaliste</strong><span>Avant de décider</span></div></div>
@@ -814,9 +826,13 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
   <div class="wrap">
     <div class="two-col two-col-rev">
       <div class="col-visual col-visual fi fd2">
-        <div class="visual-box dark">
-          <div class="visual-rings"><div class="vr vr1"></div><div class="vr vr2"></div><div class="vr vr3"></div><div class="vr vr4"></div></div>
-          <span class="visual-emoji" style="opacity:.1;color:white">🏢</span>
+        <div class="visual-box dark" style="padding:0;overflow:hidden;border-radius:16px">
+          <img src="/images/projection-immobiliere-agent-immobilier.webp"
+               alt="Projection immobilière pour agent immobilier"
+               title="Projection immobilière agents et professionnels"
+               loading="lazy"
+               width="900" height="600"
+               style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px;opacity:.92">
         </div>
         <div class="badge-float br dark-glass"><span class="bf-icon">📈</span><div class="bf-text"><strong>+25% taux closing</strong><span>Constaté par nos partenaires</span></div></div>
         <div class="badge-float tl dark-glass"><span class="bf-icon">⚡</span><div class="bf-text"><strong>Livraison 48h</strong><span>Projection garantie</span></div></div>
@@ -861,11 +877,27 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
         <div class="step-num">03</div>
         <div class="step-title">Visite & projection</div>
         <div class="step-desc">Visite sur site, plans simplifiés et enveloppe indicative.</div>
+        <div style="margin-top:18px;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(34,85,96,.12)">
+          <img src="/images/expert-projection-immobiliere-oise.webp"
+               alt="Expert projection immobilière et rénovation dans l'Oise"
+               title="Expert projection immobilière terrain – DVK Studio"
+               loading="lazy"
+               width="480" height="270"
+               style="width:100%;height:auto;display:block">
+        </div>
       </div>
       <div class="step fi fd4">
         <div class="step-num">04</div>
         <div class="step-title">Décision éclairée</div>
         <div class="step-desc">Vision claire pour avancer avec vos partenaires travaux.</div>
+        <div style="margin-top:18px;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(34,85,96,.12)">
+          <img src="/images/analyse-potentiel-immobilier.webp"
+               alt="Analyse du potentiel d'un bien immobilier avant rénovation"
+               title="Analyse potentiel immobilier – DVK Studio"
+               loading="lazy"
+               width="480" height="270"
+               style="width:100%;height:auto;display:block">
+        </div>
       </div>
     </div>
   </div>
@@ -956,11 +988,41 @@ button.btn-terra,button.btn-petrol,button.btn-outline,button.btn-white,button.bt
       <button data-tally-open="9qp9X5" data-tally-width="500" class="btn btn-petrol fi" style="flex-shrink:0">Voir mon potentiel</button>
     </div>
     <div class="gallery">
-      <div class="gi gi-a fi"><div class="gi-ph"><em>🏠</em><span>Maison individuelle · Avant / Après</span></div><div class="gi-ov"><div><h4>Rénovation complète – Oise</h4><span>Projection & optimisation</span></div></div></div>
-      <div class="gi gi-b fi fd1"><div class="gi-ph" style="background:linear-gradient(135deg,#2d6e7e,#225560)"><em>📐</em><span>Plans simplifiés – Beauvais</span></div><div class="gi-ov"><div><h4>Plans simplifiés – Beauvais</h4><span>Aide à la décision avant achat</span></div></div></div>
-      <div class="gi gi-c fi"><div class="gi-ph" style="background:linear-gradient(135deg,#1a3f4d,#225560)"><em>✨</em><span>Valorisation – Compiègne</span></div><div class="gi-ov"><div><h4>Extension légère – Compiègne</h4><span>Déclaration préalable</span></div></div></div>
-      <div class="gi gi-d fi fd1"><div class="gi-ph" style="background:linear-gradient(135deg,#c45a3c,#D96C4C)"><em>🔍</em><span>Analyse potentiel – Amiens</span></div><div class="gi-ov"><div><h4>Visite conseil – Amiens</h4><span>Investissement locatif</span></div></div></div>
-      <div class="gi gi-e fi fd2"><div class="gi-ph" style="background:linear-gradient(135deg,#6FA8AD,#2d6e7e)"><em>🏗️</em><span>Accompagnement – Creil</span></div><div class="gi-ov"><div><h4>Accompagnement – Creil</h4><span>Mise en relation artisans</span></div></div></div>
+      <div class="gi gi-a fi"><div class="gi-ph" style="padding:0;overflow:hidden">
+  <img src="/images/projection-3d-avant-apres-renovation-oise.webp"
+       alt="Projection 3D avant après rénovation appartement Oise par DVK Studio"
+       loading="lazy" width="700" height="500"
+       style="width:100%;height:100%;object-fit:cover;display:block">
+  <span style="position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600">Maison individuelle · Avant / Après</span>
+</div><div class="gi-ov"><div><h4>Rénovation complète – Oise</h4><span>Projection & optimisation</span></div></div></div>
+      <div class="gi gi-b fi fd1"><div class="gi-ph" style="padding:0;overflow:hidden">
+  <img src="/images/analyse-potentiel-immobilier.webp"
+       alt="Analyse du potentiel d'un bien immobilier avant rénovation"
+       loading="lazy" width="700" height="500"
+       style="width:100%;height:100%;object-fit:cover;display:block">
+  <span style="position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600">Plans simplifiés – Beauvais</span>
+</div><div class="gi-ov"><div><h4>Plans simplifiés – Beauvais</h4><span>Aide à la décision avant achat</span></div></div></div>
+      <div class="gi gi-c fi"><div class="gi-ph" style="padding:0;overflow:hidden">
+  <img src="/images/projection-cuisine-3d-renovation.webp"
+       alt="Projection 3D cuisine avant rénovation"
+       loading="lazy" width="700" height="500"
+       style="width:100%;height:100%;object-fit:cover;display:block">
+  <span style="position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600">Cuisine – Compiègne</span>
+</div><div class="gi-ov"><div><h4>Extension légère – Compiègne</h4><span>Déclaration préalable</span></div></div></div>
+      <div class="gi gi-d fi fd1"><div class="gi-ph" style="padding:0;overflow:hidden">
+  <img src="/images/amenagement-salon-3d-hauts-de-france.webp"
+       alt="Simulation d'aménagement salon en 3D Hauts-de-France"
+       loading="lazy" width="700" height="500"
+       style="width:100%;height:100%;object-fit:cover;display:block">
+  <span style="position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600">Salon – Amiens</span>
+</div><div class="gi-ov"><div><h4>Visite conseil – Amiens</h4><span>Investissement locatif</span></div></div></div>
+      <div class="gi gi-e fi fd2"><div class="gi-ph" style="padding:0;overflow:hidden">
+  <img src="/images/valorisation-bien-investisseur-oise.webp"
+       alt="Valorisation immobilière pour investisseurs dans l'Oise"
+       loading="lazy" width="700" height="500"
+       style="width:100%;height:100%;object-fit:cover;display:block">
+  <span style="position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600">Accompagnement – Creil</span>
+</div><div class="gi-ov"><div><h4>Accompagnement – Creil</h4><span>Mise en relation artisans</span></div></div></div>
     </div>
     <div class="gallery-note fi">
       <div><p><strong>📸 Galerie en cours de constitution</strong><br>DVK Studio est actif depuis avril 2026. Suivez nos réalisations sur Instagram.</p></div>
