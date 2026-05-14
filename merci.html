@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merci — DVK Studio</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- ============================================================
+       GOOGLE ADS — PIXEL DE CONVERSION
+       Remplace les 2 valeurs ci-dessous par celles de ton compte :
+       1. AW-XXXXXXXXX  → ton ID de compte Google Ads
+       2. YYYYYYYYYYY   → ton ID de conversion (label)
+       Tu les trouves dans : Google Ads → Outils → Conversions → ta conversion → "Balise Google"
+  ============================================================ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    // Mesure de la page (compte les vues)
+    gtag('config', 'AW-XXXXXXXXX');
+
+    // Événement de conversion (déclenché à l'arrivée sur cette page)
+    gtag('event', 'conversion', {
+      'send_to': 'AW-XXXXXXXXX/YYYYYYYYYYY',
+      'value': 180.0,       // Valeur indicative (correspond à l'offre Visite Conseil)
+      'currency': 'EUR'
+    });
+  </script>
+  <!-- FIN PIXEL GOOGLE ADS -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #1a1714;
+      --cream: #f5f0e8;
+      --warm: #e8ddd0;
+      --accent: #b5874a;
+      --accent-light: #d4a96a;
+      --muted: #7a7068;
+      --success: #4a7c59;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cercles décoratifs de fond */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(181,135,74,0.12);
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -80px; left: -80px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(181,135,74,0.08);
+      pointer-events: none;
+    }
+
+    /* LOGO */
+    .logo {
+      position: fixed;
+      top: 28px; left: 50%;
+      transform: translateX(-50%);
+    }
+    .logo img {
+      height: 36px;
+      opacity: 0.85;
+    }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.5px;
+    }
+
+    /* CARTE CENTRALE */
+    .card {
+      background: white;
+      border: 1px solid var(--warm);
+      border-radius: 20px;
+      padding: 52px 44px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 40px rgba(26,23,20,0.06);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Pastille verte */
+    .check-circle {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(74,124,89,0.1);
+      border: 2px solid rgba(74,124,89,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      animation: popIn 0.5s 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .check-circle svg {
+      width: 32px; height: 32px;
+      stroke: var(--success);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    /* Animation du trait */
+    .check-circle svg path {
+      stroke-dasharray: 40;
+      stroke-dashoffset: 40;
+      animation: draw 0.4s 0.6s ease forwards;
+    }
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    /* Étapes suivantes */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+      margin-bottom: 36px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--warm);
+      animation: fadeUp 0.5s ease both;
+    }
+    .step:nth-child(1) { animation-delay: 0.5s; }
+    .step:nth-child(2) { animation-delay: 0.65s; }
+    .step:nth-child(3) { animation-delay: 0.8s; }
+
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-content strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .step-content span {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Bouton retour */
+    .btn-home {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-home:hover {
+      background: #2e2a26;
+      transform: translateY(-1px);
+    }
+
+    /* Pied */
+    .footer-note {
+      margin-top: 28px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footer-note a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 40px 24px; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <span class="logo-text">DVK Studio</span>
+  </div>
+
+  <div class="card">
+
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 12.5 L9 18 L20 7"/>
+      </svg>
+    </div>
+
+    <div class="label">Formulaire reçu</div>
+    <h1>Votre projet est<br>entre de <em>bonnes mains.</em></h1>
+    <p class="subtitle">
+      Merci pour votre message. Je reviens vers vous sous 24h pour confirmer votre appel découverte de 20 minutes.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Confirmation sous 24h</strong>
+          <span>Vous recevrez un email ou un SMS pour confirmer la prise en compte de votre demande.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Appel découverte — 20 min</strong>
+          <span>Un échange gratuit pour cadrer votre projet et identifier l'offre la plus adaptée.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Visite & livrables sous 48h</strong>
+          <span>Visite sur site, projection, plans simplifiés et enveloppe travaux indicative.</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://dvkstudio.fr" class="btn-home">← Retour au site</a>
+
+    <p class="footer-note">
+      Une question urgente ? <a href="tel:+33640324752">06 40 32 47 52</a> · <a href="mailto:contact@dvkstudio.fr">contact@dvkstudio.fr</a>
+    </p>
+
+  </div>
+
+</body>
+</html>
