@@ -9,22 +9,23 @@
   <!-- ============================================================
        GOOGLE ADS — PIXEL DE CONVERSION
        Remplace les 2 valeurs ci-dessous par celles de ton compte :
-       1. AW-XXXXXXXXX  → ton ID de compte Google Ads
-       2. YYYYYYYYYYY   → ton ID de conversion (label)
+       1. AW-18163363802  → ton ID de compte Google Ads
+       2. lead_dvk_studio   → ton ID de conversion (label)
        Tu les trouves dans : Google Ads → Outils → Conversions → ta conversion → "Balise Google"
   ============================================================ -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18163363802"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
 
     // Mesure de la page (compte les vues)
-    gtag('config', 'AW-XXXXXXXXX');
+    gtag('config', 'AW-18163363802');
 
     // Événement de conversion (déclenché à l'arrivée sur cette page)
+    gtag('event', 'lead_dvk_studio', {});
     gtag('event', 'conversion', {
-      'send_to': 'AW-XXXXXXXXX/YYYYYYYYYYY',
+      'send_to': 'AW-18163363802/lead_dvk_studio',
       'value': 180.0,       // Valeur indicative (correspond à l'offre Visite Conseil)
       'currency': 'EUR'
     });
