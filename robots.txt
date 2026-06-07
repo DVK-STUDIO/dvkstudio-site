@@ -1,7 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /mentions-legales.html
-Disallow: /confidentialite.html
-Disallow: /cgv.html
-
 Sitemap: https://dvkstudio.fr/sitemap.xml

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#1a3f4d">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Professionnels – DVK Studio | Partenaire projection immobilière Oise</title>
+<link rel="preload" as="image" href="img/fond.png">
+<meta name="description" content="DVK Studio aide agents immobiliers, investisseurs et artisans à valoriser leurs biens et accélérer leurs ventes grâce à la projection et l'aide à la décision. Oise, Somme, Aisne.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231a3f4d'/%3E%3Cpolyline points='18,38 32,20 46,38' fill='none' stroke='white' stroke-width='3.5' stroke-linejoin='round'/%3E%3Crect x='22' y='38' width='20' height='14' fill='none' stroke='white' stroke-width='2.8' rx='1'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Montserrat',sans-serif;background:#F7F3EE;color:#1C1A18;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:root{--p:#225560;--pd:#1a3f4d;--pm:#2d6e7e;--t:#D96C4C;--tl:#e8835f;--tp:#F2C1B1;--cr:#F7F3EE;--be:#EDE8E0;--bm:#DDD8D0;--gr:#8C857C;--dk:#1C1A18;--wh:#fff;--r:6px;--r2:14px;--r3:22px;--s2:0 6px 32px rgba(34,85,96,.11);--s3:0 16px 64px rgba(34,85,96,.16);--ease:.3s cubic-bezier(.4,0,.2,1)}
+.w{max-width:1100px;margin:0 auto;padding:0 24px}
+@media(max-width:640px){.w{padding:0 18px}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:var(--r);font-family:'Montserrat',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;transition:var(--ease);line-height:1;white-space:nowrap;border:none;cursor:pointer}
+.btn-t{background:var(--t);color:var(--wh)}.btn-t:hover{background:var(--tl);transform:translateY(-2px);box-shadow:0 8px 28px rgba(217,108,76,.38)}
+.btn-p{background:var(--pd);color:var(--wh)}.btn-p:hover{background:var(--pm);transform:translateY(-2px)}
+.btn-ow{background:transparent;color:rgba(255,255,255,.8);border:2px solid rgba(255,255,255,.3)}.btn-ow:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6)}
+.arr::after{content:'→';font-size:14px}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(247,243,238,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(34,85,96,.09);transition:box-shadow var(--ease)}
+nav.up{box-shadow:var(--s2)}
+.nav-w{max-width:1100px;margin:0 auto;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo-a{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-circle{width:44px;height:44px;border-radius:50%;background:var(--wh);border:2.5px solid var(--p);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.logo-circle img{width:36px;height:36px;object-fit:contain}
+.logo-txt strong{display:block;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--pd);white-space:nowrap}
+.logo-txt small{display:block;font-size:7.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:var(--gr);white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:26px;list-style:none}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:var(--gr);text-decoration:none;transition:color var(--ease)}
+.nav-links a:hover{color:var(--pd)}.nav-links a.act{color:var(--t)}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer;flex-shrink:0}
+.burger span{display:block;width:22px;height:2px;background:var(--pd);border-radius:2px;transition:var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob{display:none;position:fixed;top:70px;left:0;right:0;background:var(--cr);border-bottom:1px solid var(--bm);padding:14px 18px;flex-direction:column;gap:2px;z-index:899;box-shadow:var(--s2)}
+.mob.open{display:flex}
+.mob a{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gr);padding:13px 0;border-bottom:1px solid rgba(34,85,96,.07);text-decoration:none;transition:color var(--ease)}
+.mob a:hover{color:var(--pd)}
+.mob-cta{background:var(--t)!important;color:var(--wh)!important;text-align:center;padding:14px!important;border-radius:var(--r);margin-top:10px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;width:100%;cursor:pointer;font-family:'Montserrat',sans-serif}
+@media(max-width:820px){.nav-links,.nav-cta-d{display:none}.burger{display:flex}.nav-w{padding:0 18px}}
+@media(min-width:821px){.mob{display:none!important}}
+.sec{padding:88px 0}
+@media(max-width:640px){.sec{padding:60px 0}}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+@media(max-width:820px){.g2{grid-template-columns:1fr;gap:36px}}
+.fi{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.fi.v{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+#sticky{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--wh);border-top:1px solid var(--bm);padding:12px 18px;z-index:800;box-shadow:0 -4px 20px rgba(0,0,0,.06)}
+#sticky button{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--t);color:var(--wh);padding:14px;border-radius:var(--r);font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;transition:background var(--ease)}
+#sticky button::after{content:'→'}
+@media(max-width:820px){#sticky{display:block}body{padding-bottom:70px}}
+#cal-m{display:none;position:fixed;inset:0;z-index:1000;background:rgba(26,63,77,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+#cal-m.open{display:flex}
+.cal-box{background:var(--wh);border-radius:16px;width:100%;max-width:820px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column}
+.cal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--bm);flex-shrink:0}
+.cal-head h3{font-size:17px;color:var(--pd)}
+.cal-head p{font-size:13px;color:var(--gr);margin-top:3px}
+.cal-close{width:36px;height:36px;border-radius:50%;background:var(--cr);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--gr);cursor:pointer;flex-shrink:0}
+.cal-body{flex:1;overflow-y:auto}
+.calendly-inline-widget{min-width:300px!important;height:680px!important}
+
+/* HERO PRO */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:70px;overflow:hidden;background:url('img/fond.png') center center/cover no-repeat}
+#hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,63,77,.92) 0%,rgba(26,63,77,.78) 50%,rgba(34,85,96,.65) 100%);z-index:0}
+.hero-in{position:relative;z-index:1;max-width:700px;padding:72px 24px 96px}
+.hero-back{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:24px;transition:color var(--ease)}
+.hero-back:hover{color:rgba(255,255,255,.85)}
+.hero-back::before{content:'←';font-size:13px}
+.hero-ey{display:inline-flex;align-items:center;gap:8px;background:rgba(34,85,96,.3);border:1px solid rgba(111,168,173,.4);color:rgba(111,168,173,.9);padding:7px 16px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:22px}
+h1{font-size:clamp(34px,5.5vw,62px);font-weight:900;line-height:1.08;letter-spacing:-1.5px;color:var(--wh);margin-bottom:20px;text-shadow:0 4px 30px rgba(0,0,0,.25)}
+h1 em{font-style:normal;color:var(--t)}
+.hero-sub-p{font-size:17px;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:36px;max-width:560px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:460px}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--r2);padding:16px;text-align:center;backdrop-filter:blur(8px)}
+.stat-num{font-size:22px;font-weight:800;color:var(--t);display:block;margin-bottom:4px}
+.stat-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.arc-circle{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.07);pointer-events:none;z-index:1}
+.ac1p{width:450px;height:450px;top:-120px;right:-100px}
+.ac2p{width:280px;height:280px;top:18%;right:6%;border-color:rgba(111,168,173,.12)}
+
+/* POUR QUI */
+#pour-qui{background:var(--wh)}
+.cibles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.cible{background:var(--cr);border:1.5px solid var(--bm);border-radius:var(--r2);padding:22px 18px;text-align:center;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease)}
+.cible:hover{transform:translateY(-4px);box-shadow:var(--s2);border-color:rgba(34,85,96,.2)}
+.cible-icon{font-size:28px;margin-bottom:10px}
+.cible h3{font-size:13.5px;font-weight:700;color:var(--pd);margin-bottom:5px}
+.cible p{font-size:12px;color:var(--gr);line-height:1.55}
+@media(max-width:820px){.cibles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.cibles{grid-template-columns:1fr 1fr}}
+
+/* PROBLÈMES PRO */
+#problemes{background:var(--pd);position:relative;overflow:hidden;padding:88px 0}
+#problemes::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:52px 52px;pointer-events:none}
+.prob-grid-pro{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px}
+.prob-card-pro{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r2);padding:26px 22px;border-left:4px solid var(--t);backdrop-filter:blur(8px)}
+.prob-icon{font-size:26px;margin-bottom:12px}
+.prob-card-pro h3{font-size:15px;font-weight:700;color:var(--wh);margin-bottom:8px}
+.prob-card-pro p{font-size:13.5px;color:rgba(255,255,255,.62);line-height:1.65}
+@media(max-width:640px){.prob-grid-pro{grid-template-columns:1fr}}
+
+/* COMMENT DVK AIDE */
+#solution{background:var(--be)}
+.usages{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.usage{background:var(--wh);border:1.5px solid var(--bm);border-radius:var(--r2);padding:26px 22px;position:relative;overflow:hidden;transition:transform var(--ease),box-shadow var(--ease)}
+.usage:hover{transform:translateY(-4px);box-shadow:var(--s3)}
+.usage::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--p),var(--t));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.usage:hover::before{transform:scaleX(1)}
+.usage-icon{font-size:28px;margin-bottom:14px}
+.usage h3{font-size:15px;font-weight:700;color:var(--pd);margin-bottom:8px}
+.usage p{font-size:13.5px;color:var(--gr);line-height:1.65}
+@media(max-width:820px){.usages{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.usages{grid-template-columns:1fr}}
+
+/* EXEMPLES */
+#exemples{background:var(--wh)}
+.exemples-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px}
+.exemple{background:linear-gradient(135deg,var(--pd),var(--pm));border-radius:var(--r2);padding:28px 24px;position:relative;overflow:hidden}
+.exemple::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.exemple-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tp);margin-bottom:8px;display:block}
+.exemple h3{font-size:16px;font-weight:700;color:var(--wh);margin-bottom:8px}
+.exemple p{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.65}
+.exemple-result{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:var(--tp);font-weight:600}
+@media(max-width:640px){.exemples-grid{grid-template-columns:1fr}}
+
+/* FAQ PRO */
+#faq{background:var(--pd);padding:88px 0}
+.faq-list{display:flex;flex-direction:column;gap:2px;margin-top:48px;background:rgba(255,255,255,.05);border-radius:var(--r2);overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.faq-item{background:rgba(255,255,255,.04)}
+.faq-q{width:100%;background:none;border:none;padding:20px 24px;text-align:left;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;font-family:'Montserrat',sans-serif;transition:background var(--ease)}
+.faq-q:hover,.faq-q.on{background:rgba(255,255,255,.08)}
+.faq-qt{font-size:14px;font-weight:600;color:var(--wh);line-height:1.5}
+.faq-ic{color:var(--t);font-size:20px;font-weight:300;flex-shrink:0;transition:transform var(--ease);line-height:1;margin-top:1px}
+.faq-q.on .faq-ic{transform:rotate(45deg)}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-ans.open{max-height:260px}
+.faq-ansi{padding:0 24px 20px;font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.78}
+
+/* CTA */
+#cta{background:var(--t);text-align:center;padding:88px 0;position:relative;overflow:hidden}
+#cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 80% at 15% 50%,rgba(255,255,255,.08) 0%,transparent 55%),radial-gradient(ellipse 45% 65% at 85% 50%,rgba(0,0,0,.08) 0%,transparent 55%);pointer-events:none}
+#cta .w{position:relative;z-index:1}
+#cta h2{font-size:clamp(26px,4vw,44px);font-weight:700;color:var(--wh);margin-bottom:16px;letter-spacing:-.5px}
+#cta p{font-size:16px;color:rgba(255,255,255,.82);max-width:500px;margin:0 auto 32px;line-height:1.75}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-arch{position:absolute;border-radius:50%;pointer-events:none}
+.ca1{top:-60px;left:-60px;width:240px;height:240px;border:1px solid rgba(255,255,255,.12)}
+.ca2{bottom:-80px;right:-50px;width:320px;height:320px;border:1px solid rgba(255,255,255,.09)}
+
+/* FOOTER */
+footer{background:var(--dk);padding:48px 0 0}
+.foot-inner{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.07)}
+.foot-logo-a{display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px}
+.flc{width:46px;height:46px;border-radius:50%;background:var(--wh);border:2.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.flc img{width:38px;height:38px;object-fit:contain}
+.flt strong{display:block;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--wh);white-space:nowrap}
+.flt small{display:block;font-size:7.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap}
+.foot-desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;max-width:220px;margin-bottom:18px}
+.foot-soc{display:flex;gap:8px}
+.fsoc{width:34px;height:34px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);display:flex;align-items:center;justify-content:center;transition:var(--ease);text-decoration:none}
+.fsoc:hover{background:var(--t);border-color:var(--t);transform:translateY(-2px)}
+.fsoc svg{width:14px;height:14px;fill:rgba(255,255,255,.6)}
+.fsoc:hover svg{fill:var(--wh)}
+.foot-col h4{font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--wh);margin-bottom:14px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.foot-links a{font-size:12.5px;color:rgba(255,255,255,.38);text-decoration:none;transition:color var(--ease)}
+.foot-links a:hover{color:var(--tp)}
+.foot-bottom{padding:18px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-bottom p{font-size:11.5px;color:rgba(255,255,255,.2)}
+.foot-legal{display:flex;gap:16px}
+.foot-legal a{font-size:11.5px;color:rgba(255,255,255,.2);text-decoration:none;transition:color var(--ease)}
+.foot-legal a:hover{color:rgba(255,255,255,.5)}
+@media(max-width:640px){.foot-inner{flex-direction:column;gap:28px}.foot-bottom{flex-direction:column;text-align:center}}
+
+/* ═══════════════════════════════════
+   SECTION PARTENAIRES
+═══════════════════════════════════ */
+.sec-partners {
+  padding: 88px 0;
+  background: var(--wh, #fff);
+  overflow: hidden;
+  position: relative;
+}
+.sec-partners::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(34,85,96,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.partners-eyebrow {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--t, #D96C4C); margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.partners-eyebrow::before, .partners-eyebrow::after {
+  content: ''; width: 24px; height: 1.5px;
+  background: var(--tp, #F2C1B1); display: block;
+}
+.partners-title {
+  font-size: clamp(22px, 3vw, 36px); font-weight: 700;
+  letter-spacing: -.5px; color: var(--pd, #1a3f4d);
+  margin-bottom: 12px;
+}
+.partners-sub {
+  font-size: 15px; color: var(--gr, #8C857C);
+  line-height: 1.75; max-width: 520px; margin: 0 auto;
+}
+
+/* Bandes dégradées pour effet de fondu sur les bords */
+.partners-track-wrap {
+  position: relative;
+  margin-top: 48px;
+  overflow: hidden;
+}
+.partners-track-wrap::before,
+.partners-track-wrap::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
+  pointer-events: none;
+}
+.partners-track-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--wh, #fff) 0%, transparent 100%);
+}
+.partners-track-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--wh, #fff) 0%, transparent 100%);
+}
+
+/* Piste de défilement */
+.partners-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  animation: scrollPartners 28s linear infinite;
+  padding: 12px 0 20px;
+}
+.partners-track:hover {
+  animation-play-state: paused;
+}
+@keyframes scrollPartners {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Carte partenaire */
+.partner-item {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+  width: 160px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Wrapper logo + tooltip */
+.partner-logo-wrap {
+  position: relative;
+  width: 110px; height: 110px;
+}
+
+/* Logo placeholder (remplacé par un vrai <img> quand dispo) */
+.partner-logo-placeholder {
+  width: 110px; height: 110px;
+  background: var(--cr, #F7F3EE);
+  border: 2px solid var(--bm, #DDD8D0);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content:center;
+  transition: all .3s ease;
+  position: relative; z-index: 1;
+}
+.partner-item:hover .partner-logo-placeholder {
+  border-color: var(--p, #225560);
+  box-shadow: 0 8px 32px rgba(34,85,96,.14);
+  transform: translateY(-4px);
+  background: var(--wh, #fff);
+}
+.pl-icon { font-size: 36px; }
+
+/* Tooltip description */
+.partner-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%; transform: translateX(-50%);
+  background: var(--pd, #1a3f4d);
+  color: rgba(255,255,255,.88);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 400;
+  line-height: 1.6;
+  padding: 12px 16px;
+  border-radius: 10px;
+  width: 220px;
+  text-align: center;
+  z-index: 100;
+  box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  pointer-events: none;
+}
+/* Flèche du tooltip */
+.partner-tooltip::after {
+  content: '';
+  position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: var(--pd, #1a3f4d);
+}
+.partner-item:hover .partner-tooltip {
+  display: block;
+}
+
+/* Nom et meta */
+.partner-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12.5px; font-weight: 700;
+  color: var(--pd, #1a3f4d);
+  text-align: center; line-height: 1.3;
+  transition: color .3s ease;
+}
+.partner-item:hover .partner-name { color: var(--p, #225560); }
+
+.partner-meta {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10.5px; font-weight: 500;
+  color: var(--gr, #8C857C);
+  text-align: center;
+  letter-spacing: .5px;
+}
+
+/* Sur mobile : ralentir le scroll */
+@media (max-width: 640px) {
+  .partners-track { animation-duration: 20s; gap: 20px; }
+  .partner-logo-placeholder { width: 90px; height: 90px; }
+  .partner-logo-wrap { width: 90px; height: 90px; }
+  .partner-item { width: 130px; }
+  .pl-icon { font-size: 28px; }
+  .partners-track-wrap::before,
+  .partners-track-wrap::after { width: 60px; }
+  /* Tooltip désactivé sur mobile (touch) */
+  .partner-tooltip { display: none !important; }
+}
+
+
+.partner-logo-img {
+  width: 110px; height: 110px;
+  object-fit: contain;
+  background: #fff;
+  border: 2px solid var(--bm, #DDD8D0);
+  border-radius: 16px;
+  padding: 14px;
+  transition: all .3s ease;
+  position: relative; z-index: 1;
+}
+.partner-item:hover .partner-logo-img {
+  border-color: var(--p, #225560);
+  box-shadow: 0 8px 32px rgba(34,85,96,.14);
+  transform: translateY(-4px);
+}
+@media (max-width: 640px) {
+  .partner-logo-img { width: 90px; height: 90px; padding: 10px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-w">
+    <a href="index.html" class="logo-a">
+      <div class="logo-circle"><img src="img/logo.png" alt="DVK Studio"></div>
+      <div class="logo-txt"><strong>DVK STUDIO</strong><small>Facilitateur de projets</small></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="particuliers.html">Particuliers</a></li>
+      <li><a href="professionnels.html" class="act">Professionnels</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta-d">
+      <button class="btn btn-t arr" onclick="openCal()">Échanger sur un partenariat</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <a href="index.html">← Accueil</a>
+  <a href="particuliers.html">Particuliers</a>
+  <a href="professionnels.html">Professionnels</a>
+  <a href="contact.html">Contact</a>
+  <button class="mob-cta" onclick="openCal()">Échanger sur un partenariat →</button>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="arc-circle ac1p"></div>
+  <div class="arc-circle ac2p"></div>
+  <div class="hero-in w">
+    <a href="index.html" class="hero-back">Accueil</a>
+    <div class="hero-ey">🏢 Pour les professionnels</div>
+    <h1>Aidez vos clients à se projeter <em>plus facilement</em> dans leur projet.</h1>
+    <p class="hero-sub-p">DVK Studio est votre partenaire pour valoriser les biens difficiles à vendre, accélérer les décisions d'achat et accompagner vos clients avant travaux.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-t arr" onclick="openCal()">Échanger sur un partenariat</button>
+      <a href="#solution" class="btn btn-ow arr">Nos services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">48h</span><span class="stat-label">Délai livraison</span></div>
+      <div class="stat"><span class="stat-num">+25%</span><span class="stat-label">Taux de closing</span></div>
+      <div class="stat"><span class="stat-num">0€</span><span class="stat-label">Premier échange</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section id="pour-qui" class="sec">
+  <div class="w">
+    <div class="fi">
+      <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--t);margin-bottom:14px;display:flex;align-items:center;gap:10px"><span style="width:24px;height:1.5px;background:var(--tp);display:block"></span>Pour qui ?</div>
+      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:14px">DVK Studio s'adresse à tous les acteurs de l'immobilier.</h2>
+      <p style="font-size:15px;color:var(--gr);line-height:1.75;max-width:560px">Que vous vendiez, investissiez, rénover ou accompagniez, DVK Studio enrichit votre offre de service avec une expertise visuelle rapide.</p>
+    </div>
+    <div class="cibles">
+      <div class="cible fi d1"><div class="cible-icon">🏠</div><h3>Agents immobiliers</h3><p>Valorisez les biens à vendre en montrant leur potentiel.</p></div>
+      <div class="cible fi d2"><div class="cible-icon">💼</div><h3>Marchands de biens</h3><p>Accélérez vos reventes avec des projections concrètes.</p></div>
+      <div class="cible fi d3"><div class="cible-icon">📈</div><h3>Investisseurs</h3><p>Décidez en connaissance de cause avec une enveloppe travaux indicative.</p></div>
+      <div class="cible fi d4"><div class="cible-icon">🔨</div><h3>Artisans & entreprises</h3><p>Appuyez vos devis avec une visualisation professionnelle.</p></div>
+      <div class="cible fi d1"><div class="cible-icon">🎨</div><h3>Architectes d'intérieur</h3><p>Complétez votre offre sur les phases de pré-projet.</p></div>
+      <div class="cible fi d2"><div class="cible-icon">🤝</div><h3>Courtiers en travaux</h3><p>Pré-qualifiez les projets avant mise en concurrence.</p></div>
+      <div class="cible fi d3"><div class="cible-icon">🏗️</div><h3>Promoteurs</h3><p>Aidez vos prospects à se projeter dans les lots disponibles.</p></div>
+      <div class="cible fi d4"><div class="cible-icon">🔑</div><h3>Gestionnaires de biens</h3><p>Valorisez votre parc locatif avec des projections travaux.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLÈMES PRO -->
+<section id="problemes">
+  <div class="w">
+    <div class="fi">
+      <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tp);margin-bottom:14px;display:flex;align-items:center;gap:10px"><span style="width:24px;height:1.5px;background:rgba(242,193,177,.4);display:block"></span>Vos défis quotidiens</div>
+      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--wh);margin-bottom:14px">Ce que vos clients vous disent souvent.</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,.65);line-height:1.75;max-width:560px">Des blocages récurrents qui ralentissent vos ventes et compliquent vos accompagnements.</p>
+    </div>
+    <div class="prob-grid-pro">
+      <div class="prob-card-pro fi d1"><div class="prob-icon">😕</div><h3>"Je n'arrive pas à me projeter dans ce bien."</h3><p>Vos clients voient l'état actuel, pas le potentiel. DVK Studio traduit le potentiel en images concrètes.</p></div>
+      <div class="prob-card-pro fi d2"><div class="prob-icon">⏳</div><h3>"J'ai besoin de temps pour réfléchir."</h3><p>Sans visualisation, la décision tarde. Avec une projection, vos clients décident 2x plus vite.</p></div>
+      <div class="prob-card-pro fi d3"><div class="prob-icon">💸</div><h3>"Je ne sais pas combien vont coûter les travaux."</h3><p>L'incertitude bloque les ventes. Une enveloppe indicative redonne confiance et fluidifie la négociation.</p></div>
+      <div class="prob-card-pro fi d4"><div class="prob-icon">📉</div><h3>"Le bien est difficile à valoriser à ce prix."</h3><p>Un bien rénové sur le papier se vend plus cher et plus vite qu'un bien vide sans vision.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT DVK AIDE -->
+<section id="solution" class="sec" style="background:var(--be)">
+  <div class="w">
+    <div class="fi" style="text-align:center;max-width:580px;margin:0 auto 0">
+      <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--t);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px"><span style="width:24px;height:1.5px;background:var(--tp);display:block"></span>Nos services<span style="width:24px;height:1.5px;background:var(--tp);display:block"></span></div>
+      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:14px">Comment DVK Studio vous aide à mieux vendre et mieux accompagner.</h2>
+    </div>
+    <div class="usages">
+      <div class="usage fi d1"><div class="usage-icon">📐</div><h3>Projection 2D / Plans simplifiés</h3><p>Plans d'aménagement simplifiés pour visualiser les espaces réorganisés. Idéal pour les visites et négociations.</p></div>
+      <div class="usage fi d2"><div class="usage-icon">🏠</div><h3>Valorisation avant vente</h3><p>Montrez le potentiel d'un bien difficile à vendre. Défendez votre prix et convaincez plus rapidement.</p></div>
+      <div class="usage fi d3"><div class="usage-icon">💡</div><h3>Aide à la décision d'achat</h3><p>Enveloppe travaux indicative et visualisation pour que vos clients décident en confiance.</p></div>
+      <div class="usage fi d1"><div class="usage-icon">⚡</div><h3>Livraison sous 48h</h3><p>Réactivité garantie pour ne pas ralentir vos processus de vente. Résultats prêts avant votre prochaine visite.</p></div>
+      <div class="usage fi d2"><div class="usage-icon">🤝</div><h3>Partenariat sur-mesure</h3><p>Formule adaptée aux professionnels réguliers avec tarifs préférentiels et engagement de qualité.</p></div>
+      <div class="usage fi d3"><div class="usage-icon">📋</div><h3>Pré-qualification de projet</h3><p>Analysez la faisabilité d'un projet avant de l'engager. Évitez les mauvaises surprises en amont.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXEMPLES -->
+<section id="exemples" class="sec">
+  <div class="w">
+    <div class="fi">
+      <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--t);margin-bottom:14px;display:flex;align-items:center;gap:10px"><span style="width:24px;height:1.5px;background:var(--tp);display:block"></span>Exemples d'usage</div>
+      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:14px">Des situations concrètes où DVK Studio fait la différence.</h2>
+    </div>
+    <div class="exemples-grid">
+      <div class="exemple fi d1">
+        <span class="exemple-tag">Agent immobilier · Oise</span>
+        <h3>Bien en vente depuis 4 mois sans offre</h3>
+        <p>Maison des années 70, cuisine vétuste, agencement peu lisible. DVK Studio réalise une projection d'aménagement et une enveloppe travaux indicative en 48h.</p>
+        <div class="exemple-result">→ Offre acceptée 10 jours après la diffusion des visuels</div>
+      </div>
+      <div class="exemple fi d2">
+        <span class="exemple-tag">Investisseur · Amiens</span>
+        <h3>Décision d'achat bloquée sur un immeuble de rapport</h3>
+        <p>L'investisseur hésite sur la rentabilité réelle après travaux. DVK Studio analyse l'existant, projette les rénovations et produit une enveloppe indicative par lot.</p>
+        <div class="exemple-result">→ Décision d'achat prise en 72h après remise du document</div>
+      </div>
+      <div class="exemple fi d3">
+        <span class="exemple-tag">Artisan · Compiègne</span>
+        <h3>Appuyer un devis avec une visualisation</h3>
+        <p>Un artisan souhaite illustrer sa proposition de rénovation salle de bain pour convaincre son client hésitant. DVK Studio produit un plan d'aménagement simple et un visuel avant/après.</p>
+        <div class="exemple-result">→ Devis accepté dès la présentation des visuels</div>
+      </div>
+      <div class="exemple fi d4">
+        <span class="exemple-tag">Marchand de biens · Creil</span>
+        <h3>Valoriser une maison avant revente</h3>
+        <p>Bien acquis en mauvais état. DVK Studio réalise une projection complète de la rénovation envisagée pour alimenter la commercialisation avant même le démarrage des travaux.</p>
+        <div class="exemple-result">→ Compromis signé 3 semaines avant fin des travaux</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PRO -->
+<section id="faq">
+  <div class="w">
+    <div class="fi" style="text-align:center;max-width:500px;margin:0 auto">
+      <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tp);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px"><span style="width:24px;height:1.5px;background:rgba(242,193,177,.4);display:block"></span>FAQ Professionnels<span style="width:24px;height:1.5px;background:rgba(242,193,177,.4);display:block"></span></div>
+      <h2 style="font-size:clamp(22px,3vw,36px);font-weight:700;letter-spacing:-.5px;color:var(--wh)">Vos questions sur le partenariat.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Comment fonctionne un partenariat avec DVK Studio ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Nous commençons par un échange de 20 minutes pour comprendre votre activité et vos besoins. Nous définissons ensemble les types de missions et une formule tarifaire adaptée à votre volume. Pas d'engagement minimum sur la durée.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Quels sont les délais de livraison ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Nous nous engageons sur une livraison sous 48h après la visite sur site pour les missions de projection standard. Ce délai peut varier selon la complexité du projet. Il est confirmé lors du cadrage.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Y a-t-il des tarifs préférentiels pour les professionnels réguliers ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Oui. DVK Studio propose des tarifs adaptés aux professionnels avec un volume régulier de missions. Ces conditions sont définies lors de l'échange de découverte selon votre profil et vos besoins.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">DVK Studio peut-il intervenir directement avec mes clients ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Oui, selon votre préférence. Nous pouvons intervenir en votre nom, en co-présence, ou en relation directe avec vos clients. Le mode d'intervention est défini ensemble selon le type de mission.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Quelle est la zone d'intervention ?</span><span class="faq-ic">+</span></button><div class="faq-ansi"><div class="faq-ansi">Principalement Oise (60), Somme (80) et Aisne (02). Pour les zones éloignées, contactez-nous — nous étudions chaque demande selon la distance et la nature de la mission.</div></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PARTENAIRES ═══ -->
+<section id="partenaires" class="sec-partners">
+  <div class="w">
+    <div class="fi" style="text-align:center;margin-bottom:48px">
+      <p class="partners-eyebrow">Nos partenaires de confiance</p>
+      <h2 class="partners-title">Un réseau sélectionné pour vous accompagner.</h2>
+      <p class="partners-sub">DVK Studio travaille avec des professionnels qualifiés dans chaque domaine pour vous offrir un accompagnement complet.</p>
+    </div>
+  </div>
+
+  <!-- Carrousel infini -->
+  <div class="partners-track-wrap">
+    <div class="partners-track" id="partnersTrack">
+
+      <a href="https://myrenego.com" target="_blank" rel="noopener" class="partner-item"
+         data-desc="Courtier spécialisé en regroupement de crédits, financement immobilier et renégociation d'assurance. Basé à Saint-Maximin (60).">
+        <div class="partner-logo-wrap">
+          <img src="img/myrenego.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <div class="partner-tooltip"></div>
+        </div>
+        <span class="partner-name">MyRenégo</span>
+        <span class="partner-meta">Courtage · Saint-Maximin (60)</span>
+      </a>
+
+      <a href="https://treenergy.fr" target="_blank" rel="noopener" class="partner-item"
+         data-desc="Bureau d'études thermiques et fluides RGE depuis 2010. Audits énergétiques, études thermiques et maîtrise d'œuvre en rénovation énergétique.">
+        <div class="partner-logo-wrap">
+          <img src="img/treenergy.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <div class="partner-tooltip"></div>
+        </div>
+        <span class="partner-name">TREENERGY</span>
+        <span class="partner-meta">Bureau d'études thermiques · Saint-Leu-d'Esserent (60)</span>
+      </a>
+
+      <a href="https://www.aeraulec.fr" target="_blank" rel="noopener" class="partner-item"
+         data-desc="Spécialiste du traitement de l'humidité et des remontées capillaires par ventilation intelligente. Idéal pour les bâtiments anciens en rénovation.">
+        <div class="partner-logo-wrap">
+          <img src="img/aeraulec.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <div class="partner-tooltip"></div>
+        </div>
+        <span class="partner-name">AÉRAULEC</span>
+        <span class="partner-meta">Traitement humidité · Oise (60)</span>
+      </a>
+
+      <a href="https://www.atmobat.fr" target="_blank" rel="noopener" class="partner-item"
+         data-desc="Collectif d'architectes d'intérieur basé à Senlis et Lamorlaye, près de Chantilly. Conception, plans 2D/3D, démarches d'urbanisme et accompagnement de projet.">
+        <div class="partner-logo-wrap">
+          <img src="img/atmobat.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <div class="partner-tooltip"></div>
+        </div>
+        <span class="partner-name">ATMOBAT</span>
+        <span class="partner-meta">Architectes d'intérieur · Senlis (60)</span>
+      </a>
+
+      <a href="https://www.bien-renove.fr" target="_blank" rel="noopener" class="partner-item"
+         data-desc="Anita Blanchard, architecte et décoratrice d'intérieur dans l'Oise et le Val-d'Oise. Méthode H.O.M.E. : aménagement, rénovation et accompagnement de A à Z.">
+        <div class="partner-logo-wrap">
+          <img src="img/bien-renove.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <div class="partner-tooltip"></div>
+        </div>
+        <span class="partner-name">BIEN RÉNOVÉ</span>
+        <span class="partner-meta">Architecte d'intérieur · Ully-Saint-Georges (60)</span>
+      </a>
+
+    </div><!-- /track -->
+  </div><!-- /wrap -->
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta">
+  <div class="cta-arch ca1"></div>
+  <div class="cta-arch ca2"></div>
+  <div class="w">
+    <div class="fi">
+      <p style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:14px">Passons à l'action</p>
+      <h2>Prêt à enrichir votre offre avec DVK Studio ?</h2>
+      <p>Commencez par remplir notre formulaire — l'appel découverte Calendly se réserve automatiquement. 20 minutes pour poser les bases d'un partenariat.</p>
+      <div class="cta-btns">
+        <button class="btn btn-wh arr" onclick="openCal()">Échanger sur un partenariat</button>
+        <a href="tel:+33640324752" class="btn btn-ow">06 40 32 47 52</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="w">
+    <div class="foot-inner">
+      <div>
+        <a href="index.html" class="foot-logo-a">
+          <div class="flc"><img src="img/logo.png" alt="DVK Studio"></div>
+          <div class="flt"><strong>DVK STUDIO</strong><small>Facilitateur de projets</small></div>
+        </a>
+        <p class="foot-desc">Projection, optimisation et préparation avant travaux – Oise, Somme, Aisne.</p>
+        <div class="foot-soc">
+          <a href="https://www.instagram.com/dvk_studio_officiel/" target="_blank" rel="noopener" class="fsoc" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.facebook.com/profile.php?id=61575906091084" target="_blank" rel="noopener" class="fsoc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="https://www.linkedin.com/in/kevin-de-vlieger-88b261364/" target="_blank" rel="noopener" class="fsoc" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Parcours</h4>
+        <ul class="foot-links">
+          <li><a href="particuliers.html">Particuliers</a></li>
+          <li><a href="professionnels.html">Professionnels</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul class="foot-links">
+          <li><a href="tel:+33640324752">06 40 32 47 52</a></li>
+          <li><a href="mailto:contact@dvkstudio.fr">contact@dvkstudio.fr</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+          <li><a href="confidentialite.html">Confidentialité</a></li>
+          <li><a href="cgv.html">CGV</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 DVK Studio – EI Kevin De Vlieger · SIRET 892 737 156 00026 · TVA FR [à compléter] · 17 Rue Machaut, 60120 Gannes</p>
+      <div class="foot-legal"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a></div>
+    </div>
+  </div>
+</footer>
+
+<div id="sticky"><button onclick="openCal()">Échanger sur un partenariat</button></div>
+
+<div id="cal-m" role="dialog" aria-modal="true">
+  <div class="cal-box">
+    <div class="cal-head"><div><h3>Réserver votre appel découverte</h3><p>20 minutes · Gratuit · Sans engagement</p></div><button class="cal-close" onclick="closeCal()">✕</button></div>
+    <div class="cal-body"><div class="calendly-inline-widget" data-url="https://calendly.com/contact-dvkstudio/premier-contact?hide_gdpr_banner=1&primary_color=d96c4c"></div></div>
+  </div>
+</div>
+
+
+<script>
+const _n=document.getElementById('nav');
+window.addEventListener('scroll',()=>_n.classList.toggle('up',scrollY>24),{passive:true});
+const _b=document.getElementById('burger'),_m=document.getElementById('mob');
+_b.addEventListener('click',()=>{_b.classList.toggle('open');_m.classList.toggle('open')});
+document.addEventListener('click',e=>{if(!_n.contains(e.target)&&!_m.contains(e.target)){_b.classList.remove('open');_m.classList.remove('open')}});
+function tq(btn){const a=btn.nextElementSibling,o=a.classList.contains('open');document.querySelectorAll('.faq-q').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.faq-ans').forEach(a=>a.classList.remove('open'));if(!o){btn.classList.add('on');a.classList.add('open')}}
+const _obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');_obs.unobserve(e.target)}})},{threshold:.07,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.fi').forEach(el=>_obs.observe(el));
+function openCal(){document.getElementById('cal-m').classList.add('open');document.body.style.overflow='hidden';if(!document.getElementById('cal-s')){const s=document.createElement('script');s.id='cal-s';s.src='https://assets.calendly.com/assets/external/widget.js';s.async=true;document.head.appendChild(s)}}
+function closeCal(){document.getElementById('cal-m').classList.remove('open');document.body.style.overflow=''}
+document.getElementById('cal-m').addEventListener('click',e=>{if(e.target===document.getElementById('cal-m'))closeCal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCal()});
+</script>
+<script>
+/* ── PARTENAIRES — Contenu tooltip + duplication piste ── */
+(function() {
+  const track = document.getElementById('partnersTrack');
+  if (!track) return;
+
+  // Remplir les tooltips avec data-desc
+  track.querySelectorAll('.partner-item').forEach(item => {
+    const desc = item.getAttribute('data-desc');
+    const tip = item.querySelector('.partner-tooltip');
+    if (tip && desc) tip.textContent = desc;
+  });
+
+  // Dupliquer les items pour le défilement infini
+  const items = Array.from(track.children);
+  items.forEach(item => {
+    const clone = item.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    // Remplir aussi le tooltip du clone
+    const desc = clone.getAttribute('data-desc');
+    const tip = clone.querySelector('.partner-tooltip');
+    if (tip && desc) tip.textContent = desc;
+    track.appendChild(clone);
+  });
+})();
+</script>
+</body>
+</html>
