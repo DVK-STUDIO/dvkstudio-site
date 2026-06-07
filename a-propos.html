@@ -19,9 +19,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cream:#F8F5F0;--white:#FFFFFF;--black:#0D0C0B;--ink:#1A1917;
-  --petrol:#1B4F5A;--petrol-l:#2D6E7E;--petrol-d:#0F3039;
-  --terra:#C4603C;--terra-l:#D4724E;
+  --cream:#F7F3EE;--white:#FFFFFF;--black:#1C1A18;--ink:#1C1A18;
+  --petrol:#225560;--petrol-l:#2D6E7E;--petrol-d:#0F3039;
+  --terra:#D96C4C;--terra-l:#D4724E;
   --sand:#C8B99A;--gray:#6B6560;--gray-l:#9B948E;
   --beige:#EDE8E0;--beige-d:#D8D0C4;
   --r12:12px;--r16:16px;--r24:24px;--rpill:999px;
@@ -250,39 +250,44 @@ p{line-height:1.75;color:var(--gray)}
 @media(max-width:860px){.foot-g{grid-template-columns:1fr 1fr;gap:32px}.foot-br{grid-column:1/-1}}
 @media(max-width:480px){.foot-g{grid-template-columns:1fr}}
 </style>
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x370zmtbtg");
+</script>
 </head>
 <body>
+
 
 <div id="cur"></div>
 <div id="cur-r"></div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="/" class="n-logo">
-    <img src="/logo-nav.png" alt="DVK Studio" width="34" height="34" style="border-radius:7px;display:block">
-    DVK Studio
-  </a>
-  <div class="n-links">
-    <a href="/#part" class="n-lnk">Particuliers</a>
-    <a href="/#pro" class="n-lnk">Professionnels</a>
-    <a href="/#offres" class="n-lnk">Offres</a>
-    <a href="/a-propos.html" class="n-lnk active">À propos</a>
-    <a href="/#faq" class="n-lnk">FAQ</a>
+  <div class="nav-w" style="max-width:1100px;margin:0 auto;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0">
+      <div style="width:44px;height:44px;border-radius:50%;background:#fff;border:2.5px solid #225560;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0"><img src="logo.jpg" alt="DVK Studio" width="36" height="36" style="width:36px;height:36px;object-fit:contain"></div>
+      <div><strong style="display:block;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#1a3f4d;white-space:nowrap;font-family:Montserrat,sans-serif">DVK STUDIO</strong><small style="display:block;font-size:7.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:#8C857C;white-space:nowrap;font-family:Montserrat,sans-serif">Facilitateur de projets</small></div>
+    </a>
+    <div style="display:flex;gap:20px">
+      <a href="particuliers.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">Particuliers</a>
+      <a href="professionnels.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">Professionnels</a>
+      <a href="contact.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">Contact</a>
+    </div>
   </div>
-  <a href="#" class="n-cta" data-tally-open="9qp9X5" data-tally-width="500">Préparer mon projet →</a>
-  <button class="n-burger" onclick="mob()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <div id="mob-menu">
   <button class="m-close" onclick="mob()">✕</button>
-  <a href="/#part" class="m-lnk" onclick="mob()">Particuliers</a>
-  <a href="/#pro" class="m-lnk" onclick="mob()">Professionnels</a>
-  <a href="/#offres" class="m-lnk" onclick="mob()">Offres</a>
-  <a href="/a-propos.html" class="m-lnk" onclick="mob()">À propos</a>
-  <a href="/#faq" class="m-lnk" onclick="mob()">FAQ</a>
-  <a href="#" class="m-lnk" data-tally-open="9qp9X5" onclick="mob()">Démarrer →</a>
+  <a href="particuliers.html" class="m-lnk" onclick="mob()">Particuliers</a>
+  <a href="professionnels.html" class="m-lnk" onclick="mob()">Professionnels</a>
+  <a href="particuliers.html#offres" class="m-lnk" onclick="mob()">Offres</a>
+  <a href="a-propos.html" class="m-lnk" onclick="mob()">À propos</a>
+  <a href="particuliers.html#faq" class="m-lnk" onclick="mob()">FAQ</a>
+  <a href="#" class="m-lnk" onclick="openCal()" onclick="mob()">Démarrer →</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -411,8 +416,8 @@ p{line-height:1.75;color:var(--gray)}
     <h1 class="ap-h1">Faciliter les projets<br>immobiliers avant<br>qu'ils ne deviennent<br>des <em>travaux.</em></h1>
     <p class="ap-sub">DVK Studio accompagne particuliers et professionnels dans la projection, l'optimisation et la préparation de leurs projets immobiliers — grâce à une approche humaine, claire et orientée aide à la décision.</p>
     <div class="ap-ctas">
-      <a href="#" class="btn btn-terra" data-tally-open="9qp9X5" data-tally-width="500">Préparer mon projet <span class="ba">→</span></a>
-      <a href="/#offres" class="btn btn-ol">Voir les offres</a>
+      <a href="#" class="btn btn-terra" onclick="openCal()">Préparer mon projet <span class="ba">→</span></a>
+      <a href="particuliers.html#offres" class="btn btn-ol">Voir les offres</a>
     </div>
   </div>
 
@@ -420,7 +425,7 @@ p{line-height:1.75;color:var(--gray)}
     <div class="ap-photo-wrap">
       <div class="ap-photo-frame"></div>
       <div class="ap-photo">
-        <img src="/kevin-dvk-studio.webp"
+        <img src="kevin-dvk-studio.webp"
              alt="Kevin De Vlieger — Fondateur DVK Studio"
              loading="eager" fetchpriority="high"
              width="380" height="480">
@@ -474,7 +479,7 @@ p{line-height:1.75;color:var(--gray)}
   <div class="wrap">
     <div class="apr-g">
       <div class="apr-img sr-l">
-        <img src="/apropos-terrain.webp"
+        <img src="apropos-terrain.webp"
              alt="DVK Studio en intervention terrain — projection immobilière"
              loading="lazy" width="900" height="600">
         <div class="apr-img-tag">Sur le terrain</div>
@@ -492,7 +497,7 @@ p{line-height:1.75;color:var(--gray)}
           <div class="apr-item">Aide à la décision claire et structurée</div>
         </div>
         <div style="margin-top:40px">
-          <a href="/#offres" class="btn btn-terra">Voir nos offres <span class="ba">→</span></a>
+          <a href="particuliers.html#offres" class="btn btn-terra">Voir nos offres <span class="ba">→</span></a>
         </div>
       </div>
     </div>
@@ -619,7 +624,7 @@ p{line-height:1.75;color:var(--gray)}
     <h2 class="cta-ap-h2 sr d2">Parlons de votre <em>projet.</em></h2>
     <p class="cta-ap-p sr d3">Chaque projet immobilier est différent. DVK Studio vous accompagne pour révéler son potentiel et préparer les bonnes décisions avant travaux.</p>
     <div class="cta-ap-btns sr d4">
-      <a href="#" class="btn btn-terra" data-tally-open="9qp9X5" data-tally-width="500" data-tally-emoji-text="👋">Préparer mon projet <span class="ba">→</span></a>
+      <a href="#" class="btn btn-terra" onclick="openCal()">Préparer mon projet <span class="ba">→</span></a>
       <a href="tel:+33640324752" class="btn btn-olw">06 40 32 47 52</a>
     </div>
     <p class="cta-ap-note sr d5">Gratuit · Sans engagement · Réponse sous 24h</p>
@@ -627,82 +632,41 @@ p{line-height:1.75;color:var(--gray)}
 </section>
 
 <!-- FOOTER -->
-<footer id="foot">
-  <div class="wrap">
-    <div class="foot-g">
-      <div class="foot-br">
-        <div class="foot-logo">
-          <img src="/logo-dvk-blanc.png" alt="DVK Studio" height="40" style="display:block;height:40px;width:auto;filter:brightness(0) invert(1);opacity:.85">
-          DVK Studio
-        </div>
-        <p class="foot-desc">Facilitateur de projets immobiliers. Projection, optimisation et préparation avant travaux — Oise, Somme, Aisne.</p>
-        <div class="foot-soc">
-          <a href="https://www.instagram.com/dvk_studio_officiel/" target="_blank" rel="noopener" class="foot-s" aria-label="Instagram">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61575906091084" target="_blank" rel="noopener" class="foot-s" aria-label="Facebook">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/kevin-de-vlieger-88b261364/" target="_blank" rel="noopener" class="foot-s" aria-label="LinkedIn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
+<footer style="background:#1C1A18;padding:32px 0 0;margin-top:80px">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.07)">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none">
+        <div style="width:42px;height:42px;border-radius:50%;background:#fff;border:2.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0"><img src="logo.jpg" alt="DVK Studio" width="34" height="34" style="width:34px;height:34px;object-fit:contain"></div>
+        <div><strong style="display:block;font-size:12px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#fff;font-family:Montserrat,sans-serif">DVK STUDIO</strong><small style="display:block;font-size:7px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:Montserrat,sans-serif">Facilitateur de projets</small></div>
+      </a>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="mentions-legales.html" style="font-size:11.5px;color:rgba(255,255,255,.3);text-decoration:none;font-family:Montserrat,sans-serif">Mentions légales</a>
+        <a href="confidentialite.html" style="font-size:11.5px;color:rgba(255,255,255,.3);text-decoration:none;font-family:Montserrat,sans-serif">Confidentialité</a>
+        <a href="cgv.html" style="font-size:11.5px;color:rgba(255,255,255,.3);text-decoration:none;font-family:Montserrat,sans-serif">CGV</a>
       </div>
-      <div class="foot-col"><h5>Offres</h5><div class="foot-lnks"><a href="/#offres" class="foot-lnk">Visite Conseil — 180€</a><a href="/#offres" class="foot-lnk">Projection — dès 360€</a><a href="/#offres" class="foot-lnk">Déclaration préalable</a><a href="/#offres" class="foot-lnk">Accompagnement projet</a></div></div>
-      <div class="foot-col"><h5>Navigation</h5><div class="foot-lnks"><a href="/#part" class="foot-lnk">Particuliers</a><a href="/#pro" class="foot-lnk">Professionnels</a><a href="/a-propos.html" class="foot-lnk">À propos</a><a href="/#faq" class="foot-lnk">FAQ</a></div></div>
-      <div class="foot-col"><h5>Contact</h5><div class="foot-lnks"><a href="tel:+33640324752" class="foot-lnk">06 40 32 47 52</a><a href="mailto:contact@dvkstudio.fr" class="foot-lnk">contact@dvkstudio.fr</a><span class="foot-lnk" style="cursor:default">17 Rue Machaut, 60120 Gannes</span></div></div>
     </div>
-    <div class="foot-bot">
-      <span class="foot-cp">© 2026 DVK Studio — EI Kevin De Vlieger · SIRET 892 737 156 00026</span>
-      <div class="foot-leg"><a href="/mentions-legales.html">Mentions légales</a><a href="/confidentialite.html">Confidentialité</a><a href="/cgv.html">CGV</a></div>
-    </div>
+    <p style="font-size:11.5px;color:rgba(255,255,255,.18);padding:18px 0;font-family:Montserrat,sans-serif">© 2026 DVK Studio – EI Kevin De Vlieger · SIRET 892 737 156 00026 · TVA FR [à compléter] · 17 Rue Machaut, 60120 Gannes</p>
   </div>
 </footer>
 
-<script async src="https://tally.so/widgets/embed.js"></script>
-<script>
-/* CURSOR desktop uniquement */
-(function(){
-  if(!window.matchMedia('(hover:hover)').matches) return;
-  var c=document.getElementById('cur'),r=document.getElementById('cur-r');
-  if(!c||!r) return;
-  var mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'},{passive:true});
-  (function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop)})();
-  document.querySelectorAll('a,button').forEach(function(el){
-    el.addEventListener('mouseenter',function(){c.style.width='14px';c.style.height='14px';c.style.background='var(--petrol)';r.style.width='48px';r.style.height='48px'});
-    el.addEventListener('mouseleave',function(){c.style.width='10px';c.style.height='10px';c.style.background='var(--terra)';r.style.width='36px';r.style.height='36px'});
-  });
-})();
 
-/* BURGER MOBILE */
-function mob(){
-  var m=document.getElementById('mob-menu');
-  if(!m) return;
-  if(m.classList.contains('open')){
-    m.classList.remove('open');
-    document.body.style.overflow='';
-  } else {
-    m.classList.add('open');
+
+
+<script>
+const _n=document.getElementById('nav');
+if(_n) window.addEventListener('scroll',()=>_n.style.boxShadow=scrollY>24?'0 6px 32px rgba(34,85,96,.11)':'',{passive:true});
+function openCal(){
+  let m=document.getElementById('cal-m');
+  if(!m){
+    m=document.createElement('div');m.id='cal-m';
+    m.style.cssText='position:fixed;inset:0;z-index:1000;background:rgba(26,63,77,.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px';
+    m.innerHTML='<div style="background:#fff;border-radius:16px;width:100%;max-width:820px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #DDD8D0"><div><h3 style="font-size:17px;color:#1a3f4d;font-family:Montserrat,sans-serif">Réserver votre appel découverte</h3><p style="font-size:13px;color:#8C857C;margin-top:3px;font-family:Montserrat,sans-serif">20 minutes · Gratuit · Sans engagement</p></div><button onclick="document.getElementById(\'cal-m\').remove();document.body.style.overflow=\'\'" style="width:36px;height:36px;border-radius:50%;background:#F7F3EE;border:none;font-size:18px;cursor:pointer;color:#8C857C">✕</button></div><div style="flex:1;overflow-y:auto"><div class="calendly-inline-widget" data-url="https://calendly.com/contact-dvkstudio/premier-contact?hide_gdpr_banner=1&primary_color=d96c4c" style="min-width:300px;height:680px"></div></div></div>';
+    m.addEventListener('click',e=>{if(e.target===m){m.remove();document.body.style.overflow=''}});
+    document.body.appendChild(m);
     document.body.style.overflow='hidden';
+    if(!document.getElementById('cal-s')){const s=document.createElement('script');s.id='cal-s';s.src='https://assets.calendly.com/assets/external/widget.js';s.async=true;document.head.appendChild(s)}
   }
 }
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('#mob-menu a').forEach(function(l){
-    l.addEventListener('click',function(){
-      var m=document.getElementById('mob-menu');
-      if(m){m.classList.remove('open');document.body.style.overflow='';}
-    });
-  });
-});
-
-/* SCROLL REVEAL */
-(function(){
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')});
-  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-  document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(function(el){io.observe(el)});
-})();
 </script>
 </body>
 </html>
