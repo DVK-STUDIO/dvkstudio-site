@@ -239,7 +239,8 @@ footer{background:var(--dk);padding:48px 0 0}
 /* Bandes dégradées pour effet de fondu sur les bords */
 .partners-track-wrap {
   position: relative;
-  margin-top: 48px;
+  margin: 48px auto 0;
+  max-width: 880px;
   overflow: hidden;
 }
 .partners-track-wrap::before,
@@ -262,15 +263,12 @@ footer{background:var(--dk);padding:48px 0 0}
   display: flex;
   gap: 28px;
   width: max-content;
-  animation: scrollPartners 28s linear infinite;
-  padding: 12px 0 20px;
+  will-change: transform;
 }
 .partners-track:hover {
   animation-play-state: paused;
 }
-@keyframes scrollPartners {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+
 }
 
 /* Carte partenaire */
@@ -279,7 +277,7 @@ footer{background:var(--dk);padding:48px 0 0}
   align-items: center; gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
-  width: 160px;
+  width: 150px;
   position: relative;
   cursor: pointer;
 }
@@ -359,10 +357,23 @@ footer{background:var(--dk);padding:48px 0 0}
 
 /* Sur mobile : ralentir le scroll */
 @media (max-width: 640px) {
-  .partners-track { animation-duration: 20s; gap: 20px; }
+  .partners-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  will-change: transform;
+}
   .partner-logo-placeholder { width: 90px; height: 90px; }
   .partner-logo-wrap { width: 90px; height: 90px; }
-  .partner-item { width: 130px; }
+  .partner-item {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+  width: 150px;
+  position: relative;
+  cursor: pointer;
+}
   .pl-icon { font-size: 28px; }
   .partners-track-wrap::before,
   .partners-track-wrap::after { width: 60px; }
@@ -371,6 +382,11 @@ footer{background:var(--dk);padding:48px 0 0}
 }
 
 
+.partner-logo-img.logo-fill {
+  padding: 0;
+  object-fit: cover;
+  border: 2px solid var(--bm, #DDD8D0);
+}
 .partner-logo-img {
   width: 110px; height: 110px;
   object-fit: contain;
@@ -669,7 +685,7 @@ footer{background:var(--dk);padding:48px 0 0}
       <a href="https://myrenego.com" target="_blank" rel="noopener" class="partner-item"
          data-desc="Courtier spécialisé en regroupement de crédits, financement immobilier et renégociation d'assurance. Basé à Saint-Maximin (60).">
         <div class="partner-logo-wrap">
-          <img src="img/myrenego.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <img src="myrenego.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
           <div class="partner-tooltip"></div>
         </div>
         <span class="partner-name">MyRenégo</span>
@@ -679,7 +695,7 @@ footer{background:var(--dk);padding:48px 0 0}
       <a href="https://treenergy.fr" target="_blank" rel="noopener" class="partner-item"
          data-desc="Bureau d'études thermiques et fluides RGE depuis 2010. Audits énergétiques, études thermiques et maîtrise d'œuvre en rénovation énergétique.">
         <div class="partner-logo-wrap">
-          <img src="img/treenergy.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <img src="treenergy.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
           <div class="partner-tooltip"></div>
         </div>
         <span class="partner-name">TREENERGY</span>
@@ -689,7 +705,7 @@ footer{background:var(--dk);padding:48px 0 0}
       <a href="https://www.aeraulec.fr" target="_blank" rel="noopener" class="partner-item"
          data-desc="Spécialiste du traitement de l'humidité et des remontées capillaires par ventilation intelligente. Idéal pour les bâtiments anciens en rénovation.">
         <div class="partner-logo-wrap">
-          <img src="img/aeraulec.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <img src="aeraulec.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
           <div class="partner-tooltip"></div>
         </div>
         <span class="partner-name">AÉRAULEC</span>
@@ -699,7 +715,7 @@ footer{background:var(--dk);padding:48px 0 0}
       <a href="https://www.atmobat.fr" target="_blank" rel="noopener" class="partner-item"
          data-desc="Collectif d'architectes d'intérieur basé à Senlis et Lamorlaye, près de Chantilly. Conception, plans 2D/3D, démarches d'urbanisme et accompagnement de projet.">
         <div class="partner-logo-wrap">
-          <img src="img/atmobat.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <img src="atmobat.png" alt="" class="partner-logo-img logo-fill" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
           <div class="partner-tooltip"></div>
         </div>
         <span class="partner-name">ATMOBAT</span>
@@ -709,7 +725,7 @@ footer{background:var(--dk);padding:48px 0 0}
       <a href="https://www.bien-renove.fr" target="_blank" rel="noopener" class="partner-item"
          data-desc="Anita Blanchard, architecte et décoratrice d'intérieur dans l'Oise et le Val-d'Oise. Méthode H.O.M.E. : aménagement, rénovation et accompagnement de A à Z.">
         <div class="partner-logo-wrap">
-          <img src="img/bien-renove.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
+          <img src="bien-renove.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
           <div class="partner-tooltip"></div>
         </div>
         <span class="partner-name">BIEN RÉNOVÉ</span>
@@ -803,28 +819,71 @@ document.getElementById('cal-m').addEventListener('click',e=>{if(e.target===docu
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCal()});
 </script>
 <script>
-/* ── PARTENAIRES — Contenu tooltip + duplication piste ── */
+/* ── PARTENAIRES — défilement infini sans trou ── */
 (function() {
   const track = document.getElementById('partnersTrack');
   if (!track) return;
 
-  // Remplir les tooltips avec data-desc
-  track.querySelectorAll('.partner-item').forEach(item => {
-    const desc = item.getAttribute('data-desc');
-    const tip = item.querySelector('.partner-tooltip');
-    if (tip && desc) tip.textContent = desc;
-  });
+  // Remplir les tooltips
+  function fillTips(scope) {
+    scope.querySelectorAll('.partner-item').forEach(item => {
+      const desc = item.getAttribute('data-desc');
+      const tip = item.querySelector('.partner-tooltip');
+      if (tip && desc) tip.textContent = desc;
+    });
+  }
+  fillTips(track);
 
-  // Dupliquer les items pour le défilement infini
-  const items = Array.from(track.children);
-  items.forEach(item => {
-    const clone = item.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    // Remplir aussi le tooltip du clone
-    const desc = clone.getAttribute('data-desc');
-    const tip = clone.querySelector('.partner-tooltip');
-    if (tip && desc) tip.textContent = desc;
-    track.appendChild(clone);
+  // Items originaux
+  const originals = Array.from(track.children);
+  const originalCount = originals.length;
+
+  // Dupliquer jusqu'à remplir au moins 2.5x la largeur du viewport
+  function ensureFill() {
+    let guard = 0;
+    const wrapW = track.parentElement.offsetWidth || 880;
+    while (track.scrollWidth < wrapW * 2.5 && guard < 20) {
+      originals.forEach(item => {
+        const clone = item.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      });
+      guard++;
+    }
+    fillTips(track);
+  }
+  ensureFill();
+
+  // Largeur d'un cycle = largeur des items originaux + gap
+  const gap = parseFloat(getComputedStyle(track).gap) || 28;
+  let cycleWidth = 0;
+  for (let i = 0; i < originalCount; i++) {
+    cycleWidth += originals[i].offsetWidth + gap;
+  }
+
+  // Animation JS : translation continue, reset invisible à chaque cycle
+  let pos = 0;
+  let paused = false;
+  const speed = 0.7; // px par frame (~30px/s à 60fps)
+
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => paused = false);
+
+  function step() {
+    if (!paused) {
+      pos -= speed;
+      if (Math.abs(pos) >= cycleWidth) pos += cycleWidth;
+      track.style.transform = 'translateX(' + pos + 'px)';
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+
+  // Recalcul au resize
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { ensureFill(); }, 200);
   });
 })();
 </script>
