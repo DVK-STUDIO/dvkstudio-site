@@ -27,7 +27,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(247,243,238,
 .legal-content strong{color:#1a3f4d}
 .legal-content table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
 .legal-content td{padding:10px 14px;border:1px solid #DDD8D0;color:#8C857C;vertical-align:top}
-.legal-content td:first-child{font-weight:600;color:#1a3f4d;width:36%;background:#F7F3EE}</style>
+.legal-content td:first-child{font-weight:600;color:#1a3f4d;width:36%;background:#F7F3EE}/* CURSEUR ANIMÉ — desktop uniquement */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  a, button, .btn, input, textarea { cursor: none; }
+  #cur { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background: var(--terra, #D96C4C); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s; box-shadow: 0 0 0 1.5px rgba(255,255,255,.35); }
+  #cur-r { position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1.5px solid rgba(217,108,76,.6); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: .8; transition: width .3s, height .3s, border-color .3s; box-shadow: 0 0 8px rgba(0,0,0,.15); }
+}
+@media (hover: none), (pointer: coarse) {
+  #cur, #cur-r { display: none !important; }
+}
+</style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -37,6 +47,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(247,243,238,
 </script>
 </head>
 <body>
+<div id="cur"></div>
+<div id="cur-r"></div>
 <nav id="nav">
   <div class="nav-w" style="max-width:1100px;margin:0 auto;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px">
     <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0">
@@ -83,6 +95,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(247,243,238,
 <script>
 const _n=document.getElementById('nav');
 window.addEventListener('scroll',()=>_n.style.boxShadow=scrollY>24?'0 6px 32px rgba(34,85,96,.11)':'',{passive:true});
+</script>
+<script>
+/* CURSEUR ANIMÉ — desktop uniquement */
+(function(){
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  var c=document.getElementById('cur'),r=document.getElementById('cur-r');
+  if(!c||!r) return;
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px';},{passive:true});
+  (function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,input,textarea').forEach(function(el){
+    el.addEventListener('mouseenter',function(){c.style.width='14px';c.style.height='14px';c.style.background='var(--petrol,#225560)';r.style.width='48px';r.style.height='48px';});
+    el.addEventListener('mouseleave',function(){c.style.width='10px';c.style.height='10px';c.style.background='var(--terra,#D96C4C)';r.style.width='36px';r.style.height='36px';});
+  });
+})();
 </script>
 </body>
 </html>
