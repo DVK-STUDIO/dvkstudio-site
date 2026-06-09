@@ -308,6 +308,19 @@ nav.up { background: rgba(26,63,77,0.85); }
 .fhs:hover{background:var(--t);border-color:var(--t)}
 .fhs svg{width:13px;height:13px;fill:rgba(255,255,255,.6)}
 @media(max-width:640px){.foot-home-inner{flex-direction:column;align-items:flex-start;gap:16px;padding:0 18px}.foot-home-links{gap:12px}}
+
+/* SIMULATEUR HABIL */
+#habil-search { position: relative; font-family: 'Montserrat', sans-serif; max-width: 480px; }
+#habil-search input { width: 100%; box-sizing: border-box; height: 52px; padding: 0 18px; border-radius: 8px; border: 2px solid #DDD8D0; background: #fff; font-size: 15px; font-family: inherit; outline: none; transition: border-color 0.2s, box-shadow 0.2s; color: #1C1A18; }
+#habil-search input:focus { border-color: #D96C4C; box-shadow: 0 0 0 4px rgba(217,108,76,.1); }
+#habil-search input::placeholder { color: #8C857C; }
+#habil-results { position: absolute; left: 0; right: 0; top: 58px; z-index: 999; display: flex; flex-direction: column; gap: 4px; }
+#habil-results:empty { display: none; }
+.habil-result { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 8px; border: 1px solid #DDD8D0; background: #fff; cursor: pointer; text-align: left; font-family: inherit; transition: background .2s, border-color .2s; }
+.habil-result:hover { background: #F7F3EE; border-color: #D96C4C; }
+.habil-result strong { font-size: 14px; color: #1a3f4d; font-weight: 600; }
+.habil-result span { font-size: 12px; color: #8C857C; }
+
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -385,6 +398,20 @@ nav.up { background: rgba(26,63,77,0.85); }
   <div class="scroll-hint"><p>Découvrir</p><div class="scroll-line"></div></div>
 </section>
 
+
+<!-- SIMULATEUR HABIL -->
+<section id="simulateur" style="position:relative;z-index:2;background:rgba(247,243,238,0.97);backdrop-filter:blur(10px);padding:64px 0;border-top:1px solid rgba(34,85,96,.08)">
+  <div style="max-width:680px;margin:0 auto;padding:0 24px;text-align:center">
+    <p style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#D96C4C;margin-bottom:12px;font-family:'Montserrat',sans-serif">Simulateur gratuit</p>
+    <h2 style="font-size:clamp(22px,3vw,34px);font-weight:700;letter-spacing:-.5px;color:#1a3f4d;margin-bottom:12px;font-family:'Montserrat',sans-serif">Estimez le potentiel de votre bien.</h2>
+    <p style="font-size:15px;color:#8C857C;line-height:1.7;margin-bottom:32px;font-family:'Montserrat',sans-serif">Entrez votre adresse pour lancer une première simulation gratuite et découvrir les possibilités de votre projet.</p>
+    <div id="habil-search" style="margin:0 auto">
+      <input type="text" placeholder="Entrez votre adresse" />
+      <div id="habil-results"></div>
+    </div>
+  </div>
+</section>
+
 <!-- RÉALISATIONS (aperçu) -->
 <section id="real">
   <div style="max-width:1100px;margin:0 auto;padding:0 24px">
@@ -433,5 +460,39 @@ const _b=document.getElementById('burger'),_m=document.getElementById('mob');
 _b.addEventListener('click',()=>{_b.classList.toggle('open');_m.classList.toggle('open')});
 document.addEventListener('click',e=>{if(!_n.contains(e.target)&&!_m.contains(e.target)){_b.classList.remove('open');_m.classList.remove('open')}});
 </script>
+
+<script>
+(function(){
+  var slug='dvk-studio';
+  var base='https://app.habil.fr';
+  var input=document.querySelector('#habil-search input');
+  var results=document.getElementById('habil-results');
+  if(!input) return;
+  var timer;
+  input.addEventListener('input',function(){
+    clearTimeout(timer);
+    var q=this.value.trim();
+    if(q.length<4){results.innerHTML='';return;}
+    timer=setTimeout(function(){
+      fetch('https://data.geopf.fr/geocodage/search/?q='+encodeURIComponent(q)+'&limit=5')
+        .then(function(r){return r.json();})
+        .then(function(data){
+          results.innerHTML='';
+          (data.features||[]).forEach(function(f){
+            var d=document.createElement('div');
+            d.className='habil-result';
+            d.innerHTML='<strong>'+f.properties.label+'</strong><span>'+f.properties.context+'</span>';
+            d.onclick=function(){
+              var c=f.geometry.coordinates;
+              window.open(base+'/'+slug+'/simulation?address='+encodeURIComponent(f.properties.label)+'&lat='+c[1]+'&lng='+c[0]+'&ban_id='+encodeURIComponent(f.properties.id),'_blank');
+            };
+            results.appendChild(d);
+          });
+        });
+    },350);
+  });
+})();
+</script>
+
 </body>
 </html>

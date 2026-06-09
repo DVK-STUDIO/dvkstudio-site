@@ -669,5 +669,22 @@ function openCal(){
   }
 }
 </script>
+<script>
+/* Scroll reveal — ajoute .in aux éléments .sr/.sr-l/.sr-r quand ils entrent dans le viewport */
+(function(){
+  var els = document.querySelectorAll('.sr, .sr-l, .sr-r');
+  if (!('IntersectionObserver' in window)) {
+    // Fallback : tout révéler
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
 </body>
 </html>
