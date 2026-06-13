@@ -37,6 +37,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(247,243,238,
 @media (hover: none), (pointer: coarse) {
   #cur, #cur-r { display: none !important; }
 }
+
+/* NAV STANDARD UNIFORME */
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(247,243,238,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(34,85,96,.09)}
+nav#nav .nav-w{max-width:1100px;margin:0 auto;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+nav#nav .logo-a{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+nav#nav .logo-circle{width:44px;height:44px;border-radius:50%;background:#fff;border:2.5px solid #225560;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+nav#nav .logo-circle img{width:36px;height:36px;object-fit:contain}
+nav#nav .logo-txt strong{display:block;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#1a3f4d;white-space:nowrap}
+nav#nav .logo-txt small{display:block;font-size:7.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:#8C857C;white-space:nowrap}
+nav#nav .nav-links{display:flex;align-items:center;gap:26px;list-style:none;margin:0;padding:0}
+nav#nav .nav-links a{font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;transition:color .3s}
+nav#nav .nav-links a:hover{color:#1a3f4d}
+nav#nav .burger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer;flex-shrink:0}
+nav#nav .burger span{display:block;width:22px;height:2px;background:#1a3f4d;border-radius:2px;transition:.3s}
+nav#nav .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+nav#nav .burger.open span:nth-child(2){opacity:0}
+nav#nav .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob{display:none;position:fixed;top:70px;left:0;right:0;background:#F7F3EE;border-bottom:1px solid #DDD8D0;padding:14px 18px;flex-direction:column;gap:2px;z-index:899;box-shadow:0 6px 32px rgba(34,85,96,.11)}
+.mob.open{display:flex}
+.mob a{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8C857C;padding:13px 0;border-bottom:1px solid rgba(34,85,96,.07);text-decoration:none}
+.mob a:last-child{border-bottom:none}
+@media(max-width:820px){nav#nav .nav-links{display:none!important}nav#nav .burger{display:flex!important}}
+@media(min-width:821px){.mob{display:none!important}}
+
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -50,19 +74,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(247,243,238,
 <div id="cur"></div>
 <div id="cur-r"></div>
 <nav id="nav">
-  <div class="nav-w" style="max-width:1100px;margin:0 auto;padding:0 24px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px">
-    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0">
-      <div style="width:44px;height:44px;border-radius:50%;background:#fff;border:2.5px solid #225560;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0"><img src="logo.jpg" alt="DVK Studio" width="36" height="36" style="width:36px;height:36px;object-fit:contain"></div>
-      <div><strong style="display:block;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#1a3f4d;white-space:nowrap;font-family:Montserrat,sans-serif">DVK STUDIO</strong><small style="display:block;font-size:7.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:#8C857C;white-space:nowrap;font-family:Montserrat,sans-serif">Facilitateur de projets</small></div>
+  <div class="nav-w">
+    <a href="index.html" class="logo-a">
+      <div class="logo-circle"><img src="logo.jpg" alt="DVK Studio"></div>
+      <div class="logo-txt"><strong>DVK STUDIO</strong><small>Facilitateur de projets</small></div>
     </a>
-    <div style="display:flex;gap:20px">
-      <a href="particuliers.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">Particuliers</a>
-      <a href="professionnels.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">Professionnels</a>
-      <a href="a-propos.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">À propos</a>
-      <a href="contact.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">Contact</a>
-    </div>
+    <ul class="nav-links">
+      <li><a href="particuliers.html">Particuliers</a></li>
+      <li><a href="professionnels.html">Professionnels</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+<div class="mob" id="mob">
+  <a href="particuliers.html">Particuliers</a>
+  <a href="professionnels.html">Professionnels</a>
+  <a href="a-propos.html">À propos</a>
+  <a href="contact.html">Contact</a>
+</div>
 <div class="page-hero">
   <div class="legal-wrap">
     <p style="font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:Montserrat,sans-serif;margin-bottom:10px">— Légal</p>
@@ -109,6 +140,15 @@ window.addEventListener('scroll',()=>_n.style.boxShadow=scrollY>24?'0 6px 32px r
     el.addEventListener('mouseenter',function(){c.style.width='14px';c.style.height='14px';c.style.background='var(--petrol,#225560)';r.style.width='48px';r.style.height='48px';});
     el.addEventListener('mouseleave',function(){c.style.width='10px';c.style.height='10px';c.style.background='var(--terra,#D96C4C)';r.style.width='36px';r.style.height='36px';});
   });
+})();
+</script>
+<script>
+(function(){
+  var bg=document.getElementById('burger'),mob=document.getElementById('mob'),nav=document.getElementById('nav');
+  if(bg&&mob){
+    bg.addEventListener('click',function(){bg.classList.toggle('open');mob.classList.toggle('open')});
+    document.addEventListener('click',function(e){if(nav&&!nav.contains(e.target)&&!mob.contains(e.target)){bg.classList.remove('open');mob.classList.remove('open')}});
+  }
 })();
 </script>
 </body>
