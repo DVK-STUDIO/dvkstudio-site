@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="theme-color" content="#1a3f4d">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Particuliers – DVK Studio | Projection rénovation Oise, Beauvais, Amiens</title>
-<meta name="description" content="Visualisez votre futur intérieur avant de lancer vos travaux. DVK Studio accompagne les particuliers dans la projection, l'optimisation et la préparation de leur rénovation. Oise, Somme, Aisne.">
+<title>Réalisations – DVK Studio | Projets de rénovation Oise, Somme, Aisne</title>
+<meta name="description" content="Découvrez les projets de rénovation accompagnés par DVK Studio : projections 3D, scénarios de travaux et gains énergétiques pour des particuliers et professionnels. Oise, Somme, Aisne.">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -434,6 +434,23 @@ footer{background:var(--dk);padding:48px 0 0}
 @media (hover: none), (pointer: coarse) {
   #cur, #cur-r { display: none !important; }
 }
+/* GALERIE RÉALISATIONS */
+.real-grid-g{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+@media(max-width:900px){.real-grid-g{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.real-grid-g{grid-template-columns:1fr}}
+.real-card{display:block;border-radius:var(--r2);overflow:hidden;background:var(--wh);box-shadow:var(--s2);text-decoration:none;transition:var(--ease)}
+.real-card:hover{transform:translateY(-4px);box-shadow:var(--s3)}
+.rc-img{aspect-ratio:16/10;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--p),var(--pd))}
+.rc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.rc-tag-ov{position:absolute;bottom:0;left:0;right:0;padding:18px;background:linear-gradient(to top,rgba(26,63,77,.88),transparent)}
+.rc-body{padding:18px 20px 22px}
+.rc-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t);margin-bottom:8px}
+.rc-title{font-size:15px;font-weight:700;color:var(--pd);margin-bottom:8px;line-height:1.4}
+.rc-meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gr)}
+.ph-img{display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 12px,transparent 12px 24px),linear-gradient(135deg,var(--p),var(--pd))}
+.ph-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.3);padding:8px 16px;border-radius:100px}
+.real-card.ph{cursor:default}
+.real-card.ph:hover{transform:none;box-shadow:var(--s2)}
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -454,9 +471,9 @@ footer{background:var(--dk);padding:48px 0 0}
       <div class="logo-txt"><strong>DVK STUDIO</strong><small>Facilitateur de projets</small></div>
     </a>
     <ul class="nav-links">
-      <li><a href="particuliers.html" class="act">Particuliers</a></li>
+      <li><a href="particuliers.html">Particuliers</a></li>
       <li><a href="professionnels.html">Professionnels</a></li>
-      <li><a href="realisations.html">Réalisations</a></li>
+      <li><a href="realisations.html" class="act">Réalisations</a></li>
       <li><a href="a-propos.html">À propos</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -470,6 +487,7 @@ footer{background:var(--dk);padding:48px 0 0}
   <a href="index.html">← Accueil</a>
   <a href="particuliers.html">Particuliers</a>
   <a href="professionnels.html">Professionnels</a>
+  <a href="realisations.html">Réalisations</a>
       <a href="a-propos.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">À propos</a>
       <a href="contact.html">Contact</a>
   <button class="mob-cta" onclick="openCal()">Réserver un échange gratuit →</button>
@@ -482,290 +500,105 @@ footer{background:var(--dk);padding:48px 0 0}
   <div class="arc-circle ac3p"></div>
   <div class="hero-in w">
     <a href="index.html" class="hero-back">Accueil</a>
-    <div class="hero-ey">🏠 Pour les particuliers</div>
-    <h1>Visualisez votre futur intérieur <em>avant</em> de lancer les travaux.</h1>
-    <p class="hero-sub-p">Vous avez un projet de rénovation, d'aménagement ou d'optimisation de votre espace ? DVK Studio vous aide à vous projeter concrètement — avant de dépenser le moindre euro.</p>
+    <div class="hero-ey">🖼️ Nos réalisations</div>
+    <h1>Des projets réels, des <em>scénarios</em> concrets.</h1>
+    <p class="hero-sub-p">Découvrez quelques études de rénovation accompagnées par DVK Studio — projections 3D, scénarios de travaux chiffrés et gains de performance énergétique. Détails identifiants (noms, adresses précises) retirés par respect de la confidentialité de nos clients.</p>
     <div class="hero-ctas">
       <button class="btn btn-wh arr" onclick="openCal()">Réserver un échange gratuit</button>
-      <a href="#offres" class="btn btn-ow arr" style="background:transparent;color:rgba(255,255,255,.8);border:2px solid rgba(255,255,255,.3)">Voir les offres</a>
+      <a href="#galerie" class="btn btn-ow arr" style="background:transparent;color:rgba(255,255,255,.8);border:2px solid rgba(255,255,255,.3)">Voir les projets</a>
     </div>
     <div class="hero-trust">
-      <div class="ht"><span>✅</span> Appel gratuit 20 min</div>
+      <div class="ht"><span>🔒</span> Études anonymisées</div>
       <div class="ht"><span>⚡</span> Livraison sous 48h</div>
       <div class="ht"><span>📍</span> Oise, Somme, Aisne</div>
     </div>
   </div>
 </section>
 
-<!-- PROBLÈMES -->
-<section id="problemes" class="sec">
+<!-- GALERIE -->
+<section id="galerie" class="sec" style="background:var(--wh)">
   <div class="w">
-    <div class="fi">
-      <div class="ey">Vos situations fréquentes</div>
-      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:14px">Vous vous reconnaissez ?</h2>
-      <p style="font-size:15px;color:var(--gr);line-height:1.75;max-width:540px">Ces situations sont fréquentes. DVK Studio y répond avec une approche concrète, visuelle et rapide.</p>
-    </div>
-    <div class="prob-grid">
-      <div class="prob-card fi d1">
-        <div class="prob-icon">🤔</div>
-        <h3>Je n'arrive pas à me projeter</h3>
-        <p>Vous avez du mal à visualiser comment votre logement pourrait être transformé avant de prendre une décision.</p>
-      </div>
-      <div class="prob-card fi d2">
-        <div class="prob-icon">💸</div>
-        <h3>J'ai peur de faire le mauvais choix</h3>
-        <p>Sans vision claire, difficile de savoir si les travaux envisagés valent vraiment l'investissement.</p>
-      </div>
-      <div class="prob-card fi d3">
-        <div class="prob-icon">📐</div>
-        <h3>Je ne sais pas par où commencer</h3>
-        <p>Quel espace optimiser en premier ? Quelles options d'aménagement sont réellement réalisables ?</p>
-      </div>
-      <div class="prob-card fi d1">
-        <div class="prob-icon">🏠</div>
-        <h3>J'envisage d'acheter un bien à rénover</h3>
-        <p>Vous voulez connaître le potentiel réel d'un bien et estimer l'enveloppe travaux avant de signer.</p>
-      </div>
-      <div class="prob-card fi d2">
-        <div class="prob-icon">⏱️</div>
-        <h3>Je n'ai pas le temps de tout gérer</h3>
-        <p>Entre les artisans, les devis et les démarches, vous avez besoin d'un point de clarté rapide.</p>
-      </div>
-      <div class="prob-card fi d3">
-        <div class="prob-icon">📋</div>
-        <h3>J'ai des démarches administratives</h3>
-        <p>Déclaration préalable, petites extensions, modifications de façade — vous avez besoin d'accompagnement.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUTION -->
-<section id="solution" class="sec" style="background:var(--be)">
-  <div class="w">
-    <div class="g2">
-      <div class="fi">
-        <div class="ey">La solution DVK Studio</div>
-        <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:14px">De la projection à la décision, en 4 étapes.</h2>
-        <p style="font-size:15px;color:var(--gr);line-height:1.75;margin-bottom:28px">DVK Studio n'est pas un architecte. Nous sommes votre facilitateur — celui qui met en image votre projet pour que vous puissiez décider sereinement.</p>
-        <div class="sol-steps">
-          <div class="sol-step">
-            <div class="sol-num act">01</div>
-            <div class="sol-body"><h3>Formulaire + appel découverte</h3><p>20 minutes gratuites pour comprendre votre projet. Via Calendly — réservez directement votre créneau.</p></div>
-          </div>
-          <div class="sol-step">
-            <div class="sol-num">02</div>
-            <div class="sol-body"><h3>Visite sur site</h3><p>Analyse de votre espace, écoute de vos besoins et premières pistes.</p></div>
-          </div>
-          <div class="sol-step">
-            <div class="sol-num">03</div>
-            <div class="sol-body"><h3>Plans et projection</h3><p>Plans simplifiés, visualisation et enveloppe travaux indicative selon votre offre.</p></div>
-          </div>
-          <div class="sol-step">
-            <div class="sol-num">04</div>
-            <div class="sol-body"><h3>Vous décidez en confiance</h3><p>Avec une vision claire, vous avancez avec vos artisans ou prenez votre décision d'achat.</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="fi d2" style="border-radius:20px;aspect-ratio:4/5;overflow:hidden;position:relative;box-shadow:0 16px 64px rgba(34,85,96,.16)">
-        <img src="projection-3d-avant-apres-renovation-oise.webp" alt="Projection 3D avant après rénovation par DVK Studio dans l'Oise" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(to top,rgba(26,63,77,.85),transparent);color:#fff">
-          <span style="font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#F2C1B1">Projet client réel</span>
-          <p style="font-family:Montserrat,sans-serif;font-size:13px;margin-top:4px;color:rgba(255,255,255,.85)">Salon rénové — Oise</p>
-        </div>
-      </div>
-  </div>
-</div>
-    </section>
-
-<!-- OFFRES -->
-<section id="offres" class="sec" style="background:var(--wh)">
-  <div class="w">
-    <div class="fi" style="text-align:center;max-width:560px;margin:0 auto 0">
-      <div class="ey" style="justify-content:center">Nos offres particuliers</div>
-      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:12px">Tarifs clairs, sans surprise.</h2>
-      <p style="font-size:15px;color:var(--gr);line-height:1.75">Choisissez l'offre qui correspond à votre besoin. Un appel découverte gratuit pour trouver ensemble la bonne formule.</p>
-    </div>
-    <div class="offres-grid">
-      <div class="offre fi d1">
-        <span class="of-tag">Découverte</span>
-        <div class="of-title">Visite Conseil</div>
-        <div class="of-price">180€</div>
-        <div class="of-unit">TTC · 1h30 sur site</div>
-        <div class="of-sep"></div>
-        <ul class="of-feats">
-          <li><span class="chk">✓</span>Visite sur site</li>
-          <li><span class="chk">✓</span>Analyse du potentiel de votre bien</li>
-          <li><span class="chk">✓</span>Conseils d'optimisation des espaces</li>
-          <li><span class="chk">✓</span>Premières orientations travaux</li>
-          <li><span class="chk">✓</span>Réponses à toutes vos questions</li>
-        </ul>
-        <button class="of-btn" onclick="openCal()">Choisir cette offre</button>
-      </div>
-      <div class="offre star fi d2">
-        <span class="of-tag">⭐ Offre phare</span>
-        <div class="of-title">Projection & Aide à la décision</div>
-        <div class="of-price">Dès 360€</div>
-        <div class="of-unit">TTC · La plus choisie</div>
-        <div class="of-sep"></div>
-        <ul class="of-feats">
-          <li><span class="chk">✓</span>Tout de la Visite Conseil</li>
-          <li><span class="chk">✓</span>Plans simplifiés d'aménagement</li>
-          <li><span class="chk">✓</span>Visualisation des espaces optimisés</li>
-          <li><span class="chk">✓</span>Enveloppe travaux indicative</li>
-          <li><span class="chk">✓</span>Aide à la décision avant travaux</li>
-          <li><span class="chk">✓</span>Livraison sous 48h après visite</li>
-        </ul>
-        <button class="of-btn" onclick="openCal()">Préparer mon projet</button>
-      </div>
-      <div class="offre fi d3">
-        <span class="of-tag">Administratif</span>
-        <div class="of-title">Déclaration préalable simplifiée</div>
-        <div class="of-price">Dès 500€</div>
-        <div class="of-unit">HT · Projets simples</div>
-        <div class="of-sep"></div>
-        <ul class="of-feats">
-          <li><span class="chk">✓</span>Constitution du dossier DP</li>
-          <li><span class="chk">✓</span>Façade, ouvertures, clôtures</li>
-          <li><span class="chk">✓</span>Pergola, extension légère</li>
-          <li><span class="chk">✓</span>Accompagnement démarches</li>
-          <li><span class="chk">✓</span>Gain de temps garanti</li>
-        </ul>
-        <button class="of-btn" onclick="openCal()">Me faire accompagner</button>
-      </div>
-      <div class="offre fi d4">
-        <span class="of-tag">Sur-mesure</span>
-        <div class="of-title">Accompagnement complet</div>
-        <div class="of-price">Sur devis</div>
-        <div class="of-unit">Étudié selon votre besoin</div>
-        <div class="of-sep"></div>
-        <ul class="of-feats">
-          <li><span class="chk">✓</span>Projet global personnalisé</li>
-          <li><span class="chk">✓</span>Orientation réseau partenaires</li>
-          <li><span class="chk">✓</span>Mise en relation artisans qualifiés</li>
-          <li><span class="chk">✓</span>Suivi simplifié du projet</li>
-          <li><span class="chk">✓</span>Support tout au long du projet</li>
-        </ul>
-        <button class="of-btn" onclick="openCal()">Discutons-en</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="sec" style="background:var(--be)">
-  <div class="w">
-    <div class="fi" style="text-align:center;max-width:500px;margin:0 auto">
-      <div class="ey" style="justify-content:center">Questions fréquentes</div>
-      <h2 style="font-size:clamp(22px,3vw,36px);font-weight:700;letter-spacing:-.5px;color:var(--pd)">Vos questions, nos réponses.</h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">DVK Studio réalise-t-il les travaux ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Non. DVK Studio accompagne la préparation et la visualisation de votre projet. Nous vous orientons ensuite vers des artisans partenaires qualifiés. Nous ne réalisons pas les travaux et ne sommes pas maître d'œuvre.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Intervenez-vous avant un achat immobilier ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Oui, c'est l'un de nos cas d'usage les plus fréquents. Visualiser le potentiel d'un bien et estimer l'enveloppe travaux avant de signer peut changer votre décision d'achat. Une visite conseil ou une mission de projection peut vous faire économiser des milliers d'euros.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Quelle différence avec un architecte ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">DVK Studio n'est pas un cabinet d'architecture. Nous intervenons en amont : aide à la décision, visualisation et accompagnement humain — sans mission réglementaire ni maîtrise d'œuvre complète. Nous sommes plus accessibles, plus rapides et centrés sur votre prise de décision.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Quels sont les délais ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">La visite conseil est organisée sous 1 à 2 semaines. Pour une mission de projection, comptez 2 à 4 semaines après la visite pour la livraison. Les délais sont précisés lors de l'appel découverte.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Dans quelles zones intervenez-vous ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Principalement Oise (60), Somme (80) et Aisne (02) : Beauvais, Amiens, Compiègne, Clermont, Creil, Senlis, Chantilly, Saint-Just-en-Chaussée et Gannes. Contactez-nous pour les zones éloignées.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="tq(this)"><span class="faq-qt">Comment se passe l'appel découverte ?</span><span class="faq-ic">+</span></button><div class="faq-ans"><div class="faq-ansi">Vous remplissez le formulaire Tally (bouton ci-dessus), puis Calendly s'ouvre automatiquement pour choisir votre créneau. L'appel dure 20 minutes, gratuit, sans engagement. Nous définissons ensemble l'offre la mieux adaptée à votre projet.</div></div></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- RÉALISATIONS -->
-<section id="realisations" class="sec" style="background:var(--wh)">
-  <div class="w">
-    <div class="fi" style="text-align:center;max-width:560px;margin:0 auto 0">
+    <div class="fi" style="text-align:center;max-width:620px;margin:0 auto 0">
       <div class="ey" style="justify-content:center">Réalisations</div>
-      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:12px">Des projets concrets, des espaces transformés.</h2>
-      <p style="font-size:15px;color:var(--gr);line-height:1.75">Découvrez quelques projections réalisées pour nos clients particuliers.</p>
+      <h2 style="font-size:clamp(24px,3.5vw,40px);font-weight:700;letter-spacing:-.5px;color:var(--pd);margin-bottom:12px">Des espaces transformés, des décisions éclairées.</h2>
+      <p style="font-size:15px;color:var(--gr);line-height:1.75">Chaque étude présentée ici donne accès à une page projet détaillée : scénarios de rénovation, simulation 3D et plan de financement indicatif.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px">
-      <div class="fi d1" style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:16/10;box-shadow:var(--s2)">
-        <img src="projection-3d-avant-apres-renovation-oise.webp" alt="Projection 3D avant après rénovation salon dans l'Oise" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:18px;background:linear-gradient(to top,rgba(26,63,77,.88),transparent)"><span style="font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tp)">Avant / Après</span><p style="font-family:Montserrat,sans-serif;font-size:13.5px;font-weight:600;color:#fff;margin-top:3px">Rénovation salon — Oise</p></div>
-      </div>
-      <div class="fi d2" style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:16/10;box-shadow:var(--s2)">
-        <img src="projection-cuisine-3d-renovation.webp" alt="Projection 3D cuisine rénovée" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:18px;background:linear-gradient(to top,rgba(26,63,77,.88),transparent)"><span style="font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tp)">Projection 3D</span><p style="font-family:Montserrat,sans-serif;font-size:13.5px;font-weight:600;color:#fff;margin-top:3px">Cuisine ouverte — projection</p></div>
-      </div>
-      <div class="fi d1" style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:16/10;box-shadow:var(--s2)">
-        <img src="amenagement-salon-3d-hauts-de-france.webp" alt="Aménagement salon 3D Hauts-de-France" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:18px;background:linear-gradient(to top,rgba(26,63,77,.88),transparent)"><span style="font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tp)">Aménagement</span><p style="font-family:Montserrat,sans-serif;font-size:13.5px;font-weight:600;color:#fff;margin-top:3px">Salon / séjour — Hauts-de-France</p></div>
-      </div>
-      <div class="fi d2" style="border-radius:16px;overflow:hidden;position:relative;aspect-ratio:16/10;box-shadow:var(--s2)">
-        <img src="analyse-potentiel-immobilier.webp" alt="Analyse du potentiel immobilier avant achat" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:18px;background:linear-gradient(to top,rgba(26,63,77,.88),transparent)"><span style="font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tp)">Analyse</span><p style="font-family:Montserrat,sans-serif;font-size:13.5px;font-weight:600;color:#fff;margin-top:3px">Potentiel d'un bien avant achat</p></div>
-      </div>
+
+    <div class="real-grid-g">
+
+      <!-- Carte projet — PLACEHOLDER, à remplacer par les vraies études anonymisées -->
+      <a href="#" class="real-card ph">
+        <div class="rc-img ph-img">
+          <span class="ph-badge">Bientôt en ligne</span>
+        </div>
+        <div class="rc-body">
+          <span class="rc-tag">Rénovation complète</span>
+          <h3 class="rc-title">Maison individuelle — secteur Oise</h3>
+          <div class="rc-meta">
+            <span>~110 m²</span><span>·</span><span>DPE D → B</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="real-card ph">
+        <div class="rc-img ph-img">
+          <span class="ph-badge">Bientôt en ligne</span>
+        </div>
+        <div class="rc-body">
+          <span class="rc-tag">Optimisation espace</span>
+          <h3 class="rc-title">Maison individuelle — secteur Oise</h3>
+          <div class="rc-meta">
+            <span>~160 m²</span><span>·</span><span>DPE E → D</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="real-card ph">
+        <div class="rc-img ph-img">
+          <span class="ph-badge">Bientôt en ligne</span>
+        </div>
+        <div class="rc-body">
+          <span class="rc-tag">Valorisation bien</span>
+          <h3 class="rc-title">Bien locatif — secteur Hauts-de-France</h3>
+          <div class="rc-meta">
+            <span>Investisseur</span><span>·</span><span>Avant / après</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="fi" style="text-align:center;margin-top:40px">
+      <p style="font-size:13px;color:var(--gr)">📋 Galerie en cours de constitution — les études détaillées seront publiées au fil des projets.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ PARTENAIRES ═══ -->
-<section id="partenaires" class="sec-partners">
+<!-- COMMENT ÇA MARCHE -->
+<section id="comment" class="sec" style="background:var(--be)">
   <div class="w">
-    <div class="fi" style="text-align:center;margin-bottom:48px">
-      <p class="partners-eyebrow">Nos partenaires de confiance</p>
-      <h2 class="partners-title">Un réseau sélectionné pour vous accompagner.</h2>
-      <p class="partners-sub">DVK Studio travaille avec des professionnels qualifiés dans chaque domaine pour vous offrir un accompagnement complet.</p>
+    <div class="fi" style="text-align:center;max-width:560px;margin:0 auto 0">
+      <div class="ey" style="justify-content:center">Méthode</div>
+      <h2 style="font-size:clamp(24px,3.5vw,38px);font-weight:700;letter-spacing:-.5px;color:var(--pd)">Comment naît une étude DVK Studio.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px">
+      <div class="fi d1" style="background:var(--wh);border-radius:var(--r2);padding:28px;box-shadow:var(--s2)">
+        <div style="font-size:24px;margin-bottom:14px">📐</div>
+        <h3 style="font-size:15px;font-weight:700;color:var(--pd);margin-bottom:8px">Relevé & projection 3D</h3>
+        <p style="font-size:13.5px;color:var(--gr);line-height:1.7">Prise de mesures sur place et modélisation du bien pour visualiser le potentiel réel de l'espace.</p>
+      </div>
+      <div class="fi d2" style="background:var(--wh);border-radius:var(--r2);padding:28px;box-shadow:var(--s2)">
+        <div style="font-size:24px;margin-bottom:14px">🧩</div>
+        <h3 style="font-size:15px;font-weight:700;color:var(--pd);margin-bottom:8px">Scénarios chiffrés</h3>
+        <p style="font-size:13.5px;color:var(--gr);line-height:1.7">Plusieurs options de travaux, avec enveloppe budgétaire indicative et impact sur la performance énergétique.</p>
+      </div>
+      <div class="fi d3" style="background:var(--wh);border-radius:var(--r2);padding:28px;box-shadow:var(--s2)">
+        <div style="font-size:24px;margin-bottom:14px">✅</div>
+        <h3 style="font-size:15px;font-weight:700;color:var(--pd);margin-bottom:8px">Décision éclairée</h3>
+        <p style="font-size:13.5px;color:var(--gr);line-height:1.7">Le client choisit son scénario en toute connaissance de cause, avant tout engagement de travaux.</p>
+      </div>
     </div>
   </div>
-
-  <!-- Carrousel infini -->
-  <div class="partners-track-wrap">
-    <div class="partners-track" id="partnersTrack">
-
-      <a href="https://myrenego.com" target="_blank" rel="noopener" class="partner-item"
-         data-desc="Courtier spécialisé en regroupement de crédits, financement immobilier et renégociation d'assurance. Basé à Saint-Maximin (60).">
-        <div class="partner-logo-wrap">
-          <img src="myrenego.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
-          <div class="partner-tooltip"></div>
-        </div>
-        <span class="partner-name">MyRenégo</span>
-        <span class="partner-meta">Courtage · Saint-Maximin</span>
-      </a>
-
-      <a href="https://treenergy.fr" target="_blank" rel="noopener" class="partner-item"
-         data-desc="Bureau d'études thermiques et fluides RGE depuis 2010. Audits énergétiques, études thermiques et maîtrise d'œuvre en rénovation énergétique.">
-        <div class="partner-logo-wrap">
-          <img src="treenergy.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
-          <div class="partner-tooltip"></div>
-        </div>
-        <span class="partner-name">TREENERGY</span>
-        <span class="partner-meta">Bureau d'études thermiques</span>
-      </a>
-
-      <a href="https://www.aeraulec.fr" target="_blank" rel="noopener" class="partner-item"
-         data-desc="Spécialiste du traitement de l'humidité et des remontées capillaires par ventilation intelligente. Idéal pour les bâtiments anciens en rénovation.">
-        <div class="partner-logo-wrap">
-          <img src="aeraulec.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
-          <div class="partner-tooltip"></div>
-        </div>
-        <span class="partner-name">AÉRAULEC</span>
-        <span class="partner-meta">Traitement humidité · Oise</span>
-      </a>
-
-      <a href="https://www.atmobat.fr" target="_blank" rel="noopener" class="partner-item"
-         data-desc="Collectif d'architectes d'intérieur basé à Senlis et Lamorlaye, près de Chantilly. Conception, plans 2D/3D, démarches d'urbanisme et accompagnement de projet.">
-        <div class="partner-logo-wrap">
-          <img src="atmobat.png" alt="" class="partner-logo-img logo-fill" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
-          <div class="partner-tooltip"></div>
-        </div>
-        <span class="partner-name">ATMOBAT</span>
-        <span class="partner-meta">Architectes d'intérieur · Senlis</span>
-      </a>
-
-      <a href="https://www.bien-renove.fr" target="_blank" rel="noopener" class="partner-item"
-         data-desc="Anita Blanchard, architecte et décoratrice d'intérieur dans l'Oise et le Val-d'Oise. Méthode H.O.M.E. : aménagement, rénovation et accompagnement de A à Z.">
-        <div class="partner-logo-wrap">
-          <img src="bien-renove.png" alt="" class="partner-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\'partner-logo-placeholder\'><span class=\'pl-icon\'>🏢</span></div>')">
-          <div class="partner-tooltip"></div>
-        </div>
-        <span class="partner-name">BIEN RÉNOVÉ</span>
-        <span class="partner-meta">Architecte d'intérieur</span>
-      </a>
-
-    </div><!-- /track -->
-  </div><!-- /wrap -->
 </section>
 
 <!-- CTA FINAL -->
@@ -806,6 +639,7 @@ footer{background:var(--dk);padding:48px 0 0}
         <ul class="foot-links">
           <li><a href="particuliers.html">Particuliers</a></li>
           <li><a href="professionnels.html">Professionnels</a></li>
+          <li><a href="realisations.html">Réalisations</a></li>
         </ul>
       </div>
       <div class="foot-col">
