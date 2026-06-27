@@ -20,7 +20,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"DVK Studio","description":"Facilitateur de projets immobiliers","url":"https://dvkstudio.fr","telephone":"+33640324752","email":"contact@dvkstudio.fr","address":{"@type":"PostalAddress","streetAddress":"17 Rue Machaut","addressLocality":"Gannes","postalCode":"60120","addressRegion":"Oise","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":49.566,"longitude":2.383},"areaServed":["Oise","Somme","Aisne","Beauvais","Amiens","Compiègne","Creil","Senlis","Chantilly"],"sameAs":["https://www.instagram.com/dvk_studio_officiel/","https://www.facebook.com/profile.php?id=61575906091084","https://www.linkedin.com/in/kevin-de-vlieger-88b261364/"]}</script>
 <style>
-/* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -34,8 +33,6 @@ body{font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;over
   --s3:0 20px 64px rgba(34,85,96,.18);
   --ease:.3s cubic-bezier(.4,0,.2,1);
 }
-
-/* ── PAGE ENTIÈRE : fond image ── */
 body {
   min-height: 100vh;
   background: var(--pd);
@@ -57,8 +54,6 @@ body::after {
     rgba(34,85,96,0.65) 100%
   );
 }
-
-/* ── NAV ── */
 nav {
   position: fixed; top:0; left:0; right:0; z-index: 900;
   background: rgba(26,63,77,0.6);
@@ -98,8 +93,6 @@ nav.up { background: rgba(26,63,77,0.85); }
 .mob a:hover{color:var(--wh)}
 @media(max-width:820px){.nav-links{display:none}.burger{display:flex}.nav-w{padding:0 18px}}
 @media(min-width:821px){.mob{display:none!important}}
-
-/* ── HERO ACCUEIL ── */
 #hero {
   position: relative; z-index: 2;
   min-height: 100vh;
@@ -108,7 +101,6 @@ nav.up { background: rgba(26,63,77,0.85); }
   padding: 80px 24px 60px;
   text-align: center;
 }
-
 .hero-eyebrow {
   display: inline-flex; align-items:center; gap:8px;
   background: rgba(242,193,177,.12);
@@ -120,7 +112,6 @@ nav.up { background: rgba(26,63,77,0.85); }
 }
 .badge-dot{width:6px;height:6px;background:var(--t);border-radius:50%;animation:pulse 2s ease infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
-
 .hero-question {
   font-size: clamp(14px, 2.5vw, 17px);
   font-weight: 600; letter-spacing: 3px;
@@ -128,7 +119,6 @@ nav.up { background: rgba(26,63,77,0.85); }
   color: rgba(255,255,255,.55);
   margin-bottom: 20px;
 }
-
 .hero-title {
   font-size: clamp(36px, 6vw, 72px);
   font-weight: 900; line-height: 1.08;
@@ -137,25 +127,20 @@ nav.up { background: rgba(26,63,77,0.85); }
   text-shadow: 0 4px 30px rgba(0,0,0,.25);
 }
 .hero-title em { font-style:normal; color:var(--t); }
-
 .hero-sub {
   font-size: 16px; font-weight:400;
   color: rgba(255,255,255,.72); line-height:1.75;
   max-width: 500px; margin: 0 auto 52px;
 }
-
-/* ── CHOIX PROFIL ── */
 .choix-label {
   font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
   text-transform: uppercase; color: rgba(255,255,255,.45);
   margin-bottom: 20px;
 }
-
 .choices {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 20px; max-width: 720px; margin: 0 auto 48px;
 }
-
 .choice-card {
   display: block; text-decoration: none;
   background: rgba(255,255,255,.08);
@@ -185,7 +170,6 @@ nav.up { background: rgba(26,63,77,0.85); }
   box-shadow: 0 24px 60px rgba(0,0,0,.25);
 }
 .choice-card:hover::before { transform:scaleX(1); }
-
 .c-icon { font-size:36px; margin-bottom:16px; display:block; }
 .c-tag {
   font-size: 9.5px; font-weight:700; letter-spacing:2.5px;
@@ -214,13 +198,10 @@ nav.up { background: rgba(26,63,77,0.85); }
 .choice-card.part .c-btn:hover { background:var(--pm); }
 .choice-card.pro  .c-btn { background:var(--t); color:var(--wh); }
 .choice-card.pro  .c-btn:hover { background:var(--tl); }
-
 .c-dots { position:absolute; bottom:16px; right:16px; display:grid; grid-template-columns:repeat(3,5px); gap:4px; }
 .c-dot { width:5px; height:5px; border-radius:50%; }
 .choice-card.part .c-dot { background:rgba(111,168,173,.2); }
 .choice-card.pro  .c-dot { background:rgba(242,193,177,.2); }
-
-/* Confiance */
 .trust {
   display: flex; align-items:center; justify-content:center;
   gap: 28px; flex-wrap:wrap;
@@ -231,8 +212,6 @@ nav.up { background: rgba(26,63,77,0.85); }
   font-weight:500;
 }
 .trust-item span { font-size:16px; }
-
-/* Scroll hint */
 .scroll-hint {
   position: absolute; bottom:24px; left:50%;
   transform:translateX(-50%);
@@ -242,8 +221,6 @@ nav.up { background: rgba(26,63,77,0.85); }
 .scroll-hint p { font-size:9.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.3); }
 .scroll-line { width:1px; height:28px; background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent); animation:sl 2s ease-in-out infinite; }
 @keyframes sl{0%,100%{opacity:.4}50%{opacity:.9}}
-
-/* Lignes archi décoratives */
 .arch-circle {
   position:fixed; border-radius:50%; pointer-events:none; z-index:2;
   border: 1px solid rgba(255,255,255,.07);
@@ -251,7 +228,6 @@ nav.up { background: rgba(26,63,77,0.85); }
 .ac1{width:500px;height:500px;top:-150px;right:-150px}
 .ac2{width:700px;height:700px;bottom:-250px;left:-250px;border-color:rgba(242,193,177,.06)}
 .ac3{width:300px;height:300px;top:20%;right:5%;border-color:rgba(255,255,255,.05)}
-
 @media(max-width:640px){
   .choices{grid-template-columns:1fr}
   .choice-card{padding:28px 22px}
@@ -260,8 +236,6 @@ nav.up { background: rgba(26,63,77,0.85); }
   .trust{gap:16px}
   .arch-circle{display:none}
 }
-
-/* ── SECTION RÉALISATIONS (accueil) ── */
 #real {
   position:relative; z-index:2;
   background:rgba(26,63,77,0.6);
@@ -284,8 +258,6 @@ nav.up { background: rgba(26,63,77,0.85); }
 .real-item em{font-size:28px;opacity:.35}
 .real-item span{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:center;padding:0 12px}
 @media(max-width:640px){.real-grid{grid-template-columns:1fr 1fr}}
-
-/* ── FOOTER ACCUEIL ── */
 #foot-home {
   position:relative; z-index:2;
   background:rgba(15,35,44,0.85);
@@ -311,20 +283,16 @@ nav.up { background: rgba(26,63,77,0.85); }
 .fhs:hover{background:var(--t);border-color:var(--t)}
 .fhs svg{width:13px;height:13px;fill:rgba(255,255,255,.6)}
 @media(max-width:640px){.foot-home-inner{flex-direction:column;align-items:flex-start;gap:16px;padding:0 18px}.foot-home-links{gap:12px}}
-
-/* SIMULATEUR HABIL */
 #habil-search { position: relative; font-family: 'Montserrat', sans-serif; max-width: 480px; }
-#habil-search input { width: 100%; box-sizing: border-box; height: 52px; padding: 0 18px; border-radius: 8px; border: 2px solid #DDD8D0; background: #fff; font-size: 15px; font-family: inherit; outline: none; transition: border-color 0.2s, box-shadow 0.2s; color: #1C1A18; }
+#habil-search input { width: 100%; box-sizing: border-box; height: 52px; padding: 0 18px; border-radius: 12px; border: 2px solid #DDD8D0; background: #fff; font-size: 15px; font-family: inherit; outline: none; transition: border-color 0.2s, box-shadow 0.2s; color: #1C1A18; }
 #habil-search input:focus { border-color: #D96C4C; box-shadow: 0 0 0 4px rgba(217,108,76,.1); }
 #habil-search input::placeholder { color: #8C857C; }
 #habil-results { position: absolute; left: 0; right: 0; top: 58px; z-index: 999; display: flex; flex-direction: column; gap: 4px; }
 #habil-results:empty { display: none; }
-.habil-result { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 8px; border: 1px solid #DDD8D0; background: #fff; cursor: pointer; text-align: left; font-family: inherit; transition: background .2s, border-color .2s; }
+.habil-result { display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; border: 1px solid #DDD8D0; background: #fff; cursor: pointer; text-align: left; font-family: inherit; transition: background .2s, border-color .2s; }
 .habil-result:hover { background: #F7F3EE; border-color: #D96C4C; }
 .habil-result strong { font-size: 14px; color: #1a3f4d; font-weight: 600; }
 .habil-result span { font-size: 12px; color: #8C857C; }
-
-/* CURSEUR ANIMÉ — desktop uniquement */
 @media (hover: hover) and (pointer: fine) {
   body { cursor: none; }
   a, button, .btn, input, textarea { cursor: none; }
@@ -346,13 +314,9 @@ nav.up { background: rgba(26,63,77,0.85); }
 <body>
 <div id="cur"></div>
 <div id="cur-r"></div>
-
-<!-- Cercles décoratifs -->
 <div class="arch-circle ac1"></div>
 <div class="arch-circle ac2"></div>
 <div class="arch-circle ac3"></div>
-
-<!-- NAV -->
 <nav id="nav">
   <div class="nav-w">
     <a href="index.html" class="logo-a">
@@ -374,16 +338,12 @@ nav.up { background: rgba(26,63,77,0.85); }
       <a href="a-propos.html" style="font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#8C857C;text-decoration:none;font-family:Montserrat,sans-serif">À propos</a>
       <a href="contact.html">Contact</a>
 </div>
-
-<!-- HERO ACCUEIL -->
 <section id="hero">
   <div class="hero-eyebrow"><span class="badge-dot"></span>Facilitateur de projets immobiliers</div>
   <p class="hero-question">Vous êtes ?</p>
   <h1 class="hero-title">Projetez votre<br>rénovation <em>avant</em><br>de vous lancer.</h1>
   <p class="hero-sub">DVK Studio vous accompagne de la visualisation à la mise en œuvre — particuliers ou professionnels.</p>
-
   <p class="choix-label">Choisissez votre parcours</p>
-
   <div class="choices">
     <a href="particuliers.html" class="choice-card part">
       <div class="c-dots"><div class="c-dot"></div><div class="c-dot"></div><div class="c-dot"></div><div class="c-dot"></div><div class="c-dot"></div><div class="c-dot"></div><div class="c-dot"></div><div class="c-dot"></div><div class="c-dot"></div></div>
@@ -402,19 +362,14 @@ nav.up { background: rgba(26,63,77,0.85); }
       <button class="c-btn">Voir mon parcours</button>
     </a>
   </div>
-
   <div class="trust">
     <div class="trust-item"><span>📍</span>Gannes – Oise, Somme, Aisne</div>
     <div class="trust-item"><span>⚡</span>Livraison sous 48h</div>
     <div class="trust-item"><span>✅</span>Sans engagement</div>
     <div class="trust-item"><span>📞</span><a href="tel:+33640324752" style="color:inherit">06 40 32 47 52</a></div>
   </div>
-
   <div class="scroll-hint"><p>Découvrir</p><div class="scroll-line"></div></div>
 </section>
-
-
-<!-- SIMULATEUR HABIL -->
 <section id="simulateur" style="position:relative;z-index:50;background:rgba(247,243,238,0.97);backdrop-filter:blur(10px);padding:64px 0;border-top:1px solid rgba(34,85,96,.08)">
   <div style="max-width:680px;margin:0 auto;padding:0 24px;text-align:center">
     <p style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#D96C4C;margin-bottom:12px;font-family:'Montserrat',sans-serif">Simulateur gratuit</p>
@@ -426,8 +381,6 @@ nav.up { background: rgba(26,63,77,0.85); }
     </div>
   </div>
 </section>
-
-<!-- RÉALISATIONS (aperçu) -->
 <section id="real">
   <div style="max-width:1100px;margin:0 auto;padding:0 24px">
     <div style="text-align:center;margin-bottom:0">
@@ -445,8 +398,6 @@ nav.up { background: rgba(26,63,77,0.85); }
     </div>
   </div>
 </section>
-
-<!-- FOOTER -->
 <div id="foot-home">
   <div class="foot-home-inner">
     <a href="index.html" class="foot-home-logo">
@@ -467,7 +418,6 @@ nav.up { background: rgba(26,63,77,0.85); }
     </div>
   </div>
 </div>
-
 <script>
 const _n=document.getElementById('nav');
 window.addEventListener('scroll',()=>_n.classList.toggle('up',scrollY>24),{passive:true});
@@ -475,7 +425,6 @@ const _b=document.getElementById('burger'),_m=document.getElementById('mob');
 _b.addEventListener('click',()=>{_b.classList.toggle('open');_m.classList.toggle('open')});
 document.addEventListener('click',e=>{if(!_n.contains(e.target)&&!_m.contains(e.target)){_b.classList.remove('open');_m.classList.remove('open')}});
 </script>
-
 <script>
 (function(){
   var slug='dvk-studio';
@@ -508,9 +457,7 @@ document.addEventListener('click',e=>{if(!_n.contains(e.target)&&!_m.contains(e.
   });
 })();
 </script>
-
 <script>
-/* CURSEUR ANIMÉ — desktop uniquement */
 (function(){
   if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
   var c=document.getElementById('cur'),r=document.getElementById('cur-r');
