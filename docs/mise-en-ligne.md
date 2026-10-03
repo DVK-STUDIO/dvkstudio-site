@@ -18,7 +18,7 @@ DVK_PUBLIC_BUILD=1 npm run build && npm run preview
 
 ## 2. Prérequis humains (bloquent la mise en production, pas le développement)
 
-- [ ] **Capacité IAD activée** : statut exact de communication vérifié, mentions réglementaires définitives intégrées (`src/content/site.ts`, objet `mandataire`), toutes les affirmations relatives à IAD relues (accueil, `/immobilier/`, `/a-propos/`, FAQ, pages légales). Tant que le statut n'est pas validé : aucun texte provisoire, voir `docs/FEUILLE-DE-ROUTE.md`. Le garde `check:public --golive` bloque tant que « [à compléter] » subsiste.
+- [ ] **Capacité IAD désactivée (option b, étape 2 faite : aucune mention publique, test de build vert) OU activée (statut validé)** : statut exact de communication vérifié, mentions réglementaires définitives intégrées (`src/content/site.ts`, objet `mandataire`), toutes les affirmations relatives à IAD relues (accueil, `/immobilier/`, `/a-propos/`, FAQ, pages légales). Tant que le statut n'est pas validé : aucun texte provisoire, voir `docs/FEUILLE-DE-ROUTE.md`. Le garde `check:public --golive` bloque tant que « [à compléter] » subsiste.
 - [ ] Tarifs : aucun repris tant que non confirmés.
 - [ ] Logos et partenaires : aucun repris sans autorisation.
 - [ ] Hero : version typographique (aucune photo non autorisée).

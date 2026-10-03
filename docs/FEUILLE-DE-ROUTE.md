@@ -17,7 +17,11 @@ Ordre retenu : V2 stabilisée → jalon 3 → conformité IAD → contenu et pho
 - Vérification complète sans rien publier : `npm run verifier:golive`.
 - L'expérience pilote ne bloque pas le site : elle est exclue du build public tant que sa diffusion n'est pas confirmée (« anonymisé » ne veut pas dire « diffusable »).
 
-## Capacités activables : IAD et hemea (décision du 2026-10-03, option A)
+## Capacités activables : IAD et hemea (décision du 2026-10-03)
+
+> **Mise à jour du 2026-10-03 : l'option (b) remplace l'option A.** IAD devient une capacité DÉSACTIVÉE pour que la V2 puisse être publiée sans attendre l'intégration IAD de Kevin. Étape 1 (en cours) : cadrage visuel de la homepage, maquettes isolées, V2 non modifiée (`C:Userscontadvk-lab-dadirection-homepage`). Étape 2 (après GO) : retirer des pages publiables tout contenu dépendant du statut IAD, avec un interrupteur unique et un test de build. Tant que l'étape 2 n'est pas faite, la V2 reste non publiable. Cible investisseur : pas de parcours dédié avant le cadrage.
+
+Texte d'origine (option A, remplacée) :
 
 La V2 est **techniquement prête mais volontairement non publiable** : le site présente aujourd'hui le statut de mandataire IAD France comme acquis (accueil, `/immobilier/`, `/a-propos/`, FAQ, mentions légales) alors que l'intégration IAD de Kevin n'est pas finalisée. Aucun contenu IAD n'est modifié pour l'instant, et aucune mention provisoire n'est ajoutée.
 
