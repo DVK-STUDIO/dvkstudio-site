@@ -17,6 +17,32 @@ Ordre retenu : V2 stabilisée → jalon 3 → conformité IAD → contenu et pho
 - Vérification complète sans rien publier : `npm run verifier:golive`.
 - L'expérience pilote ne bloque pas le site : elle est exclue du build public tant que sa diffusion n'est pas confirmée (« anonymisé » ne veut pas dire « diffusable »).
 
+## Capacités activables : IAD et hemea (décision du 2026-10-03, option A)
+
+La V2 est **techniquement prête mais volontairement non publiable** : le site présente aujourd'hui le statut de mandataire IAD France comme acquis (accueil, `/immobilier/`, `/a-propos/`, FAQ, mentions légales) alors que l'intégration IAD de Kevin n'est pas finalisée. Aucun contenu IAD n'est modifié pour l'instant, et aucune mention provisoire n'est ajoutée.
+
+**Règle commune à l'écosystème (validée par Kevin, 2026-10-03)**
+
+- Statut IAD **non validé** → **aucune** communication publique ou outbound présentant Kevin ou DVK comme mandataire IAD France. Pas de texte « en cours d'enregistrement », pas de valeur provisoire.
+- Statut IAD **validé** et mentions réglementaires **définitives** disponibles → activation des contenus IAD.
+- hemea (activité Travaux) est opérationnelle : aucun changement.
+
+| Capacité | État au 2026-10-03 | Condition d'activation |
+|---|---|---|
+| hemea · Travaux | **actif** | — |
+| IAD · Immobilier (vente, achat) | **en attente** | intégration IAD finalisée ; statut exact sous lequel Kevin peut communiquer vérifié ; mentions réglementaires définitives |
+
+IAD et hemea sont des **capacités activables**, pas des hypothèses codées en dur dans l'identité DVK : DVK Studio existe sans elles, et l'une peut s'activer ou changer sans remettre en cause l'autre.
+
+**À l'activation IAD, dans cet ordre :**
+1. vérifier le statut exact sous lequel Kevin peut communiquer ;
+2. intégrer les mentions réglementaires définitives (4 champs de `src/content/site.ts`, objet `mandataire`, plus les libellés et champs complémentaires que ses documents imposent) ;
+3. relire toutes les affirmations relatives à IAD : accueil, `/immobilier/`, `/a-propos/`, FAQ, pages légales ;
+4. relancer `npm run verifier:golive` ;
+5. décision de mise en ligne : GO explicite de Kevin (la réussite du contrôle ne déclenche aucun déploiement).
+
+**État partagé (documenté, rien de développé).** Hypothèse à tester plus tard, sans architecture disproportionnée : un petit fichier versionné de capacités, par exemple `{ "hemea": { "statut": "actif" }, "iad": { "statut": "en_attente", "mentionsDefinitives": false } }`, lu par le site au build (même mécanisme que `diffusion` : un contenu IAD ne sort pas tant que la capacité n'est pas active) et par Growth (garde avant tout envoi ou contenu mentionnant IAD). Il vivrait côté contrat public partagé (Core), jamais dans un module. D'ici là, la règle est appliquée à la main et par la relecture ci-dessus.
+
 ## DVK Design System v1
 Livré (dépôt local `dvk-design-system`). Source de vérité graphique : direction Architecture augmentée × Magazine habitat, rythme Ressentir → Comprendre → Décider, intensités Éditorial / Équilibre (défaut) / Augmenté. La V2 en est la première implémentation ; une partie de la charte est exécutable (tests `src/lib/design.test.ts`).
 
@@ -26,4 +52,4 @@ Livré (dépôt local `dvk-design-system`). Source de vérité graphique : direc
 - Photographies réelles (dépendance de contenu) : le mode Éditorial sera validé sur un projet disposant des droits.
 - Migration complète des espacements et des tailles de texte vers les rôles du Design System ; poids 500 ; repères de plan dans la matrice.
 - Plan du potentiel calé sur un projet cuisine / séjour : à généraliser dans le contrat avec un second projet.
-- Mentions du mandataire IAD : prérequis de mise en production (pas de développement).
+- Capacité IAD : **bloquant de mise en production** (pas de développement). Voir « Capacités activables » ci-dessus.
