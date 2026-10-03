@@ -13,6 +13,7 @@
     "accroche": { "type": "string", "minLength": 10, "maxLength": 260 },
     "statutExperience": { "enum": ["demonstration", "disponible"] },
     "indexable": { "type": "boolean" },
+    "diffusion": { "type": "object", "additionalProperties": false, "required": ["statut"], "properties": { "statut": { "enum": ["non_confirmee", "confirmee"] }, "note": { "type": "string", "maxLength": 200 } } },
     "genereLe": { "type": "string", "format": "date" },
     "avertissements": { "type": "array", "items": { "type": "string", "minLength": 3 } },
     "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/source" } },

@@ -53,6 +53,18 @@ if (process.argv.includes("--golive")) {
     }
   })(racine);
   for (const r of restants) problemes.push(`${r} : emplacement « à compléter » (mise en ligne impossible)`);
+
+  // Une expérience dont la diffusion n'est pas confirmée par la famille ne doit pas être dans le build public,
+  // même anonymisée (construire avec DVK_PUBLIC_BUILD=1).
+  const donnees = "src/data/experiences";
+  if (existsSync(donnees)) {
+    for (const f of readdirSync(donnees).filter((x) => x.endsWith(".json"))) {
+      const e = JSON.parse(readFileSync(join(donnees, f), "utf8"));
+      if (e.diffusion?.statut !== "confirmee" && existsSync(join(racine, "experience", e.slug))) {
+        problemes.push(`dist/experience/${e.slug}/ : diffusion non confirmée par la famille (mise en ligne impossible)`);
+      }
+    }
+  }
 }
 
 if (problemes.length) {

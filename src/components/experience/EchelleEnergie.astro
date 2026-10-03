@@ -24,8 +24,10 @@ const couleurs = ["#2f8f4e", "#5aa63f", "#9dba2e", "#d2b514", "#d98a1f", "#d1571
 <style>
   figure { margin: 0; }
   ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  .lettre { display: block; text-align: center; background: var(--c); color: var(--t); font-family: var(--serif); font-weight: 600; font-size: clamp(18px, 4vw, 28px); padding: 10px 0; border-radius: 4px; opacity: 0.45; }
-  li.avant .lettre, li.apres .lettre { opacity: 1; outline: 3px solid var(--encre); outline-offset: 2px; }
+  .lettre { display: block; text-align: center; background: var(--c); color: var(--t); font-family: var(--serif); font-weight: 600; font-size: clamp(18px, 4vw, 28px); padding: 10px 0; border-radius: var(--dvk-radius-sm); }
+  /* Classes non retenues : fond atténué, lettre pleinement lisible (COL-05). */
+  li:not(.avant):not(.apres) .lettre { background: color-mix(in srgb, var(--c) 40%, var(--dvk-background)); color: var(--dvk-text); }
+  li.avant .lettre, li.apres .lettre { outline: 3px solid var(--encre); outline-offset: 2px; }
   .legende-e { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 15px; color: var(--encre-douce); }
-  .legende-e strong { display: inline-block; min-width: 30px; text-align: center; border: 2px solid var(--encre); border-radius: 4px; margin-right: 8px; font-family: var(--serif); color: var(--encre); }
+  .legende-e strong { display: inline-block; min-width: 30px; text-align: center; border: 2px solid var(--encre); border-radius: var(--dvk-radius-sm); margin-right: 8px; font-family: var(--serif); color: var(--encre); }
 </style>

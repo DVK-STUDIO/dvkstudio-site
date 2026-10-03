@@ -9,7 +9,7 @@ const dossierExperiences = new URL("./src/data/experiences/", import.meta.url);
 const horsPlan = readdirSync(dossierExperiences)
   .filter((f) => f.endsWith(".json"))
   .map((f) => JSON.parse(readFileSync(new URL(f, dossierExperiences), "utf8")))
-  .filter((e) => e.indexable === false)
+  .filter((e) => e.indexable === false || (process.env.DVK_PUBLIC_BUILD === "1" && e.diffusion?.statut !== "confirmee"))
   .map((e) => `/experience/${e.slug}/`);
 
 export default defineConfig({

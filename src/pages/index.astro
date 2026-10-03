@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
 import BeforeAfter from "../components/BeforeAfter.astro";
 import ExperienceDemo from "../components/ExperienceDemo.astro";
-import PlanTrait from "../components/PlanTrait.astro";
+import Plan from "../components/Plan.astro";
 import Faq from "../components/Faq.astro";
 import { hero, site } from "../content/site";
 
@@ -16,7 +16,7 @@ const apres = trouver("apres");
 const heroAvantApres = hero.mode === "avantApres" && avant && apres;
 
 const faq = [
-  { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. Nous cadrons votre projet, estimons son budget et vous aidons à consulter des entreprises." },
+  { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. DVK Studio cadre votre projet, estime son budget et vous aide à consulter des entreprises." },
   { q: "Quel est le rôle d'IAD et de hemea ?", r: "Ce sont les réseaux que DVK Studio mobilise selon votre besoin : IAD France pour l'achat et la vente, hemea pour l'accompagnement des travaux. Vous gardez un seul interlocuteur, et chaque rôle vous est expliqué avant tout engagement." },
   { q: "Les budgets présentés sont-ils des devis ?", r: "Non. Ce sont des estimations indicatives, avec leurs hypothèses et leurs limites. Un devis ne vient qu'avec les entreprises consultées." },
   { q: "Où intervenez-vous ?", r: `${site.zone}, lorsque le projet s'y prête.` },
@@ -44,7 +44,16 @@ const faq = [
       {heroAvantApres ? (
         <BeforeAfter id="hero" avant={avant} apres={apres} altAvant="Pièce dans son état actuel" altApres="Projection de la même pièce transformée" legende={hero.avantApres.legende} />
       ) : (
-        <PlanTrait />
+        <Plan
+          alt="Plan schématique d'une maison : la cuisine, le séjour et la cloison qui les sépare"
+          zones={["cuisine"]}
+          ouverture
+          annotations={[
+            { x: 42.5, y: 26, lx: 52, ly: 8, libelle: "Cloison : porteuse ou non ?", statut: "manquant" },
+            { x: 42.5, y: 58, lx: 52, ly: 72, libelle: "Ouverture envisagée", statut: "hypothese", focal: true },
+          ]}
+          legende="Plan illustratif, non à l'échelle. Exemple de ce que DVK Expérience établit pour chaque bien."
+        />
       )}
     </div>
   </section>
@@ -61,25 +70,25 @@ const faq = [
   <section class="section conteneur" id="situations" aria-labelledby="titre-interlocuteur">
     <div class="duo">
       <h2 id="titre-interlocuteur" class="titre-l">Un seul interlocuteur pour votre projet immobilier, de la décision aux travaux.</h2>
-      <p class="chapo">Vous venez chez DVK Studio. Nous identifions votre besoin, puis nous mobilisons la solution adaptée — réseau immobilier ou accompagnement des travaux — sans que vous ayez à choisir entre plusieurs interlocuteurs.</p>
+      <p class="chapo">Vous venez chez DVK Studio. DVK Studio identifie votre besoin, puis mobilise la solution adaptée — réseau immobilier ou accompagnement des travaux — sans que vous ayez à choisir entre plusieurs interlocuteurs.</p>
     </div>
     <div class="grille-auto cartes">
       <article class="carte reveal">
         <h3 class="titre-m">Je vends</h3>
         <p><strong>Le problème.</strong> Mon bien tarde à se vendre, ou je ne sais pas à quel prix le proposer.</p>
-        <p><strong>Ce que nous faisons.</strong> Estimation, mise en valeur et, quand le bien a des travaux à prévoir, projection de ce qu'il peut devenir pour rassurer les acquéreurs.</p>
+        <p><strong>Ce que fait DVK Studio.</strong> Estimation, mise en valeur et, quand le bien a des travaux à prévoir, projection de ce qu'il peut devenir pour rassurer les acquéreurs.</p>
         <BoutonRdv bouton="situations.vendre" parcours="vendre" classe="lien-soulige">Estimer mon bien</BoutonRdv>
       </article>
       <article class="carte reveal">
         <h3 class="titre-m">J'achète</h3>
         <p><strong>Le problème.</strong> Ce bien me plaît, mais je n'arrive pas à me projeter ni à chiffrer les travaux.</p>
-        <p><strong>Ce que nous faisons.</strong> Analyse du potentiel, scénarios de transformation et enveloppe de travaux indicative avant que vous ne signiez.</p>
+        <p><strong>Ce que fait DVK Studio.</strong> Analyse du potentiel, scénarios de transformation et enveloppe de travaux indicative avant que vous ne signiez.</p>
         <BoutonRdv bouton="situations.acheter" parcours="acheter" classe="lien-soulige">Analyser un bien avant d'acheter</BoutonRdv>
       </article>
       <article class="carte reveal">
         <h3 class="titre-m">Je rénove</h3>
         <p><strong>Le problème.</strong> Je veux faire des travaux, sans savoir par où commencer ni combien cela coûtera.</p>
-        <p><strong>Ce que nous faisons.</strong> Cadrage du projet, budget estimatif, consultation d'entreprises et accompagnement jusqu'au chantier.</p>
+        <p><strong>Ce que fait DVK Studio.</strong> Cadrage du projet, budget estimatif, consultation d'entreprises et accompagnement jusqu'au chantier.</p>
         <BoutonRdv bouton="situations.renover" parcours="renover" classe="lien-soulige">Cadrer mes travaux</BoutonRdv>
       </article>
     </div>
@@ -130,9 +139,9 @@ const faq = [
     <h2 id="titre-methode" class="titre-l" style="max-width:20ch">Quatre étapes, un interlocuteur.</h2>
     <ol class="methode grille-auto regle-haut">
       <li><span class="numero">01</span><h3 class="titre-m">Échange</h3><p>Vingt minutes pour comprendre votre situation et votre objectif.</p></li>
-      <li><span class="numero">02</span><h3 class="titre-m">Visite et relevé</h3><p>Nous regardons le bien sur place et prenons les mesures.</p></li>
+      <li><span class="numero">02</span><h3 class="titre-m">Visite et relevé</h3><p>DVK Studio regarde le bien sur place et prend les mesures.</p></li>
       <li><span class="numero">03</span><h3 class="titre-m">Potentiel et budget</h3><p>Scénarios et enveloppe indicative, hypothèses à l'appui.</p></li>
-      <li><span class="numero">04</span><h3 class="titre-m">Décision</h3><p>Vous décidez, puis nous vous orientons vers la suite : achat, vente ou travaux.</p></li>
+      <li><span class="numero">04</span><h3 class="titre-m">Décision</h3><p>Vous décidez, puis DVK Studio vous oriente vers la suite : achat, vente ou travaux.</p></li>
     </ol>
   </section>
 
@@ -147,7 +156,7 @@ const faq = [
     <div class="conteneur duo">
       <div>
         <h2 id="titre-rdv" class="titre-l">Parlons de votre projet.</h2>
-        <p class="chapo" style="margin-top:22px">Vingt minutes, par téléphone, sans engagement. Dites-nous si vous vendez, achetez ou rénovez : nous vous orientons.</p>
+        <p class="chapo" style="margin-top:22px">Vingt minutes, par téléphone, sans engagement. Précisez si vous vendez, achetez ou rénovez, et DVK Studio vous oriente.</p>
         <p style="margin-top:28px;color:var(--brume)"><a href={site.telephoneLien}>{site.telephone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
       </div>
       <div class="rdv-carte">
@@ -193,7 +202,7 @@ const faq = [
   .faq-section { max-width: 1000px; padding-block: 96px 40px; }
   .final { margin-top: 96px; }
   .final .duo { align-items: center; }
-  .rdv-carte { background: var(--papier); color: var(--encre); border-radius: 8px; padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .rdv-carte { background: var(--papier); color: var(--encre); border-radius: var(--dvk-radius-md); padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
   .rdv-texte { font-size: 14px; color: var(--pierre); }
-  @media (max-width: 700px) { .entree { border-right: 0; border-bottom: 1px solid var(--ligne); padding-right: 0; } }
+  @media (max-width: 720px) { .entree { border-right: 0; border-bottom: 1px solid var(--ligne); padding-right: 0; } }
 </style>

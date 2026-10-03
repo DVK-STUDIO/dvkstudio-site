@@ -16,7 +16,7 @@ export interface Scenario {
 export interface Cellule { besoin: string; scenario: string; niveau: "repond" | "partiel" | "non"; note?: string }
 export interface ExperiencePubliee {
   schemaVersion: "experience-publiee/1"; slug: string; titre: string; accroche: string;
-  statutExperience: "demonstration" | "disponible"; indexable: boolean; genereLe: string; avertissements?: string[];
+  statutExperience: "demonstration" | "disponible"; indexable: boolean; diffusion?: { statut: "non_confirmee" | "confirmee"; note?: string }; genereLe: string; avertissements?: string[];
   sources: Source[];
   bien: { resume: string; faits: Fait[] };
   besoins: Besoin[];
@@ -49,9 +49,21 @@ export const SENS_STATUT: Record<Statut, string> = {
 };
 
 export const LIBELLE_NIVEAU = { repond: "Répond", partiel: "En partie", non: "Ne répond pas" } as const;
+/** Scénario « À étudier » : on parle de besoins visés, jamais couverts (règle SCN-04 du Design System). */
+export const LIBELLE_NIVEAU_VISE = { repond: "Visé", partiel: "Visé en partie", non: "Non visé" } as const;
 export const LIBELLE_MATURITE = { pre_etude: "Pré-étude", a_etudier: "À étudier" } as const;
 
 const fichiers = import.meta.glob("../../data/experiences/*.json", { eager: true, import: "default" }) as Record<string, unknown>;
+
+/** Une expérience dont la diffusion n'est pas confirmée par la famille ne sort JAMAIS dans un build public (DVK_PUBLIC_BUILD=1). */
+export function diffusionConfirmee(e: ExperiencePubliee): boolean {
+  return e.diffusion?.statut === "confirmee";
+}
+
+export function experiencesPubliables(): ExperiencePubliee[] {
+  const toutes = toutesLesExperiences();
+  return process.env.DVK_PUBLIC_BUILD === "1" ? toutes.filter(diffusionConfirmee) : toutes;
+}
 
 export function toutesLesExperiences(): ExperiencePubliee[] {
   return Object.entries(fichiers).map(([chemin, donnees]) => {

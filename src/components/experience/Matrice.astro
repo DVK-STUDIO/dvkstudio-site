@@ -1,10 +1,11 @@
 ---
 // Matrice besoins × scénarios. Tableau sur grand écran ; sur mobile, une carte par besoin
 // (jamais de défilement horizontal). Lecture de DVK Studio : statut « hypothèse ».
-import { LIBELLE_NIVEAU, type Besoin, type Scenario, type Cellule } from "../../lib/experience/experience";
+import { LIBELLE_NIVEAU, LIBELLE_NIVEAU_VISE, type Besoin, type Scenario, type Cellule } from "../../lib/experience/experience";
 interface Props { besoins: Besoin[]; scenarios: Scenario[]; cellules: Cellule[] }
 const { besoins, scenarios, cellules } = Astro.props;
 const cellule = (b: string, s: string) => cellules.find((c) => c.besoin === b && c.scenario === s)!;
+const libelle = (s: Scenario, niveau: Cellule["niveau"]) => (s.maturite === "a_etudier" ? LIBELLE_NIVEAU_VISE : LIBELLE_NIVEAU)[niveau];
 const bilan = (s: string) => {
   const mine = cellules.filter((c) => c.scenario === s);
   return { repond: mine.filter((c) => c.niveau === "repond").length, partiel: mine.filter((c) => c.niveau === "partiel").length, total: mine.length };
@@ -41,7 +42,7 @@ const bilan = (s: string) => {
             const c = cellule(b.id, s.id);
             return (
               <td data-niveau={c.niveau} data-scenario={`Scénario ${s.numero} · ${s.nom}`}>
-                <span class="niveau"><span class="puce" aria-hidden="true"></span>{LIBELLE_NIVEAU[c.niveau]}</span>
+                <span class="niveau"><span class="puce" aria-hidden="true"></span>{libelle(s, c.niveau)}</span>
                 {c.note && <span class="note">{c.note}</span>}
               </td>
             );

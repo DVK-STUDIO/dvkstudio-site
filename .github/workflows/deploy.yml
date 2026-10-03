@@ -24,7 +24,11 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+        env:
+          DVK_PUBLIC_BUILD: "1" # une expérience non confirmée par la famille ne sort jamais en production
       - run: npm run check:public -- --golive
+        env:
+          DVK_PUBLIC_BUILD: "1"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -7,13 +7,16 @@ import Statut from "../../components/experience/Statut.astro";
 import Donnee from "../../components/experience/Donnee.astro";
 import Matrice from "../../components/experience/Matrice.astro";
 import EchelleEnergie from "../../components/experience/EchelleEnergie.astro";
+import Plan from "../../components/Plan.astro";
+import Photo from "../../components/Photo.astro";
+import ProjectionFrame from "../../components/ProjectionFrame.astro";
 import {
-  toutesLesExperiences, LIBELLE_STATUT, SENS_STATUT, LIBELLE_MATURITE, afficherValeur, afficherMois, afficherDate, formaterNombre,
+  experiencesPubliables, LIBELLE_STATUT, SENS_STATUT, LIBELLE_MATURITE, afficherValeur, afficherMois, afficherDate, formaterNombre,
   type Statut as TStatut,
 } from "../../lib/experience/experience";
 
 export function getStaticPaths() {
-  return toutesLesExperiences().map((e) => ({ params: { slug: e.slug }, props: { e } }));
+  return experiencesPubliables().map((e) => ({ params: { slug: e.slug }, props: { e } }));
 }
 const { e } = Astro.props;
 
@@ -25,6 +28,17 @@ const statuts = Object.keys(LIBELLE_STATUT) as TStatut[];
 const be = e.budget.energie;
 const nbRepond = (id: string) => e.matrice.cellules.filter((c) => c.scenario === id && c.niveau === "repond").length;
 const parEspace = { cuisine: "Cuisine", sejour: "Séjour", ensemble: "Toute la maison" } as const;
+// Plan schématique du potentiel : annotations tirées des faits publiés (jamais de donnée inventée).
+// Valable pour un projet cuisine / séjour ; à généraliser dans le contrat quand un second projet existera.
+const fait = (id: string) => e.potentiel.faits.find((f) => f.id === id);
+const sep = fait("separation");
+const cui = fait("cuisine-surface");
+const sam = fait("salle-a-manger");
+const annotationsPlan = sep && cui && sam ? [
+  { x: 42.5, y: 30, lx: 49, ly: 8, libelle: "Séparation cuisine / séjour", statut: sep.valeur.statut, focal: true },
+  { x: 22, y: 58, lx: 3, ly: 74, libelle: "Surface de la cuisine", statut: cui.valeur.statut },
+  { x: 72, y: 62, lx: 56, ly: 80, libelle: `Salle à manger, ${afficherValeur(sam.valeur)}`, statut: sam.valeur.statut },
+] : [];
 const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
 ---
 
@@ -66,18 +80,24 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
     </ol>
   </nav>
 
-  <section id="bien" class="etape" aria-labelledby="t-bien">
-    <div class="conteneur">
-      <p class="surtitre">01 · Le bien</p>
-      <h2 id="t-bien" class="titre-l">Le bien tel qu'il est</h2>
-      <p class="chapo">{e.bien.resume}</p>
+  <!-- Intensités (Design System) : Éditorial = ressentir, Équilibre = comprendre (défaut), Augmenté = décider. -->
+  <section id="bien" class="etape" aria-labelledby="t-bien" data-intensite="editorial">
+    <div class="conteneur ouverture">
+      <Photo alt="Le séjour de la maison, vu depuis l'entrée" ratio="16 / 10" />
+      <div class="ouverture-texte">
+        <p class="surtitre">01 · Le bien</p>
+        <h2 id="t-bien" class="titre-l">Le bien tel qu'il est</h2>
+        <p class="chapo">{e.bien.resume}</p>
+      </div>
+    </div>
+    <div class="conteneur" data-intensite="equilibre">
       <dl class="faits">
-        {e.bien.faits.map((f, i) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} grand={i < 0} />)}
+        {e.bien.faits.map((f) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} />)}
       </dl>
     </div>
   </section>
 
-  <section id="besoins" class="etape alt" aria-labelledby="t-besoins">
+  <section id="besoins" class="etape alt" aria-labelledby="t-besoins" data-intensite="equilibre">
     <div class="conteneur">
       <p class="surtitre">02 · Ses besoins</p>
       <h2 id="t-besoins" class="titre-l">Ce que la famille attend</h2>
@@ -98,18 +118,29 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
     </div>
   </section>
 
-  <section id="potentiel" class="etape" aria-labelledby="t-potentiel">
+  <section id="potentiel" class="etape" aria-labelledby="t-potentiel" data-intensite="augmente">
     <div class="conteneur">
       <p class="surtitre">03 · Son potentiel</p>
       <h2 id="t-potentiel" class="titre-l">Ce que le lieu permet</h2>
       <p class="chapo">{e.potentiel.resume}</p>
-      <dl class="faits">
-        {e.potentiel.faits.map((f) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} />)}
-      </dl>
+      <div class:list={["potentiel-grille", { "sans-plan": annotationsPlan.length === 0 }]}>
+        {annotationsPlan.length > 0 && (
+          <Plan
+            alt="Plan schématique de la cuisine et du séjour, avec la séparation qui les relie et les informations à établir"
+            zones={["cuisine", "sejour"]}
+            ouverture
+            annotations={annotationsPlan}
+            legende="Plan illustratif, non à l'échelle. Les tirets montrent l'ouverture envisagée par un scénario : c'est une hypothèse, pas un constat."
+          />
+        )}
+        <dl class="faits">
+          {e.potentiel.faits.map((f) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} />)}
+        </dl>
+      </div>
     </div>
   </section>
 
-  <section id="scenarios" class="etape alt" aria-labelledby="t-scenarios">
+  <section id="scenarios" class="etape alt" aria-labelledby="t-scenarios" data-intensite="augmente">
     <div class="conteneur">
       <p class="surtitre">04 · Les scénarios</p>
       <h2 id="t-scenarios" class="titre-l">Deux pistes, pas une seule</h2>
@@ -123,7 +154,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
             <p>{s.intention}</p>
             <p class="couvre"><strong>{nbRepond(s.id)} {nbRepond(s.id) > 1 ? "besoins" : "besoin"} sur {e.besoins.length}</strong> {s.maturite === "a_etudier" ? "visés" : "couverts"} pleinement</p>
             <dl class="mini">
-              <div><dt>Budget</dt><dd><Statut statut={s.budget.statut} /></dd></div>
+              <div><dt>Budget</dt><dd><Statut statut={s.budget.statut} libelle={s.budget.statut === "manquant" ? "À chiffrer" : undefined} /></dd></div>
               <div><dt>Projection</dt><dd><Statut statut={s.projection.statut} /></dd></div>
             </dl>
           </article>
@@ -132,7 +163,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
     </div>
   </section>
 
-  <section id="change" class="etape" aria-labelledby="t-change">
+  <section id="change" class="etape" aria-labelledby="t-change" data-intensite="augmente">
     <div class="conteneur">
       <p class="surtitre">05 · Ce qui change</p>
       <h2 id="t-change" class="titre-l">Quels besoins chaque piste couvre</h2>
@@ -159,17 +190,14 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
         ))}
       </div>
 
-      <div class="projection">
-        <Statut statut={e.projection.statut} />
-        <div>
-          <h3>Se voir dans le résultat</h3>
-          <p>{e.projection.message}</p>
-        </div>
+      <div class="projection" data-intensite="editorial">
+        <h3>Se voir dans le résultat</h3>
+        <ProjectionFrame alt="Projection de la cuisine et du séjour transformés" message={e.projection.message} />
       </div>
     </div>
   </section>
 
-  <section id="cout" class="etape alt" aria-labelledby="t-cout">
+  <section id="cout" class="etape alt" aria-labelledby="t-cout" data-intensite="equilibre">
     <div class="conteneur">
       <p class="surtitre">06 · Combien</p>
       <h2 id="t-cout" class="titre-l">Ce que cela pourrait coûter</h2>
@@ -180,7 +208,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
           <article class="carte">
             <p class="num">Aménagement · Scénario {s.numero}</p>
             <h3>{s.nom}</h3>
-            <Statut statut={s.budget.statut} />
+            <Statut statut={s.budget.statut} libelle={s.budget.statut === "manquant" ? "À chiffrer" : undefined} />
             {s.budget.note && <p class="note-b">{s.budget.note}</p>}
           </article>
         ))}
@@ -207,7 +235,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
     </div>
   </section>
 
-  <section id="energie" class="etape" aria-labelledby="t-energie">
+  <section id="energie" class="etape" aria-labelledby="t-energie" data-intensite="augmente">
     <div class="conteneur">
       <p class="surtitre">07 · Impact énergétique</p>
       <h2 id="t-energie" class="titre-l">Ce que cela change sur l'énergie</h2>
@@ -226,7 +254,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
     </div>
   </section>
 
-  <section id="suite" class="etape sombre-fin" aria-labelledby="t-suite">
+  <section id="suite" class="etape sombre-fin" aria-labelledby="t-suite" data-intensite="equilibre">
     <div class="conteneur suite">
       <div>
         <p class="surtitre">08 · La suite</p>
@@ -250,13 +278,13 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
 <style>
   .hero { padding-top: clamp(32px, 6vw, 72px); padding-bottom: clamp(32px, 5vw, 56px); }
   .hero .chapo { margin-top: 22px; max-width: 62ch; }
-  .trente { margin-top: 36px; padding: 22px 24px; background: var(--papier-2); border-radius: 8px; max-width: 760px; }
+  .trente { margin-top: 36px; padding: 22px 24px; background: var(--papier-2); border-radius: var(--dvk-radius-md); max-width: 760px; }
   .trente ul { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 10px; }
   .trente li { font-size: 17px; color: var(--encre-douce); padding-left: 22px; position: relative; }
   .trente li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 9px; height: 9px; border-radius: 50%; background: var(--terre); }
   .trente strong { color: var(--encre); }
   .lire { margin-top: 18px; max-width: 760px; }
-  .lire summary { cursor: pointer; color: var(--petrole); font-size: 15px; text-decoration: underline; text-underline-offset: 3px; min-height: 32px; display: inline-flex; align-items: center; }
+  .lire summary { cursor: pointer; color: var(--petrole); font-size: 15px; text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
   .lire p { margin-top: 10px; font-size: 15px; color: var(--encre-douce); }
   .lire ul { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 10px; }
   .lire li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; font-size: 15px; color: var(--encre-douce); }
@@ -265,8 +293,8 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
   .chapitres { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--papier) 94%, transparent); backdrop-filter: blur(6px); border-block: 1px solid var(--ligne); }
   .chapitres ol { list-style: none; display: flex; gap: 4px; overflow-x: auto; padding-block: 8px; scrollbar-width: none; }
   .chapitres ol::-webkit-scrollbar { display: none; }
-  .chapitres a { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; min-height: 40px; padding: 0 12px; border-radius: 99px; font-size: 14px; color: var(--encre-douce); }
-  .chapitres a span { font-size: 11px; color: var(--pierre); letter-spacing: 0.08em; }
+  .chapitres a { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; min-height: 44px; padding: 0 12px; border-radius: var(--dvk-radius-pill); font-size: 14px; color: var(--encre-douce); }
+  .chapitres a span { font-size: 12px; color: var(--pierre); letter-spacing: 0.08em; }
   .chapitres a[aria-current="true"] { background: var(--encre); color: var(--papier); }
   .chapitres a[aria-current="true"] span { color: var(--brume); }
 
@@ -288,12 +316,12 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
   .besoins .espace { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terre-fonce); font-weight: 600; margin: 0; }
 
   .cartes { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
-  .carte { background: var(--papier); border: 1px solid var(--ligne); border-radius: 8px; padding: 26px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .carte { background: var(--papier); border: 1px solid var(--ligne); border-radius: var(--dvk-radius-md); padding: 26px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
   .alt .carte { background: var(--papier); }
   .carte h3 { font-size: 28px; }
   .carte p { color: var(--encre-douce); font-size: 16px; }
   .num { font-size: 12px !important; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pierre) !important; font-weight: 600; }
-  .mat { display: inline-block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; padding: 5px 10px; border-radius: 99px; }
+  .mat { display: inline-block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; padding: 5px 10px; border-radius: var(--dvk-radius-pill); }
   .mat-pre_etude { background: var(--sauge); color: var(--petrole); }
   .mat-a_etudier { background: #f1e1d6; color: #7b2f1d; }
   .couvre strong { color: var(--encre); }
@@ -313,10 +341,18 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
   .corps { padding: 0 0 18px; color: var(--encre-douce); }
   .corps ul { padding-left: 20px; display: grid; gap: 6px; margin-top: 6px; }
   .s-titre { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pierre); margin-top: 8px; font-weight: 600; }
-  .projection { margin-top: 48px; padding: 24px; border: 1px dashed var(--pierre); border-radius: 8px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; max-width: 820px; }
-  .projection h3 { font-size: 22px; }
-  .projection p { margin-top: 6px; color: var(--encre-douce); }
-  @media (max-width: 560px) { .projection { grid-template-columns: 1fr; } }
+  .projection { margin-top: 48px; max-width: 820px; }
+  .projection h3 { font-size: 22px; margin-bottom: 14px; }
+
+  /* Éditorial : photographie dominante (60 % et plus), texte secondaire. */
+  .ouverture { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 48px; align-items: end; }
+  .ouverture-texte h2 { margin-top: 12px; }
+  @media (max-width: 900px) { .ouverture { grid-template-columns: 1fr; gap: 24px; } }
+  /* Augmenté : le plan prend la place, les faits restent lisibles à côté. */
+  .potentiel-grille { margin-top: 32px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .potentiel-grille .faits { margin-top: 0; }
+  .potentiel-grille.sans-plan { grid-template-columns: 1fr; }
+  @media (max-width: 900px) { .potentiel-grille { grid-template-columns: 1fr; gap: 24px; } }
 
   .budget { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: start; }
   @media (max-width: 900px) { .budget { grid-template-columns: 1fr; gap: 24px; } }
@@ -338,7 +374,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
   .etapes li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 16px 0; border-top: 1px solid #2f4d54; font-size: 18px; color: var(--brume); }
   .etapes .n { font-size: 13px; letter-spacing: 0.1em; color: #9fb4b0; padding-top: 4px; }
   .actions { margin-top: 28px; }
-  .sources { padding: 24px; border: 1px solid #2f4d54; border-radius: 8px; }
+  .sources { padding: 24px; border: 1px solid #2f4d54; border-radius: var(--dvk-radius-md); }
   .sources h3 { font-size: 20px; }
   .sources ul { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 6px; color: var(--brume); font-size: 15px; }
   .sources p { margin-top: 14px; font-size: 14px; color: #9fb4b0; }

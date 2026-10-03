@@ -2,7 +2,7 @@
 // Démonstration de DVK Expérience : montre la STRUCTURE d'une expérience, sans aucun faux résultat.
 // Aucune donnée de projet réel ici : la première expérience réelle arrive avec le jalon suivant.
 import BoutonRdv from "./BoutonRdv.astro";
-import PlanTrait from "./PlanTrait.astro";
+import Plan from "./Plan.astro";
 
 const etapes = [
   { id: "bien", n: "01", libelle: "Le bien" },
@@ -39,14 +39,14 @@ const lecture: Record<string, string> = { oui: "Répond", partiel: "Répond en p
         <div role="tabpanel" id="panneau-bien" aria-labelledby="onglet-bien" class="panneau">
           <h3>Le bien tel qu'il est</h3>
           <p>Photos, plan, caractéristiques et état constaté, avec la source de chaque donnée : relevé, diagnostic, déclaration.</p>
-          <p class="note"><span class="statut statut-dispo">Disponible</span> relevé et état des lieux, sur rendez-vous.</p>
+          <p class="note"><span class="dvk-availability is-available">Disponible</span> relevé et état des lieux, sur rendez-vous.</p>
         </div>
 
         <div role="tabpanel" id="panneau-potentiel" aria-labelledby="onglet-potentiel" class="panneau" hidden>
           <h3>Ce qu'il pourrait devenir</h3>
           <p>Les pistes de transformation, leurs contraintes, et les besoins auxquels chacune répond — ou non.</p>
           <div class="potentiel">
-            <div class="plan-bloc"><PlanTrait /></div>
+            <div class="plan-bloc"><Plan alt="Plan schématique : cuisine, séjour et cloison" zones={["cuisine"]} ouverture annotations={[{ x: 42.5, y: 58, lx: 50, ly: 74, libelle: "Ouverture envisagée", statut: "hypothese", focal: true }]} legende="Plan illustratif, non à l'échelle." /></div>
             <table class="matrice">
               <caption class="sr-only">Exemple de lecture : besoins couverts par deux scénarios</caption>
               <thead><tr><th scope="col">Besoin</th><th scope="col">Scénario 1 · Rafraîchir</th><th scope="col">Scénario 2 · Repenser les espaces</th></tr></thead>
@@ -61,13 +61,13 @@ const lecture: Record<string, string> = { oui: "Répond", partiel: "Répond en p
               </tbody>
             </table>
           </div>
-          <p class="note"><span class="statut statut-demo">Démonstration</span> exemple de lecture, pas un projet réel. Un scénario moins cher peut répondre à moins de besoins : la comparaison le rend visible.</p>
+          <p class="note"><span class="dvk-availability is-demo">Démonstration</span> exemple de lecture, pas un projet réel. Un scénario moins cher peut répondre à moins de besoins : la comparaison le rend visible.</p>
         </div>
 
         <div role="tabpanel" id="panneau-projection" aria-labelledby="onglet-projection" class="panneau" hidden>
           <h3>Imaginez-le autrement</h3>
           <div class="a-venir-bloc">
-            <span class="statut statut-avenir">À venir</span>
+            <span class="dvk-availability is-soon">À venir</span>
             <p>Projection de la transformation choisie, produite à partir de la photo du bien en conservant son architecture. Cette fonction est en cours de développement : aucune image n'est présentée tant qu'elle n'a pas été contrôlée.</p>
           </div>
         </div>
@@ -80,7 +80,7 @@ const lecture: Record<string, string> = { oui: "Répond", partiel: "Répond en p
             <li>Aménagement : cuisine, sols, éclairage, peinture</li>
             <li>Structure : à étudier avant toute décision</li>
           </ul>
-          <p class="note"><span class="statut statut-dispo">Disponible</span> cadrage des travaux, sur rendez-vous.</p>
+          <p class="note"><span class="dvk-availability is-available">Disponible</span> cadrage des travaux, sur rendez-vous.</p>
         </div>
 
         <div role="tabpanel" id="panneau-budget" aria-labelledby="onglet-budget" class="panneau" hidden>
@@ -92,15 +92,15 @@ const lecture: Record<string, string> = { oui: "Répond", partiel: "Répond en p
             <li><strong>Estimation</strong> indicative, avec ses limites</li>
             <li><strong>Hypothèse</strong> à confirmer</li>
           </ul>
-          <p class="note"><span class="statut statut-dispo">Disponible</span> enveloppe indicative, non contractuelle, sur rendez-vous.</p>
+          <p class="note"><span class="dvk-availability is-available">Disponible</span> enveloppe indicative, non contractuelle, sur rendez-vous.</p>
         </div>
       </div>
     </div>
 
     <div class="legende">
-      <div><span class="statut statut-dispo">Disponible</span><p>Service rendu aujourd'hui, sur rendez-vous : relevé, cadrage des travaux, enveloppe indicative.</p></div>
-      <div><span class="statut statut-demo">Démonstration</span><p>Ce que montre cette page : la structure d'une expérience, avec des exemples.</p></div>
-      <div><span class="statut statut-avenir">À venir</span><p>Expérience propre à chaque bien, partageable par lien, et projection contrôlée.</p></div>
+      <div><span class="dvk-availability is-available">Disponible</span><p>Service rendu aujourd'hui, sur rendez-vous : relevé, cadrage des travaux, enveloppe indicative.</p></div>
+      <div><span class="dvk-availability is-demo">Démonstration</span><p>Ce que montre cette page : la structure d'une expérience, avec des exemples.</p></div>
+      <div><span class="dvk-availability is-soon">À venir</span><p>Expérience propre à chaque bien, partageable par lien, et projection contrôlée.</p></div>
     </div>
 
     <div class="demo-actions">
@@ -117,8 +117,8 @@ const lecture: Record<string, string> = { oui: "Répond", partiel: "Répond en p
   .onglets button .numero { color: #9fb4b0; }
   .onglets button[aria-selected="true"] { background: var(--papier); color: var(--encre); border-color: var(--papier); }
   .onglets button[aria-selected="true"] .numero { color: var(--pierre); }
-  .panneaux { flex: 1 1 560px; min-width: 0; background: var(--papier); color: var(--encre); border-radius: 8px; padding: clamp(20px, 3vw, 32px); }
-  @media (max-width: 700px) {
+  .panneaux { flex: 1 1 560px; min-width: 0; background: var(--papier); color: var(--encre); border-radius: var(--dvk-radius-md); padding: clamp(20px, 3vw, 32px); }
+  @media (max-width: 720px) {
     .demo-corps { gap: 20px; }
     .onglets, .panneaux { flex: 1 1 100%; min-width: 0; width: 100%; }
   }
@@ -138,7 +138,7 @@ const lecture: Record<string, string> = { oui: "Répond", partiel: "Répond en p
   .matrice td[data-niveau="partiel"]::before { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
   .a-venir-bloc { margin-top: 12px; padding: 22px; border: 1px dashed var(--pierre); border-radius: var(--rayon); display: flex; flex-direction: column; gap: 12px; align-items: flex-start; color: var(--encre-douce); }
   .liste-lots, .natures { margin-top: 14px; list-style: none; display: grid; gap: 8px; }
-  .liste-lots li, .natures li { background: var(--papier-2); border-radius: 4px; padding: 12px 16px; font-size: 16px; }
+  .liste-lots li, .natures li { background: var(--papier-2); border-radius: var(--dvk-radius-sm); padding: 12px 16px; font-size: 16px; }
   .legende { margin-top: 44px; border-top: 1px solid #2f4d54; padding-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
   .legende p { margin-top: 12px; font-size: 15px; color: var(--brume); }
   .demo-actions { margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap; }

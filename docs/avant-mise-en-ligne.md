@@ -10,7 +10,8 @@
 
 ## Expérience pilote (`/experience/maison-familiale/`)
 - [ ] Faire confirmer par la famille le périmètre « toute la maison » : type de bien, énergie (classe, consommation, facture), budget travaux agrégé. Le consentement initial couvre cuisine, séjour et plan anonymisé.
-- [ ] Archiver la date et la preuve de l'accord dans le dépôt privé (`consentement.dateAccord`).
+- [ ] Archiver la date et la preuve de l'accord dans le dépôt privé (`consentement.dateAccord`) et vider `perimetreAConfirmer`, puis ré-exporter : l'instantané passe en `diffusion: confirmee`.
+- **Garde automatique** : « anonymisé » ne veut pas dire « diffusable ». Un build public (`DVK_PUBLIC_BUILD=1`, déjà posé dans `deploy.yml`) n'émet aucune expérience non confirmée, et `check:public --golive` échoue si une telle page se retrouve dans `dist/`.
 - [ ] Choisir l'URL définitive (par défaut un nom neutre, sans nom de famille) et passer `indexable` à `true` dans le dépôt privé, puis ré-exporter.
 - [ ] Photos et documents : aucun publié. Droits d'usage à valider avant tout ajout.
 - [ ] Projection : reste « À venir » (aucun générateur d'image appelé).

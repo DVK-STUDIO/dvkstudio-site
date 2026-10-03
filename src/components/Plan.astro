@@ -1,0 +1,97 @@
+---
+// DVKPlan + DVKAnnotation : plan narratif. Chaque trait relie un point du plan à une information (TRA-01).
+// Le plan est schématique : il porte toujours « Plan illustratif, non à l'échelle » (PLN-02).
+// L'information des traits existe aussi en liste de texte (TRA-04) ; sur petit écran, marqueurs numérotés + liste (TRA-05).
+import Statut from "./experience/Statut.astro";
+import type { Statut as TStatut } from "../lib/experience/experience";
+
+interface Annotation {
+  /** Position du point, en % du plan. */
+  x: number; y: number;
+  /** Position de l'étiquette, en % du plan. */
+  lx: number; ly: number;
+  libelle: string;
+  statut?: TStatut;
+  statutLibelle?: string;
+  /** Un seul point focal par composition (couleur d'accent). */
+  focal?: boolean;
+}
+interface Props {
+  zones?: ("cuisine" | "sejour")[];
+  ouverture?: boolean;
+  circulation?: boolean;
+  annotations?: Annotation[];
+  legende?: string;
+  alt: string;
+}
+const { zones = [], ouverture = false, circulation = false, annotations = [], legende = "Plan illustratif, non à l'échelle.", alt } = Astro.props;
+---
+
+<figure class="dvk-plan">
+  <div class="zone">
+    <svg viewBox="0 0 400 210" role="img" aria-label={alt} class="plan">
+      {zones.includes("cuisine") && <rect class="z" x="20" y="20" width="150" height="110" />}
+      {zones.includes("sejour") && <rect class="z" x="170" y="20" width="210" height="170" />}
+      <path class="mur" d="M20 20 H380 V190 H20 Z" />
+      <line class="mur" x1="170" y1="20" x2="170" y2="190" />
+      <line class="cl" x1="20" y1="130" x2="170" y2="130" />
+      <rect class="vide" x="60" y="16" width="44" height="8" /><rect class="vide" x="236" y="16" width="70" height="8" /><rect class="vide" x="376" y="70" width="8" height="60" />
+      <path class="cl" d="M120 130 A28 28 0 0 1 148 158" />
+      {ouverture
+        ? (<><rect class="vide" x="166" y="52" width="8" height="62" /><line class="ouv" x1="170" y1="52" x2="170" y2="114" /></>)
+        : <rect class="vide" x="166" y="86" width="8" height="26" />}
+      {circulation && <path class="circ" d="M90 170 C110 150 130 120 170 100 C210 90 250 100 300 110" />}
+      <text x="52" y="78">Cuisine</text><text x="236" y="112">Séjour</text>
+    </svg>
+    <svg class="traits" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      {annotations.map((a) => <line x1={a.x} y1={a.y} x2={a.lx} y2={a.ly} />)}
+    </svg>
+    {annotations.map((a, i) => (
+      <>
+        <span class:list={["pt", { focal: a.focal }]} style={`left:${a.x}%;top:${a.y}%`} aria-hidden="true"><b>{i + 1}</b></span>
+        <div class="lib" style={`left:${a.lx}%;top:${a.ly}%`}>
+          <span class="libelle">{a.libelle}</span>
+          {a.statut && <Statut statut={a.statut} libelle={a.statutLibelle} />}
+        </div>
+      </>
+    ))}
+  </div>
+  {annotations.length > 0 && (
+    <ol class="liste">
+      {annotations.map((a) => <li><span>{a.libelle}</span> {a.statut && <Statut statut={a.statut} libelle={a.statutLibelle} />}</li>)}
+    </ol>
+  )}
+  <figcaption>{legende}</figcaption>
+</figure>
+
+<style>
+  .dvk-plan { margin: 0; }
+  .zone { position: relative; container-type: inline-size; background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 2.2cqw; }
+  .plan { width: 100%; height: auto; display: block; color: var(--dvk-text); }
+  .mur { stroke: currentColor; stroke-width: 3; fill: none; stroke-linejoin: round; }
+  .cl { stroke: currentColor; stroke-width: 1.4; fill: none; }
+  .vide { fill: var(--dvk-surface); }
+  .z { fill: color-mix(in srgb, var(--dvk-accent) 16%, transparent); stroke: var(--dvk-action); stroke-width: 1.4; }
+  .ouv { stroke: var(--dvk-action); stroke-width: 3; stroke-dasharray: 6 5; }
+  .circ { stroke: var(--dvk-primary); stroke-width: 1.6; stroke-dasharray: 2 4; stroke-linecap: round; fill: none; }
+  .plan text { font-family: var(--sans); font-size: 16px; fill: var(--dvk-text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .traits { position: absolute; inset: 2.2cqw; width: calc(100% - 4.4cqw); height: calc(100% - 4.4cqw); pointer-events: none; }
+  .traits line { stroke: var(--dvk-text); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+  .pt { position: absolute; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 50%; background: var(--dvk-text); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; box-shadow: 0 0 0 4px rgba(245, 241, 234, 0.8); }
+  .pt.focal { background: var(--dvk-action); }
+  .pt b { font-weight: 600; }
+  .lib { position: absolute; background: var(--dvk-background); padding: 6px 10px; border-radius: var(--dvk-radius-sm); box-shadow: var(--dvk-shadow-float); display: flex; flex-direction: column; gap: 4px; align-items: flex-start; font-size: 14px; line-height: 1.25; max-width: 44cqw; }
+  .libelle { font-weight: 600; }
+  .liste { margin: 12px 0 0; padding: 0; list-style: none; counter-reset: a; display: grid; gap: 8px; }
+  .liste li { counter-increment: a; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-size: 15px; color: var(--dvk-text-muted); }
+  .liste li::before { content: counter(a); width: 22px; height: 22px; border-radius: 50%; background: var(--dvk-text); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex: none; }
+  figcaption { margin-top: 10px; font-size: 13px; color: var(--dvk-text-subtle); }
+  /* Grand plan : étiquettes sur le plan, liste en repli pour les lecteurs d'écran. */
+  @media (min-width: 721px) {
+    .liste { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0; }
+  }
+  /* Petit écran : marqueurs numérotés + liste, pas d'étiquettes ni de filets (TRA-05). */
+  @media (max-width: 720px) {
+    .lib, .traits { display: none; }
+  }
+</style>

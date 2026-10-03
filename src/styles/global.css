@@ -1,24 +1,55 @@
-/* DVK Studio — tokens et base. Direction : éditorial et chaleureux. Papier, encre, une seule couleur d'action. */
+/* DVK Studio — jetons et base. Source de vérité : DVK Design System v1 (jetons --dvk-*, rôles).
+   Les anciens noms (--papier, --encre…) restent des ALIAS des rôles, le temps de migrer les composants. */
 :root {
-  --papier: #f5f1ea;
-  --papier-2: #ece6db;
-  --ligne: #cfc7b8;
-  --encre: #0f2a30;
-  --encre-douce: #2c4a50;
-  --petrole: #1f5560;
-  --terre: #c8553d;
-  --terre-fonce: #a8432d; /* texte accent sur papier : contraste AA */
-  --pierre: #6b665e;
-  --nuit: #0a1d21;
-  --brume: #c9d6d3;
-  --sauge: #e3ebe6;
+  /* Rôles (DVK Design System v1 : tokens/dvk-tokens.css) */
+  --dvk-background: #f5f1ea;
+  --dvk-surface: #ece6db;
+  --dvk-text: #0f2a30;
+  --dvk-text-muted: #2c4a50;
+  --dvk-text-subtle: #5c574f;
+  --dvk-primary: #1f5560;
+  --dvk-action: #a8432d;
+  --dvk-accent: #c8553d;
+  --dvk-border: #cfc7b8;
+  --dvk-night: #0a1d21;
+  --dvk-inverse-muted: #c9d6d3;
+  --dvk-inverse-subtle: #9fb4b0;
+  /* Statuts de donnée */
+  --dvk-real: #1f5560; --dvk-real-bg: #e3ebe6;
+  --dvk-estimate: #7b2f1d; --dvk-estimate-bg: #f1e1d6;
+  --dvk-hypothesis: #0f2a30;
+  --dvk-projection: #ffffff; --dvk-projection-bg: #1f5560;
+  --dvk-coming: #5c574f;
+  --dvk-missing: #5c574f;
+  --dvk-warning: #6b4a00; --dvk-warning-bg: #f6e9c6;
+  --dvk-hatch: rgba(15, 42, 48, 0.14);
+  /* Forme et mouvement */
+  --dvk-radius-sm: 3px; --dvk-radius-md: 6px; --dvk-radius-pill: 999px;
+  --dvk-shadow-float: 0 1px 6px rgba(15, 42, 48, 0.12);
+  --dvk-duration-micro: 120ms; --dvk-duration-state: 240ms; --dvk-duration-reveal: 480ms; --dvk-duration-passage: 800ms;
+  --dvk-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dvk-reveal-distance: 12px;
 
-  --serif: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  /* Alias historiques (à supprimer quand plus aucun composant ne les utilise) */
+  --papier: var(--dvk-background);
+  --papier-2: var(--dvk-surface);
+  --ligne: var(--dvk-border);
+  --encre: var(--dvk-text);
+  --encre-douce: var(--dvk-text-muted);
+  --petrole: var(--dvk-primary);
+  --terre: var(--dvk-accent);
+  --terre-fonce: var(--dvk-action); /* texte accent sur papier : contraste AA */
+  --pierre: var(--dvk-text-subtle);
+  --nuit: var(--dvk-night);
+  --brume: var(--dvk-inverse-muted);
+  --sauge: var(--dvk-real-bg);
+
+  --serif: "Fraunces Variable", Georgia, "Times New Roman", serif; /* variante « opsz » : axe optique actif (TYP-04) */
   --sans: "Instrument Sans Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --gouttiere: clamp(20px, 5vw, 56px);
   --largeur: 1240px;
-  --rayon: 6px;
+  --rayon: var(--dvk-radius-md);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -37,39 +68,39 @@ body {
 img, svg { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: 0.8; }
-h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em; margin: 0; }
+h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 400; letter-spacing: -0.02em; margin: 0; }
 p { margin: 0; }
 ul, ol { margin: 0; padding: 0; }
 
 :focus-visible { outline: 3px solid var(--terre); outline-offset: 3px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.aller-contenu { position: absolute; left: -999px; top: 8px; background: var(--encre); color: var(--papier); padding: 10px 14px; border-radius: 4px; z-index: 100; }
+.aller-contenu { position: absolute; left: -999px; top: 8px; background: var(--encre); color: var(--papier); padding: 10px 14px; border-radius: var(--dvk-radius-sm); z-index: 100; }
 .aller-contenu:focus { left: 8px; }
 
 .conteneur { max-width: var(--largeur); margin: 0 auto; padding-inline: var(--gouttiere); }
 .surtitre { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pierre); font-weight: 600; }
 .sombre .surtitre { color: #9fb4b0; }
 
-.titre-xl { font-size: clamp(40px, 6.2vw, 76px); line-height: 1.03; letter-spacing: -0.025em; }
-.titre-l { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.07; }
+.titre-xl { font-size: clamp(40px, 6.2vw, 76px); line-height: 1.03; letter-spacing: -0.025em; font-weight: 350; }
+.titre-l { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.07; font-weight: 350; }
 .titre-m { font-size: clamp(26px, 3vw, 40px); line-height: 1.1; }
 .chapo { font-size: clamp(17px, 1.7vw, 20px); line-height: 1.55; color: var(--encre-douce); max-width: 60ch; }
 .sombre .chapo { color: var(--brume); }
 
 /* Boutons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 26px; border-radius: 99px; font-weight: 600; font-size: 16px; border: 1.5px solid transparent; cursor: pointer; font-family: inherit; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 26px; border-radius: var(--dvk-radius-pill); font-weight: 600; font-size: 16px; border: 1.5px solid transparent; cursor: pointer; font-family: inherit; }
 .btn-action { background: var(--terre-fonce); color: #fff; }
 .btn-encre { background: var(--encre); color: var(--papier); }
 .btn-contour { border-color: currentColor; background: transparent; }
-.lien-soulige { font-weight: 600; font-size: 15px; border-bottom: 1.5px solid var(--terre); padding-bottom: 3px; align-self: flex-start; }
+.lien-soulige { font-weight: 600; font-size: 15px; border-bottom: 1.5px solid var(--terre); padding-bottom: 3px; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; }
 
 /* Pastilles de statut : toujours visibles, jamais ambiguës */
-.statut { display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 5px 9px; border-radius: 3px; }
-.statut-dispo { background: var(--sauge); color: var(--petrole); }
-.statut-demo { background: var(--encre); color: var(--papier); }
-.sombre .statut-demo { background: var(--papier); color: var(--encre); }
-.statut-avenir { border: 1px solid var(--pierre); color: var(--pierre); }
-.sombre .statut-avenir { border-color: #9fb4b0; color: var(--brume); }
+.dvk-availability { display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 5px 9px; border-radius: 3px; }
+.dvk-availability.is-available { background: var(--sauge); color: var(--petrole); }
+.dvk-availability.is-demo { background: var(--encre); color: var(--papier); }
+.sombre .dvk-availability.is-demo { background: var(--papier); color: var(--encre); }
+.dvk-availability.is-soon { border: 1px solid var(--pierre); color: var(--pierre); }
+.sombre .dvk-availability.is-soon { border-color: #9fb4b0; color: var(--brume); }
 
 /* Sections */
 .section { padding-block: clamp(64px, 10vw, 128px); }
@@ -82,7 +113,7 @@ ul, ol { margin: 0; padding: 0; }
 /* Apparition douce au scroll : jamais bloquante */
 .reveal { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: no-preference) {
-  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .js .reveal { opacity: 0; transform: translateY(var(--dvk-reveal-distance)); transition: opacity var(--dvk-duration-reveal) var(--dvk-ease), transform var(--dvk-duration-reveal) var(--dvk-ease); }
   .js .reveal.vu { opacity: 1; transform: none; }
 }
 
@@ -109,7 +140,7 @@ ul, ol { margin: 0; padding: 0; }
 .bloc h3 { font-size: 26px; margin-bottom: 10px; }
 .bloc p, .liste-simple li { color: var(--encre-douce); font-size: 16px; }
 .liste-simple { list-style: none; display: grid; gap: 10px; margin-top: 20px; }
-.liste-simple li { background: var(--papier-2); border-radius: 4px; padding: 14px 18px; }
+.liste-simple li { background: var(--papier-2); border-radius: var(--dvk-radius-sm); padding: 14px 18px; }
 .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
 .prose { max-width: 72ch; }
 .prose h2 { font-size: 28px; margin: 40px 0 12px; }

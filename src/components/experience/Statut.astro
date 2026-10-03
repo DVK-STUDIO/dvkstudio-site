@@ -1,18 +1,20 @@
 ---
-// Étiquette de statut d'une donnée : Réel / Estimation / Hypothèse / Projection / À venir / À établir.
+// DVKStatus : statut d'une DONNÉE (Réel / Estimation / Hypothèse / Projection / À venir / À établir).
+// Distinct du statut de DISPONIBILITÉ d'un service (voir .dvk-availability dans global.css) : règle STA-05.
+// Le texte porte toujours le sens ; couleur, filet et hachure ne sont que redondants (STA-02, HAT-03).
 import { LIBELLE_STATUT, SENS_STATUT, type Statut } from "../../lib/experience/experience";
-interface Props { statut: Statut }
-const { statut } = Astro.props;
+interface Props { statut: Statut; libelle?: string }
+const { statut, libelle } = Astro.props;
 ---
 
-<span class={`pastille-statut pastille-statut-${statut}`} title={SENS_STATUT[statut]}>{LIBELLE_STATUT[statut]}</span>
+<span class="dvk-status" data-status={statut} title={SENS_STATUT[statut]}>{libelle ?? LIBELLE_STATUT[statut]}</span>
 
 <style>
-  .pastille-statut { display: inline-block; font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 600; padding: 4px 8px; border-radius: 3px; line-height: 1.2; white-space: nowrap; vertical-align: middle; }
-  .pastille-statut-reel { background: var(--sauge); color: var(--petrole); }
-  .pastille-statut-estimation { background: #f1e1d6; color: #7b2f1d; }
-  .pastille-statut-hypothese { background: transparent; color: var(--encre); border: 1px solid var(--encre); }
-  .pastille-statut-projection { background: var(--petrole); color: #fff; }
-  .pastille-statut-a_venir { background: transparent; color: var(--pierre); border: 1px solid var(--pierre); }
-  .pastille-statut-manquant { background: transparent; color: var(--pierre); border: 1px dashed var(--pierre); }
+  .dvk-status { display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 4px 8px; border-radius: var(--dvk-radius-sm); line-height: 1.2; white-space: nowrap; vertical-align: middle; }
+  .dvk-status[data-status="reel"] { background: var(--dvk-real-bg); color: var(--dvk-real); }
+  .dvk-status[data-status="estimation"] { background: var(--dvk-estimate-bg); color: var(--dvk-estimate); }
+  .dvk-status[data-status="hypothese"] { background: transparent; color: var(--dvk-hypothesis); border: 1px solid var(--dvk-hypothesis); }
+  .dvk-status[data-status="projection"] { color: var(--dvk-projection); background: var(--dvk-projection-bg) repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 8px); }
+  .dvk-status[data-status="a_venir"] { background: transparent; color: var(--dvk-coming); border: 1px solid var(--dvk-coming); }
+  .dvk-status[data-status="manquant"] { background: transparent; color: var(--dvk-missing); border: 1px dashed var(--dvk-missing); }
 </style>

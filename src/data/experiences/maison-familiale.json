@@ -5,6 +5,10 @@
   "accroche": "Une maison réelle, ses besoins, deux pistes d'aménagement et ce que cela pourrait changer. Chaque donnée dit d'où elle vient et son niveau de certitude.",
   "statutExperience": "demonstration",
   "indexable": false,
+  "diffusion": {
+    "statut": "non_confirmee",
+    "note": "Anonymisée ne veut pas dire diffusable : la confirmation de la famille est requise."
+  },
   "genereLe": "2026-10-03",
   "avertissements": [
     "Projet pilote réalisé avec l'accord de la famille, anonymisé.",
@@ -288,7 +292,7 @@
       ],
       "budget": {
         "statut": "manquant",
-        "note": "Pas encore chiffré. Aucun devis n'existe."
+        "note": "À chiffrer : aucun devis n'existe à ce jour."
       },
       "impactEnergetique": {
         "statut": "manquant",
