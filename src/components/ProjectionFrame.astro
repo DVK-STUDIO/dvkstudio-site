@@ -28,10 +28,13 @@ const { src, alt, message = "Aucune image n'est présentée tant qu'elle n'a pas
 
 <style>
   .dvk-projection { margin: 0; }
-  .cadre { position: relative; width: 100%; aspect-ratio: var(--ratio); border-radius: var(--dvk-radius-md); background-color: var(--dvk-surface); background-image: repeating-linear-gradient(135deg, var(--dvk-hatch) 0 2px, transparent 2px 12px); display: flex; align-items: center; justify-content: center; padding: 24px; overflow: hidden; }
+  .cadre { position: relative; width: 100%; aspect-ratio: var(--ratio); min-height: 150px; border-radius: var(--dvk-radius-md); background-color: var(--dvk-surface); background-image: repeating-linear-gradient(135deg, var(--dvk-hatch) 0 2px, transparent 2px 12px); display: flex; align-items: center; justify-content: center; padding: 24px; overflow: hidden; }
   .cadre.produit { background: none; padding: 0; outline: 6px solid var(--dvk-background); outline-offset: -6px; }
   .img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .texte { max-width: 40ch; text-align: center; color: var(--dvk-text-muted); font-size: 16px; }
   .badges { position: absolute; right: 12px; top: 12px; display: flex; gap: 6px; background: var(--dvk-background); padding: 6px 8px; border-radius: var(--dvk-radius-sm); }
   figcaption { margin-top: 8px; font-size: 13px; color: var(--dvk-text-subtle); }
+  @media (max-width: 720px) {
+    .cadre { aspect-ratio: auto; flex-direction: column; justify-content: flex-end; padding: 64px 20px 24px; }
+  }
 </style>

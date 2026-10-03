@@ -21,4 +21,8 @@ const e = site.editeur;
   .pied-interieur { padding-block: 32px; display: flex; flex-wrap: wrap; gap: 12px 40px; justify-content: space-between; }
   .pied-liens { display: flex; flex-wrap: wrap; gap: 8px 22px; }
   .pied a { color: var(--dvk-inverse-muted); text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
+  @media (max-width: 720px) {
+    .pied-interieur { padding-block: 24px; gap: 4px; }
+    .pied-liens { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; width: 100%; }
+  }
 </style>

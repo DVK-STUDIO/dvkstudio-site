@@ -97,3 +97,57 @@ describe("Design System v1 appliqué à la V2", () => {
     for (const r of ["real", "estimate", "projection", "warning"]) expect(lus(`${r}-bg`), `--dvk-${r}-bg`).toBe(ds[r].bg!.toLowerCase());
   });
 });
+
+describe("Polish V2 : cohérence transversale", () => {
+  const css = lire(join(racine, "src", "styles", "global.css"));
+  const pages = fichiers(join(racine, "src", "pages"), /\.astro$/);
+
+  it("STA-05 : la disponibilité d'un service n'a ni fond ni pastille (≠ statut de donnée)", () => {
+    const bloc = /\.dvk-availability \{[^}]*\}/.exec(css)![0];
+    expect(bloc).not.toMatch(/background|border-radius/);
+    expect(bloc).toMatch(/border-left/);
+  });
+
+  it("STA-05 : une disponibilité n'est jamais posée au milieu d'une phrase", () => {
+    const fautes = fichiers(join(racine, "src"), /\.astro$/).filter((f) => /<(p|li)[^>]*>[^<\n]{3,}<span class="dvk-availability/.test(lire(f)));
+    expect(fautes).toEqual([]);
+  });
+
+  it("CMP-01 : un seul composant de processus pour l'accueil, travaux et professionnels", () => {
+    for (const p of ["index.astro", "travaux.astro", "professionnels.astro"]) {
+      const s = lire(join(racine, "src", "pages", p));
+      expect(s, p).toMatch(/<Processus\b/);
+      expect(s, p).not.toMatch(/<ol class="(liste-simple|methode|etapes-pros)/);
+    }
+  });
+
+  it("STA-04 : la provenance est repliée par section, pas répétée par donnée", () => {
+    const page = lire(join(racine, "src", "pages", "experience", "[slug].astro"));
+    expect((page.match(/<SourcesSection\b/g) ?? []).length).toBeGreaterThanOrEqual(4);
+    expect(lire(join(racine, "src", "components", "experience", "Donnee.astro"))).not.toMatch(/D'où vient cette donnée/);
+  });
+
+  it("PHO-02 / STA-03 : l'état « à venir » d'une projection reste visible", () => {
+    expect(lire(join(racine, "src", "components", "ProjectionFrame.astro"))).toMatch(/statut="a_venir"/);
+  });
+
+  it("EDI-02 : pas de voix mêlée (« je » et « DVK Studio » sujet) dans une même séquence", () => {
+    const fautes: string[] = [];
+    for (const f of pages.filter((p) => !/mentions-legales|confidentialite|cgv/.test(p))) {
+      // Les entrées « Je vends / J'achète… » parlent avec la voix du visiteur : hors périmètre.
+      const brut = sansCommentaires(lire(f)).replace(/<nav[^>]*entrees[\s\S]*?<\/nav>/g, "").replace(/<style[\s\S]*?<\/style>/g, "").replace(/^---[\s\S]*?\n---/, "");
+      for (const s of brut.split(/<(?:section|header)\b/).slice(1)) {
+        const texte = s.replace(/<[^>]+>/g, " ");
+        const je = /(?:^|[\s>(])(?:je|j'|m'|moi|Je|J')(?=[\s'a-zéèêà])/.test(texte);
+        const marque = /DVK Studio (?:vous|identifie|mobilise|cadre|estime|regarde|accompagne|aide|oriente)/.test(texte);
+        if (je && marque) fautes.push(`${f} : ${texte.replace(/\s+/g, " ").trim().slice(0, 60)}`);
+      }
+    }
+    expect(fautes).toEqual([]);
+  });
+
+  it("Layout : le pied de page reste en bas (pages courtes, 404)", () => {
+    expect(css).toMatch(/body \{[^}]*display: flex;[^}]*flex-direction: column/);
+    expect(css).toMatch(/main \{ flex: 1 0 auto; \}/);
+  });
+});

@@ -1,0 +1,43 @@
+---
+// DVKProcess : étapes numérotées d'un parcours (accueil, travaux, professionnels).
+// Un seul langage : numéro discret, filet, titre en serif, texte en sans. Pas de carte, pas de pastille, pas de flèche.
+//   variant « colonnes » : étapes côte à côte (large), empilées sur mobile.
+//   variant « liste »    : étapes empilées, numéro à gauche.
+interface Etape { titre?: string; texte: string }
+interface Props { etapes: Etape[]; variant?: "colonnes" | "liste" }
+const { etapes, variant = "colonnes" } = Astro.props;
+---
+
+<ol class:list={["dvk-process", variant]}>
+  {etapes.map((e, i) => (
+    <li>
+      <span class="n">{String(i + 1).padStart(2, "0")}</span>
+      <div class="corps">
+        {e.titre && <h3>{e.titre}</h3>}
+        <p>{e.texte}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .dvk-process { list-style: none; padding: 0; margin: 0; display: grid; }
+  .n { font-size: 12px; letter-spacing: 0.14em; color: var(--dvk-text-subtle); font-weight: 600; }
+  h3 { font-size: 24px; line-height: 1.15; margin: 0 0 6px; }
+  p { margin: 0; font-size: 16px; color: var(--dvk-text-muted); }
+
+  .colonnes { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 0 32px; border-top: 1.5px solid var(--dvk-border-strong, var(--dvk-text)); }
+  .colonnes li { padding: 20px 0 8px; display: flex; flex-direction: column; gap: 8px; }
+
+  .liste { gap: 0; border-top: 1.5px solid var(--dvk-text); }
+  .liste li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--dvk-border); }
+  .liste .n { padding-top: 4px; }
+  .liste p { font-size: 17px; }
+  .liste h3 + p { font-size: 16px; }
+
+  @media (max-width: 720px) {
+    .colonnes { gap: 0; }
+    .colonnes li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--dvk-border); }
+    .colonnes .n { padding-top: 4px; }
+  }
+</style>

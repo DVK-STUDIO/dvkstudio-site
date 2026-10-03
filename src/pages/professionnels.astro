@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
+import Processus from "../components/Processus.astro";
 import { site } from "../content/site";
 const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Annonce à présenter avec DVK Expérience")}`;
 ---
@@ -33,14 +34,17 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Annonce à pr
   <section class="papier-2 section" aria-labelledby="t-fonctionnement">
     <div class="conteneur">
       <h2 id="t-fonctionnement" class="titre-l" style="max-width:22ch">Comment ça se passe.</h2>
-      <ol class="liste-simple">
-        <li><strong>1.</strong> Vous m'envoyez l'annonce ou les photos du bien.</li>
-        <li><strong>2.</strong> Je prépare l'étude : potentiel, scénarios, enveloppe de travaux.</li>
-        <li><strong>3.</strong> Vous la présentez à vos acquéreurs.</li>
-      </ol>
-      <p class="chapo" style="margin-top:28px">
-        <span class="dvk-availability is-available">Disponible</span> Étude présentée en rendez-vous ou en document. <span class="dvk-availability is-soon">À venir</span> Page web partageable par lien et propre à chaque bien.
-      </p>
+      <div style="margin-top:40px">
+        <Processus variant="liste" etapes={[
+          { texte: "Vous m'envoyez l'annonce ou les photos du bien." },
+          { texte: "Je prépare l'étude : potentiel, scénarios, enveloppe de travaux." },
+          { texte: "Vous la présentez à vos acquéreurs." },
+        ]} />
+      </div>
+      <ul class="dispo-liste">
+        <li><span class="dvk-availability is-available">Disponible</span><span>Étude présentée en rendez-vous ou en document.</span></li>
+        <li><span class="dvk-availability is-soon">À venir</span><span>Page web partageable par lien et propre à chaque bien.</span></li>
+      </ul>
       <div class="actions"><BoutonRdv bouton="fonctionnement.rdv" parcours="pro">Prendre rendez-vous</BoutonRdv></div>
     </div>
   </section>

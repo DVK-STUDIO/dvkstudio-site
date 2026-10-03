@@ -1,6 +1,5 @@
 ---
 import Base from "../../layouts/Base.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
 import ExperienceDemo from "../../components/ExperienceDemo.astro";
 import { experiencesPubliables } from "../../lib/experience/experience";
 const experiences = experiencesPubliables();
@@ -19,16 +18,16 @@ const experiences = experiencesPubliables();
     <p class="chapo" style="margin-top:16px"><strong>Bien réel → compréhension → potentiel → scénarios → travaux → budget → projection → décision.</strong></p>
   </header>
 
-  <ExperienceDemo />
+  <ExperienceDemo experience={experiences[0]} />
 
   <section class="section conteneur" aria-labelledby="t-promesse">
     <h2 id="t-promesse" class="titre-l" style="max-width:24ch">Ce qui distingue DVK Expérience.</h2>
     <div class="bloc">
       <div><h3>Cohérence</h3><p>Ce qu'on montre, ce qu'on chiffre et ce qui est réalisable restent alignés. Un scénario n'est pas qu'une liste de travaux : il dit quels besoins il couvre.</p></div>
       <div><h3>Honnêteté</h3><p>Chaque donnée porte sa source et son statut : réel, estimation, hypothèse, projection ou à venir. Ce qui manque s'affiche comme manquant.</p></div>
-      <div><h3>Partage</h3><p>À terme, une page propre à chaque bien, qu'un agent peut transmettre à un acquéreur. <span class="dvk-availability is-soon">À venir</span></p></div>
+      <div><h3>Partage</h3><p>À terme, une page propre à chaque bien, qu'un agent peut transmettre à un acquéreur.</p></div>
     </div>
-    {experiences.length > 0 && (<>
+    {experiences.length > 1 && (<>
       <h3 class="titre-m" style="margin-top:56px">Une expérience réelle</h3>
       <ul class="experiences">
         {experiences.map((x) => (
@@ -43,7 +42,6 @@ const experiences = experiencesPubliables();
         ))}
       </ul>
     </>)}
-    <div class="actions"><BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv></div>
   </section>
 </Base>
 

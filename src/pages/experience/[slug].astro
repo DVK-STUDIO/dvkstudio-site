@@ -5,6 +5,7 @@ import Base from "../../layouts/Base.astro";
 import BoutonRdv from "../../components/BoutonRdv.astro";
 import Statut from "../../components/experience/Statut.astro";
 import Donnee from "../../components/experience/Donnee.astro";
+import SourcesSection from "../../components/experience/SourcesSection.astro";
 import Matrice from "../../components/experience/Matrice.astro";
 import EchelleEnergie from "../../components/experience/EchelleEnergie.astro";
 import Plan from "../../components/Plan.astro";
@@ -39,6 +40,20 @@ const annotationsPlan = sep && cui && sam ? [
   { x: 22, y: 58, lx: 3, ly: 74, libelle: "Surface de la cuisine", statut: cui.valeur.statut },
   { x: 72, y: 62, lx: 56, ly: 80, libelle: `Salle à manger, ${afficherValeur(sam.valeur)}`, statut: sam.valeur.statut },
 ] : [];
+const elementsBudget = [
+  ...be.lots.map((l) => ({ libelle: l.lot, valeur: l.montant })),
+  { libelle: "Total estimé", valeur: be.total },
+  ...be.financements.map((x) => ({ libelle: x.libelle, valeur: x.montant })),
+  { libelle: "Reste à charge", valeur: be.resteACharge },
+];
+const elementsEnergie = [
+  { libelle: "Classe aujourd'hui", valeur: e.energie.classeAvant },
+  { libelle: "Classe après le scénario énergétique", valeur: e.energie.classeApres },
+  { libelle: "Consommation (énergie primaire)", valeur: e.energie.consommation },
+  { libelle: "Émissions de gaz à effet de serre", valeur: e.energie.emissions },
+  { libelle: "Facture énergétique annuelle", valeur: e.energie.factureAnnuelle },
+  { libelle: "Économie annuelle visée", valeur: e.energie.economieAnnuelle },
+];
 const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
 ---
 
@@ -66,7 +81,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
 
     <details class="lire">
       <summary>Comment lire cette page</summary>
-      <p>Chaque donnée porte une étiquette qui dit à quel point elle est certaine. Un clic sur « D'où vient cette donnée ? » donne la source.</p>
+      <p>Chaque donnée porte une étiquette qui dit à quel point elle est certaine. La source de chaque section se déplie sous « Sources de cette section ».</p>
       <ul>
         {statuts.map((s) => <li><Statut statut={s} /> <span>{SENS_STATUT[s]}</span></li>)}
       </ul>
@@ -91,9 +106,10 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
       </div>
     </div>
     <div class="conteneur" data-intensite="equilibre">
-      <dl class="faits">
+      <dl class="faits deux-col">
         {e.bien.faits.map((f) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} />)}
       </dl>
+      <SourcesSection elements={e.bien.faits} sources={e.sources} />
     </div>
   </section>
 
@@ -137,6 +153,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
           {e.potentiel.faits.map((f) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} />)}
         </dl>
       </div>
+      <SourcesSection elements={e.potentiel.faits} sources={e.sources} />
     </div>
   </section>
 
@@ -192,7 +209,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
 
       <div class="projection" data-intensite="editorial">
         <h3>Se voir dans le résultat</h3>
-        <ProjectionFrame alt="Projection de la cuisine et du séjour transformés" message={e.projection.message} />
+        <ProjectionFrame alt="Projection de la cuisine et du séjour transformés" message={e.projection.message} ratio="21 / 9" />
       </div>
     </div>
   </section>
@@ -232,6 +249,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
           <Donnee libelle="Reste à charge" valeur={be.resteACharge} sources={e.sources} grand />
         </dl>
       </div>
+      <SourcesSection elements={elementsBudget} sources={e.sources} />
     </div>
   </section>
 
@@ -251,6 +269,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
         <Donnee libelle="Facture énergétique annuelle" valeur={e.energie.factureAnnuelle} sources={e.sources} />
         <Donnee libelle="Économie annuelle visée" valeur={e.energie.economieAnnuelle} sources={e.sources} />
       </dl>
+      <SourcesSection elements={elementsEnergie} sources={e.sources} />
     </div>
   </section>
 

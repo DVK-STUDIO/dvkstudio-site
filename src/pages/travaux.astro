@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
+import Processus from "../components/Processus.astro";
 import Faq from "../components/Faq.astro";
 import { site } from "../content/site";
 
@@ -35,12 +36,14 @@ const faq = [
   <section class="papier-2 section" aria-labelledby="t-demarche">
     <div class="conteneur">
       <h2 id="t-demarche" class="titre-l" style="max-width:22ch">Une démarche en quatre temps.</h2>
-      <ol class="liste-simple">
-        <li><strong>1. Échange</strong> — vingt minutes pour comprendre votre situation et votre objectif.</li>
-        <li><strong>2. Visite et relevé</strong> — mesures, état du bien, contraintes techniques.</li>
-        <li><strong>3. Scénarios et enveloppe</strong> — plusieurs pistes comparées, chacune avec ce qu'elle apporte et ce qu'elle laisse de côté.</li>
-        <li><strong>4. Consultation et suite</strong> — consultation d'entreprises et accompagnement si vous décidez d'avancer.</li>
-      </ol>
+      <div style="margin-top:40px">
+        <Processus variant="liste" etapes={[
+          { titre: "Échange", texte: "Vingt minutes pour comprendre votre situation et votre objectif." },
+          { titre: "Visite et relevé", texte: "Mesures, état du bien, contraintes techniques." },
+          { titre: "Scénarios et enveloppe", texte: "Plusieurs pistes comparées, chacune avec ce qu'elle apporte et ce qu'elle laisse de côté." },
+          { titre: "Consultation et suite", texte: "Consultation d'entreprises et accompagnement si vous décidez d'avancer." },
+        ]} />
+      </div>
       <div class="actions"><BoutonRdv bouton="demarche.rdv" parcours="renover">Prendre rendez-vous</BoutonRdv></div>
     </div>
   </section>
