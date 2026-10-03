@@ -24,6 +24,7 @@ if (continuer) continuer = etape("Build public (DVK_PUBLIC_BUILD=1)", () => { co
 if (continuer) {
   etape("Hygiène et fuites (check:public)", () => { const r = sh("node scripts/check-public.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Liens, SEO, redirections, accessibilité, performance (check:site)", () => { const r = sh("node scripts/check-site.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
+  etape("Capacité IAD désactivée : aucune occurrence publique (check:capacites)", () => { const r = sh("node scripts/check-capacites.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Expérience non confirmée absente du build", () => {
     const fautes = [];
     if (existsSync("src/data/experiences")) {

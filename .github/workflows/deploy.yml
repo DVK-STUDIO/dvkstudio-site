@@ -30,6 +30,7 @@ jobs:
         env:
           DVK_PUBLIC_BUILD: "1"
       - run: npm run check:site
+      - run: npm run check:capacites
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

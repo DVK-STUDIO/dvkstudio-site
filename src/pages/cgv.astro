@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import { site } from "../content/site";
+import { iadActive } from "../content/capacites";
+import { iad } from "../content/iad";
 const e = site.editeur;
 ---
 
@@ -14,7 +16,7 @@ const e = site.editeur;
     <p>{e.nom} – {site.nom} – EI assujettie à la TVA – SIRET {e.siret} – N° de TVA : {e.tva} – {e.adresse}.</p>
 
     <h2>Article 2 – Nature des prestations</h2>
-    <p>{site.nom} propose des prestations de facilitation de projets immobiliers. <strong>{site.nom} n'est pas maître d'œuvre, ne réalise pas de travaux et n'assure pas de garantie décennale liée aux travaux de tiers.</strong> Les prestations de mandataire immobilier et d'accompagnement de travaux relèvent de leurs propres conditions, communiquées avant tout engagement.</p>
+    <p>{site.nom} propose des prestations de facilitation de projets immobiliers. <strong>{site.nom} n'est pas maître d'œuvre, ne réalise pas de travaux et n'assure pas de garantie décennale liée aux travaux de tiers.</strong> {iadActive ? iad.cgv : "Les prestations d'accompagnement de travaux relèvent de leurs propres conditions, communiquées avant tout engagement."}</p>
 
     <h2>Article 3 – Livrables</h2>
     <p>Les plans fournis sont des plans simplifiés d'aide à la décision. Les enveloppes budgétaires sont indicatives et ne constituent pas des devis.</p>

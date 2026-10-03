@@ -1,11 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import { site } from "../content/site";
+import { iadActive } from "../content/capacites";
+import { iad } from "../content/iad";
+import MentionsReglementaires from "../iad/MentionsReglementaires.astro";
 const e = site.editeur;
-const m = site.mandataire;
 ---
 
-<Base titre="Mentions légales" description="Mentions légales du site dvkstudio.fr : éditeur, activité de mandataire immobilier, hébergeur." page="mentions-legales" chemin="/mentions-legales/">
+<Base titre="Mentions légales" description={iadActive ? iad.mentions.description : "Mentions légales du site dvkstudio.fr : éditeur, accompagnement des travaux, hébergeur."} page="mentions-legales" chemin="/mentions-legales/">
   <div class="conteneur page-hero prose">
     <p class="surtitre">Légal</p>
     <h1 class="titre-xl">Mentions légales</h1>
@@ -23,14 +25,7 @@ const m = site.mandataire;
       <li>Téléphone : {site.telephone} — Email : {site.email}</li>
     </ul>
 
-    <h2>Activité de mandataire immobilier</h2>
-    <p>{e.nom} exerce également comme mandataire immobilier du réseau {m.reseau}. Informations réglementaires :</p>
-    <ul>
-      <li>Carte professionnelle ou attestation : <span class="a-completer">{m.carteProfessionnelle}</span></li>
-      <li>Garantie financière : <span class="a-completer">{m.garantieFinanciere}</span></li>
-      <li>Assurance de responsabilité civile professionnelle : <span class="a-completer">{m.assuranceRcp}</span></li>
-      <li>Inscription au registre des mandataires : <span class="a-completer">{m.registreMandataires}</span></li>
-    </ul>
+  {iadActive && <MentionsReglementaires />}
 
     <h2>Accompagnement des travaux</h2>
     <p>{e.nom} intervient comme chef de projet travaux hemea et exerce sous le nom {site.nom}. {site.nom} n'est ni maître d'œuvre, ni architecte, ni bureau d'études, et ne réalise pas de travaux.</p>

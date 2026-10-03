@@ -19,7 +19,7 @@ Ordre retenu : V2 stabilisée → jalon 3 → conformité IAD → contenu et pho
 
 ## Capacités activables : IAD et hemea (décision du 2026-10-03)
 
-> **Mise à jour du 2026-10-03 : l'option (b) remplace l'option A.** IAD devient une capacité DÉSACTIVÉE pour que la V2 puisse être publiée sans attendre l'intégration IAD de Kevin. Étape 1 (en cours) : cadrage visuel de la homepage, maquettes isolées, V2 non modifiée (`C:Userscontadvk-lab-dadirection-homepage`). Étape 2 (après GO) : retirer des pages publiables tout contenu dépendant du statut IAD, avec un interrupteur unique et un test de build. Tant que l'étape 2 n'est pas faite, la V2 reste non publiable. Cible investisseur : pas de parcours dédié avant le cadrage.
+> **Mise à jour du 2026-10-03 : l'option (b) remplace l'option A.** IAD devient une capacité DÉSACTIVÉE pour que la V2 puisse être publiée sans attendre l'intégration IAD de Kevin. **Fait le 2026-10-03.** Étape 1 : cadrage validé. Étape 2 : interrupteur unique `src/content/capacites.ts`, contenus IAD isolés (`src/content/iad.ts`, `src/iad/`, jamais supprimés), page `/immobilier/` absente du build tant que OFF, test `check:capacites` (aucun « IAD » ni « mandataire » dans le build). Étape 3 : nouvelle accueil intégrée (trois entrées, page `/acquereurs/`, barre mobile). Investisseur : intégré à « J'achète un bien à rénover », pas de parcours dédié. Réactivation : voir `docs/mise-en-ligne.md`.
 
 Texte d'origine (option A, remplacée) :
 
@@ -56,4 +56,5 @@ Livré (dépôt local `dvk-design-system`). Source de vérité graphique : direc
 - Photographies réelles (dépendance de contenu) : le mode Éditorial sera validé sur un projet disposant des droits.
 - Migration complète des espacements et des tailles de texte vers les rôles du Design System ; poids 500 ; repères de plan dans la matrice.
 - Plan du potentiel calé sur un projet cuisine / séjour : à généraliser dans le contrat avec un second projet.
-- Capacité IAD : **bloquant de mise en production** (pas de développement). Voir « Capacités activables » ci-dessus.
+- Capacité IAD : désactivée, **ne bloque plus** la mise en ligne. Elle bloquera sa propre réactivation tant que le statut n'est pas validé.
+- Portrait, réalisations et avis : absents du site public (aucun emplacement réservé) tant qu'il n'y a pas de matériau réel et autorisé.

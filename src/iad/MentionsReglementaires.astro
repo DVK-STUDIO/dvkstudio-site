@@ -1,0 +1,15 @@
+---
+// Section « Activité de mandataire immobilier » des mentions légales. Affichée seulement si la capacité IAD est active.
+import { site } from "../content/site";
+import { reglementaire as m } from "../content/iad";
+const e = site.editeur;
+---
+
+<h2>Activité de mandataire immobilier</h2>
+<p>{e.nom} exerce également comme mandataire immobilier du réseau {m.reseau}. Informations réglementaires :</p>
+<ul>
+  <li>Carte professionnelle ou attestation : <span class="a-completer">{m.carteProfessionnelle}</span></li>
+  <li>Garantie financière : <span class="a-completer">{m.garantieFinanciere}</span></li>
+  <li>Assurance de responsabilité civile professionnelle : <span class="a-completer">{m.assuranceRcp}</span></li>
+  <li>Inscription au registre des mandataires : <span class="a-completer">{m.registreMandataires}</span></li>
+</ul>

@@ -9,7 +9,8 @@ npm run verifier:golive          # FORBIDDEN_FILE=<motifs privés> pour le contr
 ```
 
 Enchaîne : tests, build public (`DVK_PUBLIC_BUILD=1`), `check:public`, `check:site` (liens, SEO, redirections, accessibilité structurelle, budget de performance), absence de l'expérience non confirmée, aperçu local servi puis test de fumée.
-Verdict : **0** prêt à signer · **1** échec technique · **2** technique OK mais prérequis humains restants (aujourd'hui : mentions du mandataire IAD).
+Verdict : **0** prêt à signer · **1** échec technique · **2** technique OK mais prérequis humains restants (avec la capacité IAD désactivée, il n'y en a plus de bloquant automatique).
+Inclut `check:capacites` : capacité IAD désactivée => aucune occurrence de « IAD » ni de « mandataire » dans le build, et pas de page `/immobilier/`.
 
 Aperçu à l'œil (build public, comme en production) :
 ```
@@ -18,12 +19,20 @@ DVK_PUBLIC_BUILD=1 npm run build && npm run preview
 
 ## 2. Prérequis humains (bloquent la mise en production, pas le développement)
 
-- [ ] **Capacité IAD désactivée (option b, étape 2 faite : aucune mention publique, test de build vert) OU activée (statut validé)** : statut exact de communication vérifié, mentions réglementaires définitives intégrées (`src/content/site.ts`, objet `mandataire`), toutes les affirmations relatives à IAD relues (accueil, `/immobilier/`, `/a-propos/`, FAQ, pages légales). Tant que le statut n'est pas validé : aucun texte provisoire, voir `docs/FEUILLE-DE-ROUTE.md`. Le garde `check:public --golive` bloque tant que « [à compléter] » subsiste.
+- [x] **Capacité IAD désactivée (option b, faite le 3 octobre 2026)** : interrupteur unique `src/content/capacites.ts`, contenus isolés dans `src/content/iad.ts` et `src/iad/`, test de build `check:capacites`. Aucune mention publique du statut. Voir « Activer la capacité IAD » plus bas.
 - [ ] Tarifs : aucun repris tant que non confirmés.
 - [ ] Logos et partenaires : aucun repris sans autorisation.
 - [ ] Hero : version typographique (aucune photo non autorisée).
 - [ ] Expérience pilote : **hors publication** tant que `diffusion` n'est pas `confirmee` (accord de la famille). Elle n'a aucune raison de bloquer le site.
 - [ ] Domaine : le DNS de `dvkstudio.fr` ne change pas (fichier `CNAME` conservé).
+
+## Activer la capacité IAD (plus tard, statut validé)
+
+1. Vérifier le statut exact de communication ; compléter l'objet `reglementaire` de `src/content/iad.ts` (aucune valeur provisoire).
+2. Relire les textes de `src/content/iad.ts` et `src/iad/` (page `/immobilier/`, section des mentions légales, FAQ, À propos).
+3. Passer `iad` à `true` dans `src/content/capacites.ts` : la page `/immobilier/`, l'entrée de navigation, l'entrée « Je vends » de l'accueil, la FAQ et les mentions réapparaissent (rien n'a été supprimé).
+4. `npm run verifier:golive` : `check:public --golive` bloque tant qu'un « [à compléter] » subsiste.
+5. GO explicite avant toute publication.
 
 ## 3. Bascule (à exécuter seulement après GO explicite)
 
@@ -68,7 +77,7 @@ Puis Pages > Source = « Deploy from a branch », branche `retour-v1`, dossier `
 | # | Vérification | Résultat |
 |---|---|---|
 | 1 | `npm run verifier:golive` : technique OK | ☐ |
-| 2 | Mentions du mandataire IAD complétées | ☐ |
+| 2 | Capacité IAD désactivée (`check:capacites` vert) ou mentions définitives intégrées | ☐ |
 | 3 | Aperçu relu desktop et mobile 390 px | ☐ |
 | 4 | Aucune photo, aucun logo, aucun tarif non autorisé | ☐ |
 | 5 | Expérience pilote exclue (ou diffusion confirmée par écrit) | ☐ |

@@ -3,7 +3,7 @@
 `npm run check:public -- --golive` échoue tant qu'un emplacement « à compléter » reste dans le site construit.
 
 ## À fournir / confirmer par Kevin
-- [ ] Mentions légales : informations du mandataire IAD France (emplacement prévu, rien d'inventé).
+- [x] Informations du mandataire IAD France : sans objet tant que la capacité IAD est désactivée (aucune mention publique). À fournir avant toute réactivation.
 - [ ] Tarifs (180 / 360 / 500 €) : non repris dans la V2 tant que non confirmés.
 - [ ] Logos et partenaires : retirés ; à réintroduire seulement avec autorisation écrite.
 - [ ] Visuel du hero : version typographique par défaut. Version avant/après seulement si les droits d'usage sont confirmés (voir `src/assets/hero/LISEZMOI.md`, `hero.mode` dans `src/content/site.ts`).

@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/Base.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import Processus from "../components/Processus.astro";
+import Faq from "../components/Faq.astro";
+import { site } from "../content/site";
+
+const faq = [
+  { q: "Je veux louer le bien : est-ce aussi pour moi ?", r: "Oui. Que vous achetiez pour l'habiter ou pour le louer, la question est la même : que peut devenir ce bien, que coûteraient les travaux, et le projet global tient-il dans votre budget ?" },
+  { q: "Le budget présenté est-il un devis ?", r: "Non. C'est une estimation indicative, avec ses hypothèses et ses limites. Ce qui n'est pas encore établi est indiqué « à chiffrer » : aucun montant n'est inventé." },
+  { q: "Combien coûte le premier échange ?", r: "Vingt minutes par téléphone, sans engagement. Les conditions de chaque prestation vous sont communiquées avant tout engagement." },
+];
+---
+
+<Base
+  titre="Acquéreurs : acheter un bien à rénover en connaissant ses travaux"
+  description="Acheter un bien à rénover en Oise avec DVK Studio : potentiel du bien, scénarios, enveloppe de travaux indicative et lecture du projet global avant de signer."
+  page="acquereurs"
+  chemin="/acquereurs/"
+>
+  <header class="conteneur page-hero">
+    <p class="surtitre">Acquéreurs · {site.zone}</p>
+    <h1 class="titre-xl">Acheter un bien à rénover, en sachant ce qu'il peut devenir.</h1>
+    <p class="chapo">On visite un bien daté sans savoir ce qu'on peut en faire, ni combien cela coûterait. DVK Studio vous aide à voir clair avant de signer, que vous achetiez pour l'habiter ou pour le louer.</p>
+    <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="acheter">Analyser un bien avant d'acheter</BoutonRdv></div>
+  </header>
+
+  <section class="section conteneur" aria-labelledby="t-valeur">
+    <h2 id="t-valeur" class="titre-l" style="max-width:22ch">Ce bien me plaît, mais je n'arrive pas à me projeter.</h2>
+    <div class="bloc">
+      <div><h3>Le problème</h3><p>Le potentiel d'un bien est difficile à lire en visite, le coût des travaux reste flou, et le projet global, prix d'achat plus travaux, n'est pas vérifié avant de signer.</p></div>
+      <div><h3>Ce que fait DVK Studio</h3><p>Analyse du potentiel, scénarios de transformation comparés à vos besoins, enveloppe de travaux indicative et lecture du projet global.</p></div>
+      <div><h3>Pour vous, concrètement</h3><p>Une décision d'achat prise avec les bonnes informations, et un interlocuteur qui peut ensuite cadrer les travaux et consulter des entreprises.</p></div>
+    </div>
+  </section>
+
+  <section class="papier-2 section" aria-labelledby="t-methode">
+    <div class="conteneur">
+      <h2 id="t-methode" class="titre-l" style="max-width:20ch">Avant de signer, quatre étapes.</h2>
+      <div style="margin-top:40px">
+        <Processus etapes={[
+          { titre: "Échange", texte: "Vingt minutes pour comprendre votre projet et votre budget." },
+          { titre: "Visite et relevé", texte: "Le bien est regardé sur place et mesuré." },
+          { titre: "Potentiel et budget", texte: "Scénarios et enveloppe indicative, hypothèses à l'appui." },
+          { titre: "Décision", texte: "Vous décidez de signer, de négocier ou de renoncer." },
+        ]} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section conteneur" aria-labelledby="t-faq">
+    <h2 id="t-faq" class="titre-m" style="margin-bottom:32px">Questions fréquentes</h2>
+    <Faq questions={faq} />
+    <div class="actions"><BoutonRdv bouton="faq.rdv" parcours="acheter">Prendre rendez-vous</BoutonRdv></div>
+  </section>
+</Base>

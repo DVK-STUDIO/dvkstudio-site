@@ -19,25 +19,8 @@ export const site = {
     debutActivite: "01/04/2026",
     tva: "FR61892737156",
   },
-  // Activité de mandataire immobilier : emplacement prévu, AUCUNE valeur inventée. À fournir par Kevin
-  // avant toute mise en ligne (voir docs/avant-mise-en-ligne.md).
-  mandataire: {
-    reseau: "IAD France",
-    carteProfessionnelle: A_COMPLETER,
-    garantieFinanciere: A_COMPLETER,
-    assuranceRcp: A_COMPLETER,
-    registreMandataires: A_COMPLETER,
-  },
   reseaux: { instagram: "https://www.instagram.com/dvk_studio_officiel/", linkedin: "https://www.linkedin.com/in/kevin-de-vlieger-88b261364/", facebook: "https://www.facebook.com/profile.php?id=61575906091084" },
 };
-
-export const navigation = [
-  { libelle: "Immobilier", href: "/immobilier/" },
-  { libelle: "Travaux", href: "/travaux/" },
-  { libelle: "DVK Expérience", href: "/experience/", badge: "Nouveau" },
-  { libelle: "Professionnels", href: "/professionnels/" },
-  { libelle: "À propos", href: "/a-propos/" },
-];
 
 // Hero : mode interchangeable par simple changement de contenu.
 //  - "typo"        : hero typographique (par défaut tant que le droit d'usage du visuel n'est pas confirmé)

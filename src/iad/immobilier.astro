@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
 import Faq from "../components/Faq.astro";
 import { site } from "../content/site";
+import { reglementaire } from "../content/iad";
 
 const faq = [
   { q: "Qui est mon interlocuteur ?", r: "Kevin De Vlieger, de DVK Studio. Pour la partie immobilière, j'interviens en tant que mandataire du réseau IAD France." },
@@ -53,7 +54,7 @@ const faq = [
       <div>
         <h2 id="t-confiance" class="titre-m">Pourquoi faire confiance à DVK Studio</h2>
         <p class="chapo" style="margin-top:18px">Je suis mandataire du réseau IAD France et chef de projet travaux hemea, sous le nom DVK Studio. Vous gardez un seul interlocuteur, et je vous explique avant tout engagement qui fait quoi.</p>
-        <p class="a-completer" style="margin-top:18px;display:inline-block">Informations réglementaires du mandataire : {site.mandataire.carteProfessionnelle}</p>
+        <p class="a-completer" style="margin-top:18px;display:inline-block">Informations réglementaires du mandataire : {reglementaire.carteProfessionnelle}</p>
       </div>
       <div><Faq questions={faq} /></div>
     </div>
