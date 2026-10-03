@@ -1,0 +1,13 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../content/site";
+---
+
+<Base titre="Merci" description="Votre demande a bien été prise en compte." page="merci" chemin="/merci/" noindex>
+  <div class="conteneur page-hero">
+    <p class="surtitre">Merci</p>
+    <h1 class="titre-xl">Votre demande est prise en compte.</h1>
+    <p class="chapo">Je reviens vers vous rapidement pour confirmer votre échange. Une question urgente : <a href={site.telephoneLien}>{site.telephone}</a> ou <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    <div class="actions"><a class="btn btn-encre" href="/">Retour à l'accueil</a></div>
+  </div>
+</Base>

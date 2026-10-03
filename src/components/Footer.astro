@@ -1,0 +1,24 @@
+---
+import { site } from "../content/site";
+const e = site.editeur;
+---
+
+<footer class="pied">
+  <div class="conteneur pied-interieur">
+    <p>{site.nom} — {e.forme} {e.nom} · SIRET {e.siret} · {e.adresse}</p>
+    <p class="pied-liens">
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="/cgv/">CGV</a>
+      <a href={site.reseaux.instagram} rel="noopener">Instagram</a>
+      <a href={site.reseaux.linkedin} rel="noopener">LinkedIn</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .pied { background: var(--nuit); color: #9fb4b0; font-size: 13px; line-height: 1.6; }
+  .pied-interieur { padding-block: 32px; display: flex; flex-wrap: wrap; gap: 12px 40px; justify-content: space-between; }
+  .pied-liens { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  .pied a { color: #c9d6d3; text-decoration: underline; text-underline-offset: 3px; }
+</style>

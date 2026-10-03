@@ -1,0 +1,39 @@
+# Déploiement GitHub Pages par Actions (remplace le build « legacy » Jekyll, en erreur depuis le 27/06).
+# INACTIF tant que le dépôt n'est pas poussé ET que « Settings > Pages > Source » n'est pas sur « GitHub Actions ».
+name: Déploiement
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run check:public -- --golive
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deployer:
+    needs: construire
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4

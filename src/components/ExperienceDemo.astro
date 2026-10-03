@@ -1,0 +1,170 @@
+---
+// Démonstration de DVK Expérience : montre la STRUCTURE d'une expérience, sans aucun faux résultat.
+// Aucune donnée de projet réel ici : la première expérience réelle arrive avec le jalon suivant.
+import BoutonRdv from "./BoutonRdv.astro";
+import PlanTrait from "./PlanTrait.astro";
+
+const etapes = [
+  { id: "bien", n: "01", libelle: "Le bien" },
+  { id: "potentiel", n: "02", libelle: "Son potentiel" },
+  { id: "projection", n: "03", libelle: "Projection" },
+  { id: "travaux", n: "04", libelle: "Travaux" },
+  { id: "budget", n: "05", libelle: "Budget" },
+];
+const matrice = [
+  { besoin: "Rangements", a: "partiel", b: "oui" },
+  { besoin: "Circulation", a: "non", b: "oui" },
+  { besoin: "Lumière", a: "partiel", b: "oui" },
+  { besoin: "Ambiance et finitions", a: "oui", b: "oui" },
+];
+const lecture: Record<string, string> = { oui: "Répond", partiel: "Répond en partie", non: "Ne répond pas" };
+---
+
+<section id="experience" class="sombre section demo" aria-labelledby="titre-experience">
+  <div class="conteneur">
+    <p class="surtitre">DVK Expérience</p>
+    <h2 id="titre-experience" class="titre-l" style="margin-top:18px;max-width:20ch">Le bien, son potentiel, vos travaux, votre budget. Au même endroit.</h2>
+    <p class="chapo" style="margin-top:24px">Voici comment se présente une expérience, étape par étape. Le premier projet réel arrive prochainement ; cette page en montre la structure, pas des résultats.</p>
+
+    <div class="demo-corps">
+      <div role="tablist" aria-label="Étapes de l'expérience" class="onglets">
+        {etapes.map((e, i) => (
+          <button type="button" role="tab" id={`onglet-${e.id}`} aria-controls={`panneau-${e.id}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>
+            <span class="numero">{e.n}</span> {e.libelle}
+          </button>
+        ))}
+      </div>
+
+      <div class="panneaux">
+        <div role="tabpanel" id="panneau-bien" aria-labelledby="onglet-bien" class="panneau">
+          <h3>Le bien tel qu'il est</h3>
+          <p>Photos, plan, caractéristiques et état constaté, avec la source de chaque donnée : relevé, diagnostic, déclaration.</p>
+          <p class="note"><span class="statut statut-dispo">Disponible</span> relevé et état des lieux, sur rendez-vous.</p>
+        </div>
+
+        <div role="tabpanel" id="panneau-potentiel" aria-labelledby="onglet-potentiel" class="panneau" hidden>
+          <h3>Ce qu'il pourrait devenir</h3>
+          <p>Les pistes de transformation, leurs contraintes, et les besoins auxquels chacune répond — ou non.</p>
+          <div class="potentiel">
+            <div class="plan-bloc"><PlanTrait /></div>
+            <table class="matrice">
+              <caption class="sr-only">Exemple de lecture : besoins couverts par deux scénarios</caption>
+              <thead><tr><th scope="col">Besoin</th><th scope="col">Scénario 1 · Rafraîchir</th><th scope="col">Scénario 2 · Repenser les espaces</th></tr></thead>
+              <tbody>
+                {matrice.map((m) => (
+                  <tr>
+                    <th scope="row">{m.besoin}</th>
+                    <td data-niveau={m.a}>{lecture[m.a]}</td>
+                    <td data-niveau={m.b}>{lecture[m.b]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="note"><span class="statut statut-demo">Démonstration</span> exemple de lecture, pas un projet réel. Un scénario moins cher peut répondre à moins de besoins : la comparaison le rend visible.</p>
+        </div>
+
+        <div role="tabpanel" id="panneau-projection" aria-labelledby="onglet-projection" class="panneau" hidden>
+          <h3>Imaginez-le autrement</h3>
+          <div class="a-venir-bloc">
+            <span class="statut statut-avenir">À venir</span>
+            <p>Projection de la transformation choisie, produite à partir de la photo du bien en conservant son architecture. Cette fonction est en cours de développement : aucune image n'est présentée tant qu'elle n'a pas été contrôlée.</p>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="panneau-travaux" aria-labelledby="onglet-travaux" class="panneau" hidden>
+          <h3>Les travaux, par grands lots</h3>
+          <p>Chaque scénario liste ses travaux, les études préalables nécessaires (structure, autorisations) et ce qui reste à établir.</p>
+          <ul class="liste-lots">
+            <li>Énergie : isolation, ventilation, chauffage</li>
+            <li>Aménagement : cuisine, sols, éclairage, peinture</li>
+            <li>Structure : à étudier avant toute décision</li>
+          </ul>
+          <p class="note"><span class="statut statut-dispo">Disponible</span> cadrage des travaux, sur rendez-vous.</p>
+        </div>
+
+        <div role="tabpanel" id="panneau-budget" aria-labelledby="onglet-budget" class="panneau" hidden>
+          <h3>Le budget, avec ses hypothèses</h3>
+          <p>Chaque montant dit d'où il vient. Ce qui n'est pas chiffré s'affiche « à chiffrer », jamais une fourchette inventée.</p>
+          <ul class="natures">
+            <li><strong>Devis</strong> établi par une entreprise</li>
+            <li><strong>Pré-chiffrage</strong> à partir du métré</li>
+            <li><strong>Estimation</strong> indicative, avec ses limites</li>
+            <li><strong>Hypothèse</strong> à confirmer</li>
+          </ul>
+          <p class="note"><span class="statut statut-dispo">Disponible</span> enveloppe indicative, non contractuelle, sur rendez-vous.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="legende">
+      <div><span class="statut statut-dispo">Disponible</span><p>Service rendu aujourd'hui, sur rendez-vous : relevé, cadrage des travaux, enveloppe indicative.</p></div>
+      <div><span class="statut statut-demo">Démonstration</span><p>Ce que montre cette page : la structure d'une expérience, avec des exemples.</p></div>
+      <div><span class="statut statut-avenir">À venir</span><p>Expérience propre à chaque bien, partageable par lien, et projection contrôlée.</p></div>
+    </div>
+
+    <div class="demo-actions">
+      <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
+      <a class="btn btn-contour" href="/experience/">Découvrir DVK Expérience</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo-corps { margin-top: 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .onglets { flex: 0 1 280px; min-width: 240px; display: flex; flex-direction: column; gap: 6px; }
+  .onglets button { text-align: left; display: flex; gap: 14px; align-items: baseline; padding: 16px 18px; border-radius: var(--rayon); border: 1px solid #2f4d54; background: transparent; color: var(--papier); font-family: inherit; font-size: 17px; font-weight: 500; cursor: pointer; }
+  .onglets button .numero { color: #9fb4b0; }
+  .onglets button[aria-selected="true"] { background: var(--papier); color: var(--encre); border-color: var(--papier); }
+  .onglets button[aria-selected="true"] .numero { color: var(--pierre); }
+  .panneaux { flex: 1 1 560px; min-width: 0; background: var(--papier); color: var(--encre); border-radius: 8px; padding: clamp(20px, 3vw, 32px); }
+  @media (max-width: 700px) {
+    .demo-corps { gap: 20px; }
+    .onglets, .panneaux { flex: 1 1 100%; min-width: 0; width: 100%; }
+  }
+  .panneau h3 { font-size: 26px; margin-bottom: 12px; }
+  .panneau > p { color: var(--encre-douce); max-width: 62ch; }
+  .note { margin-top: 18px; font-size: 14px; color: var(--pierre); display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .potentiel { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .plan-bloc { flex: 1 1 220px; max-width: 320px; }
+  .matrice { flex: 2 1 300px; border-collapse: collapse; font-size: 14px; }
+  .matrice th, .matrice td { padding: 10px 12px; border-bottom: 1px solid var(--ligne); text-align: left; }
+  .matrice thead th { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pierre); }
+  .matrice td[data-niveau="oui"] { color: var(--petrole); font-weight: 600; }
+  .matrice td[data-niveau="partiel"] { color: var(--encre-douce); }
+  .matrice td[data-niveau="non"] { color: var(--terre-fonce); }
+  .matrice td::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; border: 2px solid currentColor; }
+  .matrice td[data-niveau="oui"]::before { background: currentColor; }
+  .matrice td[data-niveau="partiel"]::before { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+  .a-venir-bloc { margin-top: 12px; padding: 22px; border: 1px dashed var(--pierre); border-radius: var(--rayon); display: flex; flex-direction: column; gap: 12px; align-items: flex-start; color: var(--encre-douce); }
+  .liste-lots, .natures { margin-top: 14px; list-style: none; display: grid; gap: 8px; }
+  .liste-lots li, .natures li { background: var(--papier-2); border-radius: 4px; padding: 12px 16px; font-size: 16px; }
+  .legende { margin-top: 44px; border-top: 1px solid #2f4d54; padding-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+  .legende p { margin-top: 12px; font-size: 15px; color: var(--brume); }
+  .demo-actions { margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .demo-actions .btn-contour { color: var(--papier); }
+  /* Sans JavaScript : tous les panneaux restent lisibles à la suite. */
+  :global(html:not(.js)) .panneau[hidden] { display: block; margin-top: 28px; }
+  :global(html:not(.js)) .onglets { display: none; }
+</style>
+
+<script>
+  const onglets = Array.from(document.querySelectorAll<HTMLButtonElement>('.onglets [role="tab"]'));
+  const panneaux = Array.from(document.querySelectorAll<HTMLElement>(".panneaux [role=\"tabpanel\"]"));
+  function activer(index: number, focus = false) {
+    onglets.forEach((o, i) => {
+      const actif = i === index;
+      o.setAttribute("aria-selected", String(actif));
+      o.tabIndex = actif ? 0 : -1;
+      panneaux[i].hidden = !actif;
+      if (actif && focus) o.focus();
+    });
+  }
+  onglets.forEach((o, i) => {
+    o.addEventListener("click", () => activer(i));
+    o.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); activer((i + 1) % onglets.length, true); }
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); activer((i - 1 + onglets.length) % onglets.length, true); }
+    });
+  });
+</script>

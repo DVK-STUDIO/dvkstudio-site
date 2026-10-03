@@ -1,0 +1,25 @@
+{
+  "name": "dvkstudio-site",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "check:public": "node scripts/check-public.mjs",
+    "images": "node scripts/prepare-images.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}

@@ -1,0 +1,32 @@
+---
+// Curseur avant / après. Asset INTERCHANGEABLE : les deux images sont des props (rien de câblé dans la page).
+// Une projection est toujours étiquetée « Projection » ; l'avant « Aujourd'hui ».
+interface Props { avant: ImageMetadata; apres: ImageMetadata; altAvant: string; altApres: string; legende?: string; id: string; }
+import { Image } from "astro:assets";
+const { avant, apres, altAvant, altApres, legende, id } = Astro.props;
+---
+
+<figure class="figure-aa">
+  <div class="avant-apres" data-aa>
+    <Image src={apres} alt={altApres} widths={[480, 720, 1000]} sizes="(max-width: 700px) 100vw, 600px" loading="eager" />
+    <Image class="couche-avant" src={avant} alt={altAvant} widths={[480, 720, 1000]} sizes="(max-width: 700px) 100vw, 600px" loading="eager" />
+    <span class="etiquette etiquette-avant">Aujourd'hui</span>
+    <span class="etiquette etiquette-apres">Projection</span>
+    <label for={`curseur-${id}`} class="sr-only">Comparer l'état actuel et la projection</label>
+    <input id={`curseur-${id}`} type="range" min="0" max="100" value="50" />
+    <div class="poignee" aria-hidden="true"></div>
+  </div>
+  {legende && <figcaption>{legende}</figcaption>}
+</figure>
+
+<style>
+  .figure-aa { margin: 0; }
+  figcaption { margin-top: 12px; font-size: 13px; color: var(--pierre); line-height: 1.45; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-aa]").forEach((conteneur) => {
+    const curseur = conteneur.querySelector<HTMLInputElement>('input[type="range"]');
+    curseur?.addEventListener("input", () => conteneur.style.setProperty("--pos", `${curseur.value}%`));
+  });
+</script>

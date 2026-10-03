@@ -1,0 +1,76 @@
+---
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/instrument-sans";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../content/site";
+
+interface Props {
+  titre: string;
+  description: string;
+  page: string; // identifiant d'attribution : home, immobilier, travaux…
+  chemin: string;
+  noindex?: boolean;
+}
+const { titre, description, page, chemin, noindex = false } = Astro.props;
+const canonique = new URL(chemin, site.url).toString();
+const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Studio`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titreComplet}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonique} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonique} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="theme-color" content="#0f2a30" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/favicon-180.png" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+  </head>
+  <body data-page={page}>
+    <a class="aller-contenu" href="#contenu">Aller au contenu</a>
+    <Header page={page} />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Origine du visiteur (sans cookie) et liens de rendez-vous. Chargé sur toutes les pages.
+      import { CALENDLY_BASE, construireLienRdv, fusionnerOrigine, lireAttribution, type Attribution } from "../lib/calendly";
+      const CLE = "dvk_origine";
+      let origine: Attribution | null = null;
+      try {
+        const stockee = sessionStorage.getItem(CLE);
+        origine = stockee ? (JSON.parse(stockee) as Attribution) : null;
+        origine = fusionnerOrigine(origine, lireAttribution(location.search, document.referrer, location.pathname, location.hostname));
+        sessionStorage.setItem(CLE, JSON.stringify(origine));
+      } catch {
+        origine = lireAttribution(location.search, document.referrer, location.pathname, location.hostname);
+      }
+      const page = document.body.dataset.page ?? "page";
+      document.querySelectorAll<HTMLAnchorElement>("a[data-rdv]").forEach((a) => {
+        a.href = construireLienRdv(CALENDLY_BASE, origine, { page, bouton: a.dataset.rdv ?? "rdv", parcours: a.dataset.parcours });
+        a.target = "_blank";
+        a.rel = "noopener";
+      });
+
+      // Apparition douce au scroll (jamais bloquante).
+      const cibles = document.querySelectorAll<HTMLElement>(".reveal");
+      if ("IntersectionObserver" in window) {
+        const obs = new IntersectionObserver((entrees) => entrees.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("vu"); obs.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+        cibles.forEach((c) => obs.observe(c));
+      } else cibles.forEach((c) => c.classList.add("vu"));
+    </script>
+  </body>
+</html>

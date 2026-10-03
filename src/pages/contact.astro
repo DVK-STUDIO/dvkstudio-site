@@ -1,0 +1,29 @@
+---
+import Base from "../layouts/Base.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import { site } from "../content/site";
+---
+
+<Base
+  titre="Contact et prise de rendez-vous"
+  description="Prenez rendez-vous avec DVK Studio : un échange de vingt minutes, par téléphone, sans engagement. Oise et secteurs limitrophes."
+  page="contact"
+  chemin="/contact/"
+>
+  <header class="conteneur page-hero">
+    <p class="surtitre">Contact</p>
+    <h1 class="titre-xl">Parlons de votre projet.</h1>
+    <p class="chapo">Vingt minutes, par téléphone, sans engagement. Dites-moi si vous vendez, achetez ou rénovez : je vous oriente.</p>
+    <div class="actions"><BoutonRdv bouton="hero.rdv">Choisir un créneau</BoutonRdv></div>
+  </header>
+
+  <section class="section conteneur" aria-labelledby="t-coord">
+    <h2 id="t-coord" class="sr-only">Coordonnées</h2>
+    <div class="bloc">
+      <div><h3>Téléphone</h3><p><a href={site.telephoneLien}>{site.telephone}</a></p></div>
+      <div><h3>Email</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+      <div><h3>Adresse</h3><p>{site.editeur.adresse}</p></div>
+    </div>
+    <p class="chapo" style="margin-top:40px">La réservation s'ouvre sur Calendly. Votre origine (page et bouton cliqué) est ajoutée au lien pour que je sache d'où vous venez, sans cookie.</p>
+  </section>
+</Base>

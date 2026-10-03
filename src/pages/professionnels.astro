@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import { site } from "../content/site";
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Annonce à présenter avec DVK Expérience")}`;
+---
+
+<Base
+  titre="Professionnels : montrer le potentiel d'un bien avec travaux"
+  description="Agents immobiliers, mandataires, courtiers, prescripteurs : DVK Studio aide vos acquéreurs à comprendre le potentiel d'un bien, ses travaux et son enveloppe."
+  page="professionnels"
+  chemin="/professionnels/"
+>
+  <header class="conteneur page-hero">
+    <p class="surtitre">Agents immobiliers, mandataires, courtiers et prescripteurs</p>
+    <h1 class="titre-xl">Un bien avec travaux qui se vend difficilement ? Envoyez-moi l'annonce.</h1>
+    <p class="chapo">Je montre à vos acquéreurs ce que le bien peut devenir : son potentiel, les travaux à prévoir et leur enveloppe, avec la source de chaque donnée. Vous gagnez du temps, ils comprennent ce qu'ils achètent.</p>
+    <div class="actions">
+      <a class="btn btn-encre" href={mailto}>Envoyer une annonce</a>
+      <BoutonRdv bouton="hero.partenariat" parcours="pro" classe="btn btn-contour">Parler partenariat</BoutonRdv>
+    </div>
+  </header>
+
+  <section class="section conteneur" aria-labelledby="t-valeur">
+    <h2 id="t-valeur" class="titre-l" style="max-width:22ch">Ce que vous y gagnez.</h2>
+    <div class="bloc">
+      <div><h3>Le problème</h3><p>L'incertitude sur le coût des travaux fait traîner les ventes et pousse à la négociation. Vos acquéreurs ne savent pas se projeter dans un bien daté.</p></div>
+      <div><h3>Ce que nous faisons</h3><p>Analyse du potentiel, scénarios de transformation et enveloppe de travaux indicative, présentés clairement et pensés pour être transmis à un acquéreur.</p></div>
+      <div><h3>Pourquoi nous faire confiance</h3><p>Chaque chiffre dit s'il s'agit d'un devis, d'un pré-chiffrage, d'une estimation ou d'une hypothèse. Rien n'est présenté comme plus certain qu'il ne l'est.</p></div>
+    </div>
+  </section>
+
+  <section class="papier-2 section" aria-labelledby="t-fonctionnement">
+    <div class="conteneur">
+      <h2 id="t-fonctionnement" class="titre-l" style="max-width:22ch">Comment ça se passe.</h2>
+      <ol class="liste-simple">
+        <li><strong>1.</strong> Vous m'envoyez l'annonce ou les photos du bien.</li>
+        <li><strong>2.</strong> Je prépare l'étude : potentiel, scénarios, enveloppe de travaux.</li>
+        <li><strong>3.</strong> Vous la présentez à vos acquéreurs.</li>
+      </ol>
+      <p class="chapo" style="margin-top:28px">
+        <span class="statut statut-dispo">Disponible</span> Étude présentée en rendez-vous ou en document. <span class="statut statut-avenir">À venir</span> Page web partageable par lien et propre à chaque bien.
+      </p>
+      <div class="actions"><BoutonRdv bouton="fonctionnement.rdv" parcours="pro">Prendre rendez-vous</BoutonRdv></div>
+    </div>
+  </section>
+</Base>

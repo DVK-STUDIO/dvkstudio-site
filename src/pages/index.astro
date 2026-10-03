@@ -1,0 +1,199 @@
+---
+import Base from "../layouts/Base.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
+import ExperienceDemo from "../components/ExperienceDemo.astro";
+import PlanTrait from "../components/PlanTrait.astro";
+import Faq from "../components/Faq.astro";
+import { hero, site } from "../content/site";
+
+// Hero interchangeable : le curseur avant/après n'est actif que si le mode l'autorise ET que les deux images
+// existent dans src/assets/hero/ (avant.*, apres.*). Sinon, hero typographique.
+const images = import.meta.glob<{ default: ImageMetadata }>("../assets/hero/*.{webp,jpg,jpeg,png}", { eager: true });
+const trouver = (nom: string) => Object.entries(images).find(([chemin]) => new RegExp(`/${nom}\\.`).test(chemin))?.[1].default;
+const avant = trouver("avant");
+const apres = trouver("apres");
+const heroAvantApres = hero.mode === "avantApres" && avant && apres;
+
+const faq = [
+  { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. Nous cadrons votre projet, estimons son budget et vous aidons à consulter des entreprises." },
+  { q: "Quel est le rôle d'IAD et de hemea ?", r: "Ce sont les réseaux que DVK Studio mobilise selon votre besoin : IAD France pour l'achat et la vente, hemea pour l'accompagnement des travaux. Vous gardez un seul interlocuteur, et chaque rôle vous est expliqué avant tout engagement." },
+  { q: "Les budgets présentés sont-ils des devis ?", r: "Non. Ce sont des estimations indicatives, avec leurs hypothèses et leurs limites. Un devis ne vient qu'avec les entreprises consultées." },
+  { q: "Où intervenez-vous ?", r: `${site.zone}, lorsque le projet s'y prête.` },
+];
+---
+
+<Base
+  titre="DVK Studio — Votre projet immobilier, de la décision aux travaux"
+  description="Un seul interlocuteur pour votre projet immobilier : vendre, acheter, rénover. DVK Studio révèle le potentiel d'un bien, cadre les travaux et le budget. Oise et secteurs limitrophes."
+  page="home"
+  chemin="/"
+>
+  <!-- 1 · Hero : la promesse, démontrée -->
+  <section class="hero conteneur" aria-labelledby="titre-hero">
+    <div class="hero-texte">
+      <p class="surtitre">Immobilier · Travaux · {site.zone}</p>
+      <h1 id="titre-hero" class="titre-xl">Ne regardez plus seulement un bien. Découvrez ce qu'il peut devenir.</h1>
+      <p class="chapo">DVK Studio accompagne votre projet immobilier de la décision aux travaux. Un seul interlocuteur, du premier regard sur le bien jusqu'à sa transformation.</p>
+      <div class="hero-actions">
+        <a class="btn btn-encre" href="#experience">Voir comment se présente un bien</a>
+        <BoutonRdv bouton="hero.rdv" classe="btn btn-contour">Échanger 20 minutes</BoutonRdv>
+      </div>
+    </div>
+    <div class="hero-visuel">
+      {heroAvantApres ? (
+        <BeforeAfter id="hero" avant={avant} apres={apres} altAvant="Pièce dans son état actuel" altApres="Projection de la même pièce transformée" legende={hero.avantApres.legende} />
+      ) : (
+        <PlanTrait />
+      )}
+    </div>
+  </section>
+
+  <!-- 2 · Les quatre entrées -->
+  <nav class="conteneur entrees" aria-label="Votre situation">
+    <a href="/immobilier/#vendre" class="entree"><span class="numero">01</span><span class="entree-titre">Je vends</span><span>Estimer et valoriser mon bien →</span></a>
+    <a href="/immobilier/#acheter" class="entree"><span class="numero">02</span><span class="entree-titre">J'achète</span><span>Comprendre un bien avant de signer →</span></a>
+    <a href="/travaux/" class="entree"><span class="numero">03</span><span class="entree-titre">Je rénove</span><span>Cadrer mes travaux et mon budget →</span></a>
+    <a href="/professionnels/" class="entree"><span class="numero">04</span><span class="entree-titre">Je suis professionnel</span><span>Montrer le potentiel d'un bien →</span></a>
+  </nav>
+
+  <!-- 3 · Un seul interlocuteur -->
+  <section class="section conteneur" id="situations" aria-labelledby="titre-interlocuteur">
+    <div class="duo">
+      <h2 id="titre-interlocuteur" class="titre-l">Un seul interlocuteur pour votre projet immobilier, de la décision aux travaux.</h2>
+      <p class="chapo">Vous venez chez DVK Studio. Nous identifions votre besoin, puis nous mobilisons la solution adaptée — réseau immobilier ou accompagnement des travaux — sans que vous ayez à choisir entre plusieurs interlocuteurs.</p>
+    </div>
+    <div class="grille-auto cartes">
+      <article class="carte reveal">
+        <h3 class="titre-m">Je vends</h3>
+        <p><strong>Le problème.</strong> Mon bien tarde à se vendre, ou je ne sais pas à quel prix le proposer.</p>
+        <p><strong>Ce que nous faisons.</strong> Estimation, mise en valeur et, quand le bien a des travaux à prévoir, projection de ce qu'il peut devenir pour rassurer les acquéreurs.</p>
+        <BoutonRdv bouton="situations.vendre" parcours="vendre" classe="lien-soulige">Estimer mon bien</BoutonRdv>
+      </article>
+      <article class="carte reveal">
+        <h3 class="titre-m">J'achète</h3>
+        <p><strong>Le problème.</strong> Ce bien me plaît, mais je n'arrive pas à me projeter ni à chiffrer les travaux.</p>
+        <p><strong>Ce que nous faisons.</strong> Analyse du potentiel, scénarios de transformation et enveloppe de travaux indicative avant que vous ne signiez.</p>
+        <BoutonRdv bouton="situations.acheter" parcours="acheter" classe="lien-soulige">Analyser un bien avant d'acheter</BoutonRdv>
+      </article>
+      <article class="carte reveal">
+        <h3 class="titre-m">Je rénove</h3>
+        <p><strong>Le problème.</strong> Je veux faire des travaux, sans savoir par où commencer ni combien cela coûtera.</p>
+        <p><strong>Ce que nous faisons.</strong> Cadrage du projet, budget estimatif, consultation d'entreprises et accompagnement jusqu'au chantier.</p>
+        <BoutonRdv bouton="situations.renover" parcours="renover" classe="lien-soulige">Cadrer mes travaux</BoutonRdv>
+      </article>
+    </div>
+    <p class="transparence">Transparence : selon votre projet, DVK Studio s'appuie sur le réseau IAD France pour la partie immobilière et sur hemea pour l'accompagnement des travaux. Chaque rôle est détaillé dans la page <a href="/a-propos/">À propos</a>.</p>
+  </section>
+
+  <!-- 4 · DVK Expérience -->
+  <ExperienceDemo />
+
+  <!-- 5 · Professionnels -->
+  <section class="section conteneur" id="pros" aria-labelledby="titre-pros">
+    <div class="pros">
+      <div>
+        <p class="surtitre">Pour les agents immobiliers et prescripteurs</p>
+        <h2 id="titre-pros" class="titre-l" style="margin-top:18px">Un bien avec travaux qui se vend difficilement ?</h2>
+        <p class="chapo" style="margin-top:24px">Envoyez-moi l'annonce. Je montrerai à vos acquéreurs ce que le bien peut devenir : potentiel, travaux et enveloppe, dans une page que vous leur transmettez.</p>
+        <div class="hero-actions" style="margin-top:32px">
+          <a class="btn btn-encre" href={`mailto:${site.email}?subject=${encodeURIComponent("Annonce à présenter avec DVK Expérience")}`}>Envoyer une annonce</a>
+          <BoutonRdv bouton="pros.partenariat" parcours="pro" classe="btn btn-contour">Parler partenariat</BoutonRdv>
+        </div>
+      </div>
+      <ol class="etapes-pros regle-haut">
+        <li><span class="numero">01</span> Vous m'envoyez l'annonce ou les photos du bien.</li>
+        <li><span class="numero">02</span> Je prépare l'expérience du bien : potentiel, scénarios, enveloppe de travaux.</li>
+        <li><span class="numero">03</span> Vous partagez le lien à vos acquéreurs : ils comprennent, vous gagnez du temps.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 · Confiance -->
+  <section class="papier-2 section" id="confiance" aria-labelledby="titre-confiance">
+    <div class="conteneur duo">
+      <div>
+        <p class="surtitre">Pourquoi faire confiance à DVK Studio</p>
+        <h2 id="titre-confiance" class="titre-m" style="margin-top:18px">Je suis chef de projet travaux hemea et j'exerce sous le nom DVK Studio.</h2>
+        <p class="chapo" style="margin-top:22px">Kevin De Vlieger, basé à Gannes (Oise). Je suis aussi mandataire immobilier du réseau IAD France. Je ne suis ni architecte, ni maître d'œuvre : mon rôle est de comprendre votre projet, de le cadrer et de vous orienter vers la bonne solution.</p>
+      </div>
+      <dl class="qui-fait-quoi regle-haut">
+        <div><dt>Immobilier</dt><dd>Acheter ou vendre un bien, en tant que mandataire du réseau IAD France.</dd></div>
+        <div><dt>Travaux</dt><dd>Cadrage, budget, consultation d'entreprises et accompagnement, en tant que chef de projet travaux hemea.</dd></div>
+        <div><dt>DVK Expérience</dt><dd>Révéler et comprendre le potentiel d'un bien : conçu et opéré par DVK Studio.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 7 · Méthode -->
+  <section class="section conteneur" aria-labelledby="titre-methode">
+    <h2 id="titre-methode" class="titre-l" style="max-width:20ch">Quatre étapes, un interlocuteur.</h2>
+    <ol class="methode grille-auto regle-haut">
+      <li><span class="numero">01</span><h3 class="titre-m">Échange</h3><p>Vingt minutes pour comprendre votre situation et votre objectif.</p></li>
+      <li><span class="numero">02</span><h3 class="titre-m">Visite et relevé</h3><p>Nous regardons le bien sur place et prenons les mesures.</p></li>
+      <li><span class="numero">03</span><h3 class="titre-m">Potentiel et budget</h3><p>Scénarios et enveloppe indicative, hypothèses à l'appui.</p></li>
+      <li><span class="numero">04</span><h3 class="titre-m">Décision</h3><p>Vous décidez, puis nous vous orientons vers la suite : achat, vente ou travaux.</p></li>
+    </ol>
+  </section>
+
+  <!-- 8 · FAQ -->
+  <section class="conteneur faq-section" aria-labelledby="titre-faq">
+    <h2 id="titre-faq" class="titre-m" style="margin-bottom:32px">Questions fréquentes</h2>
+    <Faq questions={faq} />
+  </section>
+
+  <!-- 9 · Rendez-vous -->
+  <section class="sombre section final" id="rdv" aria-labelledby="titre-rdv">
+    <div class="conteneur duo">
+      <div>
+        <h2 id="titre-rdv" class="titre-l">Parlons de votre projet.</h2>
+        <p class="chapo" style="margin-top:22px">Vingt minutes, par téléphone, sans engagement. Dites-nous si vous vendez, achetez ou rénovez : nous vous orientons.</p>
+        <p style="margin-top:28px;color:var(--brume)"><a href={site.telephoneLien}>{site.telephone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+      <div class="rdv-carte">
+        <p class="titre-m" style="font-size:26px">Choisir un créneau</p>
+        <p class="rdv-texte">La réservation s'ouvre sur Calendly. Votre origine (page, bouton) est transmise pour que je sache d'où vous venez, sans cookie.</p>
+        <BoutonRdv bouton="final.rdv">Prendre rendez-vous</BoutonRdv>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: clamp(32px, 6vw, 72px); align-items: center; padding-top: clamp(24px, 5vw, 56px); }
+  .hero-texte { display: flex; flex-direction: column; gap: 24px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-visuel { max-width: 560px; justify-self: center; width: 100%; }
+  .entrees { margin-top: clamp(40px, 6vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); border-top: 1.5px solid var(--encre); padding-inline: var(--gouttiere); }
+  .entree { display: flex; flex-direction: column; gap: 6px; padding: 22px 24px 26px 0; border-right: 1px solid var(--ligne); }
+  .entree:last-child { border-right: 0; }
+  .entree-titre { font-family: var(--serif); font-size: 30px; letter-spacing: -0.01em; }
+  .entree span:last-child { font-size: 15px; color: var(--encre-douce); }
+  .duo { display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-end; justify-content: space-between; }
+  .duo > * { flex: 1 1 340px; min-width: 0; }
+  .duo .chapo { flex: 1 1 320px; }
+  .cartes { margin-top: 56px; }
+  .carte { background: var(--papier-2); padding: 32px 28px 28px; border-radius: var(--rayon); display: flex; flex-direction: column; gap: 14px; }
+  .carte p { font-size: 16px; color: var(--encre-douce); }
+  .carte strong { color: var(--encre); font-weight: 600; }
+  .carte :global(.lien-soulige) { margin-top: auto; padding-top: 12px; }
+  .transparence { margin-top: 36px; font-size: 14px; color: var(--pierre); max-width: 76ch; }
+  .transparence a { text-decoration: underline; text-underline-offset: 3px; }
+  .pros { display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
+  .pros > * { flex: 1 1 380px; min-width: 0; }
+  .etapes-pros { list-style: none; }
+  .etapes-pros li { padding: 22px 0; border-bottom: 1px solid var(--ligne); display: flex; gap: 18px; font-size: 18px; }
+  .qui-fait-quoi div { padding: 18px 0; border-bottom: 1px solid var(--ligne); display: flex; flex-wrap: wrap; gap: 8px 16px; }
+  .qui-fait-quoi dt { flex: 0 0 150px; font-weight: 600; }
+  .qui-fait-quoi dd { margin: 0; flex: 1 1 260px; color: var(--encre-douce); }
+  .methode { list-style: none; margin-top: 48px; gap: 0; }
+  .methode li { padding: 24px 24px 8px 0; }
+  .methode h3 { margin: 8px 0; font-size: 26px; }
+  .methode p { font-size: 16px; color: var(--encre-douce); }
+  .faq-section { max-width: 1000px; padding-block: 96px 40px; }
+  .final { margin-top: 96px; }
+  .final .duo { align-items: center; }
+  .rdv-carte { background: var(--papier); color: var(--encre); border-radius: 8px; padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .rdv-texte { font-size: 14px; color: var(--pierre); }
+  @media (max-width: 700px) { .entree { border-right: 0; border-bottom: 1px solid var(--ligne); padding-right: 0; } }
+</style>

@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import Faq from "../components/Faq.astro";
+import { site } from "../content/site";
+
+const faq = [
+  { q: "Êtes-vous maître d'œuvre ?", r: "Non. DVK Studio n'est ni maître d'œuvre, ni architecte, ni bureau d'études, et ne réalise pas de travaux. Je cadre votre projet, estime son budget et vous aide à consulter des entreprises." },
+  { q: "Le budget présenté est-il un devis ?", r: "Non. C'est une estimation indicative, non contractuelle, avec ses hypothèses et ses limites. Un devis est établi par les entreprises consultées." },
+  { q: "Que se passe-t-il si mon projet touche à la structure ?", r: "Il faut alors une étude préalable avant toute décision. Elle est signalée comme telle dans l'étude : aucun budget n'est avancé tant qu'elle n'a pas eu lieu." },
+];
+---
+
+<Base
+  titre="Travaux : cadrer son projet et son budget avant de s'engager"
+  description="Rénover en Oise avec DVK Studio : cadrage du projet, relevé, scénarios, budget estimatif, consultation d'entreprises et accompagnement jusqu'au chantier."
+  page="travaux"
+  chemin="/travaux/"
+>
+  <header class="conteneur page-hero">
+    <p class="surtitre">Travaux · {site.zone}</p>
+    <h1 class="titre-xl">Cadrer vos travaux et votre budget, avant de vous engager.</h1>
+    <p class="chapo">Beaucoup de projets de rénovation s'enlisent faute d'avoir été cadrés : par où commencer, combien ça coûte, qui consulter. DVK Studio met de l'ordre avant le premier devis.</p>
+    <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="renover">Cadrer mes travaux</BoutonRdv></div>
+  </header>
+
+  <section class="section conteneur" aria-labelledby="t-probleme">
+    <div class="bloc">
+      <div><h3>Le problème</h3><p>Des idées, mais pas de plan. Des devis difficiles à comparer. Un budget qui dérape parce que les contraintes du bien n'ont pas été vues au départ.</p></div>
+      <div><h3>Ce que nous faisons</h3><p>Relevé du bien, scénarios de travaux, enveloppe indicative avec ses hypothèses, puis consultation d'entreprises et accompagnement du projet en tant que chef de projet travaux hemea.</p></div>
+      <div><h3>Pour vous, concrètement</h3><p>Un projet lisible, des choix expliqués, un budget dont vous connaissez l'origine, et un interlocuteur du premier échange jusqu'au chantier.</p></div>
+    </div>
+  </section>
+
+  <section class="papier-2 section" aria-labelledby="t-demarche">
+    <div class="conteneur">
+      <h2 id="t-demarche" class="titre-l" style="max-width:22ch">Une démarche en quatre temps.</h2>
+      <ol class="liste-simple">
+        <li><strong>1. Échange</strong> — vingt minutes pour comprendre votre situation et votre objectif.</li>
+        <li><strong>2. Visite et relevé</strong> — mesures, état du bien, contraintes techniques.</li>
+        <li><strong>3. Scénarios et enveloppe</strong> — plusieurs pistes comparées, chacune avec ce qu'elle apporte et ce qu'elle laisse de côté.</li>
+        <li><strong>4. Consultation et suite</strong> — consultation d'entreprises et accompagnement si vous décidez d'avancer.</li>
+      </ol>
+      <div class="actions"><BoutonRdv bouton="demarche.rdv" parcours="renover">Prendre rendez-vous</BoutonRdv></div>
+    </div>
+  </section>
+
+  <section class="section conteneur" aria-labelledby="t-faq">
+    <h2 id="t-faq" class="titre-m" style="margin-bottom:32px">Questions fréquentes</h2>
+    <Faq questions={faq} />
+  </section>
+</Base>

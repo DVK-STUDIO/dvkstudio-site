@@ -1,0 +1,54 @@
+---
+import Base from "../layouts/Base.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import { site } from "../content/site";
+---
+
+<Base
+  titre="À propos : qui est derrière DVK Studio"
+  description="DVK Studio est le nom sous lequel Kevin De Vlieger exerce, en Oise : mandataire immobilier du réseau IAD France et chef de projet travaux hemea."
+  page="a-propos"
+  chemin="/a-propos/"
+>
+  <header class="conteneur page-hero">
+    <p class="surtitre">À propos</p>
+    <h1 class="titre-xl">Je suis chef de projet travaux hemea et j'exerce sous le nom DVK Studio.</h1>
+    <p class="chapo">Kevin De Vlieger, basé à Gannes, dans l'Oise. J'accompagne les projets immobiliers de la décision aux travaux : acheter, vendre, rénover. Je suis aussi mandataire immobilier du réseau IAD France.</p>
+  </header>
+
+  <section class="section conteneur" aria-labelledby="t-quoi">
+    <h2 id="t-quoi" class="titre-l" style="max-width:22ch">Qui fait quoi, en toute transparence.</h2>
+    <div class="bloc">
+      <div>
+        <h3>Immobilier</h3>
+        <p>Acheter ou vendre un bien, en tant que mandataire du réseau {site.mandataire.reseau}. Les informations réglementaires de cette activité figurent dans les <a href="/mentions-legales/" style="text-decoration:underline">mentions légales</a>.</p>
+      </div>
+      <div>
+        <h3>Travaux</h3>
+        <p>Cadrage, budget estimatif, consultation d'entreprises et accompagnement, en tant que chef de projet travaux hemea.</p>
+      </div>
+      <div>
+        <h3>DVK Expérience</h3>
+        <p>Révéler et comprendre le potentiel d'un bien : une présentation qui relie le bien, ses travaux et son budget. Conçu et opéré par DVK Studio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="papier-2 section" aria-labelledby="t-pas">
+    <div class="conteneur duo">
+      <div>
+        <h2 id="t-pas" class="titre-m">Ce que je ne suis pas.</h2>
+        <p class="chapo" style="margin-top:18px">Je ne suis ni architecte, ni architecte d'intérieur, ni maître d'œuvre, ni bureau d'études, et je ne réalise pas de travaux. Les budgets que je présente sont des estimations indicatives, jamais des devis.</p>
+      </div>
+      <div>
+        <h2 class="titre-m">Ma façon de travailler.</h2>
+        <ul class="liste-simple">
+          <li>Je comprends votre besoin avant de proposer quoi que ce soit.</li>
+          <li>Je dis d'où vient chaque donnée et chaque chiffre.</li>
+          <li>Je vous oriente vers la solution adaptée, même quand ce n'est pas la plus simple à vendre.</li>
+        </ul>
+        <div class="actions"><BoutonRdv bouton="apropos.rdv">Prendre rendez-vous</BoutonRdv></div>
+      </div>
+    </div>
+  </section>
+</Base>

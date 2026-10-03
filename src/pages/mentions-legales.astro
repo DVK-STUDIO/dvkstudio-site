@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../content/site";
+const e = site.editeur;
+const m = site.mandataire;
+---
+
+<Base titre="Mentions légales" description="Mentions légales du site dvkstudio.fr : éditeur, activité de mandataire immobilier, hébergeur." page="mentions-legales" chemin="/mentions-legales/">
+  <div class="conteneur page-hero prose">
+    <p class="surtitre">Légal</p>
+    <h1 class="titre-xl">Mentions légales</h1>
+    <p>Version préparée le 3 octobre 2026 ; en vigueur à la mise en ligne du site.</p>
+
+    <h2>Éditeur du site</h2>
+    <p>{site.nom} est le nom commercial de l'entreprise individuelle de {e.nom}, assujettie à la TVA.</p>
+    <ul>
+      <li>Forme : {e.forme} — {e.nom}</li>
+      <li>Adresse : {e.adresse}</li>
+      <li>SIRET : {e.siret} — SIREN : {e.siren}</li>
+      <li>Code APE : {e.ape}</li>
+      <li>Début d'activité : {e.debutActivite}</li>
+      <li>N° de TVA intracommunautaire : {e.tva}</li>
+      <li>Téléphone : {site.telephone} — Email : {site.email}</li>
+    </ul>
+
+    <h2>Activité de mandataire immobilier</h2>
+    <p>{e.nom} exerce également comme mandataire immobilier du réseau {m.reseau}. Informations réglementaires :</p>
+    <ul>
+      <li>Carte professionnelle ou attestation : <span class="a-completer">{m.carteProfessionnelle}</span></li>
+      <li>Garantie financière : <span class="a-completer">{m.garantieFinanciere}</span></li>
+      <li>Assurance de responsabilité civile professionnelle : <span class="a-completer">{m.assuranceRcp}</span></li>
+      <li>Inscription au registre des mandataires : <span class="a-completer">{m.registreMandataires}</span></li>
+    </ul>
+
+    <h2>Accompagnement des travaux</h2>
+    <p>{e.nom} intervient comme chef de projet travaux hemea et exerce sous le nom {site.nom}. {site.nom} n'est ni maître d'œuvre, ni architecte, ni bureau d'études, et ne réalise pas de travaux.</p>
+
+    <h2>Hébergeur</h2>
+    <p>GitHub, Inc. — 88 Colin P Kelly Jr Street, San Francisco, CA 94107, États-Unis. Site hébergé sur GitHub Pages.</p>
+
+    <h2>Directeur de la publication</h2>
+    <p>{e.nom} — <a href={`mailto:${site.email}`}>{site.email}</a></p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>L'ensemble des contenus de ce site est la propriété exclusive de {site.nom}, sauf mention contraire. Toute reproduction sans accord écrit préalable est interdite.</p>
+
+    <h2>Limitation de responsabilité</h2>
+    <p>Les informations publiées sont données à titre indicatif. Les budgets présentés sont des estimations indicatives et non contractuelles, et ne constituent pas des devis.</p>
+
+    <h2>Droit applicable</h2>
+    <p>Droit français. Juridiction compétente : tribunal judiciaire d'Amiens.</p>
+  </div>
+</Base>
