@@ -22,3 +22,7 @@
 - [ ] Contrôle de fuite avec motifs privés : `FORBIDDEN_FILE=<fichier hors dépôt> npm run check:public` et `npm test`.
 - [ ] Ancien site : l'IBAN reste dans l'historique Git public (pas de réécriture décidée).
 - [ ] Domaine : DNS inchangé jusqu'à la bascule contrôlée (jalon 3).
+
+## Jalon 3 (C8) : ce qui est déjà vérifié par le code
+- `npm run check:site` : liens et ancres, canonicals, titres et descriptions uniques, sitemap, `noindex`, redirections des anciennes URL, accessibilité structurelle, budget de performance (aucune ressource tierce, CSS, JS et polices bornés).
+- `npm run verifier:golive` : enchaîne tous les contrôles et un test de fumée, sans rien déployer. Procédure de bascule et retour arrière : `docs/mise-en-ligne.md`.

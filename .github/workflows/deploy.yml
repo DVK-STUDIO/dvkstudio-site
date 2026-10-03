@@ -29,6 +29,7 @@ jobs:
       - run: npm run check:public -- --golive
         env:
           DVK_PUBLIC_BUILD: "1"
+      - run: npm run check:site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -41,3 +42,13 @@ jobs:
     steps:
       - id: deploiement
         uses: actions/deploy-pages@v4
+  # Test de fumée sur le site réellement servi. En cas d'échec : appliquer le retour arrière de docs/mise-en-ligne.md.
+  fumee:
+    needs: deployer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/smoke.mjs --base https://dvkstudio.fr --public --golive

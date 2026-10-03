@@ -19,6 +19,19 @@ const heroAvantApres = hero.mode === "avantApres" && avant && apres;
 
 const experience = experiencesPubliables()[0];
 
+// Données structurées : uniquement des faits publics déjà affichés (nom, coordonnées, zone). Rien sur les réseaux partenaires.
+const entreprise = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: site.nom,
+  url: site.url,
+  telephone: "+33640324752",
+  email: site.email,
+  address: { "@type": "PostalAddress", streetAddress: "17 Rue Machaut", postalCode: "60120", addressLocality: "Gannes", addressCountry: "FR" },
+  areaServed: "Oise",
+  sameAs: [site.reseaux.instagram, site.reseaux.linkedin],
+};
+
 const faq = [
   { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. DVK Studio cadre votre projet, estime son budget et vous aide à consulter des entreprises." },
   { q: "Quel est le rôle d'IAD et de hemea ?", r: "Ce sont les réseaux que DVK Studio mobilise selon votre besoin : IAD France pour l'achat et la vente, hemea pour l'accompagnement des travaux. Vous gardez un seul interlocuteur, et chaque rôle vous est expliqué avant tout engagement." },
@@ -29,9 +42,10 @@ const faq = [
 
 <Base
   titre="DVK Studio — Votre projet immobilier, de la décision aux travaux"
-  description="Un seul interlocuteur pour votre projet immobilier : vendre, acheter, rénover. DVK Studio révèle le potentiel d'un bien, cadre les travaux et le budget. Oise et secteurs limitrophes."
+  description="Un seul interlocuteur pour votre projet immobilier : vendre, acheter, rénover. DVK Studio révèle le potentiel d'un bien et cadre travaux et budget, dans l'Oise."
   page="home"
   chemin="/"
+  donneesStructurees={entreprise}
 >
   <!-- 1 · Hero : la promesse, démontrée -->
   <section class="hero conteneur" aria-labelledby="titre-hero">

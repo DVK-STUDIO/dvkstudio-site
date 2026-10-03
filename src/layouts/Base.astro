@@ -2,6 +2,8 @@
 import "@fontsource-variable/fraunces/opsz.css";
 import "@fontsource-variable/instrument-sans";
 import "../styles/global.css";
+import frauncesLatin from "@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url";
+import instrumentLatin from "@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../content/site";
@@ -12,8 +14,10 @@ interface Props {
   page: string; // identifiant d'attribution : home, immobilier, travaux…
   chemin: string;
   noindex?: boolean;
+  /** Données structurées (schema.org), sérialisées en JSON-LD. Uniquement des faits publics déjà affichés sur le site. */
+  donneesStructurees?: Record<string, unknown>;
 }
-const { titre, description, page, chemin, noindex = false } = Astro.props;
+const { titre, description, page, chemin, noindex = false, donneesStructurees } = Astro.props;
 const canonique = new URL(chemin, site.url).toString();
 const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Studio`;
 ---
@@ -26,7 +30,11 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <title>{titreComplet}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonique} />
+    <!-- Polices du premier écran (latin) préchargées : moins de décalage au chargement. Le reste se charge à la demande. -->
+    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={instrumentLatin} as="font" type="font/woff2" crossorigin />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
+    {donneesStructurees && <script type="application/ld+json" set:html={JSON.stringify(donneesStructurees)} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={titreComplet} />
     <meta property="og:description" content={description} />
