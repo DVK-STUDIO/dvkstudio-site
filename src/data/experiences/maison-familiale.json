@@ -1,0 +1,470 @@
+{
+  "schemaVersion": "experience-publiee/1",
+  "slug": "maison-familiale",
+  "titre": "Une maison de famille dans l'Oise",
+  "accroche": "Une maison réelle, ses besoins, deux pistes d'aménagement et ce que cela pourrait changer. Chaque donnée dit d'où elle vient et son niveau de certitude.",
+  "statutExperience": "demonstration",
+  "indexable": false,
+  "genereLe": "2026-10-03",
+  "avertissements": [
+    "Projet pilote réalisé avec l'accord de la famille, anonymisé.",
+    "Aucune photo et aucun document du projet ne sont publiés."
+  ],
+  "sources": [
+    {
+      "id": "releve",
+      "libelle": "Relevé sur place et plan d'état des lieux",
+      "type": "releve",
+      "date": "2025-11"
+    },
+    {
+      "id": "cahier",
+      "libelle": "Cahier de besoins rempli avec la famille",
+      "type": "declaration",
+      "date": "2026-01"
+    },
+    {
+      "id": "metre",
+      "libelle": "Métré et plan 3D",
+      "type": "releve",
+      "date": "2026-06"
+    },
+    {
+      "id": "dpe",
+      "libelle": "Diagnostic de performance énergétique (DPE)",
+      "type": "diagnostic",
+      "date": "2026-06"
+    },
+    {
+      "id": "audit",
+      "libelle": "Audit énergétique réglementaire",
+      "type": "diagnostic",
+      "date": "2026-06"
+    },
+    {
+      "id": "etude",
+      "libelle": "Étude de rénovation énergétique (simulation)",
+      "type": "etude",
+      "date": "2026-06"
+    },
+    {
+      "id": "analyse",
+      "libelle": "Analyse DVK Studio",
+      "type": "analyse",
+      "date": "2026-10"
+    }
+  ],
+  "bien": {
+    "resume": "Une maison individuelle à étage dans l'Oise. Les chiffres de surface divergent selon les documents : ils sont présentés tels quels.",
+    "faits": [
+      {
+        "id": "type",
+        "libelle": "Type de bien",
+        "valeur": {
+          "valeur": "Maison individuelle à étage, non mitoyenne",
+          "statut": "reel",
+          "sources": [
+            "dpe",
+            "releve"
+          ]
+        }
+      },
+      {
+        "id": "localisation",
+        "libelle": "Localisation",
+        "valeur": {
+          "valeur": "Oise",
+          "statut": "reel",
+          "sources": [
+            "dpe"
+          ]
+        }
+      },
+      {
+        "id": "periode",
+        "libelle": "Année de construction",
+        "valeur": {
+          "valeur": "1982",
+          "statut": "reel",
+          "sources": [
+            "dpe",
+            "audit"
+          ],
+          "note": "Valeur du diagnostic officiel.",
+          "conflits": [
+            {
+              "valeur": "1984",
+              "sources": [
+                "cahier"
+              ],
+              "note": "Année indiquée dans le cahier de besoins."
+            },
+            {
+              "valeur": "1978 à 1982",
+              "sources": [
+                "etude"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "niveaux",
+        "libelle": "Niveaux",
+        "valeur": {
+          "valeur": 2,
+          "statut": "reel",
+          "sources": [
+            "audit"
+          ]
+        }
+      },
+      {
+        "id": "surface-reference",
+        "libelle": "Surface de référence",
+        "valeur": {
+          "valeur": 142.99,
+          "unite": "m²",
+          "statut": "reel",
+          "sources": [
+            "dpe",
+            "audit"
+          ],
+          "note": "Surface retenue par le diagnostic. À réconcilier avec le relevé : les définitions diffèrent.",
+          "conflits": [
+            {
+              "valeur": 160.31,
+              "unite": "m²",
+              "sources": [
+                "metre"
+              ],
+              "note": "Somme des pièces du plan 3D."
+            },
+            {
+              "valeur": 182.2,
+              "unite": "m²",
+              "sources": [
+                "metre"
+              ],
+              "note": "« Surface au sol » du métré."
+            },
+            {
+              "valeur": 120,
+              "unite": "m²",
+              "sources": [
+                "cahier"
+              ],
+              "note": "Surface approximative indiquée dans le cahier de besoins, sans les annexes."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "besoins": [
+    {
+      "id": "cuisine-rangements",
+      "espace": "cuisine",
+      "libelle": "Davantage de rangements dans la cuisine",
+      "detail": "Les plans de travail et les rangements actuels manquent de capacité.",
+      "statut": "reel",
+      "sources": [
+        "cahier"
+      ]
+    },
+    {
+      "id": "cuisine-circulation",
+      "espace": "cuisine",
+      "libelle": "Une cuisine plus fluide",
+      "detail": "Des zones sont peu fonctionnelles et de l'espace est perdu autour des plans de travail et des passages.",
+      "statut": "reel",
+      "sources": [
+        "cahier"
+      ]
+    },
+    {
+      "id": "lien-cuisine-sejour",
+      "espace": "cuisine",
+      "libelle": "Garder une séparation avec le salon, mais créer un lien visuel",
+      "detail": "Limiter odeurs et bruit, tout en laissant passer la lumière et en favorisant la convivialité par une ouverture partielle.",
+      "statut": "reel",
+      "sources": [
+        "cahier"
+      ]
+    },
+    {
+      "id": "accueil",
+      "espace": "sejour",
+      "libelle": "Recevoir proches et amis, surtout le week-end",
+      "detail": "L'organisation du séjour doit rester accueillante pour un groupe.",
+      "statut": "reel",
+      "sources": [
+        "cahier"
+      ]
+    },
+    {
+      "id": "ambiance",
+      "espace": "ensemble",
+      "libelle": "Une ambiance chaleureuse en matériaux naturels",
+      "detail": "Bois et pierre appréciés ; couleurs froides, excès de blanc, laqués et matières fragiles à éviter.",
+      "statut": "reel",
+      "sources": [
+        "cahier"
+      ]
+    }
+  ],
+  "potentiel": {
+    "resume": "Ce que la cuisine et le séjour permettent aujourd'hui, et ce qu'il faut encore établir avant d'envisager une transformation.",
+    "faits": [
+      {
+        "id": "salle-a-manger",
+        "libelle": "Salle à manger",
+        "valeur": {
+          "valeur": 31.95,
+          "unite": "m²",
+          "statut": "reel",
+          "sources": [
+            "metre"
+          ]
+        }
+      },
+      {
+        "id": "salon",
+        "libelle": "Salon",
+        "valeur": {
+          "valeur": 13.17,
+          "unite": "m²",
+          "statut": "reel",
+          "sources": [
+            "metre"
+          ],
+          "note": "Un second espace salon de 2,26 m² figure au plan."
+        }
+      },
+      {
+        "id": "cuisine-surface",
+        "libelle": "Surface de la cuisine",
+        "valeur": {
+          "statut": "manquant",
+          "note": "Non identifiée dans l'export du plan 3D : à relever sur place."
+        }
+      },
+      {
+        "id": "separation",
+        "libelle": "Séparation entre cuisine et séjour",
+        "valeur": {
+          "statut": "manquant",
+          "note": "Cloison porteuse ou non : à établir par une étude structurelle avant toute décision d'ouverture."
+        }
+      },
+      {
+        "id": "parois",
+        "libelle": "Types de parois relevés dans la maison",
+        "valeur": {
+          "valeur": "Blocs de béton creux et cloisons de 72 mm et 98 mm",
+          "statut": "reel",
+          "sources": [
+            "metre"
+          ],
+          "note": "Leur position exacte n'est pas rattachée à la cuisine ni au séjour."
+        }
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "rafraichir",
+      "numero": 1,
+      "nom": "Rafraîchir",
+      "maturite": "pre_etude",
+      "intention": "Améliorer l'ambiance et les finitions de la cuisine et du séjour, sans modifier profondément l'organisation.",
+      "changements": [
+        "Teintes chaleureuses et matériaux naturels (bois, pierre) pour les finitions",
+        "Sols, éclairage et peintures de la cuisine et du séjour",
+        "Rangements ajoutés sans toucher aux cloisons"
+      ],
+      "etudesPrealables": [
+        "État des supports (sols, murs) à vérifier lors de la visite technique"
+      ],
+      "budget": {
+        "statut": "manquant",
+        "note": "Pas encore chiffré. Aucun devis n'existe."
+      },
+      "impactEnergetique": {
+        "statut": "manquant",
+        "note": "Non étudié. Le volet énergie est présenté à part."
+      },
+      "projection": {
+        "statut": "a_venir",
+        "note": "Aucune image tant qu'elle n'est pas contrôlée."
+      }
+    },
+    {
+      "id": "repenser-espaces",
+      "numero": 2,
+      "nom": "Repenser les espaces",
+      "maturite": "a_etudier",
+      "intention": "Répondre aux besoins de circulation, de convivialité et d'usage en repensant l'organisation de la cuisine et sa relation avec le séjour.",
+      "changements": [
+        "Réorganiser la cuisine : plans de travail, rangements, zones de passage",
+        "Créer une ouverture partielle entre cuisine et séjour, en gardant une séparation",
+        "Reprendre l'éclairage et les finitions de l'ensemble"
+      ],
+      "etudesPrealables": [
+        "Étude structurelle de la séparation entre cuisine et séjour",
+        "Vérification des réseaux à déplacer (électricité, eau, ventilation)",
+        "Autorisations éventuelles selon la nature des travaux"
+      ],
+      "budget": {
+        "statut": "manquant",
+        "note": "À chiffrer après l'étude structurelle. Aucun montant avancé."
+      },
+      "impactEnergetique": {
+        "statut": "manquant",
+        "note": "Non étudié. Le volet énergie est présenté à part."
+      },
+      "projection": {
+        "statut": "a_venir",
+        "note": "À produire après l'étude, puis à valider avec la famille."
+      }
+    }
+  ],
+  "matrice": {
+    "statut": "hypothese",
+    "sources": [
+      "analyse"
+    ],
+    "lecture": "Lecture de DVK Studio, à confirmer après visite technique : elle compare l'intention de chaque piste aux besoins exprimés. Une piste plus simple répond à moins de besoins.",
+    "cellules": [
+      {
+        "besoin": "cuisine-rangements",
+        "scenario": "rafraichir",
+        "niveau": "partiel",
+        "note": "Des rangements s'ajoutent, mais l'implantation de la cuisine reste celle d'aujourd'hui."
+      },
+      {
+        "besoin": "cuisine-rangements",
+        "scenario": "repenser-espaces",
+        "niveau": "repond",
+        "note": "Implantation et rangements sont repensés ensemble."
+      },
+      {
+        "besoin": "cuisine-circulation",
+        "scenario": "rafraichir",
+        "niveau": "non",
+        "note": "L'organisation et les passages ne changent pas."
+      },
+      {
+        "besoin": "cuisine-circulation",
+        "scenario": "repenser-espaces",
+        "niveau": "repond",
+        "note": "Les zones de passage sont reprises."
+      },
+      {
+        "besoin": "lien-cuisine-sejour",
+        "scenario": "rafraichir",
+        "niveau": "non",
+        "note": "Aucune ouverture n'est créée."
+      },
+      {
+        "besoin": "lien-cuisine-sejour",
+        "scenario": "repenser-espaces",
+        "niveau": "repond",
+        "note": "Sous réserve de l'étude structurelle."
+      },
+      {
+        "besoin": "accueil",
+        "scenario": "rafraichir",
+        "niveau": "partiel",
+        "note": "Ambiance plus accueillante, sans réorganisation de l'espace."
+      },
+      {
+        "besoin": "accueil",
+        "scenario": "repenser-espaces",
+        "niveau": "repond",
+        "note": "Le lien entre cuisine et séjour facilite la réception."
+      },
+      {
+        "besoin": "ambiance",
+        "scenario": "rafraichir",
+        "niveau": "repond",
+        "note": "C'est le cœur de cette piste."
+      },
+      {
+        "besoin": "ambiance",
+        "scenario": "repenser-espaces",
+        "niveau": "repond",
+        "note": "À condition de prévoir les finitions dans le budget."
+      }
+    ]
+  },
+  "budget": {
+    "resume": "Aucun devis n'existe à ce jour. Les montants du volet énergie ne sont pas diffusés.",
+    "energie": {
+      "intitule": "Rénovation énergétique recommandée par l'étude",
+      "nature": "manquant",
+      "lots": [
+        {
+          "lot": "Rénovation énergétique",
+          "montant": {
+            "statut": "manquant",
+            "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+          }
+        }
+      ],
+      "total": {
+        "statut": "manquant",
+        "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+      },
+      "financements": [],
+      "resteACharge": {
+        "statut": "manquant",
+        "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+      },
+      "avertissement": "Estimation à confirmer après visite technique. Ce n'est pas un devis."
+    }
+  },
+  "energie": {
+    "resume": "Les données énergétiques de ce projet ne sont pas diffusées.",
+    "classeAvant": {
+      "statut": "manquant",
+      "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+    },
+    "classeApres": {
+      "statut": "manquant",
+      "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+    },
+    "consommation": {
+      "statut": "manquant",
+      "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+    },
+    "emissions": {
+      "statut": "manquant",
+      "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+    },
+    "factureAnnuelle": {
+      "statut": "manquant",
+      "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+    },
+    "economieAnnuelle": {
+      "statut": "manquant",
+      "note": "Non diffusé : accord de diffusion des données énergie et financement à confirmer."
+    }
+  },
+  "projection": {
+    "statut": "a_venir",
+    "message": "La projection de la cuisine et du séjour transformés est à venir. Aucune image n'est présentée tant qu'elle n'a pas été contrôlée et validée avec la famille."
+  },
+  "prochaineAction": {
+    "titre": "Et pour votre bien ?",
+    "etapes": [
+      "Un échange de vingt minutes pour comprendre votre situation et vos besoins",
+      "Une visite et un relevé du bien, pour établir ce qui est certain et ce qui reste à étudier",
+      "Des scénarios comparés à vos besoins, avec une enveloppe indicative"
+    ],
+    "cta": {
+      "libelle": "Je veux la même pour mon bien",
+      "bouton": "fin.rdv"
+    }
+  }
+}

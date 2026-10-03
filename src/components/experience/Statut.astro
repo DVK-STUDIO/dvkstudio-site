@@ -1,0 +1,18 @@
+---
+// Étiquette de statut d'une donnée : Réel / Estimation / Hypothèse / Projection / À venir / À établir.
+import { LIBELLE_STATUT, SENS_STATUT, type Statut } from "../../lib/experience/experience";
+interface Props { statut: Statut }
+const { statut } = Astro.props;
+---
+
+<span class={`pastille-statut pastille-statut-${statut}`} title={SENS_STATUT[statut]}>{LIBELLE_STATUT[statut]}</span>
+
+<style>
+  .pastille-statut { display: inline-block; font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 600; padding: 4px 8px; border-radius: 3px; line-height: 1.2; white-space: nowrap; vertical-align: middle; }
+  .pastille-statut-reel { background: var(--sauge); color: var(--petrole); }
+  .pastille-statut-estimation { background: #f1e1d6; color: #7b2f1d; }
+  .pastille-statut-hypothese { background: transparent; color: var(--encre); border: 1px solid var(--encre); }
+  .pastille-statut-projection { background: var(--petrole); color: #fff; }
+  .pastille-statut-a_venir { background: transparent; color: var(--pierre); border: 1px solid var(--pierre); }
+  .pastille-statut-manquant { background: transparent; color: var(--pierre); border: 1px dashed var(--pierre); }
+</style>

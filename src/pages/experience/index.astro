@@ -2,6 +2,8 @@
 import Base from "../../layouts/Base.astro";
 import BoutonRdv from "../../components/BoutonRdv.astro";
 import ExperienceDemo from "../../components/ExperienceDemo.astro";
+import { toutesLesExperiences } from "../../lib/experience/experience";
+const experiences = toutesLesExperiences();
 ---
 
 <Base
@@ -26,7 +28,27 @@ import ExperienceDemo from "../../components/ExperienceDemo.astro";
       <div><h3>Honnêteté</h3><p>Chaque donnée porte sa source et son statut : réel, estimation, hypothèse, projection ou à venir. Ce qui manque s'affiche comme manquant.</p></div>
       <div><h3>Partage</h3><p>À terme, une page propre à chaque bien, qu'un agent peut transmettre à un acquéreur. <span class="statut statut-avenir">À venir</span></p></div>
     </div>
-    <p class="chapo" style="margin-top:32px">La première expérience réelle, bâtie sur un projet existant et anonymisée avec l'accord des propriétaires, sera publiée ici prochainement.</p>
+    <h3 class="titre-m" style="margin-top:56px">Une expérience réelle</h3>
+    <ul class="experiences">
+      {experiences.map((x) => (
+        <li>
+          <a href={`/experience/${x.slug}/`}>
+            <span class="statut statut-demo">Projet pilote</span>
+            <strong>{x.titre}</strong>
+            <span>{x.accroche}</span>
+            <span class="aller">Découvrir l'expérience →</span>
+          </a>
+        </li>
+      ))}
+    </ul>
     <div class="actions"><BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv></div>
   </section>
 </Base>
+
+<style>
+  .experiences { list-style: none; padding: 0; margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 20px; }
+  .experiences a { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; padding: 24px; border: 1px solid var(--ligne); border-radius: 8px; background: var(--papier-2); height: 100%; }
+  .experiences strong { font-family: var(--serif); font-size: 26px; font-weight: 500; line-height: 1.15; }
+  .experiences span:not(.statut) { color: var(--encre-douce); font-size: 16px; }
+  .experiences .aller { color: var(--terre-fonce); font-weight: 600; margin-top: auto; }
+</style>

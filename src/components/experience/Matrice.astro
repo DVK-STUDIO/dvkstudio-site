@@ -1,0 +1,85 @@
+---
+// Matrice besoins × scénarios. Tableau sur grand écran ; sur mobile, une carte par besoin
+// (jamais de défilement horizontal). Lecture de DVK Studio : statut « hypothèse ».
+import { LIBELLE_NIVEAU, type Besoin, type Scenario, type Cellule } from "../../lib/experience/experience";
+interface Props { besoins: Besoin[]; scenarios: Scenario[]; cellules: Cellule[] }
+const { besoins, scenarios, cellules } = Astro.props;
+const cellule = (b: string, s: string) => cellules.find((c) => c.besoin === b && c.scenario === s)!;
+const bilan = (s: string) => {
+  const mine = cellules.filter((c) => c.scenario === s);
+  return { repond: mine.filter((c) => c.niveau === "repond").length, partiel: mine.filter((c) => c.niveau === "partiel").length, total: mine.length };
+};
+---
+
+<div class="matrice">
+  <ul class="bilans" aria-label="Bilan par scénario">
+    {scenarios.map((s) => {
+      const b = bilan(s.id);
+      return (
+        <li>
+          <span class="b-nom">{s.nom}</span>
+          <span class="b-nb"><strong>{b.repond}</strong> sur {b.total}<span class="b-txt"> {s.maturite === "a_etudier" ? "besoins visés" : "besoins couverts"}</span></span>
+          {b.partiel > 0 && <span class="b-part">et {b.partiel} en partie</span>}
+        </li>
+      );
+    })}
+  </ul>
+
+  <table>
+    <caption class="sr-only">Besoins exprimés et niveau de réponse de chaque scénario. Lecture de DVK Studio, à confirmer.</caption>
+    <thead>
+      <tr>
+        <th scope="col">Besoin</th>
+        {scenarios.map((s) => <th scope="col">Scénario {s.numero} · {s.nom}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {besoins.map((b) => (
+        <tr>
+          <th scope="row">{b.libelle}</th>
+          {scenarios.map((s) => {
+            const c = cellule(b.id, s.id);
+            return (
+              <td data-niveau={c.niveau} data-scenario={`Scénario ${s.numero} · ${s.nom}`}>
+                <span class="niveau"><span class="puce" aria-hidden="true"></span>{LIBELLE_NIVEAU[c.niveau]}</span>
+                {c.note && <span class="note">{c.note}</span>}
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .bilans { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px; margin-bottom: 28px; }
+  .bilans li { border-top: 1.5px solid var(--encre); padding-top: 12px; display: grid; gap: 2px; }
+  .b-nom { font-family: var(--serif); font-size: 22px; }
+  .b-nb { font-size: 17px; color: var(--encre-douce); }
+  .b-nb strong { font-family: var(--serif); font-size: 30px; color: var(--encre); font-weight: 500; }
+  .b-part { font-size: 14px; color: var(--pierre); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: 16px 14px; border-bottom: 1px solid var(--ligne); }
+  thead th { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pierre); border-bottom: 1.5px solid var(--encre); }
+  tbody th { font-weight: 600; font-size: 16px; width: 34%; }
+  td { width: 33%; }
+  .niveau { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  .puce { width: 12px; height: 12px; border-radius: 50%; border: 2px solid currentColor; flex: none; }
+  td[data-niveau="repond"] .niveau { color: var(--petrole); }
+  td[data-niveau="repond"] .puce { background: currentColor; }
+  td[data-niveau="partiel"] .niveau { color: #7b2f1d; }
+  td[data-niveau="partiel"] .puce { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+  td[data-niveau="non"] .niveau { color: var(--pierre); }
+  .note { display: block; margin-top: 6px; font-size: 14px; color: var(--encre-douce); font-weight: 400; }
+
+  @media (max-width: 720px) {
+    table, tbody, tr, th, td { display: block; width: auto; }
+    thead { display: none; }
+    tr { border: 1px solid var(--ligne); border-radius: var(--rayon); margin-bottom: 14px; background: var(--papier); overflow: hidden; }
+    tbody th { padding: 14px 16px; background: var(--papier-2); border-bottom: 1px solid var(--ligne); width: auto; }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--ligne); width: auto; }
+    td:last-child { border-bottom: 0; }
+    td::before { content: attr(data-scenario); display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pierre); margin-bottom: 4px; }
+  }
+</style>
