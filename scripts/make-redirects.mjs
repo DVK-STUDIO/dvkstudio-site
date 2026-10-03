@@ -9,7 +9,7 @@ const correspondances = {
   "contact.html": "/contact/",
   "mentions-legales.html": "/mentions-legales/",
   "confidentialite.html": "/confidentialite/",
-  "cgv.html": "/cgv/",
+  "cgv.html": "/mentions-legales/", // page /cgv/ retirée (voir docs/archives/)
   "merci.html": "/merci/",
 };
 mkdirSync("public", { recursive: true });

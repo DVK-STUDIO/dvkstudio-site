@@ -20,6 +20,12 @@ DVK_PUBLIC_BUILD=1 npm run build && npm run preview
 ## 2. Prérequis humains (bloquent la mise en production, pas le développement)
 
 - [x] **Capacité IAD désactivée (option b, faite le 3 octobre 2026)** : interrupteur unique `src/content/capacites.ts`, contenus isolés dans `src/content/iad.ts` et `src/iad/`, test de build `check:capacites`. Aucune mention publique du statut. Voir « Activer la capacité IAD » plus bas.
+- [ ] **Action humaine : médiateur de la consommation CM2C.** Adhésion confirmée par l'e-mail du 11/11/2025 (3 ans). Récupérer la mention officielle dans l'espace professionnel CM2C et l'intégrer aux emplacements juridiquement nécessaires. Aucune coordonnée n'est devinée : tant que ce n'est pas fait, rien n'est affiché.
+- [ ] **Action humaine : conformité à la charte de communication hemea.** Le contrat de mandataire (art. 5.5 et 5.11) impose la conformité des supports commerciaux à la charte, ou leur approbation écrite, et la mention de la qualité de mandataire et des références du mandant. Confirmer la conformité du site ou obtenir l'approbation.
+- [ ] Mention de l'assurance RCP : non affichée tant que la formulation autorisée n'est pas confirmée.
+- [ ] Relation contractuelle : le site ne dit pas qui facture le client tant que les conditions générales de hemea n'ont pas été vérifiées.
+- [ ] Dernière vérification visuelle (desktop et mobile) puis GO de déploiement.
+- [x] /cgv/ retirée du site public (DVK ne commercialise pas ces prestations au lancement ; l'ancienne adresse .html renvoie vers les mentions légales). Source conservée dans `docs/archives/cgv-v2-2026-10-03.astro`, anciennes CGV dans l'historique Git. À rétablir si DVK Studio commercialise une prestation propre (par exemple autour de DVK Expérience).
 - [ ] Tarifs : aucun repris tant que non confirmés.
 - [ ] Logos et partenaires : aucun repris sans autorisation.
 - [ ] Hero : version typographique (aucune photo non autorisée).

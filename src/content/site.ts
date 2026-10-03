@@ -25,7 +25,6 @@ export const site = {
     denomination: "NOVARE CONSTRUCTION",
     enseigne: "hemea",
     forme: "Société par actions simplifiée",
-    capital: "18 266,24 €",
     rcs: "RCS Nanterre 813 776 416",
     siege: "176 avenue Charles de Gaulle, 92200 Neuilly-sur-Seine",
   },
