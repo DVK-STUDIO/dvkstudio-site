@@ -18,4 +18,4 @@ const fichiers = [];
 
 const problemes = analyserCapaciteIad({ iadActif, fichiers });
 if (problemes.length) { console.error(`CAPACITÉ IAD : ÉCHEC\n- ${problemes.join("\n- ")}`); process.exit(1); }
-console.log(`Capacité IAD ${iadActif ? "ACTIVE (aucun contrôle d'absence)" : "désactivée : aucune occurrence de « IAD » ni de « mandataire »"} dans ${fichiers.length} fichiers du build.`);
+console.log(`Capacité IAD ${iadActif ? "ACTIVE (aucun contrôle d'absence)" : "désactivée : aucune occurrence de « IAD » ni de « mandataire immobilier »"} dans ${fichiers.length} fichiers du build.`);

@@ -45,9 +45,9 @@ const situations = [
 ];
 
 const faq = [
-  { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. Il cadre votre projet, estime son budget et vous aide à consulter des entreprises." },
+  { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. Il cadre votre projet, estime son budget et vous aide à consulter des entreprises labellisées hemea. Il ne garantit personnellement ni ces entreprises ni leurs travaux." },
   { q: "Les budgets présentés sont-ils des devis ?", r: "Non. Ce sont des estimations indicatives, avec leurs hypothèses et leurs limites. Un devis ne vient qu'avec les entreprises consultées." },
-  { q: "Combien coûte le premier échange ?", r: "Vingt minutes par téléphone, sans engagement. Les conditions de chaque prestation vous sont communiquées avant tout engagement." },
+  { q: "Le premier échange m'engage-t-il ?", r: "Non. C'est un échange de vingt minutes par téléphone, sans engagement." },
   ...(iadActive ? [iad.accueil.faq] : []),
   { q: "Où intervenez-vous ?", r: `${site.zone}, lorsque le projet s'y prête.` },
 ];
@@ -91,7 +91,7 @@ const faq = [
       </div>
     </div>
     <ul class="points" aria-label="Comment DVK Studio travaille">
-      <li><strong>Un seul interlocuteur</strong>Chef de projet travaux hemea : cadrage, budget, consultation d'entreprises.</li>
+      <li><strong>Un seul interlocuteur</strong>Chef de projet travaux hemea : cadrage, budget, consultation d'entreprises labellisées hemea.</li>
       <li><strong>Des chiffres qui disent ce qu'ils sont</strong>Réel, estimation, hypothèse ou à chiffrer.</li>
       <li><strong>Vingt minutes pour commencer</strong>Par téléphone, sans engagement.</li>
     </ul>
@@ -124,6 +124,7 @@ const faq = [
           <li><strong>Deux pistes comparées</strong> à vos besoins, pas seulement des travaux.</li>
           <li><strong>Un budget honnête</strong> : « à chiffrer » plutôt qu'un chiffre inventé.</li>
         </ul>
+        <p class="demo-note">Un outil de projection et de cadrage de votre projet travaux. Ce n'est ni une étude de faisabilité réglementaire, ni de la maîtrise d'œuvre.</p>
         <div class="hero-actions">
           <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
           <a class="btn btn-contour demo-lien" href="/experience/">Découvrir DVK Expérience</a>
@@ -161,7 +162,7 @@ const faq = [
         { titre: "Échange", texte: "Vingt minutes pour comprendre votre situation et votre objectif." },
         { titre: "Visite et relevé", texte: "Le bien est regardé sur place et mesuré." },
         { titre: "Potentiel et budget", texte: "Scénarios et enveloppe indicative, hypothèses à l'appui." },
-        { titre: "Décision", texte: "Vous décidez, puis consultation d'entreprises si vous avancez." },
+        { titre: "Décision", texte: "Vous décidez, puis consultation d'entreprises labellisées hemea si vous avancez." },
       ]} />
     </div>
     <div class="hero-actions"><BoutonRdv bouton="methode.rdv">Prendre rendez-vous</BoutonRdv></div>
@@ -173,7 +174,7 @@ const faq = [
       <div>
         <p class="surtitre">Qui vous accompagne</p>
         <h2 id="titre-confiance" class="titre-l titre-moyen">Kevin De Vlieger, chef de projet travaux hemea.</h2>
-        <p class="chapo conf-texte">Je comprends votre projet, je le cadre et je vous oriente vers les bonnes entreprises. Je ne suis ni architecte ni maître d'œuvre, et les budgets présentés sont des estimations, pas des devis. {iadActive && iad.accueil.confiance} Plus de détails sur la page <a href="/a-propos/">À propos</a>.</p>
+        <p class="chapo conf-texte">Je suis mandataire indépendant de hemea et j'exerce sous le nom DVK Studio. Je comprends votre projet, je le cadre et je vous oriente vers des entreprises labellisées hemea. Je ne suis ni architecte ni maître d'œuvre, et les budgets présentés sont des estimations, pas des devis. {iadActive && iad.accueil.confiance} Plus de détails sur la page <a href="/a-propos/">À propos</a>.</p>
       </div>
       <ul class="legende-statuts" aria-label="Ce que veulent dire les statuts">
         <li><Statut statut="reel" /><span>Constaté ou mesuré, avec sa source.</span></li>
@@ -235,6 +236,7 @@ const faq = [
   .demo-liste { list-style: none; padding: 0; margin: 28px 0 0; border-top: 1px solid var(--dvk-inverse-subtle); }
   .demo-liste li { padding: 14px 0; border-bottom: 1px solid var(--dvk-inverse-subtle); color: var(--dvk-inverse-muted); }
   .demo-liste strong { color: var(--papier); font-weight: 600; }
+  .demo-note { margin: 20px 0 0; font-size: 15px; color: var(--dvk-inverse-muted); }
   .demo-grille .hero-actions { margin-top: 28px; }
   .demo-lien { color: var(--dvk-background); }
   .demo-fenetre { background: var(--dvk-background); color: var(--dvk-text); border-radius: var(--dvk-radius-md); padding: clamp(18px, 3vw, 32px); }

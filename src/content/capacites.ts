@@ -5,7 +5,7 @@
 // iad = true  : à ne faire qu'une fois le statut IAD validé ET les mentions réglementaires définitives intégrées
 //   (src/content/iad.ts, objet `mandataire`). Voir docs/mise-en-ligne.md, section « Activer la capacité IAD ».
 //
-// Le contrôle `npm run check:capacites` lit cette valeur et échoue si « IAD » ou « mandataire » apparaît
+// Le contrôle `npm run check:capacites` lit cette valeur et échoue si « IAD » ou « mandataire immobilier » apparaît
 // dans le site construit alors qu'elle vaut false. Ne pas dupliquer cette valeur ailleurs.
 export const capacites = {
   iad: false as boolean,

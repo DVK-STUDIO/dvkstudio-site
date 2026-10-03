@@ -10,7 +10,7 @@ npm run verifier:golive          # FORBIDDEN_FILE=<motifs privés> pour le contr
 
 Enchaîne : tests, build public (`DVK_PUBLIC_BUILD=1`), `check:public`, `check:site` (liens, SEO, redirections, accessibilité structurelle, budget de performance), absence de l'expérience non confirmée, aperçu local servi puis test de fumée.
 Verdict : **0** prêt à signer · **1** échec technique · **2** technique OK mais prérequis humains restants (avec la capacité IAD désactivée, il n'y en a plus de bloquant automatique).
-Inclut `check:capacites` : capacité IAD désactivée => aucune occurrence de « IAD » ni de « mandataire » dans le build, et pas de page `/immobilier/`.
+Inclut `check:capacites` : capacité IAD désactivée => aucune occurrence de « IAD » ni de « mandataire immobilier » dans le build, et pas de page `/immobilier/`.
 
 Aperçu à l'œil (build public, comme en production) :
 ```

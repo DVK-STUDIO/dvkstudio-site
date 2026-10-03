@@ -1,8 +1,10 @@
 // Contrôle de la capacité IAD sur le site CONSTRUIT. Quand l'interrupteur (src/content/capacites.ts) vaut false,
-// ni « IAD » ni « mandataire » ne doivent apparaître dans le moindre fichier texte du build, et la page /immobilier/ ne doit pas exister.
+// ni « IAD » ni « mandataire immobilier » ne doivent apparaître dans le moindre fichier texte du build, et la page /immobilier/ ne doit pas exister.
+// La qualité contractuelle de « mandataire indépendant hemea » n'est PAS visée : seule la capacité immobilière (IAD, mandataire immobilier) l'est.
 export const MOTIFS_IAD = [
   [/\biad\b/i, "« IAD »"],
-  [/mandataire/i, "« mandataire »"],
+  [/mandataires?\s+immobili/i, "« mandataire immobilier »"],
+  [/mandats?\s+de\s+vente/i, "« mandat de vente »"],
 ];
 
 /** Lit la valeur de l'interrupteur dans le source de src/content/capacites.ts. Échoue s'il n'est pas lisible : jamais de valeur supposée. */

@@ -7,15 +7,23 @@ const f = (chemin, contenu) => ({ chemin, contenu });
 const propre = [f("index.html", "<h1>DVK Studio</h1><p>Chef de projet travaux hemea</p>"), f("acquereurs/index.html", "<p>Acheter un bien à rénover</p>")];
 
 describe("capacité IAD désactivée", () => {
-  it("accepte un build sans IAD ni mandataire", () => expect(analyserCapaciteIad({ iadActif: false, fichiers: propre })).toEqual([]));
+  it("accepte un build sans IAD ni mandataire immobilier", () => expect(analyserCapaciteIad({ iadActif: false, fichiers: propre })).toEqual([]));
   it("refuse « IAD » en majuscules, en minuscules ou à côté d'un lien", () => {
     for (const t of ["réseau IAD France", "iad france", '<a href="https://www.iadfrance.fr/">x</a> IAD', "(IAD)"]) {
       expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("index.html", t)] }).join(), t).toMatch(/IAD/);
     }
   });
-  it("refuse « mandataire » (toute casse), y compris dans les métadonnées et le JavaScript", () => {
+  it("refuse « mandataire immobilier » (toute casse, singulier ou pluriel), y compris dans les métadonnées et le JavaScript", () => {
     expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("a/index.html", '<meta name="description" content="Mandataire immobilier">')] })).toHaveLength(1);
-    expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("_astro/x.js", 'const t="mandataires"')] })).toHaveLength(1);
+    expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("_astro/x.js", 'const t="mandataires immobiliers"')] })).toHaveLength(1);
+    expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("a/index.html", "un mandat de vente exclusif")] })).toHaveLength(1);
+  });
+  it("autorise la qualité contractuelle de mandataire indépendant hemea", () => {
+    const t = "Kevin De Vlieger est mandataire indépendant de la société NOVARE CONSTRUCTION, exploitant sous l'enseigne hemea. Mandataire de hemea.";
+    expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("mentions-legales/index.html", t)] })).toEqual([]);
+  });
+  it("refuse IAD même accolé à la qualité hemea", () => {
+    expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("a/index.html", "mandataire indépendant hemea et IAD")] })).toHaveLength(1);
   });
   it("refuse la page /immobilier/ ; le mot immobilier seul n'est pas interdit", () => {
     expect(analyserCapaciteIad({ iadActif: false, fichiers: [f("immobilier/index.html", "<p>x</p>")] }).join()).toMatch(/page IAD présente/);
@@ -27,7 +35,7 @@ describe("capacité IAD désactivée", () => {
 });
 
 describe("capacité IAD activée", () => {
-  it("n'impose aucune absence", () => expect(analyserCapaciteIad({ iadActif: true, fichiers: [f("immobilier/index.html", "IAD France, mandataire")] })).toEqual([]));
+  it("n'impose aucune absence", () => expect(analyserCapaciteIad({ iadActif: true, fichiers: [f("immobilier/index.html", "IAD France, mandataire immobilier")] })).toEqual([]));
 });
 
 describe("interrupteur", () => {

@@ -16,10 +16,10 @@ function sources(d: string): string[] {
 }
 
 describe("capacité IAD : isolation des sources", () => {
-  it("aucune source hors du périmètre IAD ne cite IAD ou mandataire", () => {
+  it("aucune source hors du périmètre IAD ne cite IAD ou mandataire immobilier", () => {
     const fautes = sources("src")
       .filter((c) => !AUTORISES.some((r) => r.test(c)))
-      .filter((c) => /\bIAD\b|[Mm]andataire/.test(readFileSync(c, "utf8")));
+      .filter((c) => /\bIAD\b|[Mm]andataires? immobili/.test(readFileSync(c, "utf8")));
     expect(fautes).toEqual([]);
   });
   it("l'interrupteur est unique et désactivé tant que le statut n'est pas validé", () => {
