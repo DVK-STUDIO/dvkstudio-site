@@ -1,29 +1,33 @@
 ---
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
-import { iadActive } from "../content/capacites";
-import { iad, reglementaire } from "../content/iad";
+import { immobilierVisible } from "../content/capacites";
+import { aPropos } from "../content/immobilier";
+
+// Mode « off » : textes d'origine, sans aucune référence à l'activité immobilière.
+const descriptionOff = "DVK Studio est le nom sous lequel Kevin De Vlieger exerce, en Oise, comme chef de projet travaux hemea : cadrage, budget et consultation d'entreprises.";
+const chapoOff = "Kevin De Vlieger, basé à Gannes, dans l'Oise. J'accompagne les projets de rénovation, y compris l'achat d'un bien à rénover, de la décision aux travaux.";
 ---
 
 <Base
   titre="À propos : qui est derrière DVK Studio"
-  description={iadActive ? iad.aPropos.description : "DVK Studio est le nom sous lequel Kevin De Vlieger exerce, en Oise, comme chef de projet travaux hemea : cadrage, budget et consultation d'entreprises."}
+  description={immobilierVisible ? aPropos.description : descriptionOff}
   page="a-propos"
   chemin="/a-propos/"
 >
   <header class="conteneur page-hero">
     <p class="surtitre">À propos</p>
     <h1 class="titre-xl">Je suis chef de projet travaux hemea et j'exerce sous le nom DVK Studio.</h1>
-    <p class="chapo">{iadActive ? iad.aPropos.chapo : "Kevin De Vlieger, basé à Gannes, dans l'Oise. J'accompagne les projets de rénovation, y compris l'achat d'un bien à rénover, de la décision aux travaux."}</p>
+    <p class="chapo">{immobilierVisible ? aPropos.chapo : chapoOff}</p>
   </header>
 
   <section class="section conteneur" aria-labelledby="t-quoi">
     <h2 id="t-quoi" class="titre-l" style="max-width:22ch">Qui fait quoi, en toute transparence.</h2>
     <div class="bloc">
-      {iadActive ? (
+      {immobilierVisible ? (
         <div>
-          <h3>{iad.aPropos.blocTitre}</h3>
-          <p>{iad.aPropos.blocTexte(reglementaire.reseau)} <a href="/mentions-legales/" style="text-decoration:underline">mentions légales</a>.</p>
+          <h3>{aPropos.bloc.titre}</h3>
+          <p>{aPropos.bloc.texte} <a href={aPropos.bloc.lien.href} style="text-decoration:underline">{aPropos.bloc.lien.libelle}</a>.</p>
         </div>
       ) : (
         <div>

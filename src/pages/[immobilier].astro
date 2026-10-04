@@ -1,11 +1,11 @@
 ---
-// Page /immobilier/ : n'existe dans le build que si la capacité immobilière est active (src/content/capacites.ts).
-// Le contenu vit dans src/iad/immobilier.astro, intact, prêt à être réactivé.
-import { iadActive } from "../content/capacites";
-import Immobilier from "../iad/immobilier.astro";
+// Page /immobilier/ : n'existe dans le build que si la capacité immobilière n'est pas « off » (src/content/capacites.ts).
+// Le contenu vit dans src/immobilier/Page.astro ; ses variantes par mode dans src/content/immobilier.ts.
+import { immobilierVisible } from "../content/capacites";
+import Immobilier from "../immobilier/Page.astro";
 
 export function getStaticPaths() {
-  return iadActive ? [{ params: { immobilier: "immobilier" } }] : [];
+  return immobilierVisible ? [{ params: { immobilier: "immobilier" } }] : [];
 }
 ---
 

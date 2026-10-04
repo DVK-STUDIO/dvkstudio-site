@@ -1,13 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import { site } from "../content/site";
-import { iadActive } from "../content/capacites";
-import { iad } from "../content/iad";
-import MentionsReglementaires from "../iad/MentionsReglementaires.astro";
+import { mandataireActif } from "../content/capacites";
+import { mentions } from "../content/immobilier";
+import MentionsReglementaires from "../immobilier/MentionsReglementaires.astro";
 const e = site.editeur;
 ---
 
-<Base titre="Mentions légales" description={iadActive ? iad.mentions.description : "Mentions légales du site dvkstudio.fr : éditeur, accompagnement des travaux, hébergeur."} page="mentions-legales" chemin="/mentions-legales/">
+<Base titre="Mentions légales" description={mandataireActif ? mentions.description : "Mentions légales du site dvkstudio.fr : éditeur, accompagnement des travaux, hébergeur."} page="mentions-legales" chemin="/mentions-legales/">
   <div class="conteneur page-hero prose">
     <p class="surtitre">Légal</p>
     <h1 class="titre-xl">Mentions légales</h1>
@@ -25,7 +25,7 @@ const e = site.editeur;
       <li>Téléphone : {site.telephone} — Email : {site.email}</li>
     </ul>
 
-  {iadActive && <MentionsReglementaires />}
+  {mandataireActif && <MentionsReglementaires />}
 
     <h2>Accompagnement des travaux</h2>
     <p>{e.nom} exerce, sous le nom commercial {site.nom}, comme chef de projet travaux hemea et mandataire indépendant de la société {site.mandant.denomination}, exploitant sous l'enseigne {site.mandant.enseigne}. Pour cette activité, {e.nom} agit au nom et pour le compte de cette société, en toute indépendance.</p>

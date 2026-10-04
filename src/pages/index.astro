@@ -9,8 +9,8 @@ import Faq from "../components/Faq.astro";
 import Statut from "../components/experience/Statut.astro";
 import { experiencesPubliables } from "../lib/experience/experience";
 import { hero, site } from "../content/site";
-import { iadActive } from "../content/capacites";
-import { iad } from "../content/iad";
+import { immobilierVisible } from "../content/capacites";
+import { accueil } from "../content/immobilier";
 
 // Hero interchangeable : le curseur avant/après n'est actif que si le mode l'autorise ET que les deux images
 // existent dans src/assets/hero/ (avant.*, apres.*). Sinon, plan annoté.
@@ -36,19 +36,23 @@ const entreprise = {
   sameAs: [site.reseaux.instagram, site.reseaux.linkedin],
 };
 
-// Où en êtes-vous ? Trois situations. Une entrée supplémentaire n'apparaît que si la capacité correspondante est active.
-const situations = [
-  { titre: "Je rénove", texte: "Cadrer mes travaux et mon budget avant de m'engager.", lien: "Cadrer mes travaux →", href: "/travaux/" },
-  { titre: "J'achète un bien à rénover", texte: "Comprendre son potentiel et le coût des travaux avant de signer, pour l'habiter ou le louer.", lien: "Analyser un bien →", href: "/acquereurs/" },
-  { titre: "Je suis professionnel", texte: "Montrer à vos acquéreurs ce qu'un bien peut devenir.", lien: "Envoyer une annonce →", href: "/professionnels/" },
-  ...(iadActive ? [iad.accueil.entree] : []),
-];
+// Où en êtes-vous ? Avec la capacité Immobilier : trois entrées (Je rénove, J'achète, Je vends) et un accès discret pour les professionnels.
+// Sans elle (mode « off ») : les trois entrées d'origine.
+const renove = { titre: "Je rénove", texte: "Cadrer mes travaux et mon budget avant de m'engager.", lien: "Cadrer mes travaux →", href: "/travaux/" };
+const professionnel = { titre: "Je suis professionnel", texte: "Montrer à vos acquéreurs ce qu'un bien peut devenir.", lien: "Envoyer une annonce →", href: "/professionnels/" };
+const situations = immobilierVisible
+  ? [renove, accueil.entreeAchat, accueil.entreeVente]
+  : [
+      renove,
+      { titre: "J'achète un bien à rénover", texte: "Comprendre son potentiel et le coût des travaux avant de signer, pour l'habiter ou le louer.", lien: "Analyser un bien →", href: "/acquereurs/" },
+      professionnel,
+    ];
 
 const faq = [
   { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. Il cadre votre projet, estime son budget et vous aide à consulter des entreprises labellisées hemea. Il ne garantit personnellement ni ces entreprises ni leurs travaux." },
   { q: "Les budgets présentés sont-ils des devis ?", r: "Non. Ce sont des estimations indicatives, avec leurs hypothèses et leurs limites. Un devis ne vient qu'avec les entreprises consultées." },
   { q: "Le premier échange m'engage-t-il ?", r: "Non. C'est un échange de vingt minutes par téléphone, sans engagement." },
-  ...(iadActive ? [iad.accueil.faq] : []),
+  ...(immobilierVisible ? [accueil.faq] : []),
   { q: "Où intervenez-vous ?", r: `${site.zone}, lorsque le projet s'y prête.` },
 ];
 ---
@@ -111,6 +115,7 @@ const faq = [
         </a>
       ))}
     </nav>
+    {immobilierVisible && <p class="ligne-pro">{accueil.lignePro.texte} <a href={accueil.lignePro.href}>{accueil.lignePro.lien}</a></p>}
   </section>
 
   <!-- 3 · DVK Expérience : ce que reçoit le client -->
@@ -174,7 +179,7 @@ const faq = [
       <div>
         <p class="surtitre">Qui vous accompagne</p>
         <h2 id="titre-confiance" class="titre-l titre-moyen">Kevin De Vlieger, chef de projet travaux hemea.</h2>
-        <p class="chapo conf-texte">Je suis mandataire indépendant de hemea et j'exerce sous le nom DVK Studio. Je comprends votre projet, je le cadre et je vous oriente vers des entreprises labellisées hemea. Je ne suis ni architecte ni maître d'œuvre, et les budgets présentés sont des estimations, pas des devis. {iadActive && iad.accueil.confiance} Plus de détails sur la page <a href="/a-propos/">À propos</a>.</p>
+        <p class="chapo conf-texte">Je suis mandataire indépendant de hemea et j'exerce sous le nom DVK Studio. Je comprends votre projet, je le cadre et je vous oriente vers des entreprises labellisées hemea. Je ne suis ni architecte ni maître d'œuvre, et les budgets présentés sont des estimations, pas des devis. {immobilierVisible && accueil.confiance} Plus de détails sur la page <a href="/a-propos/">À propos</a>.</p>
       </div>
       <ul class="legende-statuts" aria-label="Ce que veulent dire les statuts">
         <li><Statut statut="reel" /><span>Constaté ou mesuré, avec sa source.</span></li>
@@ -230,6 +235,8 @@ const faq = [
   .entree-titre { font-family: var(--serif); font-size: 30px; line-height: 1.1; letter-spacing: -0.01em; }
   .entree-texte { color: var(--dvk-text-muted); font-size: 16px; }
   .entree-lien { color: var(--dvk-action); font-weight: 600; }
+  .ligne-pro { margin-top: 24px; font-size: 16px; color: var(--dvk-text-muted); }
+  .ligne-pro a { color: var(--dvk-action); font-weight: 600; }
 
   .demo-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 80px); align-items: center; }
   @media (max-width: 900px) { .demo-grille { grid-template-columns: 1fr; } }

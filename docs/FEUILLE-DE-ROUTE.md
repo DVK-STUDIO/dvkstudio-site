@@ -21,6 +21,8 @@ Ordre retenu : V2 stabilisée → jalon 3 → conformité IAD → contenu et pho
 
 > **Mise à jour du 2026-10-03 : l'option (b) remplace l'option A.** IAD devient une capacité DÉSACTIVÉE pour que la V2 puisse être publiée sans attendre l'intégration IAD de Kevin. **Fait le 2026-10-03.** Étape 1 : cadrage validé. Étape 2 : interrupteur unique `src/content/capacites.ts`, contenus IAD isolés (`src/content/iad.ts`, `src/iad/`, jamais supprimés), page `/immobilier/` absente du build tant que OFF, test `check:capacites` (aucun « IAD » ni « mandataire » dans le build). Étape 3 : nouvelle accueil intégrée (trois entrées, page `/acquereurs/`, barre mobile). Investisseur : intégré à « J'achète un bien à rénover », pas de parcours dédié. Réactivation : voir `docs/mise-en-ligne.md`.
 
+> **Mise à jour du 2026-10-04 : le mode `orientation` remplace l'option (b).** L'interrupteur booléen devient `immobilier.mode = "off" | "orientation" | "mandataire"`. Version préparée pour publication : `orientation` (page `/immobilier/` active, navigation « Immobilier », accueil Je rénove / J'achète / Je vends, « Je rejoins le réseau iad France » autorisé si exact ; aucune qualité de professionnel immobilier, aucun mandat, avis de valeur, honoraires ni mention réglementaire). `mandataire` est verrouillé : le build échoue tant que les données réglementaires ne sont pas complètes et validées. Growth est inchangé : aucune prospection sortante ne présente Kevin comme mandataire immobilier tant que le mode `mandataire` n'est pas explicitement activé. Détail : `docs/mise-en-ligne.md`, section « Mode Immobilier ».
+
 Texte d'origine (option A, remplacée) :
 
 La V2 est **techniquement prête mais volontairement non publiable** : le site présente aujourd'hui le statut de mandataire IAD France comme acquis (accueil, `/immobilier/`, `/a-propos/`, FAQ, mentions légales) alors que l'intégration IAD de Kevin n'est pas finalisée. Aucun contenu IAD n'est modifié pour l'instant, et aucune mention provisoire n'est ajoutée.
@@ -34,7 +36,7 @@ La V2 est **techniquement prête mais volontairement non publiable** : le site p
 | Capacité | État au 2026-10-03 | Condition d'activation |
 |---|---|---|
 | hemea · Travaux | **actif** | — |
-| IAD · Immobilier (vente, achat) | **en attente** | intégration IAD finalisée ; statut exact sous lequel Kevin peut communiquer vérifié ; mentions réglementaires définitives |
+| iad · Immobilier (vente, achat) | **orientation publiable** (2026-10-04) ; `mandataire` verrouillé | `mandataire` : statut exact validé, données réglementaires complètes (`reglementaire.valide`), canaux Growth relus, GO explicite |
 
 IAD et hemea sont des **capacités activables**, pas des hypothèses codées en dur dans l'identité DVK : DVK Studio existe sans elles, et l'une peut s'activer ou changer sans remettre en cause l'autre.
 
@@ -56,5 +58,5 @@ Livré (dépôt local `dvk-design-system`). Source de vérité graphique : direc
 - Photographies réelles (dépendance de contenu) : le mode Éditorial sera validé sur un projet disposant des droits.
 - Migration complète des espacements et des tailles de texte vers les rôles du Design System ; poids 500 ; repères de plan dans la matrice.
 - Plan du potentiel calé sur un projet cuisine / séjour : à généraliser dans le contrat avec un second projet.
-- Capacité IAD : désactivée, **ne bloque plus** la mise en ligne. Elle bloquera sa propre réactivation tant que le statut n'est pas validé.
+- Mode Immobilier : `orientation` publiable (ne bloque pas la mise en ligne). `mandataire` bloque sa propre activation tant que les données réglementaires manquent.
 - Portrait, réalisations et avis : absents du site public (aucun emplacement réservé) tant qu'il n'y a pas de matériau réel et autorisé.

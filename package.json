@@ -11,6 +11,7 @@
     "check:public": "node scripts/check-public.mjs",
     "check:site": "node scripts/check-site.mjs",
     "check:capacites": "node scripts/check-capacites.mjs",
+    "check:modes": "node scripts/verifier-modes.mjs",
     "smoke": "node scripts/smoke.mjs",
     "verifier:golive": "node scripts/verifier-golive.mjs",
     "images": "node scripts/prepare-images.mjs"

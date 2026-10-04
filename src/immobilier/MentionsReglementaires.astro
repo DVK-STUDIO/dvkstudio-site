@@ -1,0 +1,18 @@
+---
+// Informations réglementaires de l'activité immobilière. Affichées seulement en mode « mandataire » (le build échoue
+// avant si une valeur manque). Aucune valeur écrite ici : tout vient de src/content/iad.ts.
+import { site } from "../content/site";
+import { reglementaire as r, reseau } from "../content/iad";
+const e = site.editeur;
+---
+
+<h2>Activité immobilière</h2>
+<p>{e.nom} exerce également en tant que {r.qualite} du réseau {reseau.nom}. Informations réglementaires :</p>
+<ul>
+  <li>Immatriculation au RSAC : {r.rsac}</li>
+  <li>Carte professionnelle ou attestation : {r.carteProfessionnelle}</li>
+  <li>Garantie financière : {r.garantieFinanciere}</li>
+  <li>Assurance de responsabilité civile professionnelle : {r.assuranceRcp}</li>
+  <li>Honoraires : {r.honoraires}</li>
+  <li>Médiation de la consommation : {r.mediateur}</li>
+</ul>

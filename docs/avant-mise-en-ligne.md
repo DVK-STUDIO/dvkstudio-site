@@ -3,7 +3,8 @@
 `npm run check:public -- --golive` échoue tant qu'un emplacement « à compléter » reste dans le site construit.
 
 ## À fournir / confirmer par Kevin
-- [x] Informations du mandataire IAD France : sans objet tant que la capacité IAD est désactivée (aucune mention publique). À fournir avant toute réactivation.
+- [x] Informations réglementaires du mandataire : sans objet en mode `orientation` (aucune mention publique). À fournir avant le mode `mandataire` (liste dans `docs/mise-en-ligne.md`).
+- [ ] **Action humaine : confirmer que « Je rejoins le réseau iad France » est exact** au jour de la mise en ligne.
 - [ ] **Action humaine : médiateur de la consommation CM2C.** Adhésion confirmée par l'e-mail du 11/11/2025 (3 ans). Récupérer la mention officielle dans l'espace professionnel CM2C et l'intégrer aux emplacements juridiquement nécessaires. Aucune coordonnée n'est devinée : tant que ce n'est pas fait, rien n'est affiché.
 - [ ] **Action humaine : conformité à la charte de communication hemea.** Le contrat de mandataire (art. 5.5 et 5.11) impose la conformité des supports commerciaux à la charte, ou leur approbation écrite, et la mention de la qualité de mandataire et des références du mandant. Confirmer la conformité du site ou obtenir l'approbation.
 - [ ] Mention de l'assurance RCP : non affichée tant que la formulation autorisée n'est pas confirmée.

@@ -9,8 +9,8 @@ npm run verifier:golive          # FORBIDDEN_FILE=<motifs privés> pour le contr
 ```
 
 Enchaîne : tests, build public (`DVK_PUBLIC_BUILD=1`), `check:public`, `check:site` (liens, SEO, redirections, accessibilité structurelle, budget de performance), absence de l'expérience non confirmée, aperçu local servi puis test de fumée.
-Verdict : **0** prêt à signer · **1** échec technique · **2** technique OK mais prérequis humains restants (avec la capacité IAD désactivée, il n'y en a plus de bloquant automatique).
-Inclut `check:capacites` : capacité IAD désactivée => aucune occurrence de « IAD » ni de « mandataire immobilier » dans le build, et pas de page `/immobilier/`.
+Verdict : **0** prêt à signer · **1** échec technique · **2** technique OK mais prérequis humains restants (en mode Immobilier « orientation » ou « off », il n'y a plus de bloquant automatique ; le mode « mandataire » ne se construit pas tant que les données réglementaires manquent).
+Inclut `check:capacites` (la matrice du mode publié, voir « Mode Immobilier » plus bas) et `check:modes` (les trois modes construits réellement, dans un dossier temporaire ; les sources sont restaurées et `dist/` n'est pas touché).
 
 Aperçu à l'œil (build public, comme en production) :
 ```
@@ -19,7 +19,8 @@ DVK_PUBLIC_BUILD=1 npm run build && npm run preview
 
 ## 2. Prérequis humains (bloquent la mise en production, pas le développement)
 
-- [x] **Capacité IAD désactivée (option b, faite le 3 octobre 2026)** : interrupteur unique `src/content/capacites.ts`, contenus isolés dans `src/content/iad.ts` et `src/iad/`, test de build `check:capacites`. Aucune mention publique du statut. Voir « Activer la capacité IAD » plus bas.
+- [x] **Mode Immobilier « orientation » (décision du 4 octobre 2026, remplace l'option b du 3 octobre)** : interrupteur unique `src/content/capacites.ts` (`immobilier.mode`), contenus dans `src/content/immobilier.ts`, données réglementaires séparées dans `src/content/iad.ts`, contrôles `check:capacites` et `check:modes`. La page `/immobilier/` est publiable ; le site ne présente jamais Kevin comme professionnel immobilier. Voir « Mode Immobilier » plus bas.
+- [ ] **Action humaine : confirmer que « Je rejoins le réseau iad France » est exact** au jour de la mise en ligne (texte affiché en mode orientation).
 - [ ] **Action humaine : médiateur de la consommation CM2C.** Adhésion confirmée par l'e-mail du 11/11/2025 (3 ans). Récupérer la mention officielle dans l'espace professionnel CM2C et l'intégrer aux emplacements juridiquement nécessaires. Aucune coordonnée n'est devinée : tant que ce n'est pas fait, rien n'est affiché.
 - [ ] **Action humaine : conformité à la charte de communication hemea.** Le contrat de mandataire (art. 5.5 et 5.11) impose la conformité des supports commerciaux à la charte, ou leur approbation écrite, et la mention de la qualité de mandataire et des références du mandant. Confirmer la conformité du site ou obtenir l'approbation.
 - [ ] Mention de l'assurance RCP : non affichée tant que la formulation autorisée n'est pas confirmée.
@@ -32,13 +33,23 @@ DVK_PUBLIC_BUILD=1 npm run build && npm run preview
 - [ ] Expérience pilote : **hors publication** tant que `diffusion` n'est pas `confirmee` (accord de la famille). Elle n'a aucune raison de bloquer le site.
 - [ ] Domaine : le DNS de `dvkstudio.fr` ne change pas (fichier `CNAME` conservé).
 
-## Activer la capacité IAD (plus tard, statut validé)
+## Mode Immobilier (`immobilier.mode` dans `src/content/capacites.ts`)
 
-1. Vérifier le statut exact de communication ; compléter l'objet `reglementaire` de `src/content/iad.ts` (aucune valeur provisoire).
-2. Relire les textes de `src/content/iad.ts` et `src/iad/` (page `/immobilier/`, section des mentions légales, FAQ, À propos).
-3. Passer `iad` à `true` dans `src/content/capacites.ts` : la page `/immobilier/`, l'entrée de navigation, l'entrée « Je vends » de l'accueil, la FAQ et les mentions réapparaissent (rien n'a été supprimé).
-4. `npm run verifier:golive` : `check:public --golive` bloque tant qu'un « [à compléter] » subsiste.
-5. GO explicite avant toute publication.
+| Mode | Effet |
+|---|---|
+| `off` | Aucune page `/immobilier/`, aucune présentation de l'activité immobilière, aucune référence au réseau iad. Menu et accueil d'origine. |
+| `orientation` (**publié**) | Page `/immobilier/` active, menu « Immobilier », accueil Je rénove / J'achète / Je vends. Autorisé : « je rejoins le réseau iad France » (si exact). Interdits : qualité de professionnel immobilier (mandataire, conseiller, agent commercial), mandat, avis de valeur, honoraires ou barème, mentions réglementaires, SEO transactionnel, formulaire de transmission à un tiers, rémunération de recommandation. CTA : rendez-vous général de 20 minutes. |
+| `mandataire` | Page définitive. **Verrouillé** : le build échoue tant que `reglementaire` (`src/content/iad.ts`) est incomplet ou que `valide` vaut false. |
+
+Règle : **Immobilier orientation = publiable. Immobilier mandataire = verrouillé jusqu'à validation réglementaire.** Graphie du réseau : « iad France » (vérifiée sur les e-mails officiels d'iad), variable `reseau.nom`. Pas de logo iad. « Conseil en investissement » : exclu dans tous les modes.
+
+### Activer le mode mandataire (plus tard, statut validé)
+
+1. Vérifier le statut exact de communication. Renseigner `reglementaire` dans `src/content/iad.ts` avec les valeurs OFFICIELLES (qualité, RSAC, carte professionnelle, garantie financière, RCP, honoraires, médiateur après vérification du périmètre CM2C et des exigences iad). Aucune valeur provisoire.
+2. Passer `valide` à `true`, puis `immobilier.mode` à `"mandataire"` dans `src/content/capacites.ts`. Le build refuse si un champ manque.
+3. Relire les textes de `src/content/immobilier.ts` (variantes `mandataire`) et la section réglementaire des mentions légales.
+4. Relire les canaux d'acquisition de Growth (contrôle de cohérence inscrit au roadmap Growth).
+5. `npm run verifier:golive` (inclut `check:capacites` et `check:modes`), puis GO explicite avant toute publication.
 
 ## 3. Bascule (à exécuter seulement après GO explicite)
 
@@ -83,7 +94,7 @@ Puis Pages > Source = « Deploy from a branch », branche `retour-v1`, dossier `
 | # | Vérification | Résultat |
 |---|---|---|
 | 1 | `npm run verifier:golive` : technique OK | ☐ |
-| 2 | Capacité IAD désactivée (`check:capacites` vert) ou mentions définitives intégrées | ☐ |
+| 2 | Mode Immobilier `orientation` : `check:capacites` et `check:modes` verts ; « Je rejoins le réseau iad France » confirmé exact | ☐ |
 | 3 | Aperçu relu desktop et mobile 390 px | ☐ |
 | 4 | Aucune photo, aucun logo, aucun tarif non autorisé | ☐ |
 | 5 | Expérience pilote exclue (ou diffusion confirmée par écrit) | ☐ |

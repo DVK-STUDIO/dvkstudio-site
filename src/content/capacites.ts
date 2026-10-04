@@ -1,14 +1,19 @@
-// Interrupteur UNIQUE des capacités activables du site.
+// Interrupteur UNIQUE de la capacité Immobilier du site. Ne pas dupliquer cette valeur ailleurs.
 //
-// iad = false : aucun contenu relatif à IAD France ni au statut de mandataire n'est émis par le build.
-//   Les contenus restent dans le dépôt (src/content/iad.ts, src/iad/), prêts à être réactivés.
-// iad = true  : à ne faire qu'une fois le statut IAD validé ET les mentions réglementaires définitives intégrées
-//   (src/content/iad.ts, objet `mandataire`). Voir docs/mise-en-ligne.md, section « Activer la capacité IAD ».
+//   "off"         : aucune page /immobilier/, aucune présentation de l'activité immobilière, aucune référence au réseau.
+//   "orientation" : page /immobilier/ publiée. Dégradation contrôlée de la page définitive : le site peut dire
+//                   « je rejoins le réseau » (si c'est exact), mais ne présente JAMAIS Kevin comme professionnel
+//                   immobilier, ni mandat, ni avis de valeur, ni honoraires, ni mention réglementaire.
+//   "mandataire"  : page définitive. VERROUILLÉ : le build échoue tant que `reglementaire` (src/content/iad.ts)
+//                   n'est pas complet et `valide`. Voir docs/mise-en-ligne.md, section « Activer le mode mandataire ».
 //
-// Le contrôle `npm run check:capacites` lit cette valeur et échoue si « IAD » ou « mandataire immobilier » apparaît
-// dans le site construit alors qu'elle vaut false. Ne pas dupliquer cette valeur ailleurs.
-export const capacites = {
-  iad: false as boolean,
+// Le contrôle `npm run check:capacites` lit cette valeur et vérifie le site construit selon la matrice du mode.
+export type ModeImmobilier = "off" | "orientation" | "mandataire";
+
+export const immobilier = {
+  mode: "orientation" as ModeImmobilier,
 };
 
-export const iadActive = capacites.iad;
+export const modeImmobilier: ModeImmobilier = immobilier.mode;
+export const immobilierVisible = modeImmobilier !== "off";
+export const mandataireActif = modeImmobilier === "mandataire";

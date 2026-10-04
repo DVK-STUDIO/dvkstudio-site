@@ -1,36 +1,44 @@
-// Contenus dépendant du statut de mandataire IAD France. ISOLÉS ici : aucune page publique ne doit les citer en dur.
-// Ils ne sont lus que si `capacites.iad` vaut true (src/content/capacites.ts). Rien n'est supprimé : réactivation = un interrupteur.
-// Aucune valeur inventée : tout champ non confirmé reste « [à compléter] » (le contrôle de mise en ligne bloque alors).
+// Données du réseau et données réglementaires de l'activité immobilière. ISOLÉES ici : aucune page publique ne doit les citer en dur.
+// Aucune valeur inventée : tout champ non confirmé reste « [à compléter] ». En mode « mandataire », le build échoue
+// tant qu'un champ manque ou que `valide` vaut false (voir src/content/immobilier.ts et scripts/check-capacites.mjs).
 import { A_COMPLETER } from "./site";
 
+// Graphie vérifiée le 2026-10-04 sur les e-mails officiels d'iad (expéditeur notif.iadinternational.com) : « iad » et « iad France ».
+// Utilisée partout par cette seule variable. Pas de logo iad pour l'instant.
+export const reseau = {
+  nom: "iad France",
+};
+
 export const reglementaire = {
-  reseau: "IAD France",
+  // Passer à true seulement quand tous les champs ci-dessous sont les valeurs officielles, validées par Kevin et par iad.
+  valide: false,
+  // Qualité exacte, telle que validée par iad (ne jamais la deviner).
+  qualite: A_COMPLETER,
+  // Immatriculation au RSAC : numéro et greffe.
+  rsac: A_COMPLETER,
   carteProfessionnelle: A_COMPLETER,
   garantieFinanciere: A_COMPLETER,
   assuranceRcp: A_COMPLETER,
-  registreMandataires: A_COMPLETER,
+  // Honoraires : barème iad et modalités d'accès.
+  honoraires: A_COMPLETER,
+  // Médiateur : périmètre de l'adhésion CM2C du 11/11/2025 et exigences d'iad à vérifier avant de remplir.
+  mediateur: A_COMPLETER,
 };
 
-export const iad = {
-  navigation: [{ libelle: "Immobilier", href: "/immobilier/" }],
+export type Reglementaire = typeof reglementaire;
 
-  accueil: {
-    description: "Un seul interlocuteur pour votre projet immobilier : vendre, acheter, rénover. DVK Studio révèle le potentiel d'un bien et cadre travaux et budget, dans l'Oise.",
-    entree: { titre: "Je vends", texte: "Estimer et valoriser mon bien.", lien: "Estimer mon bien →", href: "/immobilier/#vendre" },
-    faq: { q: "Quel est le rôle d'IAD et de hemea ?", r: "Ce sont les réseaux que DVK Studio mobilise selon votre besoin : IAD France pour l'achat et la vente, hemea pour l'accompagnement des travaux. Vous gardez un seul interlocuteur, et chaque rôle vous est expliqué avant tout engagement." },
-    confiance: "Je suis aussi mandataire immobilier du réseau IAD France.",
-  },
+/** Retourne les champs absents ou encore à compléter (liste vide = complet). */
+export function reglementaireManquant(r: Reglementaire): string[] {
+  return (Object.entries(r) as [string, unknown][])
+    .filter(([cle]) => cle !== "valide")
+    .filter(([, v]) => typeof v !== "string" || v.trim() === "" || /à compléter/i.test(v))
+    .map(([cle]) => cle);
+}
 
-  aPropos: {
-    description: "DVK Studio est le nom sous lequel Kevin De Vlieger exerce, en Oise : mandataire immobilier du réseau IAD France et chef de projet travaux hemea.",
-    chapo: "Kevin De Vlieger, basé à Gannes, dans l'Oise. J'accompagne les projets immobiliers de la décision aux travaux : acheter, vendre, rénover. Je suis aussi mandataire immobilier du réseau IAD France.",
-    blocTitre: "Immobilier",
-    blocTexte: (reseau: string) => `Acheter ou vendre un bien, en tant que mandataire du réseau ${reseau}. Les informations réglementaires de cette activité figurent dans les`,
-  },
-
-  cgv: "Les prestations de mandataire immobilier et d'accompagnement de travaux relèvent de leurs propres conditions, communiquées avant tout engagement.",
-
-  mentions: {
-    description: "Mentions légales du site dvkstudio.fr : éditeur, activité de mandataire immobilier, hébergeur.",
-  },
-};
+/** Message d'erreur si le mode « mandataire » est demandé avec des données incomplètes ou non validées ; null sinon. */
+export function verrouMandataire(r: Reglementaire): string | null {
+  const manque = reglementaireManquant(r);
+  if (!r.valide) return "mode « mandataire » refusé : `reglementaire.valide` vaut false (src/content/iad.ts)";
+  if (manque.length) return `mode « mandataire » refusé : données réglementaires incomplètes (${manque.join(", ")})`;
+  return null;
+}

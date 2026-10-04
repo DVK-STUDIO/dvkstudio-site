@@ -4,11 +4,12 @@ import BoutonRdv from "../components/BoutonRdv.astro";
 import Processus from "../components/Processus.astro";
 import Faq from "../components/Faq.astro";
 import { site } from "../content/site";
+import { faqAcquereurConseil } from "../content/immobilier";
 
 const faq = [
   { q: "Je veux louer le bien : est-ce aussi pour moi ?", r: "Oui. Que vous achetiez pour l'habiter ou pour le louer, la question des travaux est la même : que peut devenir ce bien, et quelle enveloppe de travaux faut-il envisager ?" },
   { q: "Le budget présenté est-il un devis ?", r: "Non. C'est une estimation indicative, avec ses hypothèses et ses limites. Ce qui n'est pas encore établi est indiqué « à chiffrer » : aucun montant n'est inventé." },
-  { q: "Donnez-vous un avis sur l'opportunité d'acheter ?", r: "Non. L'accompagnement porte sur les travaux à envisager. DVK Studio ne donne pas de conseil financier, juridique ou en investissement immobilier, et n'intervient pas dans la transaction d'achat." },
+  { q: "Donnez-vous un avis sur l'opportunité d'acheter ?", r: faqAcquereurConseil },
   { q: "Le premier échange m'engage-t-il ?", r: "Non. C'est un échange de vingt minutes par téléphone, sans engagement." },
 ];
 ---
