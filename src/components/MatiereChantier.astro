@@ -1,0 +1,27 @@
+---
+// Matière chantier : mur ouvert, structure, isolation, matériaux. Une seule grande image, jamais de pose ni de cliché.
+// La provenance est toujours dite : « Chantier du projet présenté » ou « Illustration · chantier d'un autre projet ».
+import { Picture } from "astro:assets";
+import { mentionChantier } from "../lib/medias";
+import type { Provenance } from "../content/medias";
+
+interface Props { src: ImageMetadata; alt: string; provenance?: Provenance; standin?: boolean }
+const { src, alt, provenance, standin = false } = Astro.props;
+---
+
+<figure class="matiere">
+  <div class="cadre">
+    <Picture src={src} alt={alt} widths={[480, 720, 960, 1280, 1600]} sizes="(max-width: 1240px) 100vw, 1128px" formats={["avif", "webp"]} loading="lazy" decoding="async" />
+    {standin && <span class="marque-provisoire">STAND-IN · HORS PRODUCTION</span>}
+  </div>
+  <figcaption><span class="dvk-availability is-demo">{mentionChantier(provenance)}</span></figcaption>
+</figure>
+
+<style>
+  .matiere { margin: 0; }
+  .cadre { position: relative; aspect-ratio: 21 / 9; overflow: hidden; background: var(--dvk-surface); border-radius: var(--dvk-radius-md); }
+  .cadre :global(picture), .cadre :global(img) { display: block; width: 100%; height: 100%; }
+  .cadre :global(img) { object-fit: cover; }
+  figcaption { margin-top: 12px; }
+  @media (max-width: 720px) { .cadre { aspect-ratio: 4 / 3; } }
+</style>

@@ -5,6 +5,11 @@ import Processus from "../components/Processus.astro";
 import Faq from "../components/Faq.astro";
 import { site } from "../content/site";
 import { faqAcquereurConseil } from "../content/immobilier";
+import PhotoAnnotee from "../components/PhotoAnnotee.astro";
+import { imageAcquereurs } from "../lib/medias";
+
+// Bien existant + lecture du potentiel et travaux à anticiper. Absent tant que ses droits ne sont pas confirmés : hero actuel.
+const photo = imageAcquereurs();
 
 const faq = [
   { q: "Je veux louer le bien : est-ce aussi pour moi ?", r: "Oui. Que vous achetiez pour l'habiter ou pour le louer, la question des travaux est la même : que peut devenir ce bien, et quelle enveloppe de travaux faut-il envisager ?" },
@@ -20,12 +25,28 @@ const faq = [
   page="acquereurs"
   chemin="/acquereurs/"
 >
-  <header class="conteneur page-hero">
-    <p class="surtitre">Acquéreurs · {site.zone}</p>
-    <h1 class="titre-xl">Acheter un bien à rénover, en sachant ce qu'il peut devenir.</h1>
-    <p class="chapo">On visite un bien daté sans savoir ce qu'on peut en faire, ni combien cela coûterait. DVK Studio vous aide à voir clair avant de signer, que vous achetiez pour l'habiter ou pour le louer.</p>
-    <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="acheter">Analyser un bien avant d'acheter</BoutonRdv></div>
+  {photo ? (
+  <header class="conteneur page-hero hero-media">
+    <div class="hm-tete">
+      <p class="surtitre">Acquéreurs · {site.zone}</p>
+      <h1 class="titre-xl">Acheter un bien à rénover, en sachant ce qu'il peut devenir.</h1>
+    </div>
+    <div class="hm-visuel">
+      <PhotoAnnotee src={photo.src} alt={photo.alt} reperes={photo.reperes} standin={photo.standin} cotes={["01 · Le bien", "Potentiel · 02"]} />
+    </div>
+    <div class="hm-corps">
+      <p class="chapo">On visite un bien daté sans savoir ce qu'on peut en faire, ni combien cela coûterait. DVK Studio vous aide à voir clair avant de signer, que vous achetiez pour l'habiter ou pour le louer.</p>
+      <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="acheter">Analyser un bien avant d'acheter</BoutonRdv></div>
+    </div>
   </header>
+  ) : (
+    <header class="conteneur page-hero">
+      <p class="surtitre">Acquéreurs · {site.zone}</p>
+      <h1 class="titre-xl">Acheter un bien à rénover, en sachant ce qu'il peut devenir.</h1>
+      <p class="chapo">On visite un bien daté sans savoir ce qu'on peut en faire, ni combien cela coûterait. DVK Studio vous aide à voir clair avant de signer, que vous achetiez pour l'habiter ou pour le louer.</p>
+      <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="acheter">Analyser un bien avant d'acheter</BoutonRdv></div>
+    </header>
+  )}
 
   <section class="section conteneur" aria-labelledby="t-valeur">
     <h2 id="t-valeur" class="titre-l" style="max-width:22ch">Ce bien me plaît, mais je n'arrive pas à me projeter.</h2>

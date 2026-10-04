@@ -13,7 +13,7 @@
 - [x] /cgv/ retirée du site public (DVK ne commercialise pas ces prestations au lancement ; l'ancienne adresse .html renvoie vers les mentions légales). Source conservée dans `docs/archives/cgv-v2-2026-10-03.astro`, anciennes CGV dans l'historique Git. À rétablir si DVK Studio commercialise une prestation propre (par exemple autour de DVK Expérience).
 - [ ] Tarifs (180 / 360 / 500 €) : non repris dans la V2 tant que non confirmés.
 - [ ] Logos et partenaires : retirés ; à réintroduire seulement avec autorisation écrite.
-- [ ] Visuel du hero : version typographique par défaut. Version avant/après seulement si les droits d'usage sont confirmés (voir `src/assets/hero/LISEZMOI.md`, `hero.mode` dans `src/content/site.ts`).
+- [ ] Visuel du hero : version actuelle (plan) tant qu'aucune paire existant / projection n'est autorisée. La paire signature s'ajoute par un petit commit éditorial (voir `docs/medias.md`) : droits confirmés avec justificatif et date, mêmes dimensions exactes, 2400 × 2000 minimum visés.
 
 ## Expérience pilote (`/experience/maison-familiale/`)
 - [ ] Faire confirmer par la famille le périmètre « toute la maison » : type de bien, énergie (classe, consommation, facture), budget travaux agrégé. Le consentement initial couvre cuisine, séjour et plan anonymisé.

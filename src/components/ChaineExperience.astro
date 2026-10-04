@@ -3,17 +3,12 @@
 // À poser dans une section .sombre. Chaque jalon porte le statut de la NATURE de l'information (jamais une valeur de projet) :
 // aucun projet, aucune donnée n'est inventé. Les quatre statuts du Design System sont conservés tels quels.
 import Statut from "./experience/Statut.astro";
+import { jalons } from "../content/chaine";
 
 interface Props { id: string; titre: string; intro?: string; idx?: string; legende?: string }
 const { id, titre, intro, idx = "02", legende = "Exemple de lecture : chaque étape affiche le niveau de certitude de ce qui est établi pour le bien. Ce n'est pas un projet réel." } = Astro.props;
 
-const jalons = [
-  { n: "01", titre: "Bien actuel", texte: "Le bien tel qu'il est, avec la source de chaque donnée.", statut: "reel" as const },
-  { n: "02", titre: "Potentiel", texte: "Ce qu'il permettrait, lu à partir de vos besoins.", statut: "hypothese" as const },
-  { n: "03", titre: "Projection", texte: "Une image pour s'y voir, présentée comme un outil de compréhension.", statut: "hypothese" as const },
-  { n: "04", titre: "Travaux", texte: "Les travaux envisageables, en ordre de grandeur avant la visite.", statut: "estimation" as const },
-  { n: "05", titre: "Enveloppe indicative", texte: "Une première enveloppe, ou « à chiffrer » tant que rien n'est établi.", statut: "manquant" as const, libelle: "À chiffrer" },
-];
+
 ---
 
 <div class="chaine-xp conteneur trame">

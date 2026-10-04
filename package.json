@@ -12,6 +12,9 @@
     "check:site": "node scripts/check-site.mjs",
     "check:capacites": "node scripts/check-capacites.mjs",
     "check:modes": "node scripts/verifier-modes.mjs",
+    "check:medias": "node scripts/check-medias.mjs",
+    "check:modes-medias": "node scripts/verifier-medias.mjs",
+    "dev:standins": "node scripts/dev-standins.mjs",
     "smoke": "node scripts/smoke.mjs",
     "verifier:golive": "node scripts/verifier-golive.mjs",
     "images": "node scripts/prepare-images.mjs"

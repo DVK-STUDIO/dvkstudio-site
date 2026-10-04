@@ -12,11 +12,23 @@ const horsPlan = readdirSync(dossierExperiences)
   .filter((e) => e.indexable === false || (process.env.DVK_PUBLIC_BUILD === "1" && e.diffusion?.statut !== "confirmee"))
   .map((e) => `/experience/${e.slug}/`);
 
+// Aucun stand-in de développement ne doit entrer dans un build : le module qui les liste est vidé hors du serveur de développement.
+let commande = "build";
+const standinsSeulementEnDev = () => ({
+  name: "dvk-standins",
+  enforce: "pre",
+  configResolved(config) { commande = config.command; },
+  transform(code, id) {
+    if (commande !== "serve" && /src[\\/]lib[\\/]standins-dev\.ts$/.test(id.split("?")[0])) return { code: "export default {};", map: null };
+  },
+});
+
 export default defineConfig({
   site: "https://dvkstudio.fr",
   output: "static",
   trailingSlash: "always",
   build: { format: "directory" },
   compressHTML: true,
+  vite: { plugins: [standinsSeulementEnDev()] },
   integrations: [sitemap({ filter: (page) => !/\/(merci|404)\/?$/.test(page) && !horsPlan.some((p) => page.endsWith(p)) })],
 });

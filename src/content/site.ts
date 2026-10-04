@@ -30,11 +30,3 @@ export const site = {
   },
   reseaux: { instagram: "https://www.instagram.com/dvk_studio_officiel/", linkedin: "https://www.linkedin.com/in/kevin-de-vlieger-88b261364/", facebook: "https://www.facebook.com/profile.php?id=61575906091084" },
 };
-
-// Hero : mode interchangeable par simple changement de contenu.
-//  - "typo"        : hero typographique (par défaut tant que le droit d'usage du visuel n'est pas confirmé)
-//  - "avantApres"  : curseur avant/après (visuels dans src/assets/hero/, voir scripts/prepare-images.mjs)
-export const hero = {
-  mode: "typo" as "typo" | "avantApres",
-  avantApres: { avant: "", apres: "", legende: "Projection réalisée par DVK Studio à partir de photos du bien — une visualisation, pas un travail réalisé." },
-};

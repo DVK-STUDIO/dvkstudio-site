@@ -4,6 +4,11 @@ import BoutonRdv from "../components/BoutonRdv.astro";
 import Processus from "../components/Processus.astro";
 import Faq from "../components/Faq.astro";
 import { site } from "../content/site";
+import MatiereChantier from "../components/MatiereChantier.astro";
+import { chantier } from "../lib/medias";
+
+// Matière chantier (mur ouvert, structure, isolation) : une seule grande image, avec sa provenance. Absente tant que ses droits ne sont pas confirmés.
+const matiere = chantier();
 
 const faq = [
   { q: "Êtes-vous maître d'œuvre ?", r: "Non. DVK Studio n'est ni maître d'œuvre, ni architecte, ni bureau d'études, et ne réalise pas de travaux. Je cadre votre projet, estime son budget et vous aide à consulter des entreprises labellisées hemea." },
@@ -25,6 +30,12 @@ const faq = [
     <p class="chapo">Beaucoup de projets de rénovation s'enlisent faute d'avoir été cadrés : par où commencer, combien ça coûte, qui consulter. DVK Studio met de l'ordre avant le premier devis.</p>
     <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="renover">Cadrer mes travaux</BoutonRdv></div>
   </header>
+
+  {matiere && (
+    <section class="conteneur" aria-label="Matière chantier">
+      <MatiereChantier src={matiere.src} alt={matiere.alt} provenance={matiere.provenance} standin={matiere.standin} />
+    </section>
+  )}
 
   <section class="section conteneur" aria-labelledby="t-probleme">
     <h2 id="t-probleme" class="titre-l" style="max-width:22ch">Ce que vous y gagnez.</h2>

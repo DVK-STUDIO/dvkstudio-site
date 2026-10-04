@@ -26,6 +26,8 @@ if (continuer) {
   etape("Liens, SEO, redirections, accessibilité, performance (check:site)", () => { const r = sh("node scripts/check-site.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Capacité Immobilier : matrice du mode publié respectée (check:capacites)", () => { const r = sh("node scripts/check-capacites.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Capacité Immobilier : les trois modes testés par construction réelle (check:modes)", () => { const r = sh("node scripts/verifier-modes.mjs"); return { ok: r.status === 0, detail: sortie(r).split("\n").slice(-14).join("\n") }; });
+  etape("Médias : aucun stand-in, aucun emplacement vide, aucun montant, aucun EXIF (check:medias)", () => { const r = sh("node scripts/check-medias.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
+  etape("Médias : livraison dormante et verrous testés par construction réelle (check:modes-medias)", () => { const r = sh("node scripts/verifier-medias.mjs"); return { ok: r.status === 0, detail: sortie(r).split("\n").slice(-14).join("\n") }; });
   etape("Expérience non confirmée absente du build", () => {
     const fautes = [];
     if (existsSync("src/data/experiences")) {

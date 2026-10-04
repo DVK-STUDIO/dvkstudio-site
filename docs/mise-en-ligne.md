@@ -10,7 +10,7 @@ npm run verifier:golive          # FORBIDDEN_FILE=<motifs privés> pour le contr
 
 Enchaîne : tests, build public (`DVK_PUBLIC_BUILD=1`), `check:public`, `check:site` (liens, SEO, redirections, accessibilité structurelle, budget de performance), absence de l'expérience non confirmée, aperçu local servi puis test de fumée.
 Verdict : **0** prêt à signer · **1** échec technique · **2** technique OK mais prérequis humains restants (en mode Immobilier « orientation » ou « off », il n'y a plus de bloquant automatique ; le mode « mandataire » ne se construit pas tant que les données réglementaires manquent).
-Inclut `check:capacites` (la matrice du mode publié, voir « Mode Immobilier » plus bas) et `check:modes` (les trois modes construits réellement, dans un dossier temporaire ; les sources sont restaurées et `dist/` n'est pas touché).
+Inclut `check:capacites` (la matrice du mode publié, voir « Mode Immobilier » plus bas) et `check:modes` (les trois modes construits réellement, dans un dossier temporaire ; les sources sont restaurées et `dist/` n'est pas touché). Inclut aussi `check:medias` (aucun stand-in, aucun emplacement vide, aucun montant dans la chaîne, aucun EXIF, hero : dimensions explicites et budget de chargement) et `check:modes-medias` (constructions réelles de la couche photographique : livraison dormante, stand-ins refusés, paire fictive confirmée, dimensions différentes refusées, droits sans justificatif refusés). Voir `docs/medias.md`.
 
 Aperçu à l'œil (build public, comme en production) :
 ```
@@ -29,7 +29,7 @@ DVK_PUBLIC_BUILD=1 npm run build && npm run preview
 - [x] /cgv/ retirée du site public (DVK ne commercialise pas ces prestations au lancement ; l'ancienne adresse .html renvoie vers les mentions légales). Source conservée dans `docs/archives/cgv-v2-2026-10-03.astro`, anciennes CGV dans l'historique Git. À rétablir si DVK Studio commercialise une prestation propre (par exemple autour de DVK Expérience).
 - [ ] Tarifs : aucun repris tant que non confirmés.
 - [ ] Logos et partenaires : aucun repris sans autorisation.
-- [ ] Hero : version typographique (aucune photo non autorisée).
+- [ ] Hero : version actuelle (plan, aucune photo non autorisée). La couche photographique est livrée dormante : elle ne s'active que lorsqu'un média est marqué « confirmés » dans `src/content/medias.ts` (voir `docs/medias.md`).
 - [ ] Expérience pilote : **hors publication** tant que `diffusion` n'est pas `confirmee` (accord de la famille). Elle n'a aucune raison de bloquer le site.
 - [ ] Domaine : le DNS de `dvkstudio.fr` ne change pas (fichier `CNAME` conservé).
 

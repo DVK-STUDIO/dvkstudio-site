@@ -3,3 +3,6 @@ dist/
 .astro/
 .env
 .DS_Store
+
+# Stand-ins de développement local (droits non confirmés) : jamais versionnés, jamais dans un build public
+src/assets/standins/

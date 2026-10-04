@@ -6,10 +6,15 @@ import BoutonRdv from "../components/BoutonRdv.astro";
 import Processus from "../components/Processus.astro";
 import Faq from "../components/Faq.astro";
 import ChaineExperience from "../components/ChaineExperience.astro";
+import PhotoAnnotee from "../components/PhotoAnnotee.astro";
 import Statut from "../components/experience/Statut.astro";
 import MentionsReglementaires from "./MentionsReglementaires.astro";
 import { mandataireActif } from "../content/capacites";
 import { page as p } from "../content/immobilier";
+import { imageImmobilier } from "../lib/medias";
+
+// Photographie propre à l'immobilier (façade / bien existant + potentiel annoté). Absente tant que ses droits ne sont pas confirmés : hero actuel.
+const photo = imageImmobilier();
 
 // Données structurées : la FAQ visible, rien d'autre.
 const faqStructuree = {
@@ -20,17 +25,16 @@ const faqStructuree = {
 ---
 
 <Base titre={p.titre} description={p.description} page="immobilier" chemin="/immobilier/" donneesStructurees={faqStructuree}>
-  <header class="conteneur page-hero hero-immo">
-    <!-- Motif de construction inspiré de la géométrie du logo (lentille et axe) : décoratif. -->
-    <svg class="motif" viewBox="0 0 320 300" width="267" height="250" aria-hidden="true" focusable="false">
-      <path d="M160 24 C 92 86, 92 190, 160 276 C 228 190, 228 86, 160 24 Z" />
-      <path d="M160 24 C 92 86, 92 190, 160 276 C 228 190, 228 86, 160 24 Z" transform="rotate(-28 160 276)" />
-      <line x1="160" y1="8" x2="160" y2="292" stroke-dasharray="2 6" />
-      <line x1="20" y1="276" x2="300" y2="276" />
-    </svg>
-    <p class="surtitre">{p.hero.surtitre}</p>
-    <h1 class="titre-xl titre-hero">{p.hero.titre}</h1>
-    <div class="hero-corps">
+  {photo ? (
+  <header class="conteneur page-hero hero-media">
+    <div class="hm-tete">
+      <p class="surtitre">{p.hero.surtitre}</p>
+      <h1 class="titre-xl titre-hero">{p.hero.titre}</h1>
+    </div>
+    <div class="hm-visuel">
+      <PhotoAnnotee src={photo.src} alt={photo.alt} reperes={photo.reperes} standin={photo.standin} cotes={["01 · Le bien", "Potentiel · 02"]} />
+    </div>
+    <div class="hm-corps">
       <p class="chapo">{p.hero.chapo}</p>
       <div class="actions">
         <a class="btn btn-action" href="#vendre">{p.hero.vendre}</a>
@@ -39,6 +43,27 @@ const faqStructuree = {
       <p class="micro">{p.hero.ligne}</p>
     </div>
   </header>
+  ) : (
+    <header class="conteneur page-hero hero-immo">
+      <!-- Motif de construction inspiré de la géométrie du logo (lentille et axe) : décoratif. -->
+      <svg class="motif" viewBox="0 0 320 300" width="267" height="250" aria-hidden="true" focusable="false">
+        <path d="M160 24 C 92 86, 92 190, 160 276 C 228 190, 228 86, 160 24 Z" />
+        <path d="M160 24 C 92 86, 92 190, 160 276 C 228 190, 228 86, 160 24 Z" transform="rotate(-28 160 276)" />
+        <line x1="160" y1="8" x2="160" y2="292" stroke-dasharray="2 6" />
+        <line x1="20" y1="276" x2="300" y2="276" />
+      </svg>
+      <p class="surtitre">{p.hero.surtitre}</p>
+      <h1 class="titre-xl titre-hero">{p.hero.titre}</h1>
+      <div class="hero-corps">
+        <p class="chapo">{p.hero.chapo}</p>
+        <div class="actions">
+          <a class="btn btn-action" href="#vendre">{p.hero.vendre}</a>
+          <a class="btn btn-contour" href="#acheter">{p.hero.acheter}</a>
+        </div>
+        <p class="micro">{p.hero.ligne}</p>
+      </div>
+    </header>
+  )}
 
   <section class="section conteneur" aria-labelledby="t-approche">
     <div class="enonce">

@@ -1,25 +1,23 @@
 ---
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
-import BarreRdv from "../components/BarreRdv.astro";
 import BeforeAfter from "../components/BeforeAfter.astro";
+import BarreRdv from "../components/BarreRdv.astro";
 import Processus from "../components/Processus.astro";
 import Plan from "../components/Plan.astro";
 import Faq from "../components/Faq.astro";
 import ChaineExperience from "../components/ChaineExperience.astro";
+import TransformationChaine from "../components/TransformationChaine.astro";
 import Statut from "../components/experience/Statut.astro";
 import { experiencesPubliables } from "../lib/experience/experience";
-import { hero, site } from "../content/site";
+import { site } from "../content/site";
+import { chantier, paire } from "../lib/medias";
 import { immobilierVisible } from "../content/capacites";
 import { accueil } from "../content/immobilier";
 
-// Hero interchangeable : le curseur avant/après n'est actif que si le mode l'autorise ET que les deux images
-// existent dans src/assets/hero/ (avant.*, apres.*). Sinon, plan annoté.
-const images = import.meta.glob<{ default: ImageMetadata }>("../assets/hero/*.{webp,jpg,jpeg,png}", { eager: true });
-const trouver = (nom: string) => Object.entries(images).find(([chemin]) => new RegExp(`/${nom}\\.`).test(chemin))?.[1].default;
-const avant = trouver("avant");
-const apres = trouver("apres");
-const heroAvantApres = hero.mode === "avantApres" && avant && apres;
+// Paire existant / projection (src/content/medias.ts). Absente tant que ses droits ne sont pas confirmés : hero et chaîne actuels.
+const media = paire();
+const mediaChantier = media ? chantier() : null;
 
 // Aperçu réel de DVK Expérience : uniquement si une expérience est publiable (diffusion confirmée en build public).
 const experience = experiencesPubliables()[0];
@@ -67,44 +65,70 @@ const faq = [
   chemin="/"
   donneesStructurees={entreprise}
 >
-  <!-- 1 · Hero : titre en travers, texte et plan décalés sur la grille -->
-  <section class="hero conteneur trame" aria-labelledby="titre-hero">
-    <div class="hero-grille">
-      <div class="hero-tete">
-        <p class="surtitre">Chef de projet travaux · {site.zone}</p>
-        <h1 id="titre-hero" class="titre-xl titre-hero">Ne regardez plus seulement un bien. Découvrez ce qu'il peut devenir.</h1>
-      </div>
-      <div class="hero-corps">
-        <p class="chapo">DVK Studio vous aide à comprendre le potentiel d'un bien, ses travaux et leur budget, avant de décider. Un seul interlocuteur, et des chiffres qui disent s'ils sont réels, estimés ou supposés.</p>
-        <div class="hero-actions">
-          <BoutonRdv bouton="hero.rdv">Prendre rendez-vous · 20 min</BoutonRdv>
-          <a class="lien-fort" href="/experience/">Découvrir DVK Expérience →</a>
+  {media ? (
+    <section class="hero-b conteneur trame" aria-labelledby="titre-hero">
+      <div class="hero-b-grille">
+        <div class="hero-b-tete">
+          <p class="surtitre">Chef de projet travaux · {site.zone}</p>
+          <h1 id="titre-hero" class="titre-xl titre-hero-b">Ne regardez plus seulement un bien. Découvrez ce qu'il peut devenir.</h1>
         </div>
-        <p class="micro">Par téléphone, sans engagement.</p>
+        <div class="hero-b-visuel">
+          <BeforeAfter id="hero" avant={media.avant} apres={media.apres} altAvant={media.altAvant} altApres={media.altApres} reperes={media.reperesHero} standin={media.standin} />
+        </div>
+        <div class="hero-b-corps">
+          <p class="chapo">DVK Studio vous aide à comprendre le potentiel d'un bien, ses travaux et leur budget, avant de décider. Un seul interlocuteur, et des chiffres qui disent s'ils sont réels, estimés ou supposés.</p>
+          <div class="hero-actions">
+            <BoutonRdv bouton="hero.rdv">Prendre rendez-vous · 20 min</BoutonRdv>
+            <a class="lien-fort" href="#transformation">Voir ce qu'il y a entre les deux →</a>
+          </div>
+          <p class="micro">Par téléphone, sans engagement.</p>
+        </div>
       </div>
-      <div class="hero-visuel">
-        {heroAvantApres ? (
-          <BeforeAfter id="hero" avant={avant} apres={apres} altAvant="Pièce dans son état actuel" altApres="Projection de la même pièce transformée" legende={hero.avantApres.legende} />
-        ) : (
-          <Plan
-            alt="Plan schématique d'une maison : la cuisine, le séjour et la cloison qui les sépare"
-            zones={["cuisine"]}
-            ouverture
-            annotations={[
-              { x: 42.5, y: 26, lx: 52, ly: 8, libelle: "Cloison : porteuse ou non ?", statut: "manquant" },
-              { x: 42.5, y: 58, lx: 52, ly: 72, libelle: "Ouverture envisagée", statut: "hypothese", focal: true },
-            ]}
-            legende="Plan illustratif, non à l'échelle. Exemple de ce que DVK Expérience établit pour chaque bien."
-          />
-        )}
-      </div>
-    </div>
-    <ol class="points" aria-label="Comment DVK Studio travaille">
-      <li><span class="numero">01</span><strong>Un seul interlocuteur</strong>Chef de projet travaux hemea : cadrage, budget, consultation d'entreprises labellisées hemea.</li>
-      <li><span class="numero">02</span><strong>Des chiffres qui disent ce qu'ils sont</strong>Réel, estimation, hypothèse ou à chiffrer.</li>
-      <li><span class="numero">03</span><strong>Vingt minutes pour commencer</strong>Par téléphone, sans engagement.</li>
-    </ol>
-  </section>
+      <ol class="points" aria-label="Comment DVK Studio travaille">
+        <li><span class="numero">01</span><strong>Un seul interlocuteur</strong>Chef de projet travaux hemea : cadrage, budget, consultation d'entreprises labellisées hemea.</li>
+        <li><span class="numero">02</span><strong>Des chiffres qui disent ce qu'ils sont</strong>Réel, estimation, hypothèse ou à chiffrer.</li>
+        <li><span class="numero">03</span><strong>Vingt minutes pour commencer</strong>Par téléphone, sans engagement.</li>
+      </ol>
+    </section>
+
+  ) : (
+    <>
+      <section class="hero conteneur trame" aria-labelledby="titre-hero">
+        <div class="hero-grille">
+          <div class="hero-tete">
+            <p class="surtitre">Chef de projet travaux · {site.zone}</p>
+            <h1 id="titre-hero" class="titre-xl titre-hero">Ne regardez plus seulement un bien. Découvrez ce qu'il peut devenir.</h1>
+          </div>
+          <div class="hero-corps">
+            <p class="chapo">DVK Studio vous aide à comprendre le potentiel d'un bien, ses travaux et leur budget, avant de décider. Un seul interlocuteur, et des chiffres qui disent s'ils sont réels, estimés ou supposés.</p>
+            <div class="hero-actions">
+              <BoutonRdv bouton="hero.rdv">Prendre rendez-vous · 20 min</BoutonRdv>
+              <a class="lien-fort" href="/experience/">Découvrir DVK Expérience →</a>
+            </div>
+            <p class="micro">Par téléphone, sans engagement.</p>
+          </div>
+          <div class="hero-visuel">
+                    <Plan
+              alt="Plan schématique d'une maison : la cuisine, le séjour et la cloison qui les sépare"
+              zones={["cuisine"]}
+              ouverture
+              annotations={[
+                { x: 42.5, y: 26, lx: 52, ly: 8, libelle: "Cloison : porteuse ou non ?", statut: "manquant" },
+                { x: 42.5, y: 58, lx: 52, ly: 72, libelle: "Ouverture envisagée", statut: "hypothese", focal: true },
+              ]}
+              legende="Plan illustratif, non à l'échelle. Exemple de ce que DVK Expérience établit pour chaque bien."
+            />
+          </div>
+        </div>
+        <ol class="points" aria-label="Comment DVK Studio travaille">
+          <li><span class="numero">01</span><strong>Un seul interlocuteur</strong>Chef de projet travaux hemea : cadrage, budget, consultation d'entreprises labellisées hemea.</li>
+          <li><span class="numero">02</span><strong>Des chiffres qui disent ce qu'ils sont</strong>Réel, estimation, hypothèse ou à chiffrer.</li>
+          <li><span class="numero">03</span><strong>Vingt minutes pour commencer</strong>Par téléphone, sans engagement.</li>
+        </ol>
+      </section>
+
+    </>
+  )}
 
   <!-- 2 · Où en êtes-vous ? Trois entrées éditoriales, pas de cartes -->
   <section class="section conteneur" id="situations" aria-labelledby="titre-situations">
@@ -128,42 +152,88 @@ const faq = [
     {immobilierVisible && <p class="ligne-pro">{accueil.lignePro.texte} <a href={accueil.lignePro.href}>{accueil.lignePro.lien}</a></p>}
   </section>
 
+  {media && (
+    <section class="conteneur passerelle" aria-label="Du comparateur à la chaîne">
+      <p>Vous voyez la transformation.</p>
+      <p>Maintenant, comprenez ce qu'elle implique.</p>
+    </section>
+  )}
+
   <!-- 3 · DVK Expérience : le moment signature -->
-  <section id="experience" class="sombre section" aria-labelledby="titre-experience">
-    <ChaineExperience
-      id="titre-experience"
-      titre="Une page claire pour chaque bien."
-      intro="Un outil de projection et de cadrage de votre projet travaux. Ce n'est ni une étude de faisabilité réglementaire, ni de la maîtrise d'œuvre."
-      idx="02"
-    >
-      <div class="demo-bas">
-        <div class="demo-actions">
-          <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
-          <a class="lien-fort demo-lien" href="/experience/">Découvrir DVK Expérience →</a>
+  {media ? (
+    <>
+      <section id="experience" class="sombre" aria-labelledby="titre-experience">
+        <TransformationChaine id="titre-experience" titre="Entre l'existant et la décision, cinq étapes." paire={media} chantier={mediaChantier} />
+      </section>
+      <section class="sombre section suite-experience" aria-label="DVK Expérience : aller plus loin">
+        <div class="conteneur">
+          <p class="demo-note-bas">Un outil de projection et de cadrage de votre projet travaux. Ce n'est ni une étude de faisabilité réglementaire, ni de la maîtrise d'œuvre.</p>
+          <div class="demo-bas">
+            <div class="demo-actions">
+              <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
+              <a class="lien-fort demo-lien" href="/experience/">Découvrir DVK Expérience →</a>
+            </div>
+            <div class="demo-fenetre">
+              {experience ? (
+                <a class="apercu" href={`/experience/${experience.slug}/`}>
+                  <span class="dvk-availability is-demo">Projet pilote</span>
+                  <strong>{experience.titre}</strong>
+                  <span class="accroche">{experience.accroche}</span>
+                  <span class="aller">Découvrir l'expérience →</span>
+                </a>
+              ) : (
+                <>
+                  <p class="surtitre">Exemple de lecture · démonstration</p>
+                  <div class="scenarios">
+                    <div><h3>Scénario A</h3><Statut statut="hypothese" /><p>Comparé à vos besoins, un par un.</p></div>
+                    <div><h3>Scénario B</h3><Statut statut="hypothese" /><p>Comparé aux mêmes besoins.</p></div>
+                  </div>
+                  <p class="budget">Budget : <Statut statut="manquant" libelle="À chiffrer" /> après l'étude. Aucun montant inventé.</p>
+                  <p class="legende-demo">Exemple de structure, pas un projet réel.</p>
+                </>
+              )}
+            </div>
+          </div>
         </div>
-        <div class="demo-fenetre">
-          {experience ? (
-            <a class="apercu" href={`/experience/${experience.slug}/`}>
-              <span class="dvk-availability is-demo">Projet pilote</span>
-              <strong>{experience.titre}</strong>
-              <span class="accroche">{experience.accroche}</span>
-              <span class="aller">Découvrir l'expérience →</span>
-            </a>
-          ) : (
-            <>
-              <p class="surtitre">Exemple de lecture · démonstration</p>
-              <div class="scenarios">
-                <div><h3>Scénario A</h3><Statut statut="hypothese" /><p>Comparé à vos besoins, un par un.</p></div>
-                <div><h3>Scénario B</h3><Statut statut="hypothese" /><p>Comparé aux mêmes besoins.</p></div>
-              </div>
-              <p class="budget">Budget : <Statut statut="manquant" libelle="À chiffrer" /> après l'étude. Aucun montant inventé.</p>
-              <p class="legende-demo">Exemple de structure, pas un projet réel.</p>
-            </>
-          )}
+      </section>
+    </>
+  ) : (
+    <section id="experience" class="sombre section" aria-labelledby="titre-experience">
+      <ChaineExperience
+        id="titre-experience"
+        titre="Une page claire pour chaque bien."
+        intro="Un outil de projection et de cadrage de votre projet travaux. Ce n'est ni une étude de faisabilité réglementaire, ni de la maîtrise d'œuvre."
+        idx="02"
+      >
+        <div class="demo-bas">
+          <div class="demo-actions">
+            <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
+            <a class="lien-fort demo-lien" href="/experience/">Découvrir DVK Expérience →</a>
+          </div>
+          <div class="demo-fenetre">
+            {experience ? (
+              <a class="apercu" href={`/experience/${experience.slug}/`}>
+                <span class="dvk-availability is-demo">Projet pilote</span>
+                <strong>{experience.titre}</strong>
+                <span class="accroche">{experience.accroche}</span>
+                <span class="aller">Découvrir l'expérience →</span>
+              </a>
+            ) : (
+              <>
+                <p class="surtitre">Exemple de lecture · démonstration</p>
+                <div class="scenarios">
+                  <div><h3>Scénario A</h3><Statut statut="hypothese" /><p>Comparé à vos besoins, un par un.</p></div>
+                  <div><h3>Scénario B</h3><Statut statut="hypothese" /><p>Comparé aux mêmes besoins.</p></div>
+                </div>
+                <p class="budget">Budget : <Statut statut="manquant" libelle="À chiffrer" /> après l'étude. Aucun montant inventé.</p>
+                <p class="legende-demo">Exemple de structure, pas un projet réel.</p>
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </ChaineExperience>
-  </section>
+      </ChaineExperience>
+    </section>
+  )}
 
   <!-- 4 · Comment ça se passe -->
   <section class="section conteneur" id="methode" aria-labelledby="titre-methode">
@@ -255,6 +325,23 @@ const faq = [
   @media (max-width: 900px) { .points { grid-template-columns: 1fr; gap: 0; } }
 
   .titre-moyen { max-width: 24ch; }
+
+  /* Hero B : texte à gauche, comparateur à droite (jusqu'au bord), sur une grille ; mobile : titre, comparateur, texte. */
+  .hero-b { padding-top: clamp(32px, 5vw, 64px); padding-bottom: clamp(32px, 5vw, 64px); }
+  .hero-b-grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "tete visuel" "corps visuel"; grid-template-rows: auto 1fr; column-gap: clamp(24px, 4vw, 64px); row-gap: 24px; align-items: start; }
+  .hero-b-tete { grid-area: tete; display: flex; flex-direction: column; gap: 24px; }
+  .titre-hero-b { font-size: clamp(32px, 4vw, 54px); line-height: 1.08; }
+  .hero-b-corps { grid-area: corps; display: flex; flex-direction: column; gap: 22px; align-self: start; }
+  .hero-b-visuel { grid-area: visuel; margin-right: calc(-1 * var(--gouttiere)); align-self: center; }
+  @media (max-width: 900px) {
+    .hero-b-grille { grid-template-columns: 1fr; grid-template-areas: "tete" "visuel" "corps"; grid-template-rows: auto; row-gap: 22px; }
+    .hero-b-visuel { margin: 0 calc(-1 * var(--gouttiere)); }
+  }
+  .passerelle { padding-block: clamp(56px, 8vw, 104px) clamp(8px, 2vw, 24px); }
+  .passerelle p { font-size: clamp(26px, 3.6vw, 44px); line-height: 1.15; letter-spacing: -0.04em; font-weight: 300; }
+  .passerelle p + p { color: var(--dvk-text-subtle); margin-top: 6px; }
+  .suite-experience { padding-top: 0; }
+  .demo-note-bas { font-size: 14px; color: var(--dvk-inverse-muted); max-width: 62ch; }
 
   /* Parcours : trois lignes éditoriales (numéro, grand titre, promesse, lien), séparées par des filets */
   .parcours { margin-top: clamp(32px, 5vw, 56px); border-bottom: 1px solid var(--dvk-border); }
