@@ -1,9 +1,7 @@
 ---
-import "@fontsource-variable/fraunces/opsz.css";
-import "@fontsource-variable/instrument-sans";
+import "@fontsource-variable/montserrat";
 import "../styles/global.css";
-import frauncesLatin from "@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url";
-import instrumentLatin from "@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url";
+import montserratLatin from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../content/site";
@@ -31,8 +29,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <meta name="description" content={description} />
     <link rel="canonical" href={canonique} />
     <!-- Polices du premier écran (latin) préchargées : moins de décalage au chargement. Le reste se charge à la demande. -->
-    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={instrumentLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={montserratLatin} as="font" type="font/woff2" crossorigin />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     {donneesStructurees && <script type="application/ld+json" set:html={JSON.stringify(donneesStructurees)} />}
     <meta property="og:type" content="website" />

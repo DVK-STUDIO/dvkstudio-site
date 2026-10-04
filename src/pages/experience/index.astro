@@ -15,7 +15,6 @@ const experiences = experiencesPubliables();
     <p class="surtitre">DVK Expérience</p>
     <h1 class="titre-xl">Ne regardez plus seulement un bien. Découvrez ce qu'il peut devenir.</h1>
     <p class="chapo">Du bien réel à la décision : comprendre ce qu'on achète, ce qu'on pourrait en faire, ce que cela coûterait et ce que chaque option apporte ou laisse de côté.</p>
-    <p class="chapo" style="margin-top:16px"><strong>Bien réel → compréhension → potentiel → scénarios → travaux → budget → projection → décision.</strong></p>
   </header>
 
   <ExperienceDemo experience={experiences[0]} />
@@ -48,7 +47,7 @@ const experiences = experiencesPubliables();
 <style>
   .experiences { list-style: none; padding: 0; margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 20px; }
   .experiences a { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; padding: 24px; border: 1px solid var(--ligne); border-radius: var(--dvk-radius-md); background: var(--papier-2); height: 100%; }
-  .experiences strong { font-family: var(--serif); font-size: 26px; font-weight: 500; line-height: 1.15; }
+  .experiences strong { font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1.15; }
   .experiences span:not(.dvk-availability) { color: var(--encre-douce); font-size: 16px; }
   .experiences .aller { color: var(--terre-fonce); font-weight: 600; margin-top: auto; }
 </style>

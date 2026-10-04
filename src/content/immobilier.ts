@@ -60,12 +60,6 @@ export const page = {
     surtitre: "DVK Expérience",
     titre: "Une page claire pour chaque bien.",
     intro: "Pour un bien avec travaux, DVK Expérience fait ce que la visite ne permet pas toujours : montrer le bien tel qu'il est, puis ce qu'il pourrait devenir.",
-    points: [
-      "Le bien actuel.",
-      "Des pistes de transformation et des projections pour s'y voir.",
-      "Les travaux envisageables.",
-      "Une enveloppe indicative, lorsque les éléments le permettent.",
-    ],
     limites: "Les projections sont des outils pour comprendre. Elles ne constituent ni une étude de faisabilité, ni des plans d'architecte, ni un engagement technique.",
     cta: "Voir un exemple",
     legendeTitre: "Ce que veulent dire les statuts",

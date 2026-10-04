@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { navigation } from "../content/navigation";
 import { CALENDLY_BASE } from "../lib/calendly";
+import symbole from "../assets/logo/dvk-logo-symbole.png";
 interface Props { page: string }
 const { page } = Astro.props;
 const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
@@ -8,7 +10,11 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
 
 <header class="entete">
   <div class="conteneur entete-interieur">
-    <a href="/" class="marque" aria-label="DVK Studio — accueil">DVK Studio<span class="marque-zone">Oise</span></a>
+    <a href="/" class="marque" aria-label="DVK Studio — accueil">
+      <!-- Symbole du logo officiel (fichier transparent fourni, rogné sans retouche). Le logo complet est dans le pied de page. -->
+      <Image class="marque-symbole" src={symbole} width={82} height={67} format="webp" alt="" loading="eager" />
+      <span class="marque-nom">DVK Studio</span><span class="marque-zone">Oise</span>
+    </a>
     <nav aria-label="Navigation principale" class="nav" id="nav-principale">
       <ul>
         {navigation.map((n) => (
@@ -29,15 +35,17 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
 </header>
 
 <style>
-  .entete { padding-block: 18px; position: relative; z-index: 10; }
+  .entete { padding-block: 16px; position: relative; z-index: 10; border-bottom: 1px solid var(--dvk-border); }
   .entete-interieur { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .marque { display: flex; align-items: center; min-height: 44px; gap: 10px; font-family: var(--serif); font-size: 26px; letter-spacing: -0.01em; font-weight: 600; }
-  .marque-zone { font-family: var(--sans); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pierre); font-weight: 600; }
-  .nav ul { list-style: none; display: flex; gap: 30px; }
-  .nav a { font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; padding-block: 8px; }
-  .nav a[aria-current="page"] { border-bottom: 2px solid var(--terre); }
+  .marque { display: flex; align-items: center; min-height: 44px; gap: 12px; }
+  .marque-symbole { height: 34px; width: auto; flex: none; }
+  .marque-nom { font-size: 15px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; white-space: nowrap; }
+  .marque-zone { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pierre); font-weight: 600; padding-left: 12px; border-left: 1px solid var(--dvk-border); }
+  .nav ul { list-style: none; display: flex; gap: 22px; }
+  .nav a { font-size: 13.5px; letter-spacing: 0.01em; font-weight: 400; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding-block: 8px; }
+  .nav a[aria-current="page"] { border-bottom: 2px solid var(--terre); font-weight: 600; }
   .badge { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--encre); color: var(--papier); padding: 3px 8px; border-radius: var(--dvk-radius-pill); }
-  .entete-cta { min-height: 44px; padding: 0 22px; font-size: 15px; }
+  .entete-cta { min-height: 44px; padding: 0 20px; font-size: 13.5px; white-space: nowrap; }
   .menu-bouton { display: none; width: 44px; height: 44px; border: 1.5px solid var(--encre); background: transparent; border-radius: 50%; flex-direction: column; gap: 5px; align-items: center; justify-content: center; cursor: pointer; }
   .menu-bouton span { width: 18px; height: 1.5px; background: var(--encre); display: block; }
   @media (max-width: 900px) {
@@ -46,7 +54,11 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
     .nav { position: absolute; inset: 100% 0 auto 0; background: var(--papier); border-bottom: 1px solid var(--ligne); display: none; padding: 8px var(--gouttiere) 20px; }
     .nav.ouvert { display: block; }
     .nav ul { flex-direction: column; gap: 4px; }
-    .nav a { font-size: 18px; padding-block: 12px; }
+    .nav a { font-size: 17px; padding-block: 12px; }
+  }
+  @media (max-width: 720px) {
+    .marque-nom { font-size: 13px; letter-spacing: 0.2em; }
+    .marque-zone { display: none; }
   }
 </style>
 

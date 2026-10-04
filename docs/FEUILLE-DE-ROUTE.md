@@ -52,6 +52,8 @@ IAD et hemea sont des **capacités activables**, pas des hypothèses codées en 
 ## DVK Design System v1
 Livré (dépôt local `dvk-design-system`). Source de vérité graphique : direction Architecture augmentée × Magazine habitat, rythme Ressentir → Comprendre → Décider, intensités Éditorial / Équilibre (défaut) / Augmenté. La V2 en est la première implémentation ; une partie de la charte est exécutable (tests `src/lib/design.test.ts`).
 
+**Mise à jour du 2026-10-04 : typographie Montserrat.** Le Design System est réaligné sur la charte graphique DVK Studio : Montserrat est la seule famille (Fraunces et Instrument Sans retirées), trois graisses (300 / 400 / 600), logo officiel transparent (symbole en en-tête, logo complet en pied de page), matière graphique (trame, index de section, motifs de construction), chaîne DVK Expérience. Jetons, règles TYP-01 à TYP-04 et tests mis à jour dans `dvk-design-system` et `src/lib/design.test.ts`.
+
 **Décision d'outillage : Napkin et Canva sont retirés de l'architecture.** Workflow de référence : Données / Projet → Claude → DVK Design System → support. Un outil spécialisé n'est ajouté que lorsqu'une capacité réellement manquante le justifie (par exemple un moteur de projection photoréaliste, avec contrôle de fidélité). Voir `dvk-design-system/docs/11-limites-et-briques-specialisees.md`.
 
 ## Dette et points volontairement ouverts

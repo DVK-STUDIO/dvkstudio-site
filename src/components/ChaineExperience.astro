@@ -1,0 +1,72 @@
+---
+// DVK Expérience : la séquence Bien actuel → Potentiel → Projection → Travaux → Enveloppe indicative, en ligne de construction.
+// À poser dans une section .sombre. Chaque jalon porte le statut de la NATURE de l'information (jamais une valeur de projet) :
+// aucun projet, aucune donnée n'est inventé. Les quatre statuts du Design System sont conservés tels quels.
+import Statut from "./experience/Statut.astro";
+
+interface Props { id: string; titre: string; intro?: string; idx?: string; legende?: string }
+const { id, titre, intro, idx = "02", legende = "Exemple de lecture : chaque étape affiche le niveau de certitude de ce qui est établi pour le bien. Ce n'est pas un projet réel." } = Astro.props;
+
+const jalons = [
+  { n: "01", titre: "Bien actuel", texte: "Le bien tel qu'il est, avec la source de chaque donnée.", statut: "reel" as const },
+  { n: "02", titre: "Potentiel", texte: "Ce qu'il permettrait, lu à partir de vos besoins.", statut: "hypothese" as const },
+  { n: "03", titre: "Projection", texte: "Une image pour s'y voir, présentée comme un outil de compréhension.", statut: "hypothese" as const },
+  { n: "04", titre: "Travaux", texte: "Les travaux envisageables, en ordre de grandeur avant la visite.", statut: "estimation" as const },
+  { n: "05", titre: "Enveloppe indicative", texte: "Une première enveloppe, ou « à chiffrer » tant que rien n'est établi.", statut: "manquant" as const, libelle: "À chiffrer" },
+];
+---
+
+<div class="chaine-xp conteneur trame">
+  <!-- Motif de construction inspiré de la géométrie du logo (lentille et axe) : décoratif, jamais le logo. -->
+  <svg class="motif" viewBox="0 0 320 300" width="214" height="200" aria-hidden="true" focusable="false">
+    <path d="M160 24 C 92 86, 92 190, 160 276 C 228 190, 228 86, 160 24 Z" />
+    <path d="M160 24 C 92 86, 92 190, 160 276 C 228 190, 228 86, 160 24 Z" transform="rotate(-28 160 276)" />
+    <path d="M160 24 C 92 86, 92 190, 160 276 C 228 190, 228 86, 160 24 Z" transform="rotate(28 160 276)" />
+    <line x1="160" y1="8" x2="160" y2="292" stroke-dasharray="2 6" />
+    <line x1="20" y1="276" x2="300" y2="276" />
+  </svg>
+
+  <div class="enonce">
+    <span class="idx" aria-hidden="true">{idx}</span>
+    <div class="tete">
+      <p class="surtitre">DVK Expérience</p>
+      <h2 id={id} class="titre-xl titre-chaine">{titre}</h2>
+    </div>
+    {intro && <div class="corps"><p class="chapo">{intro}</p></div>}
+  </div>
+
+  <ol class="chaine" aria-label="Les cinq étapes de DVK Expérience">
+    {jalons.map((j) => (
+      <li>
+        <span class="n">{j.n}</span>
+        <h3>{j.titre}</h3>
+        <span class="plaque"><Statut statut={j.statut} libelle={j.libelle} /></span>
+        <p>{j.texte}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="legende-chaine">{legende}</p>
+  <slot />
+</div>
+
+<style>
+  .chaine-xp { position: relative; isolation: isolate; }
+  .chaine-xp > .motif { top: 0; right: var(--gouttiere); color: var(--dvk-inverse-subtle); opacity: 0.3; }
+  .titre-chaine { max-width: 18ch; }
+  .chaine { list-style: none; margin: clamp(40px, 6vw, 72px) 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--dvk-inverse-subtle); }
+  .chaine li { position: relative; padding: 28px 20px 8px 0; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .chaine li::before { content: ""; position: absolute; top: -6px; left: 0; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dvk-background); background: var(--dvk-night); }
+  .chaine li:last-child::before { border-style: dashed; }
+  .n { font-size: 12px; letter-spacing: 0.2em; font-weight: 600; color: var(--dvk-inverse-subtle); }
+  .chaine h3 { min-height: 2.4em; font-size: 22px; line-height: 1.2; font-weight: 300; letter-spacing: -0.02em; color: var(--dvk-background); }
+  .plaque { display: inline-block; background: var(--dvk-background); border-radius: var(--dvk-radius-sm); padding: 2px; line-height: 0; }
+  .chaine p { font-size: 14px; line-height: 1.6; color: var(--dvk-inverse-muted); }
+  .legende-chaine { margin-top: 28px; font-size: 13px; color: var(--dvk-inverse-subtle); max-width: 70ch; }
+  @media (max-width: 900px) {
+    .chaine { grid-template-columns: 1fr; border-top: none; border-left: 1px solid var(--dvk-inverse-subtle); margin-left: 5px; }
+    .chaine li { padding: 0 0 28px 28px; }
+    .chaine li::before { top: 4px; left: -6px; }
+    .chaine-xp > .motif { display: none; }
+    .chaine h3 { min-height: 0; }
+  }
+</style>

@@ -21,9 +21,20 @@ describe("Design System v1 appliqué à la V2", () => {
     expect(fautes).toEqual([]);
   });
 
-  it("TYP-04 : Fraunces est chargée avec l'axe optique", () => {
+  it("TYP-01 : Montserrat (charte graphique DVK) est la seule famille, chargée en auto-hébergé", () => {
     const base = lire(join(racine, "src", "layouts", "Base.astro"));
-    expect(base).toMatch(/@fontsource-variable\/fraunces\/opsz\.css/);
+    expect(base).toMatch(/@fontsource-variable\/montserrat/);
+    expect(base).not.toMatch(/fraunces|instrument-sans/i);
+    const css = lire(join(racine, "src", "styles", "global.css"));
+    expect(css).toMatch(/--dvk-font:\s*"Montserrat Variable"/);
+    expect(css).not.toMatch(/Fraunces|Instrument Sans/);
+    const autres = sources.flatMap((f) => [...sansCommentaires(lire(f)).matchAll(/font-family:\s*([^;}]+)/g)].filter((m) => !/^(var\(--(dvk-font|serif|sans)\)|inherit)$/.test(m[1].trim())).map((m) => `${f} : ${m[0].trim()}`));
+    expect(autres).toEqual([]);
+  });
+
+  it("TYP-02 : peu de graisses (300 titres, 400 texte, 600 libellés et boutons)", () => {
+    const fautes = sources.flatMap((f) => [...sansCommentaires(lire(f)).matchAll(/font-weight:\s*(\d+)/g)].filter((m) => ![300, 400, 600].includes(Number(m[1]))).map((m) => `${f} : ${m[0]}`));
+    expect(fautes).toEqual([]);
   });
 
   it("SPC-02 : rayons limités à 3 px, 6 px, cercle, pilule ou jeton", () => {
@@ -135,7 +146,7 @@ describe("Polish V2 : cohérence transversale", () => {
     const fautes: string[] = [];
     for (const f of pages.filter((p) => !/mentions-legales|confidentialite|cgv/.test(p))) {
       // Les entrées « Je vends / J'achète… » parlent avec la voix du visiteur : hors périmètre.
-      const brut = sansCommentaires(lire(f)).replace(/<nav[^>]*entrees[\s\S]*?<\/nav>/g, "").replace(/<style[\s\S]*?<\/style>/g, "").replace(/^---[\s\S]*?\n---/, "");
+      const brut = sansCommentaires(lire(f)).replace(/<nav[^>]*(?:entrees|parcours)[\s\S]*?<\/nav>/g, "").replace(/<style[\s\S]*?<\/style>/g, "").replace(/^---[\s\S]*?\n---/, "");
       for (const s of brut.split(/<(?:section|header)\b/).slice(1)) {
         const texte = s.replace(/<[^>]+>/g, " ");
         const je = /(?:^|[\s>(])(?:je|j'|m'|moi|Je|J')(?=[\s'a-zéèêà])/.test(texte);

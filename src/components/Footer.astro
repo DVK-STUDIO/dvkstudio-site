@@ -1,27 +1,38 @@
 ---
+import { Image } from "astro:assets";
 import { site } from "../content/site";
+import logo from "../assets/logo/dvk-logo-complet.png";
 const e = site.editeur;
+const m = site.mandant;
 ---
 
 <footer class="pied">
   <div class="conteneur pied-interieur">
-    <p>{site.nom} — {e.forme} {e.nom} · SIRET {e.siret} · {e.adresse}</p>
-    <p class="pied-liens">
-      <a href="/mentions-legales/">Mentions légales</a>
-      <a href="/confidentialite/">Confidentialité</a>
-      <a href={site.reseaux.instagram} rel="noopener">Instagram</a>
-      <a href={site.reseaux.linkedin} rel="noopener">LinkedIn</a>
-    </p>
+    <!-- Logo officiel couleur (fichier transparent fourni, rogné sans retouche) : posé sur le fond clair du pied de page. -->
+    <Image class="pied-logo" src={logo} width={190} height={167} format="webp" alt="DVK Studio" loading="eager" />
+    <div class="pied-texte">
+      <p class="pied-qualite">{e.nom} — Chef de projet travaux hemea · Mandataire indépendant de {m.denomination}, exploitant sous l'enseigne {m.enseigne}.</p>
+      <p>{site.nom} — {e.forme} {e.nom} · SIRET {e.siret} · {e.adresse}</p>
+      <p class="pied-liens">
+        <a href="/mentions-legales/">Mentions légales</a>
+        <a href="/confidentialite/">Confidentialité</a>
+        <a href={site.reseaux.instagram} rel="noopener">Instagram</a>
+        <a href={site.reseaux.linkedin} rel="noopener">LinkedIn</a>
+      </p>
+    </div>
   </div>
 </footer>
 
 <style>
-  .pied { background: var(--nuit); color: var(--dvk-inverse-subtle); font-size: 13px; line-height: 1.6; }
-  .pied-interieur { padding-block: 32px; display: flex; flex-wrap: wrap; gap: 12px 40px; justify-content: space-between; }
-  .pied-liens { display: flex; flex-wrap: wrap; gap: 8px 22px; }
-  .pied a { color: var(--dvk-inverse-muted); text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
+  .pied { background: var(--dvk-surface); color: var(--dvk-text-muted); font-size: 13px; line-height: 1.7; border-top: 1px solid var(--dvk-border); }
+  .pied-interieur { padding-block: 40px; display: flex; flex-wrap: wrap; gap: 28px 56px; align-items: center; justify-content: space-between; }
+  .pied-logo { width: 95px; height: auto; flex: none; }
+  .pied-texte { display: grid; gap: 6px; max-width: 70ch; flex: 1 1 360px; }
+  .pied-qualite { color: var(--dvk-text); }
+  .pied-liens { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 4px; }
+  .pied a { color: var(--dvk-text); text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
   @media (max-width: 720px) {
-    .pied-interieur { padding-block: 24px; gap: 4px; }
+    .pied-interieur { padding-block: 28px; gap: 16px; align-items: flex-start; }
     .pied-liens { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; width: 100%; }
   }
 </style>
