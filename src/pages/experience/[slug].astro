@@ -74,8 +74,10 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
       <ul>
         <li><strong>{e.besoins.length} besoins</strong> exprimés par la famille, pour la cuisine et le séjour.</li>
         <li><strong>{e.scenarios.length} pistes</strong> comparées : {e.scenarios.map((s) => s.nom).join(" et ")}.</li>
-        <li><strong>Aucun devis</strong> à ce jour : l'aménagement reste à chiffrer, seul le volet énergie est estimé.</li>
-        <li><strong>Classe {e.energie.classeAvant.valeur}</strong> au diagnostic ; classe {e.energie.classeApres.valeur} estimée après le scénario énergétique recommandé.</li>
+        <li><strong>Aucun devis</strong> à ce jour : l'aménagement reste à chiffrer{e.energie.classeAvant.valeur === undefined ? "." : ", seul le volet énergie est estimé."}</li>
+        {e.energie.classeAvant.valeur !== undefined && e.energie.classeApres.valeur !== undefined && (
+          <li><strong>Classe {e.energie.classeAvant.valeur}</strong> au diagnostic ; classe {e.energie.classeApres.valeur} estimée après le scénario énergétique recommandé.</li>
+        )}
       </ul>
     </section>
 
@@ -259,7 +261,7 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
       <h2 id="t-energie" class="titre-l">Ce que cela change sur l'énergie</h2>
       <p class="chapo">{e.energie.resume}</p>
       <div style="margin-top:32px;max-width:640px">
-        <EchelleEnergie avant={String(e.energie.classeAvant.valeur)} apres={String(e.energie.classeApres.valeur)} />
+        {e.energie.classeAvant.valeur !== undefined && e.energie.classeApres.valeur !== undefined && (<EchelleEnergie avant={String(e.energie.classeAvant.valeur)} apres={String(e.energie.classeApres.valeur)} />)}
       </div>
       <dl class="faits deux-col">
         <Donnee libelle="Classe aujourd'hui" valeur={e.energie.classeAvant} sources={e.sources} />
