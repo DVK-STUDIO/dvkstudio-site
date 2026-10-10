@@ -30,20 +30,40 @@ export type Attribution = {
 
 const MAX_UTM = 120;
 
-/** Normalise une valeur de campagne au format Growth/Core. Retourne undefined si rien n'est exploitable. */
+// Seules différences considérées comme « la même valeur » : casse, accents, espaces de bord.
+const plier = (v: string): string => v.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+
+// FNV-1a 32 bits (déterministe, sans dépendance), 7 caractères base 36.
+function empreinte(s: string): string {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 0x01000193) >>> 0;
+  return h.toString(36).padStart(7, "0");
+}
+
+/**
+ * Normalise une valeur de campagne au format Growth/Core (^[a-z0-9][a-z0-9._-]{0,119}$).
+ *
+ * - Valeur vide ou blanche : undefined (rien à transmettre).
+ * - Écart limité à la casse, aux accents et aux espaces de bord : valeur pliée, sans marque.
+ * - Toute autre modification (caractère remplacé, séparateur ajusté, troncature) : suffixe « -h<7 car.> » calculé
+ *   sur la valeur pliée. Deux valeurs différentes ne deviennent donc jamais identiques en silence
+ *   (« a b » → « a-b-h… », distinct de « a-b »).
+ * - Valeur sans aucun caractère exploitable (« ### ») : « invalide-h… ». Elle n'est jamais perdue en silence, ni
+ *   remplacée par un identifiant de bouton interne.
+ * Idempotente : une valeur déjà normalisée ressort identique.
+ */
 export function normaliserUtm(v: string | null | undefined): string | undefined {
-  if (!v) return undefined;
-  const t = v
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .trim()
+  const plie = plier(v ?? "");
+  if (plie === "") return undefined;
+  const base = plie
     .replace(/[^a-z0-9._-]+/g, "-")
     .replace(/-{2,}/g, "-")
     .replace(/^[^a-z0-9]+/, "")
-    .slice(0, MAX_UTM)
     .replace(/[^a-z0-9]+$/, "");
-  return t === "" ? undefined : t;
+  if (base !== "" && base === plie && base.length <= MAX_UTM) return base;
+  const marque = `-h${empreinte(plie)}`;
+  const tronque = base.slice(0, MAX_UTM - marque.length).replace(/[^a-z0-9]+$/, "");
+  return `${tronque === "" ? "invalide" : tronque}${marque}`;
 }
 
 // Chemin d'atterrissage : informatif (navigateur), jamais envoyé à Calendly.
@@ -53,7 +73,20 @@ const nettoyerChemin = (v: string | null | undefined): string | undefined => {
   return t === "" ? undefined : t;
 };
 
-/** Offre portée par une page : /travaux/ → renovation, /acquereurs/ → achat_travaux, sinon aucune. */
+/**
+ * Offre d'ORIGINE annoncée par la campagne : préfixe « renovation- » ou « achat-travaux- » de utm_campaign.
+ * C'est l'origine publicitaire, pas le besoin réellement qualifié (travaux | immobilier | mixte), que Growth
+ * établit à la qualification et qui peut différer.
+ */
+export function offreDepuisCampagne(campagne: string | null | undefined): Offre | undefined {
+  const c = normaliserUtm(campagne);
+  if (!c) return undefined;
+  if (c.startsWith("renovation-")) return "renovation";
+  if (c.startsWith("achat-travaux-")) return "achat_travaux";
+  return undefined;
+}
+
+/** Offre d'origine portée par une page : /travaux/ → renovation, /acquereurs/ → achat_travaux, sinon aucune. */
 export function offreDepuisChemin(chemin: string | null | undefined): Offre | undefined {
   const c = (chemin ?? "").replace(/\/+$/, "");
   if (c === "/travaux") return "renovation";
@@ -79,7 +112,8 @@ export function lireAttribution(search: string, referrer: string, chemin: string
     utm_term: normaliserUtm(p.get("utm_term")),
     referrerHote: normaliserUtm(referrerHote),
     atterrissage: nettoyerChemin(chemin),
-    offre: offreDepuisChemin(chemin),
+    // Offre d'origine : la convention de campagne prime sur la page d'arrivée.
+    offre: offreDepuisCampagne(p.get("utm_campaign")) ?? offreDepuisChemin(chemin),
   };
 }
 

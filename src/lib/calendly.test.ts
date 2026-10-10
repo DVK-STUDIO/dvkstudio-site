@@ -5,6 +5,7 @@ import {
   fusionnerOrigine,
   lireAttribution,
   normaliserUtm,
+  offreDepuisCampagne,
   offreDepuisChemin,
   type Attribution,
 } from "./calendly";
@@ -14,29 +15,76 @@ const HOTE = "dvkstudio.fr";
 const FORMAT_CORE = /^[a-z0-9][a-z0-9._-]{0,119}$/;
 
 describe("normaliserUtm", () => {
-  it("met au format Growth/Core : minuscules, sans accent, séparateurs sûrs", () => {
-    expect(normaliserUtm("Rénovation Été 2026")).toBe("renovation-ete-2026");
-    expect(normaliserUtm("Meta_Ads/Carrousel #3")).toBe("meta_ads-carrousel-3");
+  it("replie casse, accents et espaces de bord sans marque", () => {
+    expect(normaliserUtm("Rénovation-Été_2026")).toBe("renovation-ete_2026");
+    expect(normaliserUtm("  Meta.Ads  ")).toBe("meta.ads");
     expect(normaliserUtm("  ")).toBeUndefined();
-    expect(normaliserUtm("---")).toBeUndefined();
     expect(normaliserUtm(null)).toBeUndefined();
+    expect(normaliserUtm(undefined)).toBeUndefined();
   });
-  it("borne à 120 caractères et ne finit jamais par un séparateur", () => {
+  it("une valeur modifiée au-delà de la casse et des accents reçoit une marque -h…", () => {
+    expect(normaliserUtm("Rénovation Été 2026")).toMatch(/^renovation-ete-2026-h[a-z0-9]{7}$/);
+    expect(normaliserUtm("Meta_Ads/Carrousel #3")).toMatch(/^meta_ads-carrousel-3-h[a-z0-9]{7}$/);
+  });
+  it("deux valeurs différentes ne deviennent jamais identiques", () => {
+    const groupes = [
+      ["a b", "a-b", "a/b", "a  b", "a+b", "a b ", "a_b"],
+      ["ad 7", "ad-7", "ad/7", "ad#7", "ad7"],
+      ["{campaignid}", "campaignid", "[campaignid]"],
+      ["x".repeat(130), "x".repeat(130) + "y", "x".repeat(125) + "z".repeat(10)],
+    ];
+    for (const g of groupes) {
+      const sorties = g.map((v) => normaliserUtm(v)!);
+      // « a b » et « a b  » ne diffèrent que par un espace de bord : même valeur ; on retire ce doublon voulu.
+      const attendu = new Set(g.map((v) => v.trim().toLowerCase())).size;
+      expect(new Set(sorties).size).toBe(attendu);
+    }
+  });
+  it("casse et accents seuls : même valeur (fusion voulue)", () => {
+    expect(normaliserUtm("Rénovation")).toBe(normaliserUtm("renovation"));
+    expect(normaliserUtm("META")).toBe(normaliserUtm("meta"));
+  });
+  it("valeur sans caractère exploitable : conservée sous « invalide-h… », jamais perdue", () => {
+    expect(normaliserUtm("###")).toMatch(/^invalide-h[a-z0-9]{7}$/);
+    expect(normaliserUtm("###")).not.toBe(normaliserUtm("@@@"));
+  });
+  it("troncature à 120 caractères avec marque, format Core respecté", () => {
     const v = normaliserUtm("a".repeat(300))!;
-    expect(v).toHaveLength(120);
-    expect(normaliserUtm("a".repeat(119) + "-b")).toBe("a".repeat(119));
+    expect(v.length).toBeLessThanOrEqual(120);
+    expect(v).toMatch(/-h[a-z0-9]{7}$/);
+    expect(v).toMatch(FORMAT_CORE);
+  });
+  it("est idempotente", () => {
+    for (const brut of ["Rénovation Été 2026", "a/b", "###", "x".repeat(300), "meta", "ad-12"]) {
+      const une = normaliserUtm(brut)!;
+      expect(normaliserUtm(une)).toBe(une);
+    }
   });
   it("toute sortie respecte le format Core", () => {
-    for (const brut of ["<script>alert(1)</script>", "Été 2026 !", "{campaignid}", "AbC.dEf_12", "x".repeat(500)]) {
+    for (const brut of ["<script>alert(1)</script>", "Été 2026 !", "{campaignid}", "AbC.dEf_12", "x".repeat(500), "-- --", "é"]) {
       const v = normaliserUtm(brut);
       if (v) expect(v).toMatch(FORMAT_CORE);
     }
   });
 });
 
+describe("offreDepuisCampagne", () => {
+  it("lit la convention renovation- / achat-travaux-", () => {
+    expect(offreDepuisCampagne("renovation-oct-2026")).toBe("renovation");
+    expect(offreDepuisCampagne("Rénovation-Oct")).toBe("renovation");
+    expect(offreDepuisCampagne("achat-travaux-meta-1")).toBe("achat_travaux");
+  });
+  it("aucune offre sans le préfixe exact", () => {
+    expect(offreDepuisCampagne("renovation")).toBeUndefined();
+    expect(offreDepuisCampagne("brand-renovation-oct")).toBeUndefined();
+    expect(offreDepuisCampagne("iad-vendre")).toBeUndefined();
+    expect(offreDepuisCampagne(null)).toBeUndefined();
+  });
+});
+
 describe("lireAttribution", () => {
   it("lit et normalise les paramètres de campagne", () => {
-    const a = lireAttribution("?utm_source=Meta&utm_medium=paid_social&utm_campaign=Rénovation Oct&utm_content=Ad-12&utm_term=Maçon Oise", "", "/travaux/", HOTE);
+    const a = lireAttribution("?utm_source=Meta&utm_medium=paid_social&utm_campaign=Renovation-Oct&utm_content=Ad-12&utm_term=Maçon-Oise", "", "/travaux/", HOTE);
     expect(a).toMatchObject({
       utm_source: "meta",
       utm_medium: "paid_social",
@@ -46,6 +94,18 @@ describe("lireAttribution", () => {
       atterrissage: "/travaux/",
       offre: "renovation",
     });
+  });
+  it("l'offre de la campagne prime sur la page d'arrivée ; sans convention, la page décide", () => {
+    expect(lireAttribution("?utm_campaign=achat-travaux-meta-1", "", "/travaux/", HOTE).offre).toBe("achat_travaux");
+    expect(lireAttribution("?utm_campaign=autre", "", "/acquereurs/", HOTE).offre).toBe("achat_travaux");
+    expect(lireAttribution("?utm_campaign=autre", "", "/", HOTE).offre).toBeUndefined();
+  });
+  it("une valeur incompatible reste visible : jamais supprimée ni remplacée par le bouton", () => {
+    const a = lireAttribution("?utm_source=meta&utm_content=" + encodeURIComponent("###"), "", "/travaux/", HOTE);
+    expect(a.utm_content).toMatch(/^invalide-h/);
+    const u = new URL(construireLienRdv(CALENDLY_BASE, a, { page: "travaux", bouton: "hero.rdv" }));
+    expect(u.searchParams.get("utm_content")).toBe(a.utm_content);
+    expect(u.searchParams.get("utm_content")).not.toMatch(/^dvk./);
   });
   it("sans campagne, retient l'hôte référent externe ; ignore le site lui-même", () => {
     expect(lireAttribution("", "https://www.google.com/search?q=x", "/", HOTE).referrerHote).toBe("google.com");
@@ -132,7 +192,7 @@ describe("construireLienRdv", () => {
     expect(u.toString()).not.toContain("abc123");
   });
   it("seuls des utm_* sont émis, tous au format Core", () => {
-    const u = lien(lireAttribution("?utm_source=Meta&utm_campaign=Été Rénovation&utm_content=AD 7", "", "/travaux/", HOTE));
+    const u = lien(lireAttribution("?utm_source=Meta&utm_campaign=Été Rénovation&utm_content=AD 7&utm_term=###", "", "/travaux/", HOTE));
     for (const [k, v] of u.searchParams) {
       expect(k).toMatch(/^utm_(source|medium|campaign|content|term)$/);
       expect(v).toMatch(FORMAT_CORE);
