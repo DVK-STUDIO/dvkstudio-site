@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   CALENDLY_BASE,
   construireLienRdv,
+  ecartOffre,
   fusionnerOrigine,
   lireAttribution,
   normaliserUtm,
@@ -148,6 +149,54 @@ describe("fusionnerOrigine", () => {
     const fusion = fusionnerOrigine(ancienne, lireAttribution("", "", "/", HOTE)) as Record<string, unknown>;
     expect(fusion.gclid).toBeUndefined();
     expect(fusion.utm_source).toBe("google");
+  });
+});
+
+describe("origine stockée par une ancienne session", () => {
+  const rejouer = (stockee: unknown) =>
+    fusionnerOrigine(stockee as Attribution, lireAttribution("", "", "/", HOTE)) as Record<string, unknown>;
+
+  it("renormalise les valeurs enregistrées au format Core", () => {
+    const r = rejouer({ utm_source: "Meta", utm_campaign: "Rénovation Oct", utm_content: "AD 7", atterrissage: "/travaux/" });
+    expect(r.utm_source).toBe("meta");
+    expect(r.utm_campaign).toMatch(/^renovation-oct-h[a-z0-9]{7}$/);
+    expect(r.utm_content).toMatch(/^ad-7-h[a-z0-9]{7}$/);
+    for (const k of ["utm_source", "utm_campaign", "utm_content"]) expect(r[k]).toMatch(FORMAT_CORE);
+  });
+  it("ne fait pas confiance aux offres stockées : elles sont recalculées", () => {
+    const r = rejouer({ utm_source: "meta", utm_campaign: "renovation-oct", atterrissage: "/", offre: "iad", offreCampagne: "iad" });
+    expect(r.offreCampagne).toBe("renovation");
+    expect(r.offre).toBe("renovation");
+    expect(r.offreAtterrissage).toBeUndefined();
+  });
+  it("ignore les valeurs qui ne sont pas du texte et les champs inconnus", () => {
+    const r = rejouer({ utm_source: { x: 1 }, utm_content: 42, atterrissage: "/", gclid: "abc", a1: "x" });
+    expect(r.utm_source).toBeUndefined();
+    expect(r.utm_content).toBeUndefined();
+    expect(r.gclid).toBeUndefined();
+    expect(r.a1).toBeUndefined();
+  });
+});
+
+describe("campagne, page d'arrivée et offre d'origine restent distinctes", () => {
+  it("conserve les trois, même en désaccord", () => {
+    const a = lireAttribution("?utm_source=meta&utm_campaign=achat-travaux-meta-1", "", "/travaux/", HOTE);
+    expect(a.utm_campaign).toBe("achat-travaux-meta-1");
+    expect(a.atterrissage).toBe("/travaux/");
+    expect(a.offreCampagne).toBe("achat_travaux");
+    expect(a.offreAtterrissage).toBe("renovation");
+    expect(a.offre).toBe("achat_travaux");
+    expect(ecartOffre(a)).toBe(true);
+  });
+  it("pas d'écart quand les deux concordent ou qu'une seule est connue", () => {
+    expect(ecartOffre(lireAttribution("?utm_campaign=renovation-x", "", "/travaux/", HOTE))).toBe(false);
+    expect(ecartOffre(lireAttribution("?utm_campaign=renovation-x", "", "/", HOTE))).toBe(false);
+    expect(ecartOffre(lireAttribution("", "", "/acquereurs/", HOTE))).toBe(false);
+  });
+  it("l'écart survit à la fusion de session", () => {
+    const premiere = lireAttribution("?utm_source=meta&utm_campaign=achat-travaux-meta-1", "", "/travaux/", HOTE);
+    const apres = fusionnerOrigine(premiere, lireAttribution("", "https://dvkstudio.fr/", "/", HOTE));
+    expect(ecartOffre(apres)).toBe(true);
   });
 });
 

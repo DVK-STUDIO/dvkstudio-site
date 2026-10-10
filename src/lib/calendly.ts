@@ -25,8 +25,19 @@ export type Attribution = {
   utm_term?: string;
   referrerHote?: string;
   atterrissage?: string;
+  /**
+   * Offre d'origine retenue : celle de la campagne, à défaut celle de la page d'arrivée. C'est une ORIGINE,
+   * jamais le besoin qualifié. Les deux sources restent conservées séparément ci-dessous, même en désaccord.
+   */
   offre?: Offre;
+  offreCampagne?: Offre;
+  offreAtterrissage?: Offre;
 };
+
+/** Vrai quand la campagne et la page d'arrivée annoncent deux offres différentes (ex. /travaux/ + achat-travaux-*). */
+export function ecartOffre(a: Attribution): boolean {
+  return a.offreCampagne !== undefined && a.offreAtterrissage !== undefined && a.offreCampagne !== a.offreAtterrissage;
+}
 
 const MAX_UTM = 120;
 
@@ -112,15 +123,33 @@ export function lireAttribution(search: string, referrer: string, chemin: string
     utm_term: normaliserUtm(p.get("utm_term")),
     referrerHote: normaliserUtm(referrerHote),
     atterrissage: nettoyerChemin(chemin),
-    // Offre d'origine : la convention de campagne prime sur la page d'arrivée.
-    offre: offreDepuisCampagne(p.get("utm_campaign")) ?? offreDepuisChemin(chemin),
+    ...offresDepuis(p.get("utm_campaign"), chemin),
   };
 }
 
-// Ne garde que les champs connus : une origine stockée par une version précédente (gclid, a1..a3) est purgée.
+// Offres d'origine : la convention de campagne prime sur la page d'arrivée, les deux restent conservées.
+function offresDepuis(campagne: string | null | undefined, chemin: string | null | undefined) {
+  const offreCampagne = offreDepuisCampagne(campagne);
+  const offreAtterrissage = offreDepuisChemin(chemin);
+  return { offre: offreCampagne ?? offreAtterrissage, offreCampagne, offreAtterrissage };
+}
+
+// Origine stockée par une version précédente ou altérée dans le navigateur : on ne lui fait pas confiance.
+// Seuls les champs connus sont gardés (gclid, a1..a3 purgés), chacun est renormalisé et les offres sont recalculées.
+const texte = (v: unknown): string | undefined => (typeof v === "string" ? v : undefined);
 function purger(o: Attribution): Attribution {
-  const { utm_source, utm_medium, utm_campaign, utm_content, utm_term, referrerHote, atterrissage, offre } = o;
-  return { utm_source, utm_medium, utm_campaign, utm_content, utm_term, referrerHote, atterrissage, offre };
+  const campagne = normaliserUtm(texte(o.utm_campaign));
+  const atterrissage = nettoyerChemin(texte(o.atterrissage));
+  return {
+    utm_source: normaliserUtm(texte(o.utm_source)),
+    utm_medium: normaliserUtm(texte(o.utm_medium)),
+    utm_campaign: campagne,
+    utm_content: normaliserUtm(texte(o.utm_content)),
+    utm_term: normaliserUtm(texte(o.utm_term)),
+    referrerHote: normaliserUtm(texte(o.referrerHote)),
+    atterrissage,
+    ...offresDepuis(campagne, atterrissage),
+  };
 }
 
 // Conserve la PREMIÈRE origine d'une session (jamais écrasée par une navigation interne).
