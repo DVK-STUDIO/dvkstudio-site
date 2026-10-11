@@ -15,8 +15,13 @@ const m = site.mandant;
         <a href="/mentions-legales/">Mentions légales</a>
         <a href="/confidentialite/">Confidentialité</a>
         <a href={site.telephoneLien}>{site.telephone}</a>
-        <a href={site.reseaux.linkedin} rel="noopener">LinkedIn</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
       </p>
+      <nav class="pied-liens pied-reseaux" aria-label="Réseaux sociaux">
+        <a href={site.reseaux.instagram} rel="noopener">Instagram</a>
+        <a href={site.reseaux.facebook} rel="noopener">Facebook</a>
+        <a href={site.reseaux.linkedin} rel="noopener">LinkedIn</a>
+      </nav>
     </div>
   </div>
 </footer>
@@ -29,10 +34,12 @@ const m = site.mandant;
   .pied-texte { display: grid; gap: 6px; max-width: 70ch; flex: 1 1 360px; }
   .pied-qualite { color: var(--dvk-text-inverse); }
   .pied-liens { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 4px; }
+  .pied-reseaux { margin-top: 0; }
   .pied a { color: var(--dvk-text-inverse); text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
   @media (max-width: 720px) {
     .pied-interieur { padding-block: 28px; gap: 16px; align-items: flex-start; }
     .pied-liens { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; width: 100%; }
+    .pied-reseaux { grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 20px; margin-top: 0; }
   }
 </style>
 

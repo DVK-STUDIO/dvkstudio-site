@@ -4,7 +4,7 @@ Cette proposition reprend la V2 existante et sa charte. Elle cible exclusivement
 
 - Accueil recentré sur la préparation des travaux et la prise de contact.
 - Parcours Particuliers, Avant d'acheter et Prescripteurs.
-- Contact : 06 40 32 47 52, k.devlieger@hemea.fr, prise de rendez-vous existante.
+- Contact : 06 40 32 47 52, contact@dvkstudio.fr, prise de rendez-vous existante.
 - Immobilier désactivé ; DVK Expérience conservée en source mais ses routes ne sont plus générées.
 - Ancienne URL realisations.html redirigée vers /travaux/.
 

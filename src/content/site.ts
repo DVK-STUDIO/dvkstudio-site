@@ -7,7 +7,7 @@ export const site = {
   zone: "Oise et Somme",
   telephone: "06 40 32 47 52",
   telephoneLien: "tel:+33640324752",
-  email: "k.devlieger@hemea.fr",
+  email: "contact@dvkstudio.fr",
   editeur: {
     forme: "Entrepreneur individuel",
     nom: "Kevin De Vlieger",
