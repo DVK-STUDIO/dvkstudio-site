@@ -1,398 +1,151 @@
 ---
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
-import BeforeAfter from "../components/BeforeAfter.astro";
 import BarreRdv from "../components/BarreRdv.astro";
 import Processus from "../components/Processus.astro";
 import Plan from "../components/Plan.astro";
 import Faq from "../components/Faq.astro";
-import ChaineExperience from "../components/ChaineExperience.astro";
-import TransformationChaine from "../components/TransformationChaine.astro";
-import Statut from "../components/experience/Statut.astro";
-import { experiencesPubliables } from "../lib/experience/experience";
 import { site } from "../content/site";
-import { chantier, paire } from "../lib/medias";
-import { immobilierVisible } from "../content/capacites";
-import { accueil } from "../content/immobilier";
 
-// Paire existant / projection (src/content/medias.ts). Absente tant que ses droits ne sont pas confirmés : hero et chaîne actuels.
-const media = paire();
-const mediaChantier = media ? chantier() : null;
-
-// Aperçu réel de DVK Expérience : uniquement si une expérience est publiable (diffusion confirmée en build public).
-const experience = experiencesPubliables()[0];
-
-// Données structurées : uniquement des faits publics déjà affichés (nom, coordonnées, zone). Rien sur les réseaux partenaires.
 const entreprise = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: site.nom,
-  url: site.url,
-  telephone: "+33640324752",
-  email: site.email,
+  "@context": "https://schema.org", "@type": "ProfessionalService",
+  name: site.nom, url: site.url, telephone: "+33640324752", email: site.email,
+  description: "Kevin De Vlieger, chef de projet travaux hemea dans l'Oise et la Somme.",
   address: { "@type": "PostalAddress", streetAddress: "17 Rue Machaut", postalCode: "60120", addressLocality: "Gannes", addressCountry: "FR" },
-  areaServed: "Oise",
-  sameAs: [site.reseaux.instagram, site.reseaux.linkedin],
+  areaServed: ["Oise", "Somme"], sameAs: [site.reseaux.linkedin],
 };
-
-// Où en êtes-vous ? Avec la capacité Immobilier : trois entrées (Je rénove, J'achète, Je vends) et un accès discret pour les professionnels.
-// Sans elle (mode « off ») : les trois entrées d'origine.
-const renove = { titre: "Je rénove", texte: "Cadrer mes travaux et mon budget avant de m'engager.", lien: "Cadrer mes travaux", href: "/travaux/" };
-const professionnel = { titre: "Je suis professionnel", texte: "Montrer à vos acquéreurs ce qu'un bien peut devenir.", lien: "Envoyer une annonce", href: "/professionnels/" };
-const sansFleche = (s: { lien: string }) => s.lien.replace(/\s*→$/, "");
-const situations = (immobilierVisible
-  ? [renove, accueil.entreeAchat, accueil.entreeVente]
-  : [
-      renove,
-      { titre: "J'achète un bien à rénover", texte: "Comprendre son potentiel et le coût des travaux avant de signer, pour l'habiter ou le louer.", lien: "Analyser un bien", href: "/acquereurs/" },
-      professionnel,
-    ]
-).map((s) => ({ ...s, lien: sansFleche(s) }));
-
 const faq = [
-  { q: "Faites-vous les travaux ?", r: "Non. DVK Studio n'est pas maître d'œuvre et ne réalise pas de travaux. Il cadre votre projet, estime son budget et vous aide à consulter des entreprises labellisées hemea. Il ne garantit personnellement ni ces entreprises ni leurs travaux." },
-  { q: "Les budgets présentés sont-ils des devis ?", r: "Non. Ce sont des estimations indicatives, avec leurs hypothèses et leurs limites. Un devis ne vient qu'avec les entreprises consultées." },
-  { q: "Le premier échange m'engage-t-il ?", r: "Non. C'est un échange de vingt minutes par téléphone, sans engagement." },
-  ...(immobilierVisible ? [accueil.faq] : []),
-  { q: "Où intervenez-vous ?", r: `${site.zone}, lorsque le projet s'y prête.` },
+  { q: "À quel moment vous contacter ?", r: "Dès que vous envisagez des travaux, y compris avant l'achat d'un bien à rénover. Je commence par votre besoin, la commune du bien et votre calendrier." },
+  { q: "Intervenez-vous dans l'Oise et la Somme ?", r: "Oui. Je suis basé à Gannes, dans l'Oise, et j'accompagne les projets dans l'Oise (60) et la Somme (80). Je précise les modalités selon la localisation et la nature du projet." },
+  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange téléphonique dure vingt minutes et se fait sans engagement." },
+  { q: "Une enveloppe de travaux est-elle un devis ?", r: "Une estimation est un premier repère, avec ses hypothèses et ses limites. Les devis sont établis par les entreprises consultées après étude du besoin." },
+  { q: "Réalisez-vous les travaux ?", r: "Les travaux sont réalisés par les entreprises retenues. Mon rôle de chef de projet travaux hemea porte sur le cadrage, le budget estimatif et la consultation d'entreprises labellisées hemea. Le périmètre de l'accompagnement est précisé pour chaque projet." },
 ];
 ---
 
-<Base
-  titre="DVK Studio — Comprendre le potentiel d'un bien, ses travaux et leur budget"
-  description="Chef de projet travaux en Oise : DVK Studio vous aide à comprendre le potentiel d'un bien, ses travaux et leur budget avant de décider. Un seul interlocuteur."
-  page="home"
-  chemin="/"
-  donneesStructurees={entreprise}
->
-  {media ? (
-    <section class="hero-b conteneur trame" aria-labelledby="titre-hero">
-      <div class="hero-b-grille">
-        <div class="hero-b-tete">
-          <p class="surtitre">Chef de projet travaux · {site.zone}</p>
-          <h1 id="titre-hero" class="titre-xl titre-hero-b">Ne regardez plus seulement un bien. Découvrez ce qu'il peut devenir.</h1>
-        </div>
-        <div class="hero-b-visuel">
-          <BeforeAfter id="hero" avant={media.avant} apres={media.apres} altAvant={media.altAvant} altApres={media.altApres} reperes={media.reperesHero} standin={media.standin} />
-        </div>
-        <div class="hero-b-corps">
-          <p class="chapo">DVK Studio vous aide à comprendre le potentiel d'un bien, ses travaux et leur budget, avant de décider. Un seul interlocuteur, et des chiffres qui disent s'ils sont réels, estimés ou supposés.</p>
-          <div class="hero-actions">
-            <BoutonRdv bouton="hero.rdv">Prendre rendez-vous · 20 min</BoutonRdv>
-            <a class="lien-fort" href="#transformation">Voir ce qu'il y a entre les deux →</a>
-          </div>
-          <p class="micro">Par téléphone, sans engagement.</p>
-        </div>
+<Base titre="DVK Studio — Chef de projet travaux hemea | Oise et Somme"
+  description="Votre rénovation dans l'Oise et la Somme avec Kevin De Vlieger, chef de projet travaux hemea. Particuliers et prescripteurs immobiliers : parlons de votre projet."
+  page="home" chemin="/" donneesStructurees={entreprise}>
+  <header class="conteneur trame hemea-hero">
+    <div class="hero-texte">
+      <p class="surtitre">Chef de projet travaux hemea · Oise & Somme</p>
+      <h1 class="titre-xl">Votre rénovation,<br />un projet bien accompagné.</h1>
+      <p class="chapo">Des premières questions aux prochaines étapes de vos travaux, avançons avec un besoin clair, un budget à cadrer et les bons interlocuteurs.</p>
+      <div class="actions">
+        <BoutonRdv bouton="hero.rdv" parcours="renover">Parlons de votre projet</BoutonRdv>
+        <a class="lien-soulige" href={site.telephoneLien}>{site.telephone}</a>
       </div>
-      <ol class="points" aria-label="Comment DVK Studio travaille">
-        <li><span class="numero">01</span><strong>Un seul interlocuteur</strong>Chef de projet travaux hemea : cadrage, budget, consultation d'entreprises labellisées hemea.</li>
-        <li><span class="numero">02</span><strong>Des chiffres qui disent ce qu'ils sont</strong>Réel, estimation, hypothèse ou à chiffrer.</li>
-        <li><span class="numero">03</span><strong>Vingt minutes pour commencer</strong>Par téléphone, sans engagement.</li>
-      </ol>
-    </section>
+      <p class="hero-note">Kevin De Vlieger · Premier échange de 20 min, par téléphone, sans engagement.</p>
+    </div>
+    <div class="hero-plan">
+      <div class="cotes"><span>Votre projet</span><span>De l'idée aux travaux</span></div>
+      <Plan alt="Plan schématique illustrant un projet de rénovation de cuisine et de séjour"
+        zones={["cuisine"]} ouverture
+        annotations={[
+          { x: 42.5, y: 26, lx: 52, ly: 8, libelle: "Contraintes à vérifier", statut: "manquant" },
+          { x: 42.5, y: 58, lx: 52, ly: 72, libelle: "Travaux à envisager", statut: "hypothese", focal: true },
+        ]}
+        legende="Plan illustratif, non à l'échelle. Chaque projet nécessite sa propre étude." />
+      <p class="plan-signature">Le bon point de départ : comprendre votre besoin.</p>
+    </div>
+  </header>
 
-  ) : (
-    <>
-      <section class="hero conteneur trame" aria-labelledby="titre-hero">
-        <div class="hero-grille">
-          <div class="hero-tete">
-            <p class="surtitre">Chef de projet travaux · {site.zone}</p>
-            <h1 id="titre-hero" class="titre-xl titre-hero">Ne regardez plus seulement un bien. Découvrez ce qu'il peut devenir.</h1>
-          </div>
-          <div class="hero-corps">
-            <p class="chapo">DVK Studio vous aide à comprendre le potentiel d'un bien, ses travaux et leur budget, avant de décider. Un seul interlocuteur, et des chiffres qui disent s'ils sont réels, estimés ou supposés.</p>
-            <div class="hero-actions">
-              <BoutonRdv bouton="hero.rdv">Prendre rendez-vous · 20 min</BoutonRdv>
-              <a class="lien-fort" href="/experience/">Découvrir DVK Expérience →</a>
-            </div>
-            <p class="micro">Par téléphone, sans engagement.</p>
-          </div>
-          <div class="hero-visuel">
-                    <Plan
-              alt="Plan schématique d'une maison : la cuisine, le séjour et la cloison qui les sépare"
-              zones={["cuisine"]}
-              ouverture
-              annotations={[
-                { x: 42.5, y: 26, lx: 52, ly: 8, libelle: "Cloison : porteuse ou non ?", statut: "manquant" },
-                { x: 42.5, y: 58, lx: 52, ly: 72, libelle: "Ouverture envisagée", statut: "hypothese", focal: true },
-              ]}
-              legende="Plan illustratif, non à l'échelle. Exemple de ce que DVK Expérience établit pour chaque bien."
-            />
-          </div>
-        </div>
-        <ol class="points" aria-label="Comment DVK Studio travaille">
-          <li><span class="numero">01</span><strong>Un seul interlocuteur</strong>Chef de projet travaux hemea : cadrage, budget, consultation d'entreprises labellisées hemea.</li>
-          <li><span class="numero">02</span><strong>Des chiffres qui disent ce qu'ils sont</strong>Réel, estimation, hypothèse ou à chiffrer.</li>
-          <li><span class="numero">03</span><strong>Vingt minutes pour commencer</strong>Par téléphone, sans engagement.</li>
-        </ol>
-      </section>
+  <section class="conteneur reperes" aria-label="Votre accompagnement">
+    <div><span class="numero">01 · Un interlocuteur</span><p>Kevin De Vlieger,<br />chef de projet travaux hemea.</p></div>
+    <div><span class="numero">02 · Deux départements</span><p>Oise (60) et Somme (80),<br />à partir de Gannes.</p></div>
+    <div><span class="numero">03 · Un projet à cadrer</span><p>Votre besoin, votre budget<br />et votre calendrier.</p></div>
+  </section>
 
-    </>
-  )}
-
-  <!-- 2 · Où en êtes-vous ? Trois entrées éditoriales, pas de cartes -->
-  <section class="section conteneur" id="situations" aria-labelledby="titre-situations">
+  <section class="section conteneur" id="parcours" aria-labelledby="t-parcours">
     <div class="enonce">
       <span class="idx" aria-hidden="true">01</span>
-      <div class="tete">
-        <p class="surtitre">Pour qui</p>
-        <h2 id="titre-situations" class="titre-xl">Où en êtes-vous ?</h2>
-      </div>
+      <div class="tete"><p class="surtitre">Votre point de départ</p><h2 id="t-parcours" class="titre-l">Vous avez un projet.<br />Ou un client à accompagner.</h2></div>
     </div>
-    <nav class="parcours" aria-label="Votre situation">
-      {situations.map((s, i) => (
-        <a href={s.href} class="parcours-ligne">
-          <span class="numero">{String(i + 1).padStart(2, "0")}</span>
-          <span class="parcours-titre">{s.titre}</span>
-          <span class="parcours-texte">{s.texte}</span>
-          <span class="parcours-lien">{s.lien} <span aria-hidden="true">→</span></span>
-        </a>
-      ))}
+    <nav class="parcours-hemea" aria-label="Choisir votre parcours">
+      <a href="/travaux/"><span class="numero">01</span><h3>Je rénove mon logement</h3><p>Faire le point sur mes travaux, mes priorités et le budget à prévoir.</p><span class="parcours-suite">Parcours particuliers <span aria-hidden="true">→</span></span></a>
+      <a href="/acquereurs/"><span class="numero">02</span><h3>J'achète un bien à rénover</h3><p>Anticiper les questions de travaux avant de poursuivre mon achat.</p><span class="parcours-suite">Préparer mon projet <span aria-hidden="true">→</span></span></a>
+      <a href="/professionnels/"><span class="numero">03</span><h3>J'accompagne un client</h3><p>Orienter mon client vers un interlocuteur travaux dans l'Oise ou la Somme.</p><span class="parcours-suite">Parcours prescripteurs <span aria-hidden="true">→</span></span></a>
     </nav>
-    {immobilierVisible && <p class="ligne-pro">{accueil.lignePro.texte} <a href={accueil.lignePro.href}>{accueil.lignePro.lien}</a></p>}
   </section>
 
-  {media && (
-    <section class="conteneur passerelle" aria-label="Du comparateur à la chaîne">
-      <p>Vous voyez la transformation.</p>
-      <p>Maintenant, comprenez ce qu'elle implique.</p>
-    </section>
-  )}
-
-  <!-- 3 · DVK Expérience : le moment signature -->
-  {media ? (
-    <>
-      <section id="experience" class="sombre" aria-labelledby="titre-experience">
-        <TransformationChaine id="titre-experience" titre="Entre l'existant et la décision, cinq étapes." paire={media} chantier={mediaChantier} />
-      </section>
-      <section class="sombre section suite-experience" aria-label="DVK Expérience : aller plus loin">
-        <div class="conteneur">
-          <p class="demo-note-bas">Un outil de projection et de cadrage de votre projet travaux. Ce n'est ni une étude de faisabilité réglementaire, ni de la maîtrise d'œuvre.</p>
-          <div class="demo-bas">
-            <div class="demo-actions">
-              <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
-              <a class="lien-fort demo-lien" href="/experience/">Découvrir DVK Expérience →</a>
-            </div>
-            <div class="demo-fenetre">
-              {experience ? (
-                <a class="apercu" href={`/experience/${experience.slug}/`}>
-                  <span class="dvk-availability is-demo">Projet pilote</span>
-                  <strong>{experience.titre}</strong>
-                  <span class="accroche">{experience.accroche}</span>
-                  <span class="aller">Découvrir l'expérience →</span>
-                </a>
-              ) : (
-                <>
-                  <p class="surtitre">Exemple de lecture · démonstration</p>
-                  <div class="scenarios">
-                    <div><h3>Scénario A</h3><Statut statut="hypothese" /><p>Comparé à vos besoins, un par un.</p></div>
-                    <div><h3>Scénario B</h3><Statut statut="hypothese" /><p>Comparé aux mêmes besoins.</p></div>
-                  </div>
-                  <p class="budget">Budget : <Statut statut="manquant" libelle="À chiffrer" /> après l'étude. Aucun montant inventé.</p>
-                  <p class="legende-demo">Exemple de structure, pas un projet réel.</p>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  ) : (
-    <section id="experience" class="sombre section" aria-labelledby="titre-experience">
-      <ChaineExperience
-        id="titre-experience"
-        titre="Une page claire pour chaque bien."
-        intro="Un outil de projection et de cadrage de votre projet travaux. Ce n'est ni une étude de faisabilité réglementaire, ni de la maîtrise d'œuvre."
-        idx="02"
-      >
-        <div class="demo-bas">
-          <div class="demo-actions">
-            <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
-            <a class="lien-fort demo-lien" href="/experience/">Découvrir DVK Expérience →</a>
-          </div>
-          <div class="demo-fenetre">
-            {experience ? (
-              <a class="apercu" href={`/experience/${experience.slug}/`}>
-                <span class="dvk-availability is-demo">Projet pilote</span>
-                <strong>{experience.titre}</strong>
-                <span class="accroche">{experience.accroche}</span>
-                <span class="aller">Découvrir l'expérience →</span>
-              </a>
-            ) : (
-              <>
-                <p class="surtitre">Exemple de lecture · démonstration</p>
-                <div class="scenarios">
-                  <div><h3>Scénario A</h3><Statut statut="hypothese" /><p>Comparé à vos besoins, un par un.</p></div>
-                  <div><h3>Scénario B</h3><Statut statut="hypothese" /><p>Comparé aux mêmes besoins.</p></div>
-                </div>
-                <p class="budget">Budget : <Statut statut="manquant" libelle="À chiffrer" /> après l'étude. Aucun montant inventé.</p>
-                <p class="legende-demo">Exemple de structure, pas un projet réel.</p>
-              </>
-            )}
-          </div>
-        </div>
-      </ChaineExperience>
-    </section>
-  )}
-
-  <!-- 4 · Comment ça se passe -->
-  <section class="section conteneur" id="methode" aria-labelledby="titre-methode">
-    <div class="enonce">
-      <span class="idx" aria-hidden="true">03</span>
-      <div class="tete">
-        <p class="surtitre">Comment ça se passe</p>
-        <h2 id="titre-methode" class="titre-xl">Quatre étapes, un interlocuteur.</h2>
-      </div>
-    </div>
-    <div class="methode-etapes">
-      <Processus etapes={[
-        { titre: "Échange", texte: "Vingt minutes pour comprendre votre situation et votre objectif." },
-        { titre: "Visite et relevé", texte: "Le bien est regardé sur place et mesuré." },
-        { titre: "Potentiel et budget", texte: "Scénarios et enveloppe indicative, hypothèses à l'appui." },
-        { titre: "Décision", texte: "Vous décidez, puis consultation d'entreprises labellisées hemea si vous avancez." },
-      ]} />
-    </div>
-    <div class="hero-actions"><BoutonRdv bouton="methode.rdv">Prendre rendez-vous</BoutonRdv></div>
-  </section>
-
-  <!-- 5 · Qui vous accompagne (portrait, réalisations et avis : absents tant qu'ils ne sont pas réels et autorisés) -->
-  <section class="papier-2 section" id="confiance" aria-labelledby="titre-confiance">
+  <section class="sombre section" id="methode" aria-labelledby="t-methode">
     <div class="conteneur">
-      <div class="enonce">
-        <span class="idx" aria-hidden="true">04</span>
-        <div class="tete">
-          <p class="surtitre">Qui vous accompagne</p>
-          <h2 id="titre-confiance" class="titre-l titre-moyen">Kevin De Vlieger, chef de projet travaux hemea.</h2>
-        </div>
+      <p class="surtitre">L'accompagnement hemea</p>
+      <h2 id="t-methode" class="titre-l methode-titre">Mettre les bonnes questions<br />dans le bon ordre.</h2>
+      <p class="chapo methode-intro">Avant les devis, clarifions ce que vous souhaitez faire. Puis construisons la suite selon votre bien, vos priorités et le cadre de l'accompagnement hemea.</p>
+      <div class="methode-etapes">
+        <Processus etapes={[
+          { titre: "Votre besoin", texte: "Un premier échange sur votre situation, la commune du bien et vos objectifs." },
+          { titre: "Votre projet", texte: "Cadrage des travaux envisagés, des priorités et des points à vérifier." },
+          { titre: "Votre budget", texte: "Une enveloppe indicative puis la consultation d'entreprises labellisées hemea." },
+          { titre: "La suite", texte: "Comparaison des propositions et accompagnement selon le périmètre convenu." },
+        ]} />
       </div>
-      <div class="conf">
-        <p class="chapo conf-texte">Je suis mandataire indépendant de hemea et j'exerce sous le nom DVK Studio. Je comprends votre projet, je le cadre et je vous oriente vers des entreprises labellisées hemea. Je ne suis ni architecte ni maître d'œuvre, et les budgets présentés sont des estimations, pas des devis. {immobilierVisible && accueil.confiance} Plus de détails sur la page <a href="/a-propos/">À propos</a>.</p>
-        <ul class="legende-statuts" aria-label="Ce que veulent dire les statuts">
-          <li><Statut statut="reel" /><span>Constaté ou mesuré, avec sa source.</span></li>
-          <li><Statut statut="estimation" /><span>Ordre de grandeur, à confirmer après visite.</span></li>
-          <li><Statut statut="hypothese" /><span>Lecture de DVK Studio, à vérifier.</span></li>
-          <li><Statut statut="manquant" libelle="À chiffrer" /><span>Pas encore établi : rien n'est inventé.</span></li>
-        </ul>
+      <div class="actions"><BoutonRdv bouton="methode.rdv">Faire le point sur mes travaux</BoutonRdv></div>
+    </div>
+  </section>
+
+  <section class="section conteneur" aria-labelledby="t-pro">
+    <div class="duo">
+      <div><p class="surtitre">Prescripteurs immobiliers</p><h2 id="t-pro" class="titre-l pro-titre">Vos clients ont des questions travaux.<br />Donnons-leur un point de contact.</h2></div>
+      <div>
+        <p class="chapo">Agents immobiliers, chasseurs et courtiers : lorsqu'un achat ou un projet de votre client implique une rénovation, mettez-le en relation avec un interlocuteur local.</p>
+        <p class="pro-texte">J’échange avec votre client sur son besoin, les travaux envisagés et les prochaines étapes. Vous restez son interlocuteur immobilier ; je prends le relais sur la préparation du projet travaux hemea.</p>
+        <div class="actions"><a class="btn btn-encre" href="/professionnels/">Parlons de vos clients</a></div>
       </div>
     </div>
   </section>
 
-  <!-- 6 · FAQ -->
-  <section class="conteneur faq-section" aria-labelledby="titre-faq">
-    <h2 id="titre-faq" class="titre-m" style="margin-bottom:32px">Questions fréquentes</h2>
+  <section class="papier-2 section" aria-labelledby="t-kevin">
+    <div class="conteneur enonce">
+      <span class="idx" aria-hidden="true">02</span>
+      <div class="tete"><p class="surtitre">Qui vous accompagne</p><h2 id="t-kevin" class="titre-l">Kevin De Vlieger,<br />chef de projet travaux hemea.</h2></div>
+      <div class="corps"><p class="chapo">J'exerce sous le nom DVK Studio, en tant que mandataire indépendant de hemea. Basé à Gannes, je suis votre point de contact pour préparer un projet de rénovation dans l'Oise et la Somme.</p><div class="actions"><a class="lien-soulige" href="/a-propos/">Découvrir mon rôle</a></div></div>
+    </div>
+  </section>
+
+  <section class="section conteneur" aria-labelledby="t-faq">
+    <h2 id="t-faq" class="titre-m faq-titre">Vos premières questions</h2>
     <Faq questions={faq} />
   </section>
 
-  <!-- 7 · Rendez-vous -->
-  <section class="sombre section final" id="rdv" aria-labelledby="titre-rdv">
-    <div class="conteneur duo trame">
-      <div>
-        <h2 id="titre-rdv" class="titre-l">Parlons de votre projet.</h2>
-        <p class="contact"><a href={site.telephoneLien}>{site.telephone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
-      </div>
-      <div class="rdv-carte">
-        <p class="titre-m" style="font-size:24px">Choisir un créneau</p>
-        <p class="rdv-texte">Vingt minutes, par téléphone, sans engagement. La réservation s'ouvre sur Calendly ; votre origine (page, bouton) est transmise, sans cookie.</p>
-        <BoutonRdv bouton="final.rdv">Prendre rendez-vous</BoutonRdv>
-      </div>
+  <section class="sombre section" id="rdv" aria-labelledby="t-rdv">
+    <div class="conteneur duo">
+      <div><p class="surtitre">Commençons par un échange</p><h2 id="t-rdv" class="titre-l">Un bien, des travaux,<br />une première conversation.</h2><p class="chapo contact-intro">Indiquez-moi la commune du bien, les travaux envisagés et votre calendrier.</p></div>
+      <div class="contact-direct"><a href={site.telephoneLien} class="contact-tel">{site.telephone}</a><a href={`mailto:${site.email}`}>{site.email}</a><div class="actions"><BoutonRdv bouton="final.rdv">Choisir un créneau · 20 min</BoutonRdv></div><p class="contact-note">La prise de rendez-vous s'ouvre sur Calendly.</p></div>
     </div>
   </section>
-
   <BarreRdv />
 </Base>
 
 <style>
-  /* Hero : titre en travers, texte à gauche, plan à droite, sur une grille de 12 colonnes */
-  .hero { padding-top: clamp(32px, 6vw, 72px); padding-bottom: clamp(32px, 5vw, 64px); }
-  .hero-grille { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 24px); row-gap: clamp(20px, 3vw, 36px); align-items: end; }
-  .hero-tete { grid-column: 1 / span 10; display: flex; flex-direction: column; gap: 24px; }
-  .titre-hero { max-width: 20ch; }
-  .hero-corps { grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 22px; }
-  .hero-visuel { grid-column: 7 / -1; width: 100%; }
-  .hero-visuel :global(.zone) { background: transparent; padding: 0; border-radius: 0; }
-  .hero-visuel :global(.vide) { fill: var(--dvk-background); }
-  @media (max-width: 900px) {
-    .hero-tete, .hero-corps, .hero-visuel { grid-column: 1 / -1; }
-    .titre-hero { max-width: none; }
-  }
-  .hero-actions { display: flex; gap: 14px 28px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-  .lien-fort { font-weight: 600; font-size: 15px; letter-spacing: 0.02em; border-bottom: 1.5px solid var(--terre); padding-bottom: 3px; display: inline-flex; align-items: center; min-height: 44px; }
-  .micro { font-size: 13px; color: var(--dvk-text-subtle); margin-top: -8px; }
-  .points { list-style: none; padding: 0; margin: clamp(40px, 6vw, 72px) 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; }
-  .points li { padding: 18px 0 4px; border-top: 1.5px solid var(--dvk-text); font-size: 14px; line-height: 1.6; color: var(--dvk-text-muted); }
-  .points .numero { display: block; margin-bottom: 12px; }
-  .points strong { display: block; font-weight: 600; font-size: 15px; color: var(--dvk-text); margin-bottom: 4px; }
-  @media (max-width: 900px) { .points { grid-template-columns: 1fr; gap: 0; } }
-
-  .titre-moyen { max-width: 24ch; }
-
-  /* Hero B : texte à gauche, comparateur à droite (jusqu'au bord), sur une grille ; mobile : titre, comparateur, texte. */
-  .hero-b { padding-top: clamp(32px, 5vw, 64px); padding-bottom: clamp(32px, 5vw, 64px); }
-  .hero-b-grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "tete visuel" "corps visuel"; grid-template-rows: auto 1fr; column-gap: clamp(24px, 4vw, 64px); row-gap: 24px; align-items: start; }
-  .hero-b-tete { grid-area: tete; display: flex; flex-direction: column; gap: 24px; }
-  .titre-hero-b { font-size: clamp(32px, 4vw, 54px); line-height: 1.08; }
-  .hero-b-corps { grid-area: corps; display: flex; flex-direction: column; gap: 22px; align-self: start; }
-  .hero-b-visuel { grid-area: visuel; margin-right: calc(-1 * var(--gouttiere)); align-self: center; }
-  @media (max-width: 900px) {
-    .hero-b-grille { grid-template-columns: 1fr; grid-template-areas: "tete" "visuel" "corps"; grid-template-rows: auto; row-gap: 22px; }
-    .hero-b-visuel { margin: 0 calc(-1 * var(--gouttiere)); }
-  }
-  .passerelle { padding-block: clamp(56px, 8vw, 104px) clamp(8px, 2vw, 24px); }
-  .passerelle p { font-size: clamp(26px, 3.6vw, 44px); line-height: 1.15; letter-spacing: -0.04em; font-weight: 300; }
-  .passerelle p + p { color: var(--dvk-text-subtle); margin-top: 6px; }
-  .suite-experience { padding-top: 0; }
-  .demo-note-bas { font-size: 14px; color: var(--dvk-inverse-muted); max-width: 62ch; }
-
-  /* Parcours : trois lignes éditoriales (numéro, grand titre, promesse, lien), séparées par des filets */
-  .parcours { margin-top: clamp(32px, 5vw, 56px); border-bottom: 1px solid var(--dvk-border); }
-  .parcours-ligne { display: grid; grid-template-columns: 56px minmax(0, 1.25fr) minmax(0, 1fr) 190px; gap: 12px clamp(16px, 3vw, 40px); align-items: baseline; padding: clamp(24px, 3.4vw, 40px) 0; border-top: 1px solid var(--dvk-border); transition: padding-left var(--dvk-duration-state) var(--dvk-ease); }
-  .parcours-ligne:first-child { border-top: 1.5px solid var(--dvk-text); }
-  .parcours-titre { font-size: clamp(30px, 4.2vw, 56px); font-weight: 300; letter-spacing: -0.04em; line-height: 1.05; }
-  .parcours-texte { font-size: 15px; color: var(--dvk-text-muted); max-width: 40ch; }
-  .parcours-lien { color: var(--dvk-action); font-weight: 600; font-size: 14px; letter-spacing: 0.02em; text-align: right; }
-  .parcours-ligne:hover { opacity: 1; padding-left: 12px; }
-  .parcours-ligne:hover .parcours-titre { color: var(--dvk-action); }
-  @media (max-width: 900px) {
-    .parcours-ligne { grid-template-columns: 40px minmax(0, 1fr); }
-    .parcours-ligne > .numero { grid-row: 1 / span 3; padding-top: 10px; }
-    .parcours-texte, .parcours-lien { grid-column: 2; }
-    .parcours-ligne:hover { padding-left: 0; }
-  }
-  .ligne-pro { margin-top: 24px; font-size: 15px; color: var(--dvk-text-muted); }
-  .ligne-pro a { color: var(--dvk-action); font-weight: 600; }
-
-  /* DVK Expérience : bas de la bande signature (actions + fenêtre de lecture) */
-  .demo-bas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: start; margin-top: clamp(40px, 6vw, 72px); }
-  @media (max-width: 900px) { .demo-bas { grid-template-columns: 1fr; } }
-  .demo-actions { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
-  .demo-lien { color: var(--dvk-background); }
-  .demo-fenetre { background: var(--dvk-background); color: var(--dvk-text); border-radius: var(--dvk-radius-md); padding: clamp(18px, 3vw, 32px); }
-  .demo-fenetre .surtitre { margin: 0 0 6px; }
-  .scenarios { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
-  .scenarios > div { border-top: 1.5px solid var(--dvk-text); padding-top: 10px; font-size: 15px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
-  .scenarios h3 { font-size: 18px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
-  .scenarios p { margin: 0; color: var(--dvk-text-muted); font-size: 14px; }
-  @media (max-width: 720px) { .scenarios { grid-template-columns: 1fr; } }
-  .budget { margin: 16px 0 0; font-size: 14px; color: var(--dvk-text-muted); }
-  .legende-demo { margin: 10px 0 0; font-size: 13px; color: var(--dvk-text-subtle); }
-  .apercu { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-  .apercu strong { font-size: clamp(22px, 2.6vw, 30px); font-weight: 300; line-height: 1.15; letter-spacing: -0.03em; }
-  .accroche { color: var(--dvk-text-muted); font-size: 15px; }
-  .aller { color: var(--dvk-action); font-weight: 600; }
-
-  .methode-etapes { margin-top: clamp(32px, 5vw, 56px); }
-  .conf { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: start; margin-top: clamp(28px, 4vw, 48px); }
-  @media (max-width: 900px) { .conf { grid-template-columns: 1fr; } }
-  .conf-texte a { text-decoration: underline; text-underline-offset: 3px; }
-  .legende-statuts { list-style: none; padding: 0; margin: 0; border-top: 1.5px solid var(--dvk-text); }
-  .legende-statuts li { display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--dvk-border); align-items: baseline; font-size: 15px; color: var(--dvk-text-muted); }
-  @media (max-width: 720px) { .legende-statuts li { grid-template-columns: 1fr; gap: 6px; } }
-
-  .faq-section { max-width: 1000px; padding-block: 96px 40px; }
-  .final { margin-top: 96px; }
-  .duo { display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: center; justify-content: space-between; }
-  .duo > * { flex: 1 1 340px; min-width: 0; }
-  .contact { margin-top: 22px; color: var(--brume); }
-  .rdv-carte { background: var(--papier); color: var(--encre); border-radius: var(--dvk-radius-md); padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-  .rdv-texte { font-size: 14px; color: var(--pierre); }
+  .hemea-hero { display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:clamp(32px,5vw,72px); align-items:center; padding-block:clamp(44px,7vw,96px); }
+  .hero-texte .surtitre { margin-bottom:28px; }
+  .hero-texte h1 { font-size:clamp(36px,4.5vw,60px); max-width:19ch; }
+  .hero-texte .chapo { margin-top:28px; }
+  .hero-note { font-size:13px; color:var(--pierre); margin-top:20px; max-width:46ch; }
+  .hero-plan { min-width:0; padding-top:24px; }
+  .hero-plan :global(.zone) { background:transparent; padding:0; }
+  .plan-signature { font-size:13px; color:var(--pierre); border-top:1px solid var(--ligne); padding-top:16px; margin-top:20px; }
+  .reperes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; }
+  .reperes > div { border-top:1.5px solid var(--encre); padding-top:18px; }
+  .reperes p { margin-top:12px; font-size:15px; color:var(--encre-douce); }
+  .parcours-hemea { margin-top:48px; border-bottom:1px solid var(--ligne); }
+  .parcours-hemea > a { display:grid; grid-template-columns:40px minmax(0,1.1fr) minmax(0,1fr) 190px; align-items:center; gap:24px; padding-block:32px; border-top:1px solid var(--ligne); }
+  .parcours-hemea h3 { font-size:23px; line-height:1.25; }
+  .parcours-hemea p { font-size:15px; color:var(--encre-douce); }
+  .parcours-suite { font-size:13px; font-weight:600; display:flex; justify-content:space-between; gap:12px; }
+  .methode-titre { margin-top:24px; }
+  .methode-intro { margin-top:28px; }
+  .methode-etapes { margin-top:48px; --dvk-text-muted:var(--dvk-inverse-muted); --dvk-text-subtle:var(--dvk-inverse-subtle); --dvk-border-strong:var(--dvk-inverse-subtle); }
+  .pro-titre { margin-top:24px; }
+  .pro-texte { color:var(--encre-douce); margin-top:22px; }
+  .faq-titre { margin-bottom:32px; }
+  .contact-intro { margin-top:24px; }
+  .contact-direct { display:flex; flex-direction:column; align-items:flex-start; padding-top:32px; overflow-wrap:anywhere; }
+  .contact-tel { font-size:clamp(26px,3vw,40px); font-weight:300; line-height:1.2; margin-bottom:18px; }
+  .contact-note { font-size:13px; color:var(--brume); margin-top:16px; }
+  @media (max-width:900px) { .hemea-hero { grid-template-columns:1fr; } .hero-texte h1 { max-width:22ch; } .hero-plan { max-width:620px; width:100%; margin:auto; } .parcours-hemea > a { grid-template-columns:30px 1fr; gap:12px 20px; } .parcours-hemea p,.parcours-suite { grid-column:2; } .parcours-suite { justify-content:flex-start; } }
+  @media (max-width:720px) { .reperes { grid-template-columns:1fr; gap:24px; } .hero-texte .actions { align-items:flex-start; flex-direction:column; } .contact-direct { padding-top:0; } }
 </style>
+

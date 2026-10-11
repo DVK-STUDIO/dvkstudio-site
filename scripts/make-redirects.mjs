@@ -5,7 +5,7 @@ const correspondances = {
   "particuliers.html": "/travaux/",
   "professionnels.html": "/professionnels/",
   "a-propos.html": "/a-propos/",
-  "realisations.html": "/experience/",
+  "realisations.html": "/travaux/",
   "contact.html": "/contact/",
   "mentions-legales.html": "/mentions-legales/",
   "confidentialite.html": "/confidentialite/",
@@ -21,3 +21,4 @@ for (const [ancien, nouveau] of Object.entries(correspondances)) {
   );
 }
 console.log(`${Object.keys(correspondances).length} redirections écrites`);
+

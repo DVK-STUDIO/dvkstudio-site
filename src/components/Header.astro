@@ -13,7 +13,7 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
     <a href="/" class="marque" aria-label="DVK Studio — accueil">
       <!-- Symbole du logo officiel (fichier transparent fourni, rogné sans retouche). Le logo complet est dans le pied de page. -->
       <Image class="marque-symbole" src={symbole} width={82} height={67} format="webp" alt="" loading="eager" />
-      <span class="marque-nom">DVK Studio</span><span class="marque-zone">Oise</span>
+      <span class="marque-nom">DVK Studio</span><span class="marque-zone">Oise · Somme</span>
     </a>
     <nav aria-label="Navigation principale" class="nav" id="nav-principale">
       <ul>
@@ -71,3 +71,4 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
     bouton.setAttribute("aria-label", ouvert ? "Fermer le menu" : "Ouvrir le menu");
   });
 </script>
+

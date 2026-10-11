@@ -6,14 +6,14 @@ import { site } from "../content/site";
 
 <Base
   titre="Contact et prise de rendez-vous"
-  description="Prenez rendez-vous avec DVK Studio : un échange de vingt minutes, par téléphone, sans engagement. Oise et secteurs limitrophes."
+  description="Prenez rendez-vous avec DVK Studio : un échange de vingt minutes, par téléphone, sans engagement. Chef de projet travaux hemea dans l'Oise et la Somme."
   page="contact"
   chemin="/contact/"
 >
   <header class="conteneur page-hero">
     <p class="surtitre">Contact</p>
-    <h1 class="titre-xl">Parlons de votre projet.</h1>
-    <p class="chapo">Vingt minutes, par téléphone, sans engagement. Dites-moi si vous rénovez ou achetez un bien à rénover : je vous oriente.</p>
+    <h1 class="titre-xl">Parlons de vos travaux.</h1>
+    <p class="chapo">Vingt minutes, par téléphone, sans engagement. Vous avez un projet de rénovation ou un client à accompagner dans l'Oise ou la Somme ? Indiquez la commune du bien, la nature des travaux et votre calendrier.</p>
     <div class="actions"><BoutonRdv bouton="hero.rdv">Choisir un créneau</BoutonRdv></div>
   </header>
 
@@ -22,8 +22,9 @@ import { site } from "../content/site";
     <div class="bloc">
       <div><h3>Téléphone</h3><p><a href={site.telephoneLien}>{site.telephone}</a></p></div>
       <div><h3>Email</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
-      <div><h3>Adresse</h3><p>{site.editeur.adresse}</p></div>
+      <div><h3>Zone d’intervention</h3><p>{site.zone} · basé à Gannes</p></div>
     </div>
     <p class="chapo" style="margin-top:40px">La réservation s'ouvre sur Calendly. Votre origine (page et bouton cliqué) est ajoutée au lien pour que je sache d'où vous venez, sans cookie.</p>
   </section>
 </Base>
+

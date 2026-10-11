@@ -16,7 +16,7 @@ const m = site.mandant;
       <p class="pied-liens">
         <a href="/mentions-legales/">Mentions légales</a>
         <a href="/confidentialite/">Confidentialité</a>
-        <a href={site.reseaux.instagram} rel="noopener">Instagram</a>
+        <a href={site.telephoneLien}>{site.telephone}</a>
         <a href={site.reseaux.linkedin} rel="noopener">LinkedIn</a>
       </p>
     </div>
@@ -36,3 +36,4 @@ const m = site.mandant;
     .pied-liens { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; width: 100%; }
   }
 </style>
+

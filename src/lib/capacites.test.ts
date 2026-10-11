@@ -1,11 +1,11 @@
 // Gardes au niveau du SOURCE pour la capacité Immobilier :
 //  - le réseau (iad) et la qualité de mandataire ne vivent que dans des fichiers dédiés ; aucune autre source ne les cite en dur
 //    (ils passeraient dans le build malgré l'interrupteur) ;
-//  - l'interrupteur est unique ; le mode publié est « orientation » ; « mandataire » est verrouillé tant que les données manquent.
+//  - l'interrupteur est unique ; le mode publié est « off » ; « mandataire » est verrouillé tant que les données manquent.
 import { describe, it, expect } from "vitest";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { immobilier, immobilierVisible, mandataireActif } from "../content/capacites";
+import { immobilier, immobilierVisible, mandataireActif, experienceVisible } from "../content/capacites";
 import { navigation } from "../content/navigation";
 import { reglementaire, reglementaireManquant, verrouMandataire } from "../content/iad";
 
@@ -35,15 +35,16 @@ describe("capacité Immobilier : isolation des sources", () => {
 });
 
 describe("capacité Immobilier : interrupteur", () => {
-  it("l'interrupteur est unique et vaut « orientation » (version préparée pour publication)", () => {
+  it("l'interrupteur est unique et vaut « off » (version préparée pour publication)", () => {
     expect(Object.keys(immobilier)).toEqual(["mode"]);
-    expect(immobilier.mode).toBe("orientation");
-    expect(immobilierVisible).toBe(true);
+    expect(immobilier.mode).toBe("off");
+    expect(immobilierVisible).toBe(false);
+    expect(experienceVisible).toBe(false);
     expect(mandataireActif).toBe(false);
   });
-  it("la navigation place Immobilier en tête et en retire Acquéreurs", () => {
-    expect(navigation.map((n) => n.href)).toEqual(["/immobilier/", "/travaux/", "/experience/", "/professionnels/", "/a-propos/"]);
-    expect(navigation.map((n) => n.libelle)).toEqual(["Immobilier", "Travaux", "DVK Expérience", "Professionnels", "À propos"]);
+  it("la navigation ne propose que les parcours travaux hemea", () => {
+    expect(navigation.map((n) => n.href)).toEqual(["/travaux/", "/acquereurs/", "/professionnels/", "/a-propos/"]);
+    expect(navigation.map((n) => n.libelle)).toEqual(["Particuliers", "Avant d'acheter", "Prescripteurs", "À propos"]);
   });
 });
 
@@ -65,3 +66,4 @@ describe("mode mandataire : verrou des données réglementaires", () => {
     expect(verrouMandataire({ ...complet, mediateur: "[à compléter]" })).toMatch(/mediateur/);
   });
 });
+

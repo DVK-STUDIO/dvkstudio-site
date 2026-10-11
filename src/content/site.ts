@@ -4,10 +4,10 @@ export const A_COMPLETER = "[à compléter]";
 export const site = {
   nom: "DVK Studio",
   url: "https://dvkstudio.fr",
-  zone: "Oise et secteurs limitrophes",
+  zone: "Oise et Somme",
   telephone: "06 40 32 47 52",
   telephoneLien: "tel:+33640324752",
-  email: "contact@dvkstudio.fr",
+  email: "k.devlieger@hemea.fr",
   editeur: {
     forme: "Entrepreneur individuel",
     nom: "Kevin De Vlieger",
@@ -28,5 +28,6 @@ export const site = {
     rcs: "RCS Nanterre 813 776 416",
     siege: "176 avenue Charles de Gaulle, 92200 Neuilly-sur-Seine",
   },
-  reseaux: { instagram: "https://www.instagram.com/dvk_studio_officiel/", linkedin: "https://www.linkedin.com/in/kevin-de-vlieger-88b261364/", facebook: "https://www.facebook.com/profile.php?id=61575906091084" },
+  reseaux: { instagram: "https://www.instagram.com/dvk_studio_officiel/", linkedin: "https://www.linkedin.com/company/dvk-studio/", facebook: "https://www.facebook.com/profile.php?id=61575906091084" },
 };
+
