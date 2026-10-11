@@ -39,3 +39,6 @@ Toute image de chantier déclare sa provenance : `meme-projet` (« Chantier du p
 
 ## Contrôles
 `npm run check:medias` (build : aucun stand-in, aucun emplacement vide, aucun montant dans la chaîne, aucun EXIF, dimensions et budget du hero) et `npm run check:modes-medias` (constructions réelles : dormant, stand-ins refusés, paire fictive confirmée, dimensions différentes refusées, droits sans justificatif refusés). Tous deux sont dans `npm run verifier:golive`.
+
+## Photo d'ambiance du hero (charte « Atelier · hemea »)
+`registre.ambiance` (`src/assets/medias/ambiance.jpg`) : photo d'illustration plein écran de l'accueil, sous un voile sombre, avec la mention « Photo d'illustration. ». Droits confirmés par Kevin De Vlieger le 11/10/2026 (à archiver avec les autres justificatifs). Elle est décorative (alt vide) et n'est jamais présentée comme un chantier réalisé. Elle ne compte pas dans le budget du comparateur (`data-hero-image`) : elle porte `data-hero-ambiance`.

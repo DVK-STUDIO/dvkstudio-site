@@ -1,7 +1,10 @@
 ---
 import "@fontsource-variable/montserrat";
+import "@fontsource/fraunces/latin-500.css";
+import "@fontsource/fraunces/latin-600.css";
 import "../styles/global.css";
 import montserratLatin from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
+import frauncesLatin from "@fontsource/fraunces/files/fraunces-latin-500-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../content/site";
@@ -30,6 +33,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <link rel="canonical" href={canonique} />
     <!-- Polices du premier écran (latin) préchargées : moins de décalage au chargement. Le reste se charge à la demande. -->
     <link rel="preload" href={montserratLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     {donneesStructurees && <script type="application/ld+json" set:html={JSON.stringify(donneesStructurees)} />}
     <meta property="og:type" content="website" />
@@ -37,7 +41,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonique} />
     <meta property="og:locale" content="fr_FR" />
-    <meta name="theme-color" content="#0f2a30" />
+    <meta name="theme-color" content="#1c1c1c" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/favicon-180.png" />

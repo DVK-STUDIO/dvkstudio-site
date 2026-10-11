@@ -13,12 +13,12 @@ const { questions } = Astro.props;
 </div>
 
 <style>
-  .faq { border-bottom: 1.5px solid var(--encre); }
-  details { border-top: 1px solid var(--ligne); padding: 20px 0; }
-  details:first-child { border-top: 1.5px solid var(--encre); }
-  summary { cursor: pointer; list-style: none; font-size: 19px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; }
+  .faq { border-bottom: 1px solid var(--dvk-border); }
+  details { border-top: 1px solid var(--dvk-border); padding: 20px 0; }
+  details:first-child { border-top: 1px solid var(--dvk-border-strong); }
+  summary { cursor: pointer; list-style: none; font-size: 18px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; font-weight: 400; font-size: 24px; line-height: 1; color: var(--terre-fonce); }
+  summary::after { content: "+"; flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-weight: 400; font-size: 20px; line-height: 1; color: var(--dvk-action-deep); background: var(--dvk-action-soft); }
   details[open] summary::after { content: "–"; }
-  details p { margin-top: 14px; color: var(--encre-douce); max-width: 70ch; }
+  details p { margin-top: 14px; color: var(--dvk-text-muted); max-width: 70ch; }
 </style>

@@ -41,15 +41,22 @@ export interface ConfigImage {
 const aConfirmer: Droits = { statut: "non-confirmes" };
 
 /** Production : rien n'est autorisé tant que les droits ne sont pas archivés. */
-export const registre: { paire: ConfigPaire; chantier: ConfigImage; immobilier: ConfigImage; acquereurs: ConfigImage } = {
+export const registre: { paire: ConfigPaire; chantier: ConfigImage; immobilier: ConfigImage; acquereurs: ConfigImage; ambiance: ConfigImage } = {
   paire: { avant: "hero-avant", apres: "hero-apres", altAvant: "", altApres: "", reperesHero: [], reperesPotentiel: [], lots: [], droits: aConfirmer },
   chantier: { fichier: "chantier", alt: "", reperes: [], provenance: "autre-projet", droits: aConfirmer },
   immobilier: { fichier: "immobilier-bien", alt: "", reperes: [], droits: aConfirmer },
   acquereurs: { fichier: "acquereurs-bien", alt: "", reperes: [], droits: aConfirmer },
+  /** Photo d'ambiance du hero de l'accueil (charte « Atelier · hemea ») : illustration, jamais présentée comme un chantier réalisé. */
+  ambiance: {
+    fichier: "ambiance",
+    alt: "",
+    reperes: [],
+    droits: { statut: "confirmes", reference: "Droits d'usage confirmés par Kevin De Vlieger lors de la validation de la charte (photo d'illustration du hero)", date: "2026-10-11" },
+  },
 };
 
 /** Développement local uniquement (voir src/lib/medias.ts). */
-export const standins: { paire: ConfigPaire; chantier: ConfigImage; immobilier: ConfigImage; acquereurs: ConfigImage } = {
+export const standins: { paire: ConfigPaire; chantier: ConfigImage; immobilier: ConfigImage; acquereurs: ConfigImage; ambiance: ConfigImage } = {
   paire: {
     avant: "standin-paire-avant",
     apres: "standin-paire-apres",
@@ -91,4 +98,5 @@ export const standins: { paire: ConfigPaire; chantier: ConfigImage; immobilier: 
     ],
     droits: aConfirmer,
   },
+  ambiance: { fichier: "standin-ambiance", alt: "", reperes: [], droits: aConfirmer },
 };

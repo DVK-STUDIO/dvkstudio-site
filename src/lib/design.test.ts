@@ -21,24 +21,26 @@ describe("Design System v1 appliqué à la V2", () => {
     expect(fautes).toEqual([]);
   });
 
-  it("TYP-01 : Montserrat (charte graphique DVK) est la seule famille, chargée en auto-hébergé", () => {
+  it("TYP-01 : Montserrat pour le texte, Fraunces pour les titres (charte « Atelier · hemea »), toutes deux auto-hébergées", () => {
     const base = lire(join(racine, "src", "layouts", "Base.astro"));
     expect(base).toMatch(/@fontsource-variable\/montserrat/);
-    expect(base).not.toMatch(/fraunces|instrument-sans/i);
+    expect(base).toMatch(/@fontsource\/fraunces/);
+    expect(base).not.toMatch(/fonts\.googleapis|instrument-sans/i);
     const css = lire(join(racine, "src", "styles", "global.css"));
     expect(css).toMatch(/--dvk-font:\s*"Montserrat Variable"/);
-    expect(css).not.toMatch(/Fraunces|Instrument Sans/);
-    const autres = sources.flatMap((f) => [...sansCommentaires(lire(f)).matchAll(/font-family:\s*([^;}]+)/g)].filter((m) => !/^(var\(--(dvk-font|serif|sans)\)|inherit)$/.test(m[1].trim())).map((m) => `${f} : ${m[0].trim()}`));
+    expect(css).toMatch(/--dvk-font-display:\s*"?Fraunces/);
+    expect(css).not.toMatch(/Instrument Sans|@import url\(/);
+    const autres = sources.flatMap((f) => [...sansCommentaires(lire(f)).matchAll(/font-family:\s*([^;}]+)/g)].filter((m) => !/^(var\(--(dvk-font|dvk-font-display|serif|sans)\)|inherit)$/.test(m[1].trim())).map((m) => `${f} : ${m[0].trim()}`));
     expect(autres).toEqual([]);
   });
 
-  it("TYP-02 : peu de graisses (300 titres, 400 texte, 600 libellés et boutons)", () => {
-    const fautes = sources.flatMap((f) => [...sansCommentaires(lire(f)).matchAll(/font-weight:\s*(\d+)/g)].filter((m) => ![300, 400, 600].includes(Number(m[1]))).map((m) => `${f} : ${m[0]}`));
+  it("TYP-02 : peu de graisses (400 texte, 500 titres serif, 600 libellés et boutons)", () => {
+    const fautes = sources.flatMap((f) => [...sansCommentaires(lire(f)).matchAll(/font-weight:\s*(\d+)/g)].filter((m) => ![400, 500, 600].includes(Number(m[1]))).map((m) => `${f} : ${m[0]}`));
     expect(fautes).toEqual([]);
   });
 
-  it("SPC-02 : rayons limités à 3 px, 6 px, cercle, pilule ou jeton", () => {
-    const autorises = /^(var\(--dvk-radius-(sm|md|pill)\)|var\(--rayon\)|3px|6px|50%|0|2px|var\(--dvk-radius-md\) var\(--dvk-radius-md\) 0 0)$/;
+  it("SPC-02 : rayons limités aux jetons (4 px boutons et champs, 16 px cartes), cercle ou pilule", () => {
+    const autorises = /^(var\(--dvk-radius-(sm|md|pill)\)|var\(--rayon\)|50%|0|var\(--dvk-radius-md\) var\(--dvk-radius-md\) 0 0)$/;
     const fautes = sources.flatMap((f) => [...sansCommentaires(lire(f)).matchAll(/border-radius:\s*([^;}]+)/g)].filter((m) => !autorises.test(m[1].trim())).map((m) => `${f} : ${m[0].trim()}`));
     expect(fautes).toEqual([]);
   });

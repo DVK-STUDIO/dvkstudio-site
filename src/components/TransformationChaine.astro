@@ -97,11 +97,11 @@ const libStatut = (s: string) => (s === "manquant" ? "À chiffrer" : undefined);
   [data-e="3"] .b3, [data-e="4"] .b4 { opacity: 1; }
   .env { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; justify-content: center; padding: clamp(18px, 3vw, 40px); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
   [data-e="5"] .env { opacity: 1; pointer-events: auto; }
-  .env-titre { font-size: clamp(22px, 2.4vw, 32px); font-weight: 300; letter-spacing: -0.03em; color: var(--dvk-background); margin-bottom: 10px; }
+  .env-titre { font-size: clamp(22px, 2.4vw, 32px); font-weight: 400; letter-spacing: -0.03em; color: var(--dvk-background); margin-bottom: 10px; }
   .lots { list-style: none; margin: 0; padding: 0; counter-reset: lot; }
   .lots li { display: grid; grid-template-columns: 30px 1fr auto; column-gap: 14px; align-items: baseline; padding: 12px 0; border-top: 1px solid rgba(245, 241, 234, 0.28); }
   .lots li::before { counter-increment: lot; content: counter(lot, upper-alpha); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; color: var(--dvk-inverse-subtle); border: 1px solid var(--dvk-inverse-subtle); width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; align-self: center; }
-  .lots .nom { font-size: clamp(18px, 2vw, 26px); font-weight: 300; letter-spacing: -0.03em; line-height: 1.15; color: var(--dvk-background); }
+  .lots .nom { font-size: clamp(18px, 2vw, 26px); font-weight: 400; letter-spacing: -0.03em; line-height: 1.15; color: var(--dvk-background); }
   .lots .note { grid-column: 2; font-size: 12px; color: var(--dvk-inverse-muted); margin-top: 2px; }
   .lots li > .plaque { grid-column: 3; grid-row: 1; align-self: center; }
   .plaque { display: inline-block; background: var(--dvk-background); border-radius: var(--dvk-radius-sm); padding: 2px; line-height: 0; }
@@ -112,7 +112,7 @@ const libStatut = (s: string) => (s === "manquant" ? "À chiffrer" : undefined);
   .rail li { padding: 14px 0 14px 26px; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
   .rail li::before { content: ""; position: absolute; left: -6px; top: 22px; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dvk-background); background: var(--dvk-night); }
   .rail .n { font-size: 12px; letter-spacing: 0.2em; font-weight: 600; color: var(--dvk-inverse-subtle); }
-  .rail h3 { font-size: 22px; line-height: 1.2; font-weight: 300; letter-spacing: -0.02em; color: var(--dvk-background); }
+  .rail h3 { font-size: 22px; line-height: 1.2; font-weight: 400; letter-spacing: -0.02em; color: var(--dvk-background); }
   .rail p { font-size: 14px; line-height: 1.6; color: var(--dvk-inverse-muted); }
   /* Une fois le script actif, seule l'étape courante est développée. */
   [data-interactif] .rail li { opacity: 0.4; transition: opacity 0.35s; }

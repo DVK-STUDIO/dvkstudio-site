@@ -7,6 +7,16 @@ import Processus from "../components/Processus.astro";
 import Plan from "../components/Plan.astro";
 import Faq from "../components/Faq.astro";
 import { site } from "../content/site";
+import { Image } from "astro:assets";
+import { imageAmbiance } from "../lib/medias";
+
+const ambiance = imageAmbiance();
+const garanties = [
+  { titre: "Budget maîtrisé", texte: "Devis détaillés et mise en concurrence de 2 artisans minimum pour obtenir un prix au marché." },
+  { titre: "Délais respectés", texte: "Application de pénalités en cas de retard. Remplacement de l'artisan en cas d'abandon ou de défaillance." },
+  { titre: "Qualité soignée", texte: "Artisans évalués régulièrement sur 30 critères stricts de conformité, de finition et de satisfaction client." },
+  { titre: "Confiance et sérénité", texte: "Interlocuteur unique pilote votre projet et vous conseille à chaque étape. Paiements selon l'avancement réel du chantier." },
+];
 
 const entreprise = {
   "@context": "https://schema.org", "@type": "ProfessionalService",
@@ -29,30 +39,34 @@ const faq = [
 <Base titre="DVK Studio — Chef de projet travaux hemea | Oise et Somme"
   description="Votre rénovation dans l'Oise et la Somme avec Kevin De Vlieger, chef de projet travaux hemea. Particuliers et prescripteurs immobiliers : parlons de votre projet."
   page="home" chemin="/" donneesStructurees={entreprise}>
-  <header class="conteneur trame hemea-hero">
-    <div class="hero-texte">
+  <header class:list={["hero-photo", { "sans-photo": !ambiance }]}>
+    {ambiance && <Image class="hero-fond" src={ambiance.src} alt="" widths={[640, 960, 1280, 1800]} sizes="100vw" loading="eager" fetchpriority="high" data-hero-ambiance />}
+    <div class="conteneur hero-texte">
       <p class="surtitre">Chef de projet travaux hemea · Oise & Somme</p>
-      <h1 class="titre-xl">Quels travaux prévoir,<br />quel budget envisager<br />et par où commencer ?</h1>
+      <h1 class="titre-xl">Quels travaux prévoir, quel budget envisager et par où commencer ?</h1>
       <p class="chapo">Vous rénovez votre logement ou envisagez l’achat d’un bien à rénover ? Je vous accompagne pour clarifier vos besoins, préparer une enveloppe estimative et organiser la consultation d’entreprises labellisées hemea.</p>
       <div class="actions">
         <BoutonRdv bouton="hero.rdv" parcours="renover">Faire le point sur mon projet</BoutonRdv>
         <a class="lien-soulige" href="/professionnels/">Vous accompagnez un client ?</a>
       </div>
       <p class="hero-note">Kevin De Vlieger · Premier échange de 30 min, par téléphone, sans engagement.</p>
+      <ul class="hero-reperes" aria-label="Votre accompagnement">
+        <li><span>01 · Un interlocuteur</span><p>Kevin De Vlieger, chef de projet travaux hemea.</p></li>
+        <li><span>02 · Deux départements</span><p>Oise (60) et Somme (80), à partir de Gannes.</p></li>
+        <li><span>03 · Un projet à cadrer</span><p>Votre besoin, votre budget et votre calendrier.</p></li>
+      </ul>
+      {ambiance && <p class="hero-credit">Photo d’illustration.</p>}
     </div>
-    <aside class="hero-plan premier-contact" aria-label="Votre premier échange">
-      <p class="surtitre">Votre interlocuteur local</p>
-      <h2 class="titre-m">Kevin De Vlieger</h2>
-      <p>Chef de projet travaux hemea<br />Basé à Gannes · Oise et Somme</p>
-      <div class="contact-reperes"><span>01</span><p>Votre besoin : ce que vous souhaitez changer dans le logement.</p><span>02</span><p>Votre situation : bien occupé, achat envisagé, calendrier.</p><span>03</span><p>Votre prochaine étape : vérifier l’adéquation de l’accompagnement.</p></div>
-      <p class="hero-note">Le premier échange sert à cadrer le besoin. Il ne remplace ni une étude technique ni un devis.</p>
-    </aside>
   </header>
 
-  <section class="conteneur reperes" aria-label="Votre accompagnement">
-    <div><span class="numero">01 · Un interlocuteur</span><p>Kevin De Vlieger,<br />chef de projet travaux hemea.</p></div>
-    <div><span class="numero">02 · Deux départements</span><p>Oise (60) et Somme (80),<br />à partir de Gannes.</p></div>
-    <div><span class="numero">03 · Un projet à cadrer</span><p>Votre besoin, votre budget<br />et votre calendrier.</p></div>
+  <section class="conteneur trame premier-bloc" aria-labelledby="t-contact">
+    <div class="premier-contact">
+      <p class="surtitre">Votre interlocuteur local</p>
+      <h2 id="t-contact" class="titre-m">Kevin De Vlieger</h2>
+      <p>Chef de projet travaux hemea<br />Basé à Gannes · Oise et Somme</p>
+      <div class="contact-reperes"><span>01</span><p>Votre besoin : ce que vous souhaitez changer dans le logement.</p><span>02</span><p>Votre situation : bien occupé, achat envisagé, calendrier.</p><span>03</span><p>Votre prochaine étape : vérifier l’adéquation de l’accompagnement.</p></div>
+      <p class="hero-note encadre">Le premier échange sert à cadrer le besoin. Il ne remplace ni une étude technique ni un devis.</p>
+    </div>
   </section>
 
   <section class="section conteneur" id="parcours" aria-labelledby="t-parcours">
@@ -62,11 +76,11 @@ const faq = [
     </div>
     <nav class="parcours-hemea" aria-label="Choisir votre parcours">
       <a href="/travaux/"><span class="numero">01 · Particuliers</span><h3>J’ai un projet de rénovation</h3><p>Je rénove mon logement ou prépare un achat avec travaux. Je veux clarifier les travaux, le budget et les étapes.</p><span class="parcours-suite">Préparer mon projet <span aria-hidden="true">→</span></span></a>
-      <a href="/professionnels/"><span class="numero">02 · Prescripteurs</span><h3>J’accompagne un client</h3><p>Je cherche un contact local hemea pour répondre aux questions travaux de mon client.</p><span class="parcours-suite">Échanger sur un projet client <span aria-hidden="true">→</span></span></a>
+      <a class="nuit" href="/professionnels/"><span class="numero">02 · Prescripteurs</span><h3>J’accompagne un client</h3><p>Je cherche un contact local hemea pour répondre aux questions travaux de mon client.</p><span class="parcours-suite">Échanger sur un projet client <span aria-hidden="true">→</span></span></a>
     </nav>
   </section>
 
-  <section class="sombre section" id="methode" aria-labelledby="t-methode">
+  <section class="section trait" id="methode" aria-labelledby="t-methode">
     <div class="conteneur">
       <p class="surtitre">L'accompagnement hemea</p>
       <h2 id="t-methode" class="titre-l methode-titre">Mettre les bonnes questions<br />dans le bon ordre.</h2>
@@ -83,8 +97,19 @@ const faq = [
     </div>
   </section>
 
-  <section class="section conteneur" aria-labelledby="t-pro">
-    <div class="duo">
+  <section class="papier-2 section" aria-labelledby="t-garanties">
+    <div class="conteneur">
+      <p class="surtitre">Le cadre hemea</p>
+      <h2 id="t-garanties" class="titre-l garanties-titre">Ce que le cadre hemea apporte à vos travaux.</h2>
+      <ul class="garanties">
+        {garanties.map((g) => (<li><h3>{g.titre}</h3><p>{g.texte}</p></li>))}
+      </ul>
+      <p class="garanties-source">Engagements présentés par hemea sur hemea.com.</p>
+    </div>
+  </section>
+
+  <section class="sombre section" aria-labelledby="t-pro">
+    <div class="conteneur duo trame">
       <div><p class="surtitre">Prescripteurs immobiliers</p><h2 id="t-pro" class="titre-l pro-titre">Vos clients ont des questions travaux.<br />Donnons-leur un point de contact.</h2></div>
       <div>
         <p class="chapo">Agents immobiliers, chasseurs et courtiers : lorsqu'un achat ou un projet de votre client implique une rénovation, mettez-le en relation avec un interlocuteur local.</p>
@@ -114,38 +139,72 @@ const faq = [
 </Base>
 
 <style>
-  .premier-contact { padding:32px; background:var(--dvk-surface); border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-md); }
-  .premier-contact h2 { margin-block:20px; }
-  .contact-reperes { display:grid; grid-template-columns:28px 1fr; gap:18px 12px; margin-top:28px; }
-  .contact-reperes span { font-size:13px; color:var(--dvk-text-subtle); }
-  .contact-reperes p { font-size:16px; margin:0; }
-  .hemea-hero { display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:clamp(32px,5vw,72px); align-items:center; padding-block:clamp(44px,7vw,96px); }
-  .hero-texte .surtitre { margin-bottom:28px; }
-  .hero-texte h1 { font-size:clamp(36px,4.5vw,60px); max-width:19ch; }
-  .hero-texte .chapo { margin-top:28px; }
-  .hero-note { font-size:13px; color:var(--pierre); margin-top:20px; max-width:46ch; }
-  .hero-plan { min-width:0; padding-top:24px; }
-  .hero-plan :global(.zone) { background:transparent; padding:0; }
-  .plan-signature { font-size:13px; color:var(--pierre); border-top:1px solid var(--ligne); padding-top:16px; margin-top:20px; }
-  .reperes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; }
-  .reperes > div { border-top:1.5px solid var(--encre); padding-top:18px; }
-  .reperes p { margin-top:12px; font-size:15px; color:var(--encre-douce); }
-  .parcours-hemea { margin-top:48px; border-bottom:1px solid var(--ligne); }
-  .parcours-hemea > a { display:grid; grid-template-columns:120px minmax(0,1.1fr) minmax(0,1fr) 190px; align-items:center; gap:24px; padding-block:32px; border-top:1px solid var(--ligne); }
-  .parcours-hemea h3 { font-size:23px; line-height:1.25; }
-  .parcours-hemea p { font-size:15px; color:var(--encre-douce); }
-  .parcours-suite { font-size:13px; font-weight:600; display:flex; justify-content:space-between; gap:12px; }
-  .methode-titre { margin-top:24px; }
-  .methode-intro { margin-top:28px; }
-  .methode-etapes { margin-top:48px; --dvk-text-muted:var(--dvk-inverse-muted); --dvk-text-subtle:var(--dvk-inverse-subtle); --dvk-border-strong:var(--dvk-inverse-subtle); }
-  .pro-titre { margin-top:24px; }
-  .pro-texte { color:var(--encre-douce); margin-top:22px; }
-  .faq-titre { margin-bottom:32px; }
-  .contact-intro { margin-top:24px; }
-  .contact-direct { display:flex; flex-direction:column; align-items:flex-start; padding-top:32px; overflow-wrap:anywhere; }
-  .contact-tel { font-size:clamp(26px,3vw,40px); font-weight:300; line-height:1.2; margin-bottom:18px; }
-  .contact-note { font-size:13px; color:var(--brume); margin-top:16px; }
-  @media (max-width:900px) { .hemea-hero { grid-template-columns:1fr; } .hero-texte h1 { max-width:22ch; } .hero-plan { max-width:620px; width:100%; margin:auto; } .parcours-hemea > a { grid-template-columns:1fr; gap:12px 20px; } .parcours-hemea p,.parcours-suite { grid-column:1; } .parcours-suite { justify-content:flex-start; } }
-  @media (max-width:720px) { .reperes { grid-template-columns:1fr; gap:24px; } .hero-texte .actions { align-items:flex-start; flex-direction:column; } .contact-direct { padding-top:0; } }
+  /* Hero : photo plein écran sous un voile sombre (textes en clair, contraste ≥ 5:1 vérifié), repli sur fond nuit sans photo. */
+  .hero-photo { position: relative; isolation: isolate; overflow: hidden; background: var(--dvk-night); color: var(--dvk-text-inverse); min-height: min(88svh, 860px); display: flex; align-items: flex-end; }
+  .hero-fond { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .hero-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(20,20,20,.62) 0%, rgba(20,20,20,.70) 45%, rgba(20,20,20,.84) 100%); }
+  .hero-texte { padding-block: clamp(56px, 9vw, 112px) clamp(40px, 6vw, 72px); width: 100%; }
+  .hero-texte .surtitre { margin-bottom: 24px; color: var(--dvk-text-inverse); }
+  .hero-texte .surtitre::before { background: var(--dvk-accent-on-night); }
+  .hero-texte h1 { font-size: clamp(36px, 4.6vw, 60px); max-width: 20ch; color: var(--dvk-text-inverse); }
+  .hero-texte .chapo { margin-top: 24px; max-width: 58ch; color: var(--dvk-text-inverse); }
+  .hero-texte .actions { margin-top: 32px; }
+  .hero-texte .lien-soulige { color: var(--dvk-text-inverse); border-bottom-color: var(--dvk-accent-on-night); }
+  .hero-texte .hero-note { color: var(--dvk-text-inverse); }
+  .hero-note { font-size: 13px; color: var(--dvk-text-muted); margin-top: 20px; max-width: 52ch; }
+  .hero-reperes { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid rgba(247,243,236,.28); padding-top: 24px; max-width: 980px; }
+  .hero-reperes span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--dvk-accent-on-night); }
+  .hero-reperes p { margin-top: 8px; font-size: 15px; color: var(--dvk-text-inverse); }
+  .hero-credit { margin-top: 24px; font-size: 12px; color: var(--dvk-inverse-muted); }
+
+  .premier-bloc { padding-block: clamp(32px, 5vw, 64px) 0; }
+  .premier-contact { padding: 32px; background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); max-width: 760px; }
+  .premier-contact h2 { margin-block: 16px 6px; }
+  .premier-contact > p:not(.surtitre):not(.hero-note) { color: var(--dvk-text-muted); }
+  .contact-reperes { display: grid; grid-template-columns: 28px 1fr; gap: 14px 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--dvk-border); }
+  .contact-reperes span { font-size: 13px; font-weight: 600; color: var(--dvk-action); }
+  .contact-reperes p { font-size: 16px; margin: 0; }
+  .encadre { padding: 12px 14px; background: var(--dvk-surface); border-radius: var(--dvk-radius-sm); max-width: none; }
+
+  .parcours-hemea { margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .parcours-hemea > a { display: flex; flex-direction: column; gap: 12px; padding: 28px; background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); transition: transform var(--dvk-duration-micro) var(--dvk-ease); }
+  .parcours-hemea > a:hover { transform: translateY(-2px); }
+  .parcours-hemea .numero { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--dvk-action); }
+  .parcours-hemea h3 { font-size: 24px; line-height: 1.2; }
+  .parcours-hemea p { font-size: 15px; color: var(--dvk-text-muted); }
+  .parcours-suite { margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600; color: var(--dvk-action); display: inline-flex; gap: 8px; }
+  .parcours-hemea > a.nuit { background: var(--dvk-night); border-color: var(--dvk-night); color: var(--dvk-text-inverse); }
+  .parcours-hemea > a.nuit .numero, .parcours-hemea > a.nuit .parcours-suite { color: var(--dvk-accent-on-night); }
+  .parcours-hemea > a.nuit p { color: var(--dvk-inverse-muted); }
+
+  .trait { border-top: 1px solid var(--dvk-border); }
+  .methode-titre { margin-top: 20px; }
+  .methode-intro { margin-top: 24px; }
+  .methode-etapes { margin-top: 40px; }
+
+  .garanties-titre { margin-top: 20px; max-width: 24ch; }
+  .garanties { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .garanties li { padding: 24px; background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-top: 3px solid var(--dvk-accent); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); }
+  .garanties h3 { font-size: 20px; line-height: 1.25; margin-bottom: 8px; }
+  .garanties p { font-size: 15px; color: var(--dvk-text-muted); }
+  .garanties-source { margin-top: 20px; font-size: 13px; color: var(--dvk-text-muted); }
+
+  .pro-titre { margin-top: 20px; }
+  .pro-texte { color: var(--brume); margin-top: 22px; }
+  .faq-titre { margin-bottom: 32px; }
+
+  @media (max-width: 900px) {
+    .garanties { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .parcours-hemea { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .hero-photo { min-height: 0; }
+    .hero-reperes { grid-template-columns: 1fr; gap: 16px; }
+    .hero-texte .actions { align-items: flex-start; flex-direction: column; }
+    .hero-texte .actions :global(.btn) { width: 100%; }
+    .premier-contact { padding: 24px; }
+    .garanties { grid-template-columns: 1fr; }
+    .parcours-hemea > a { padding: 24px; }
+  }
 </style>
 

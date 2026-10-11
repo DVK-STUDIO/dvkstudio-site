@@ -2,18 +2,27 @@
    Les anciens noms (--papier, --encre…) restent des ALIAS des rôles, le temps de migrer les composants. */
 :root {
   /* Rôles (DVK Design System v1 : tokens/dvk-tokens.css) */
-  --dvk-background: #f5f1ea;
-  --dvk-surface: #ece6db;
-  --dvk-text: #0f2a30;
-  --dvk-text-muted: #2c4a50;
-  --dvk-text-subtle: #5c574f;
-  --dvk-primary: #1f5560;
-  --dvk-action: #a8432d;
-  --dvk-accent: #c8553d;
-  --dvk-border: #cfc7b8;
-  --dvk-night: #0a1d21;
-  --dvk-inverse-muted: #c9d6d3;
-  --dvk-inverse-subtle: #9fb4b0;
+  /* Direction « Atelier » validée le 11/10/2026 : papier crème, encre ardoise, bleu pétrole du logo (liens, focus),
+     caramel de hemea pour l'action (#b77a3c, assombri en #8c5a29 pour porter du texte blanc), noir doux pour les sections sombres. */
+  --dvk-background: #f7f3ec;
+  --dvk-surface: #efe8dc;
+  --dvk-surface-raised: #ffffff;
+  --dvk-text: #1f2a2e;
+  --dvk-text-muted: #4a5458;
+  --dvk-text-subtle: #4a5458;
+  --dvk-primary: #0b4b66;
+  --dvk-action: #8c5a29;
+  --dvk-action-deep: #7a4e23;
+  --dvk-action-soft: #f5ebdf;
+  --dvk-accent: #b77a3c;
+  --dvk-accent-on-night: #c98d50;
+  --dvk-border: #e3dccf;
+  --dvk-border-strong: #8a7f6e;
+  --dvk-night: #1c1c1c;
+  --dvk-night-line: #3a3a3a;
+  --dvk-text-inverse: #f7f3ec;
+  --dvk-inverse-muted: #c9c2b6;
+  --dvk-inverse-subtle: #a9a196;
   /* Statuts de donnée */
   --dvk-real: #1f5560; --dvk-real-bg: #e3ebe6;
   --dvk-estimate: #7b2f1d; --dvk-estimate-bg: #f1e1d6;
@@ -24,8 +33,10 @@
   --dvk-warning: #6b4a00; --dvk-warning-bg: #f6e9c6;
   --dvk-hatch: rgba(15, 42, 48, 0.14);
   /* Forme et mouvement */
-  --dvk-radius-sm: 3px; --dvk-radius-md: 6px; --dvk-radius-pill: 999px;
-  --dvk-shadow-float: 0 1px 6px rgba(15, 42, 48, 0.12);
+  /* Boutons et champs : 4 px (comme hemea) ; cartes : 16 px ; pastilles : cercle. */
+  --dvk-radius-sm: 4px; --dvk-radius-md: 16px; --dvk-radius-pill: 999px;
+  --dvk-shadow-float: 0 1px 6px rgba(28, 28, 28, 0.12);
+  --dvk-shadow-card: 0 1px 2px rgba(28, 28, 28, 0.04), 0 10px 30px rgba(28, 28, 28, 0.06);
   --dvk-duration-micro: 120ms; --dvk-duration-state: 240ms; --dvk-duration-reveal: 480ms; --dvk-duration-passage: 800ms;
   --dvk-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dvk-reveal-distance: 12px;
@@ -44,16 +55,17 @@
   --brume: var(--dvk-inverse-muted);
   --sauge: var(--dvk-real-bg);
 
-  /* Typographie : une seule famille, Montserrat (charte graphique DVK Studio). Le caractère vient des échelles,
-     des graisses (300 / 400 / 600 seulement), du tracking et des capitales, pas d'une seconde famille.
-     --serif et --sans restent des ALIAS historiques de --dvk-font. */
+  /* Typographie : Montserrat pour le texte, Fraunces (serif douce, dans l'esprit des titres hemea) pour les grands titres.
+     Les deux sont auto-hébergées (aucune police chargée depuis un serveur tiers). Graisses : 400 texte, 500 titres serif, 600 libellés.
+     --sans reste l'alias historique de --dvk-font ; --serif pointe désormais sur la famille des titres. */
   --dvk-font: "Montserrat Variable", Montserrat, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --serif: var(--dvk-font);
+  --dvk-font-display: Fraunces, Georgia, "Times New Roman", serif;
+  --serif: var(--dvk-font-display);
   --sans: var(--dvk-font);
   /* Matière graphique : trames et filets de construction, très discrets */
-  --dvk-trame: rgba(15, 42, 48, 0.075);
-  --dvk-trame-inverse: rgba(245, 241, 234, 0.09);
-  --dvk-filet-fort: rgba(15, 42, 48, 0.55);
+  --dvk-trame: rgba(31, 42, 46, 0.075);
+  --dvk-trame-inverse: rgba(247, 243, 236, 0.09);
+  --dvk-filet-fort: rgba(31, 42, 46, 0.55);
 
   --gouttiere: clamp(20px, 5vw, 56px);
   --largeur: 1240px;
@@ -79,11 +91,12 @@ body {
 img, svg { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: 0.8; }
-h1, h2, h3 { font-family: var(--dvk-font); font-weight: 300; letter-spacing: -0.03em; margin: 0; }
+h1, h2, h3 { font-family: var(--dvk-font-display); font-weight: 500; letter-spacing: -0.01em; margin: 0; }
 p { margin: 0; }
 ul, ol { margin: 0; padding: 0; }
 
-:focus-visible { outline: 3px solid var(--terre); outline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--dvk-primary); outline-offset: 3px; }
+.sombre :focus-visible { outline-color: var(--dvk-background); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .aller-contenu { position: absolute; left: -999px; top: 8px; background: var(--encre); color: var(--papier); padding: 10px 14px; border-radius: var(--dvk-radius-sm); z-index: 100; }
 .aller-contenu:focus { left: 8px; }
@@ -91,23 +104,26 @@ ul, ol { margin: 0; padding: 0; }
 main { flex: 1 0 auto; }
 .conteneur { max-width: var(--largeur); margin: 0 auto; padding-inline: var(--gouttiere); }
 /* Étiquette de section : capitales, tracking large, précédée d'un filet (repère de construction) */
-.surtitre { display: inline-flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pierre); font-weight: 600; line-height: 1.5; }
-.surtitre::before { content: ""; flex: none; width: 28px; height: 1px; background: currentColor; }
-.sombre .surtitre { color: #9fb4b0; }
+.surtitre { display: inline-flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dvk-action); font-weight: 600; line-height: 1.5; }
+.surtitre::before { content: ""; flex: none; width: 28px; height: 1.5px; background: var(--dvk-accent); }
+.sombre .surtitre { color: var(--dvk-accent-on-night); }
 
 /* Échelle typographique : écarts francs entre display (300, tracking serré) et texte (400) */
-.titre-xl { font-size: clamp(34px, 5.2vw, 66px); line-height: 1.06; letter-spacing: -0.04em; font-weight: 300; }
-.titre-l { font-size: clamp(28px, 3.7vw, 46px); line-height: 1.1; letter-spacing: -0.035em; font-weight: 300; }
-.titre-m { font-size: clamp(22px, 2.4vw, 32px); line-height: 1.2; letter-spacing: -0.03em; }
+.titre-xl { font-size: clamp(36px, 5vw, 60px); line-height: 1.08; letter-spacing: -0.01em; font-weight: 500; }
+.titre-l { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12; letter-spacing: -0.005em; font-weight: 500; }
+.titre-m { font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2; letter-spacing: 0; }
 .chapo { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.7; color: var(--encre-douce); max-width: 58ch; }
 .sombre .chapo { color: var(--brume); }
 
 /* Boutons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 26px; border-radius: var(--dvk-radius-pill); font-weight: 600; font-size: 15px; letter-spacing: 0.02em; border: 1.5px solid transparent; cursor: pointer; font-family: inherit; }
-.btn-action { background: var(--terre-fonce); color: #fff; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border-radius: var(--dvk-radius-sm); font-weight: 600; font-size: 15px; letter-spacing: 0.02em; border: 1.5px solid transparent; cursor: pointer; font-family: inherit; }
+.btn-action { background: var(--dvk-action); color: #fff; }
+.btn-action:hover { background: var(--dvk-action-deep); opacity: 1; }
 .btn-encre { background: var(--encre); color: var(--papier); }
-.btn-contour { border-color: currentColor; background: transparent; }
-.lien-soulige { font-weight: 600; font-size: 15px; border-bottom: 1.5px solid var(--terre); padding-bottom: 3px; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; }
+.sombre .btn-encre { background: transparent; color: var(--dvk-accent-on-night); border-color: var(--dvk-accent-on-night); }
+.btn-contour { border-color: var(--dvk-action); color: var(--dvk-action); background: transparent; }
+.sombre .btn-contour { border-color: var(--dvk-accent-on-night); color: var(--dvk-accent-on-night); }
+.lien-soulige { font-weight: 600; font-size: 15px; border-bottom: 1.5px solid var(--dvk-accent); padding-bottom: 3px; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; }
 
 /* Disponibilité d'un service (Disponible / Démonstration / À venir) : repère à barre, SANS pastille ni fond.
    Les statuts de DONNÉE (Réel, Estimation…) sont des pastilles : voir components/experience/Statut.astro (règle STA-05). */
@@ -125,7 +141,7 @@ main { flex: 1 0 auto; }
 
 /* Sections */
 .section { padding-block: clamp(48px, 9vw, 128px); }
-.sombre { background: var(--encre); color: var(--papier); }
+.sombre { background: var(--nuit); color: var(--papier); }
 .papier-2 { background: var(--papier-2); }
 .grille-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 24px; }
 .regle-haut { border-top: 1.5px solid var(--encre); }
@@ -146,36 +162,37 @@ main { flex: 1 0 auto; }
 .duo { display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-start; justify-content: space-between; }
 .duo > * { flex: 1 1 340px; min-width: 0; }
 .bloc { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px; margin-top: 40px; counter-reset: bloc; }
-.bloc > div { border-top: 1.5px solid var(--encre); padding-top: 20px; counter-increment: bloc; }
-.bloc > div::before { content: counter(bloc, decimal-leading-zero); display: block; margin-bottom: 18px; font-size: 12px; letter-spacing: 0.2em; font-weight: 600; color: var(--pierre); }
-.bloc h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 10px; }
+.bloc > div { background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); padding: 24px; counter-increment: bloc; }
+.bloc > div::before { content: counter(bloc, decimal-leading-zero); display: block; margin-bottom: 14px; font-size: 12px; letter-spacing: 0.18em; font-weight: 600; color: var(--dvk-action); }
+.bloc h3 { font-family: var(--dvk-font); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 10px; }
 .bloc p, .liste-simple li { color: var(--encre-douce); font-size: 16px; }
 .liste-simple { list-style: none; display: grid; gap: 10px; margin-top: 20px; }
-.liste-simple li { background: var(--papier-2); border-radius: var(--dvk-radius-sm); padding: 14px 18px; }
+.liste-simple li { background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-sm); padding: 14px 18px; }
 .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
 .prose { max-width: 72ch; }
 .prose h2 { font-size: 28px; margin: 40px 0 12px; }
 .prose p, .prose li { color: var(--encre-douce); margin-top: 10px; }
 .prose ul { padding-left: 20px; }
 .prose a { text-decoration: underline; text-underline-offset: 3px; }
-.a-completer { background: #fff3cd; color: #5c4400; padding: 1px 6px; border-radius: 3px; }
+.a-completer { background: #fff3cd; color: #5c4400; padding: 1px 6px; border-radius: var(--dvk-radius-sm); }
 
 /* ───────── Matière graphique : vocabulaire d'un studio d'architecture ─────────
    Trame de construction, grands numéros, filets, motifs tirés de la géométrie du logo (jamais le logo lui-même).
    Toujours discrets et systématiques : aucune décoration gratuite. */
 
-/* Trame : six colonnes de filets fins sur la largeur utile, qui s'estompent vers le bas. À poser sur un .conteneur. */
+/* Dessin d'architecture : une seule coupe de maison au trait, posée en marge, rare et discrète (jamais de motif répété).
+   À poser sur un .conteneur. */
 .trame, .page-hero:not(.prose) { position: relative; isolation: isolate; }
 .trame::before, .page-hero:not(.prose)::before {
-  content: ""; position: absolute; z-index: -1; inset: 0 var(--gouttiere); pointer-events: none;
-  background-image: linear-gradient(to right, var(--trame-c, var(--dvk-trame)) 1px, transparent 1px);
-  background-size: calc(100% / 6) 100%;
-  border-right: 1px solid var(--trame-c, var(--dvk-trame));
-  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 90%);
-  mask-image: linear-gradient(to bottom, #000, transparent 90%);
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  top: 24px; right: var(--gouttiere); width: clamp(140px, 22vw, 280px); aspect-ratio: 6 / 5;
+  background-color: var(--trame-c, var(--dvk-trame));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' fill='none' stroke='%23000' stroke-width='1'%3E%3Cpath d='M20 190V90l100-70 100 70v100z'/%3E%3Cpath d='M20 90h200M60 190v-60h40v60M140 120h50v40h-50zM165 120v40M140 140h50'/%3E%3Cpath d='M0 190h240' stroke-dasharray='4 6'/%3E%3Cpath d='M120 20V4M112 4h16'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' fill='none' stroke='%23000' stroke-width='1'%3E%3Cpath d='M20 190V90l100-70 100 70v100z'/%3E%3Cpath d='M20 90h200M60 190v-60h40v60M140 120h50v40h-50zM165 120v40M140 140h50'/%3E%3Cpath d='M0 190h240' stroke-dasharray='4 6'/%3E%3Cpath d='M120 20V4M112 4h16'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 .sombre .trame { --trame-c: var(--dvk-trame-inverse); }
-@media (max-width: 720px) { .trame::before, .page-hero:not(.prose)::before { background-size: calc(100% / 3) 100%; } }
+/* Sur mobile, le dessin passerait sous les titres : il disparaît (la lisibilité d'abord). */
+@media (max-width: 720px) { .trame::before, .page-hero:not(.prose)::before { display: none; } }
 
 /* Section « énoncé » : grand titre décalé sur une grille de 12 colonnes, index en marge, texte en colonne étroite. */
 .enonce { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 2vw, 24px); row-gap: 28px; align-items: start; }
@@ -184,7 +201,7 @@ main { flex: 1 0 auto; }
 .enonce > .corps { grid-column: 6 / -1; }
 .enonce > .large { grid-column: 3 / -1; }
 @media (max-width: 900px) { .enonce > .idx, .enonce > .tete, .enonce > .corps, .enonce > .large { grid-column: 1 / -1; } }
-.idx { font-size: clamp(48px, 7vw, 96px); font-weight: 300; line-height: 0.9; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1px var(--dvk-filet-fort); user-select: none; }
+.idx { font-family: var(--dvk-font-display); font-size: clamp(48px, 7vw, 96px); font-weight: 500; line-height: 0.9; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1px var(--dvk-filet-fort); user-select: none; }
 .sombre .idx { -webkit-text-stroke-color: var(--dvk-inverse-subtle); }
 .tete .surtitre { margin-bottom: 20px; }
 .corps p + p { margin-top: 14px; }

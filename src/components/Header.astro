@@ -1,8 +1,7 @@
 ---
-import { Image } from "astro:assets";
 import { navigation } from "../content/navigation";
 import { CALENDLY_BASE } from "../lib/calendly";
-import symbole from "../assets/logo/dvk-logo-symbole.png";
+import symbole from "../assets/logo/dvk-logo-symbole.svg?url";
 interface Props { page: string }
 const { page } = Astro.props;
 const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
@@ -11,8 +10,8 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
 <header class="entete">
   <div class="conteneur entete-interieur">
     <a href="/" class="marque" aria-label="DVK Studio — accueil">
-      <!-- Symbole du logo officiel (fichier transparent fourni, rogné sans retouche). Le logo complet est dans le pied de page. -->
-      <Image class="marque-symbole" src={symbole} width={82} height={67} format="webp" alt="" loading="eager" />
+      <!-- Symbole du logo officiel, version vectorielle (tracé du fichier fourni, couleurs du logo). -->
+      <img class="marque-symbole" src={symbole} width="41" height="34" alt="" />
       <span class="marque-nom">DVK Studio</span><span class="marque-zone">Oise · Somme</span>
     </a>
     <nav aria-label="Navigation principale" class="nav" id="nav-principale">
@@ -35,7 +34,7 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
 </header>
 
 <style>
-  .entete { padding-block: 16px; position: relative; z-index: 10; border-bottom: 1px solid var(--dvk-border); }
+  .entete { padding-block: 14px; background: var(--dvk-surface-raised); position: relative; z-index: 10; border-bottom: 1px solid var(--dvk-border); }
   .entete-interieur { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
   .marque { display: flex; align-items: center; min-height: 44px; gap: 12px; }
   .marque-symbole { height: 34px; width: auto; flex: none; }
@@ -43,15 +42,15 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
   .marque-zone { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pierre); font-weight: 600; padding-left: 12px; border-left: 1px solid var(--dvk-border); }
   .nav ul { list-style: none; display: flex; gap: 22px; }
   .nav a { font-size: 13.5px; letter-spacing: 0.01em; font-weight: 400; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding-block: 8px; }
-  .nav a[aria-current="page"] { border-bottom: 2px solid var(--terre); font-weight: 600; }
-  .badge { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--encre); color: var(--papier); padding: 3px 8px; border-radius: var(--dvk-radius-pill); }
+  .nav a[aria-current="page"] { border-bottom: 2px solid var(--dvk-accent); font-weight: 600; }
+  .badge { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--dvk-action-soft); color: var(--dvk-action-deep); padding: 3px 8px; border-radius: var(--dvk-radius-pill); }
   .entete-cta { min-height: 44px; padding: 0 20px; font-size: 13.5px; white-space: nowrap; }
-  .menu-bouton { display: none; width: 44px; height: 44px; border: 1.5px solid var(--encre); background: transparent; border-radius: 50%; flex-direction: column; gap: 5px; align-items: center; justify-content: center; cursor: pointer; }
+  .menu-bouton { display: none; width: 44px; height: 44px; border: 1px solid var(--dvk-border-strong); background: transparent; border-radius: var(--dvk-radius-sm); flex-direction: column; gap: 5px; align-items: center; justify-content: center; cursor: pointer; }
   .menu-bouton span { width: 18px; height: 1.5px; background: var(--encre); display: block; }
   @media (max-width: 900px) {
     .menu-bouton { display: flex; }
     .entete-cta { display: none; }
-    .nav { position: absolute; inset: 100% 0 auto 0; background: var(--papier); border-bottom: 1px solid var(--ligne); display: none; padding: 8px var(--gouttiere) 20px; }
+    .nav { position: absolute; inset: 100% 0 auto 0; background: var(--dvk-surface-raised); border-bottom: 1px solid var(--dvk-border); display: none; padding: 8px var(--gouttiere) 20px; }
     .nav.ouvert { display: block; }
     .nav ul { flex-direction: column; gap: 4px; }
     .nav a { font-size: 17px; padding-block: 12px; }

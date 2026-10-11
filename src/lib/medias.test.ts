@@ -5,15 +5,22 @@ import { join } from "node:path";
 import { registre, standins } from "../content/medias";
 import {
   LARGEUR_MIN_PAIRE, MAX_REPERES_HERO, MAX_REPERES_PAGE, MAX_REPERES_POTENTIEL, STANDINS_DEMANDES,
-  chantier, imageAcquereurs, imageImmobilier, mentionChantier, paire, trouver, verifierDroits, verifierPaire, verifierReperes,
+  chantier, imageAcquereurs, imageAmbiance, imageImmobilier, mentionChantier, paire, trouver, verifierDroits, verifierPaire, verifierReperes,
 } from "./medias";
 
 const img = (width: number, height: number) => ({ src: "/x.jpg", width, height, format: "jpg" }) as never;
 const repere = (n: number) => Array.from({ length: n }, (_, i) => ({ x: 10 + i, y: 20, libelle: `r${i}`, statut: "hypothese" as const }));
 
 describe("livraison dormante : rien n'est publié sans droits confirmés", () => {
-  it("tous les médias du registre sont « non-confirmes » tant que la paire signature n'existe pas", () => {
-    for (const [nom, c] of Object.entries(registre)) expect(c.droits.statut, nom).toBe("non-confirmes");
+  it("tous les médias du registre sont « non-confirmes » tant que la paire signature n'existe pas (sauf la photo d'ambiance du hero)", () => {
+    for (const [nom, c] of Object.entries(registre)) if (nom !== "ambiance") expect(c.droits.statut, nom).toBe("non-confirmes");
+  });
+  it("la photo d'ambiance du hero est publiée avec un justificatif, une date et un fichier présent", () => {
+    const c = registre.ambiance;
+    expect(c.droits.statut).toBe("confirmes");
+    expect(() => verifierDroits("ambiance", c.droits)).not.toThrow();
+    expect(imageAmbiance()).not.toBeNull();
+    expect(imageAmbiance()!.alt).toBe("");
   });
   it("sans stand-ins demandés, aucun média n'est résolu (hero et chaîne actuels, aucun emplacement vide)", () => {
     if (STANDINS_DEMANDES) return; // développement avec stand-ins : voir `npm run dev:standins`

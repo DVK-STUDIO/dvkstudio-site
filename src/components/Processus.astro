@@ -1,6 +1,6 @@
 ---
 // DVKProcess : étapes numérotées d'un parcours (accueil, travaux, professionnels).
-// Un seul langage : numéro discret, filet, titre en serif, texte en sans. Pas de carte, pas de pastille, pas de flèche.
+// Un seul langage : pastille numérotée caramel, titre en serif, texte en sans. Cartes blanches en colonnes, frise verticale sur mobile.
 //   variant « colonnes » : étapes côte à côte (large), empilées sur mobile.
 //   variant « liste »    : étapes empilées, numéro à gauche.
 interface Etape { titre?: string; texte: string }
@@ -11,7 +11,7 @@ const { etapes, variant = "colonnes" } = Astro.props;
 <ol class:list={["dvk-process", variant]}>
   {etapes.map((e, i) => (
     <li>
-      <span class="n">{String(i + 1).padStart(2, "0")}</span>
+      <span class="n">{i + 1}</span>
       <div class="corps">
         {e.titre && <h3>{e.titre}</h3>}
         <p>{e.texte}</p>
@@ -21,23 +21,25 @@ const { etapes, variant = "colonnes" } = Astro.props;
 </ol>
 
 <style>
+  /* Étapes : pastilles numérotées caramel, reliées par un filet vertical sur mobile ; cartes blanches en colonnes au-delà. */
   .dvk-process { list-style: none; padding: 0; margin: 0; display: grid; }
-  .n { font-size: 12px; letter-spacing: 0.14em; color: var(--dvk-text-subtle); font-weight: 600; }
-  h3 { font-size: 24px; line-height: 1.15; margin: 0 0 6px; }
+  .n { width: 36px; height: 36px; border-radius: 50%; display: inline-grid; place-items: center; flex: none; font-size: 13px; font-weight: 600; color: var(--dvk-action-deep); background: var(--dvk-action-soft); border: 1px solid var(--dvk-accent); }
+  h3 { font-size: 22px; line-height: 1.2; margin: 0 0 6px; }
   p { margin: 0; font-size: 16px; color: var(--dvk-text-muted); }
 
-  .colonnes { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 0 32px; border-top: 1.5px solid var(--dvk-border-strong, var(--dvk-text)); }
-  .colonnes li { padding: 20px 0 8px; display: flex; flex-direction: column; gap: 8px; }
+  .colonnes { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
+  .colonnes li { padding: 24px; display: flex; flex-direction: column; gap: 12px; background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); }
 
-  .liste { gap: 0; border-top: 1.5px solid var(--dvk-text); }
-  .liste li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--dvk-border); }
-  .liste .n { padding-top: 4px; }
+  .liste { gap: 0; position: relative; }
+  .liste li { display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 0 0 24px; position: relative; }
+  .liste li:not(:last-child)::before { content: ""; position: absolute; left: 17.5px; top: 40px; bottom: 4px; width: 1px; background: var(--dvk-border-strong); }
   .liste p { font-size: 17px; }
   .liste h3 + p { font-size: 16px; }
+  .liste h3, .liste p:first-of-type { padding-top: 4px; }
 
   @media (max-width: 720px) {
     .colonnes { gap: 0; }
-    .colonnes li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--dvk-border); }
-    .colonnes .n { padding-top: 4px; }
+    .colonnes li { display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 0 0 24px; background: none; border: 0; box-shadow: none; border-radius: 0; position: relative; }
+    .colonnes li:not(:last-child)::before { content: ""; position: absolute; left: 17.5px; top: 40px; bottom: 4px; width: 1px; background: var(--dvk-border-strong); }
   }
 </style>

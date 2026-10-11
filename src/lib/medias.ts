@@ -48,7 +48,9 @@ export function verifierPaire(avant: ImageMetadata, apres: ImageMetadata, option
   if (options.largeurMin && avant.width < options.largeurMin) throw new Error(`paire du comparateur : ${avant.width} px de large (minimum ${options.largeurMin})`);
 }
 
-function configImage(slot: "chantier" | "immobilier" | "acquereurs", c: ConfigImage, dossier: Dossier, standin: boolean): MediaImage | null {
+type Slot = "chantier" | "immobilier" | "acquereurs" | "ambiance";
+
+function configImage(slot: Slot, c: ConfigImage, dossier: Dossier, standin: boolean): MediaImage | null {
   const src = trouver(dossier, c.fichier);
   if (!src) {
     if (!standin && c.droits.statut === "confirmes") throw new Error(`média « ${slot} » : droits confirmés mais fichier ${c.fichier} absent de src/assets/medias/`);
@@ -59,7 +61,7 @@ function configImage(slot: "chantier" | "immobilier" | "acquereurs", c: ConfigIm
   return { src, alt: c.alt, reperes: c.reperes, provenance: c.provenance, standin };
 }
 
-function resoudreImage(slot: "chantier" | "immobilier" | "acquereurs"): MediaImage | null {
+function resoudreImage(slot: Slot): MediaImage | null {
   const c = registre[slot];
   if (c.droits.statut === "confirmes") {
     verifierDroits(slot, c.droits);
@@ -97,6 +99,8 @@ export const paire = (): MediaPaire | null => resoudrePaire();
 export const chantier = (): MediaImage | null => resoudreImage("chantier");
 export const imageImmobilier = (): MediaImage | null => resoudreImage("immobilier");
 export const imageAcquereurs = (): MediaImage | null => resoudreImage("acquereurs");
+/** Photo d'ambiance du hero de l'accueil (décorative : alt vide, voile sombre, crédit « Photo d'illustration »). */
+export const imageAmbiance = (): MediaImage | null => resoudreImage("ambiance");
 
 /** Mention de provenance d'un chantier : jamais de fausse continuité. */
 export const mentionChantier = (p: Provenance | undefined): string =>
