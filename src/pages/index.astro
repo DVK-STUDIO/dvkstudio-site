@@ -1,4 +1,5 @@
 ---
+import PremierEchange from "../components/PremierEchange.astro";
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
 import BarreRdv from "../components/BarreRdv.astro";
@@ -15,9 +16,11 @@ const entreprise = {
   areaServed: ["Oise", "Somme"], sameAs: [site.reseaux.linkedin],
 };
 const faq = [
+  { q: "Dois-je déjà avoir des plans ou des devis ?", r: "Non. Pour commencer, la commune du bien, une description du besoin et votre calendrier suffisent. Les informations à approfondir sont précisées pendant l’échange." },
+  { q: "Comment connaître le coût de l’accompagnement ?", r: "Le périmètre et les modalités sont précisés selon votre projet avant toute prestation. Le premier échange ne vous engage pas pour la suite." },
   { q: "À quel moment vous contacter ?", r: "Dès que vous envisagez des travaux, y compris avant l'achat d'un bien à rénover. Je commence par votre besoin, la commune du bien et votre calendrier." },
   { q: "Intervenez-vous dans l'Oise et la Somme ?", r: "Oui. Je suis basé à Gannes, dans l'Oise, et j'accompagne les projets dans l'Oise (60) et la Somme (80). Je précise les modalités selon la localisation et la nature du projet." },
-  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange téléphonique dure vingt minutes et se fait sans engagement." },
+  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange téléphonique dure trente minutes et se fait sans engagement." },
   { q: "Une enveloppe de travaux est-elle un devis ?", r: "Une estimation est un premier repère, avec ses hypothèses et ses limites. Les devis sont établis par les entreprises consultées après étude du besoin." },
   { q: "Réalisez-vous les travaux ?", r: "Les travaux sont réalisés par les entreprises retenues. Mon rôle de chef de projet travaux hemea porte sur le cadrage, le budget estimatif et la consultation d'entreprises labellisées hemea. Le périmètre de l'accompagnement est précisé pour chaque projet." },
 ];
@@ -29,25 +32,21 @@ const faq = [
   <header class="conteneur trame hemea-hero">
     <div class="hero-texte">
       <p class="surtitre">Chef de projet travaux hemea · Oise & Somme</p>
-      <h1 class="titre-xl">Votre rénovation,<br />un projet bien accompagné.</h1>
-      <p class="chapo">Des premières questions aux prochaines étapes de vos travaux, avançons avec un besoin clair, un budget à cadrer et les bons interlocuteurs.</p>
+      <h1 class="titre-xl">Quels travaux prévoir,<br />quel budget envisager<br />et par où commencer ?</h1>
+      <p class="chapo">Vous rénovez votre logement ou envisagez l’achat d’un bien à rénover ? Je vous accompagne pour clarifier vos besoins, préparer une enveloppe estimative et organiser la consultation d’entreprises labellisées hemea.</p>
       <div class="actions">
-        <BoutonRdv bouton="hero.rdv" parcours="renover">Parlons de votre projet</BoutonRdv>
-        <a class="lien-soulige" href={site.telephoneLien}>{site.telephone}</a>
+        <BoutonRdv bouton="hero.rdv" parcours="renover">Faire le point sur mon projet</BoutonRdv>
+        <a class="lien-soulige" href="/professionnels/">Vous accompagnez un client ?</a>
       </div>
-      <p class="hero-note">Kevin De Vlieger · Premier échange de 20 min, par téléphone, sans engagement.</p>
+      <p class="hero-note">Kevin De Vlieger · Premier échange de 30 min, par téléphone, sans engagement.</p>
     </div>
-    <div class="hero-plan">
-      <div class="cotes"><span>Votre projet</span><span>De l'idée aux travaux</span></div>
-      <Plan alt="Plan schématique illustrant un projet de rénovation de cuisine et de séjour"
-        zones={["cuisine"]} ouverture
-        annotations={[
-          { x: 42.5, y: 26, lx: 52, ly: 8, libelle: "Contraintes à vérifier", statut: "manquant" },
-          { x: 42.5, y: 58, lx: 52, ly: 72, libelle: "Travaux à envisager", statut: "hypothese", focal: true },
-        ]}
-        legende="Plan illustratif, non à l'échelle. Chaque projet nécessite sa propre étude." />
-      <p class="plan-signature">Le bon point de départ : comprendre votre besoin.</p>
-    </div>
+    <aside class="hero-plan premier-contact" aria-label="Votre premier échange">
+      <p class="surtitre">Votre interlocuteur local</p>
+      <h2 class="titre-m">Kevin De Vlieger</h2>
+      <p>Chef de projet travaux hemea<br />Basé à Gannes · Oise et Somme</p>
+      <div class="contact-reperes"><span>01</span><p>Votre besoin : ce que vous souhaitez changer dans le logement.</p><span>02</span><p>Votre situation : bien occupé, achat envisagé, calendrier.</p><span>03</span><p>Votre prochaine étape : vérifier l’adéquation de l’accompagnement.</p></div>
+      <p class="hero-note">Le premier échange sert à cadrer le besoin. Il ne remplace ni une étude technique ni un devis.</p>
+    </aside>
   </header>
 
   <section class="conteneur reperes" aria-label="Votre accompagnement">
@@ -62,9 +61,8 @@ const faq = [
       <div class="tete"><p class="surtitre">Votre point de départ</p><h2 id="t-parcours" class="titre-l">Vous avez un projet.<br />Ou un client à accompagner.</h2></div>
     </div>
     <nav class="parcours-hemea" aria-label="Choisir votre parcours">
-      <a href="/travaux/"><span class="numero">01</span><h3>Je rénove mon logement</h3><p>Faire le point sur mes travaux, mes priorités et le budget à prévoir.</p><span class="parcours-suite">Parcours particuliers <span aria-hidden="true">→</span></span></a>
-      <a href="/acquereurs/"><span class="numero">02</span><h3>J'achète un bien à rénover</h3><p>Anticiper les questions de travaux avant de poursuivre mon achat.</p><span class="parcours-suite">Préparer mon projet <span aria-hidden="true">→</span></span></a>
-      <a href="/professionnels/"><span class="numero">03</span><h3>J'accompagne un client</h3><p>Orienter mon client vers un interlocuteur travaux dans l'Oise ou la Somme.</p><span class="parcours-suite">Parcours prescripteurs <span aria-hidden="true">→</span></span></a>
+      <a href="/travaux/"><span class="numero">01 · Particuliers</span><h3>J’ai un projet de rénovation</h3><p>Je rénove mon logement ou prépare un achat avec travaux. Je veux clarifier les travaux, le budget et les étapes.</p><span class="parcours-suite">Préparer mon projet <span aria-hidden="true">→</span></span></a>
+      <a href="/professionnels/"><span class="numero">02 · Prescripteurs</span><h3>J’accompagne un client</h3><p>Je cherche un contact local hemea pour répondre aux questions travaux de mon client.</p><span class="parcours-suite">Échanger sur un projet client <span aria-hidden="true">→</span></span></a>
     </nav>
   </section>
 
@@ -81,7 +79,7 @@ const faq = [
           { titre: "La suite", texte: "Comparaison des propositions et accompagnement selon le périmètre convenu." },
         ]} />
       </div>
-      <div class="actions"><BoutonRdv bouton="methode.rdv">Faire le point sur mes travaux</BoutonRdv></div>
+      <div class="actions"><BoutonRdv bouton="methode.rdv">Faire le point sur mon projet</BoutonRdv></div>
     </div>
   </section>
 
@@ -104,21 +102,23 @@ const faq = [
     </div>
   </section>
 
+  <section class="section conteneur" aria-labelledby="t-exemple"><div class="duo"><div><p class="surtitre">Comprendre la démarche</p><h2 id="t-exemple" class="titre-m">Partir de vos usages, puis vérifier les contraintes.</h2><p class="chapo">Ouvrir une cuisine sur le séjour pose plusieurs questions : usage, structure, réseaux et budget. Les hypothèses sont distinguées des points vérifiés avant de consulter les entreprises.</p></div><Plan alt="Plan illustratif d’une cuisine et d’un séjour" zones={["cuisine"]} ouverture legende="Plan illustratif, non à l'échelle. Exemple de démarche, sans réalisation de chantier présentée." /></div></section>
+
   <section class="section conteneur" aria-labelledby="t-faq">
     <h2 id="t-faq" class="titre-m faq-titre">Vos premières questions</h2>
     <Faq questions={faq} />
   </section>
 
-  <section class="sombre section" id="rdv" aria-labelledby="t-rdv">
-    <div class="conteneur duo">
-      <div><p class="surtitre">Commençons par un échange</p><h2 id="t-rdv" class="titre-l">Un bien, des travaux,<br />une première conversation.</h2><p class="chapo contact-intro">Indiquez-moi la commune du bien, les travaux envisagés et votre calendrier.</p></div>
-      <div class="contact-direct"><a href={site.telephoneLien} class="contact-tel">{site.telephone}</a><a href={`mailto:${site.email}`}>{site.email}</a><div class="actions"><BoutonRdv bouton="final.rdv">Choisir un créneau · 20 min</BoutonRdv></div><p class="contact-note">La prise de rendez-vous s'ouvre sur Calendly.</p></div>
-    </div>
-  </section>
+  <PremierEchange />
   <BarreRdv />
 </Base>
 
 <style>
+  .premier-contact { padding:32px; background:var(--dvk-surface); border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-md); }
+  .premier-contact h2 { margin-block:20px; }
+  .contact-reperes { display:grid; grid-template-columns:28px 1fr; gap:18px 12px; margin-top:28px; }
+  .contact-reperes span { font-size:13px; color:var(--dvk-text-subtle); }
+  .contact-reperes p { font-size:16px; margin:0; }
   .hemea-hero { display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:clamp(32px,5vw,72px); align-items:center; padding-block:clamp(44px,7vw,96px); }
   .hero-texte .surtitre { margin-bottom:28px; }
   .hero-texte h1 { font-size:clamp(36px,4.5vw,60px); max-width:19ch; }
@@ -131,7 +131,7 @@ const faq = [
   .reperes > div { border-top:1.5px solid var(--encre); padding-top:18px; }
   .reperes p { margin-top:12px; font-size:15px; color:var(--encre-douce); }
   .parcours-hemea { margin-top:48px; border-bottom:1px solid var(--ligne); }
-  .parcours-hemea > a { display:grid; grid-template-columns:40px minmax(0,1.1fr) minmax(0,1fr) 190px; align-items:center; gap:24px; padding-block:32px; border-top:1px solid var(--ligne); }
+  .parcours-hemea > a { display:grid; grid-template-columns:120px minmax(0,1.1fr) minmax(0,1fr) 190px; align-items:center; gap:24px; padding-block:32px; border-top:1px solid var(--ligne); }
   .parcours-hemea h3 { font-size:23px; line-height:1.25; }
   .parcours-hemea p { font-size:15px; color:var(--encre-douce); }
   .parcours-suite { font-size:13px; font-weight:600; display:flex; justify-content:space-between; gap:12px; }
@@ -145,7 +145,7 @@ const faq = [
   .contact-direct { display:flex; flex-direction:column; align-items:flex-start; padding-top:32px; overflow-wrap:anywhere; }
   .contact-tel { font-size:clamp(26px,3vw,40px); font-weight:300; line-height:1.2; margin-bottom:18px; }
   .contact-note { font-size:13px; color:var(--brume); margin-top:16px; }
-  @media (max-width:900px) { .hemea-hero { grid-template-columns:1fr; } .hero-texte h1 { max-width:22ch; } .hero-plan { max-width:620px; width:100%; margin:auto; } .parcours-hemea > a { grid-template-columns:30px 1fr; gap:12px 20px; } .parcours-hemea p,.parcours-suite { grid-column:2; } .parcours-suite { justify-content:flex-start; } }
+  @media (max-width:900px) { .hemea-hero { grid-template-columns:1fr; } .hero-texte h1 { max-width:22ch; } .hero-plan { max-width:620px; width:100%; margin:auto; } .parcours-hemea > a { grid-template-columns:1fr; gap:12px 20px; } .parcours-hemea p,.parcours-suite { grid-column:1; } .parcours-suite { justify-content:flex-start; } }
   @media (max-width:720px) { .reperes { grid-template-columns:1fr; gap:24px; } .hero-texte .actions { align-items:flex-start; flex-direction:column; } .contact-direct { padding-top:0; } }
 </style>
 

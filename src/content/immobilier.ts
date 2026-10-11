@@ -31,7 +31,7 @@ export const page = {
     chapo: "Vendre, acheter, comprendre le potentiel d'un bien et anticiper ses travaux : DVK Studio réunit immobilier et rénovation dans un même parcours.",
     vendre: "Je souhaite vendre",
     acheter: "Je souhaite acheter",
-    ligne: "Basé à Gannes, dans l'Oise. Premier échange de vingt minutes, sans engagement.",
+    ligne: "Basé à Gannes, dans l'Oise. Premier échange de trente minutes, sans engagement.",
   },
 
   approche: {
@@ -175,8 +175,8 @@ export const page = {
     {
       q: "Combien cela coûte-t-il ?",
       r: choisir(
-        "Le premier échange de vingt minutes est sans engagement. Si une transaction est envisagée, le professionnel concerné vous communique ses conditions avant tout engagement.",
-        `Le premier échange de vingt minutes est sans engagement. Les honoraires de l'activité immobilière figurent dans le barème ${R}, remis avant tout engagement et rappelé dans le mandat.`,
+        "Le premier échange de trente minutes est sans engagement. Si une transaction est envisagée, le professionnel concerné vous communique ses conditions avant tout engagement.",
+        `Le premier échange de trente minutes est sans engagement. Les honoraires de l'activité immobilière figurent dans le barème ${R}, remis avant tout engagement et rappelé dans le mandat.`,
       ),
     },
     {
@@ -248,3 +248,4 @@ export const faqAcquereurConseil = choisir(
 );
 
 export { reglementaire, reseau };
+

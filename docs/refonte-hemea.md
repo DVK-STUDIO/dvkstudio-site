@@ -12,6 +12,8 @@ Cette proposition reprend la V2 existante et sa charte. Elle cible exclusivement
 
 Après installation des dépendances : npm test, npm run build (DVK_PUBLIC_BUILD=1), npm run check:public, npm run check:site, npm run check:capacites, node scripts/check-hemea.mjs, puis test de fumée et vérification visuelle sur ordinateur et mobile.
 
-L'environnement local de préparation ne peut pas télécharger les dépendances npm : compilation, tests Vitest et aperçu visuel restent à confirmer. Les contrôles de syntaxe des scripts et de cohérence des sources ont été réalisés ; ils ne remplacent pas ces vérifications.
+Les dépendances déjà installées localement ont permis de compiler sans téléchargement : 10 pages générées, 152 tests Vitest réussis, 5 contrôles des signaux de conversion réussis. Les contrôles des liens, SEO, accessibilité structurelle, budgets de performance, hygiène publique, capacités et médias passent. La compilation a utilisé un cache temporaire distinct. Le test HTTP et la revue visuelle restent bloqués par l’accès aux aperçus locaux ; ils restent nécessaires avant publication.
 
 La proposition ne déploie rien. Les conditions de mise en ligne déjà documentées (identité légale, usage de la marque hemea, rendez-vous et validation explicite) restent à vérifier avant publication. Aucun avis client, résultat chiffré ni photographie de chantier n'a été inventé.
+
+La logique de conversion, la qualification Calendly et les limites de mesure sont détaillées dans docs/conversion.md. Le rendez-vous réel dure 30 minutes ; les textes sont alignés.
