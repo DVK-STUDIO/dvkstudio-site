@@ -11,9 +11,13 @@
 export type ModeImmobilier = "off" | "orientation" | "mandataire";
 
 export const immobilier = {
-  mode: "orientation" as ModeImmobilier,
+  mode: "off" as ModeImmobilier,
 };
 
 export const modeImmobilier: ModeImmobilier = immobilier.mode;
 export const immobilierVisible = modeImmobilier !== "off";
 export const mandataireActif = modeImmobilier === "mandataire";
+
+// Conservée en source pour une reprise ultérieure, absente de cette version publique.
+export const experienceVisible = false;
+

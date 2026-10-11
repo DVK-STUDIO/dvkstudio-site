@@ -2,6 +2,7 @@
 // DVK Expérience : une expérience publiée, construite uniquement à partir d'une ExperiencePubliée v1.
 // Parcours : le bien > ses besoins > son potentiel > les scénarios > ce qui change > combien > énergie > suite.
 import Base from "../../layouts/Base.astro";
+import { experienceVisible } from "../../content/capacites";
 import BoutonRdv from "../../components/BoutonRdv.astro";
 import Statut from "../../components/experience/Statut.astro";
 import Donnee from "../../components/experience/Donnee.astro";
@@ -17,7 +18,7 @@ import {
 } from "../../lib/experience/experience";
 
 export function getStaticPaths() {
-  return experiencesPubliables().map((e) => ({ params: { slug: e.slug }, props: { e } }));
+  return experienceVisible ? experiencesPubliables().map((e) => ({ params: { slug: e.slug }, props: { e } })) : [];
 }
 const { e } = Astro.props;
 
@@ -422,3 +423,4 @@ const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
     sections.forEach((s) => io.observe(s));
   }
 </script>
+

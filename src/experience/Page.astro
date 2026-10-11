@@ -1,7 +1,7 @@
 ---
-import Base from "../../layouts/Base.astro";
-import ExperienceDemo from "../../components/ExperienceDemo.astro";
-import { experiencesPubliables } from "../../lib/experience/experience";
+import Base from "../layouts/Base.astro";
+import ExperienceDemo from "../components/ExperienceDemo.astro";
+import { experiencesPubliables } from "../lib/experience/experience";
 const experiences = experiencesPubliables();
 ---
 
@@ -51,3 +51,4 @@ const experiences = experiencesPubliables();
   .experiences span:not(.dvk-availability) { color: var(--encre-douce); font-size: 16px; }
   .experiences .aller { color: var(--terre-fonce); font-weight: 600; margin-top: auto; }
 </style>
+

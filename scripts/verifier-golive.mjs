@@ -25,6 +25,8 @@ if (continuer) {
   etape("Hygiène et fuites (check:public)", () => { const r = sh("node scripts/check-public.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Liens, SEO, redirections, accessibilité, performance (check:site)", () => { const r = sh("node scripts/check-site.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Capacité Immobilier : matrice du mode publié respectée (check:capacites)", () => { const r = sh("node scripts/check-capacites.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
+  etape("Positionnement hemea exclusif", () => { const r = sh("node scripts/check-hemea.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
+  etape("Positionnement hemea exclusif", () => { const r = sh("node scripts/check-hemea.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Capacité Immobilier : les trois modes testés par construction réelle (check:modes)", () => { const r = sh("node scripts/verifier-modes.mjs"); return { ok: r.status === 0, detail: sortie(r).split("\n").slice(-14).join("\n") }; });
   etape("Médias : aucun stand-in, aucun emplacement vide, aucun montant, aucun EXIF (check:medias)", () => { const r = sh("node scripts/check-medias.mjs"); return { ok: r.status === 0, detail: sortie(r) }; });
   etape("Médias : livraison dormante et verrous testés par construction réelle (check:modes-medias)", () => { const r = sh("node scripts/verifier-medias.mjs"); return { ok: r.status === 0, detail: sortie(r).split("\n").slice(-14).join("\n") }; });
@@ -56,7 +58,7 @@ if (existsSync("dist")) {
   const avec = listerFichiers("dist").filter((f) => f.endsWith(".html")).filter((f) => /à compléter/.test(readFileSync(`dist/${f}`, "utf8")));
   if (avec.length) humains.push(`Emplacements « à compléter » : ${avec.length} page(s) (${avec.map((f) => "/" + f.replace(/index\.html$/, "")).join(", ")})`);
 }
-humains.push("Mode Immobilier « orientation » : confirmer que « Je rejoins le réseau iad France » est exact au jour de la mise en ligne");
+if (/mode:\s*"orientation"/.test(readFileSync("src/content/capacites.ts", "utf8"))) humains.push("Mode Immobilier « orientation » : confirmer que « Je rejoins le réseau iad France » est exact au jour de la mise en ligne");
 humains.push("Mention officielle CM2C, conformité à la charte de communication hemea, dernière vérification visuelle, GO de déploiement");
 humains.push("Tarifs : non repris tant qu'ils ne sont pas confirmés (aucune action si non confirmés)");
 humains.push("Logos et partenaires : non repris tant que l'autorisation n'est pas obtenue");
@@ -71,3 +73,4 @@ for (const h of humains) console.log(`  - ${bloquants.includes(h) ? "[BLOQUANT] 
 if (!technique) { console.error("\nNON PRÊT : corriger l'échec technique."); process.exit(1); }
 if (bloquants.length) { console.log("\nTechniquement prêt. NON PRÊT à publier : prérequis humains restants."); process.exit(2); }
 console.log("\nPRÊT pour la signature de la check-list. Aucun déploiement n'a été fait.");
+

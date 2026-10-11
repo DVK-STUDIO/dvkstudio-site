@@ -1,4 +1,5 @@
 ---
+import PremierEchange from "../components/PremierEchange.astro";
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
 import Processus from "../components/Processus.astro";
@@ -11,6 +12,8 @@ import { chantier } from "../lib/medias";
 const matiere = chantier();
 
 const faq = [
+  { q: "Dois-je déjà avoir des plans ou des devis ?", r: "Non. Pour commencer, la commune du bien, une description du besoin et votre calendrier suffisent. Les informations à approfondir sont précisées pendant l’échange." },
+  { q: "Comment connaître le coût de l’accompagnement ?", r: "Le périmètre et les modalités sont précisés selon votre projet avant toute prestation. Le premier échange ne vous engage pas pour la suite." },
   { q: "Êtes-vous maître d'œuvre ?", r: "Non. DVK Studio n'est ni maître d'œuvre, ni architecte, ni bureau d'études, et ne réalise pas de travaux. Je cadre votre projet, estime son budget et vous aide à consulter des entreprises labellisées hemea." },
   { q: "Garantissez-vous les entreprises et leurs travaux ?", r: "Non. Les devis et les travaux relèvent des entreprises consultées. DVK Studio ne garantit personnellement ni leurs prix ni leurs travaux." },
   { q: "Le budget présenté est-il un devis ?", r: "Non. C'est une estimation indicative, non contractuelle, avec ses hypothèses et ses limites. Un devis est établi par les entreprises consultées." },
@@ -19,16 +22,16 @@ const faq = [
 ---
 
 <Base
-  titre="Travaux : cadrer son projet et son budget avant de s'engager"
-  description="Rénover en Oise avec DVK Studio : cadrage du projet, relevé, scénarios, budget estimatif, consultation d'entreprises et accompagnement jusqu'au chantier."
+  titre="Particuliers : préparer vos travaux avec hemea | Oise et Somme"
+  description="Kevin De Vlieger, chef de projet travaux hemea dans l’Oise et la Somme : cadrage de votre rénovation, budget indicatif et consultation d’entreprises."
   page="travaux"
   chemin="/travaux/"
 >
   <header class="conteneur page-hero">
     <p class="surtitre">Travaux · {site.zone}</p>
-    <h1 class="titre-xl">Cadrer vos travaux et votre budget, avant de vous engager.</h1>
-    <p class="chapo">Beaucoup de projets de rénovation s'enlisent faute d'avoir été cadrés : par où commencer, combien ça coûte, qui consulter. DVK Studio met de l'ordre avant le premier devis.</p>
-    <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="renover">Cadrer mes travaux</BoutonRdv></div>
+    <h1 class="titre-xl">Votre rénovation commence par un projet clair.</h1>
+    <p class="chapo">Vous avez des idées, mais vous hésitez sur les travaux à prévoir, le budget ou les entreprises à consulter ? Kevin De Vlieger, chef de projet travaux hemea dans l’Oise et la Somme, vous aide à préparer les prochaines étapes.</p>
+    <div class="actions"><BoutonRdv bouton="hero.rdv" parcours="renover">Faire le point sur mon projet</BoutonRdv></div>
   </header>
 
   {matiere && (
@@ -41,8 +44,8 @@ const faq = [
     <h2 id="t-probleme" class="titre-l" style="max-width:22ch">Ce que vous y gagnez.</h2>
     <div class="bloc">
       <div><h3>Le problème</h3><p>Des idées, mais pas de plan. Des devis difficiles à comparer. Un budget qui dérape parce que les contraintes du bien n'ont pas été vues au départ.</p></div>
-      <div><h3>Ce que fait DVK Studio</h3><p>Relevé du bien, scénarios de travaux, enveloppe indicative avec ses hypothèses, puis consultation d'entreprises labellisées hemea et accompagnement du projet en tant que chef de projet travaux hemea.</p></div>
-      <div><h3>Pour vous, concrètement</h3><p>Un projet lisible, des choix expliqués, un budget dont vous connaissez l'origine, et un interlocuteur du premier échange jusqu'au chantier.</p></div>
+      <div><h3>Ce que fait DVK Studio</h3><p>Cadrage des besoins, pistes de travaux, enveloppe indicative avec ses hypothèses, puis consultation d'entreprises labellisées hemea et accompagnement du projet en tant que chef de projet travaux hemea.</p></div>
+      <div><h3>Pour vous, concrètement</h3><p>Des priorités explicites, une enveloppe dont les hypothèses sont expliquées et les prochaines étapes définies selon le périmètre convenu.</p></div>
     </div>
   </section>
 
@@ -51,13 +54,13 @@ const faq = [
       <h2 id="t-demarche" class="titre-l" style="max-width:22ch">Une démarche en quatre temps.</h2>
       <div style="margin-top:40px">
         <Processus variant="liste" etapes={[
-          { titre: "Échange", texte: "Vingt minutes pour comprendre votre situation et votre objectif." },
-          { titre: "Visite et relevé", texte: "Mesures, état du bien, contraintes techniques." },
+          { titre: "Échange", texte: "Trente minutes pour comprendre votre situation et votre objectif." },
+          { titre: "Étude du besoin", texte: "Les informations sur le bien et les vérifications nécessaires sont précisées selon le projet." },
           { titre: "Scénarios et enveloppe", texte: "Plusieurs pistes comparées, chacune avec ce qu'elle apporte et ce qu'elle laisse de côté." },
           { titre: "Consultation et suite", texte: "Consultation d'entreprises labellisées hemea et accompagnement si vous décidez d'avancer." },
         ]} />
       </div>
-      <div class="actions"><BoutonRdv bouton="demarche.rdv" parcours="renover">Prendre rendez-vous</BoutonRdv></div>
+      <div class="actions"><BoutonRdv bouton="demarche.rdv" parcours="renover">Faire le point sur mon projet</BoutonRdv></div>
     </div>
   </section>
 
@@ -65,4 +68,6 @@ const faq = [
     <h2 id="t-faq" class="titre-m" style="margin-bottom:32px">Questions fréquentes</h2>
     <Faq questions={faq} />
   </section>
+  <PremierEchange />
 </Base>
+

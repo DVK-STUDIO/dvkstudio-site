@@ -31,6 +31,7 @@ const canonique = (h) => /<link[^>]*rel="canonical"[^>]*href="([^"]+)"/i.exec(h)
 // Plan de site : celui de dist/ s'il existe, sinon celui du site servi (contrôle après mise en ligne, sans build local).
 const xmlSitemap = existsSync("dist/sitemap-0.xml") ? readFileSync("dist/sitemap-0.xml", "utf8") : (await lire("/sitemap-0.xml")).corps;
 const sitemap = [...xmlSitemap.matchAll(/<loc>https:\/\/dvkstudio\.fr([^<]*)<\/loc>/g)].map((m) => m[1]);
+const experienceVisible = /export const experienceVisible = true/.test(readFileSync("src/content/capacites.ts", "utf8"));
 const experiencesInterdites = [];
 const experiencesAutorisees = [];
 if (existsSync("src/data/experiences")) {
@@ -39,8 +40,8 @@ if (existsSync("src/data/experiences")) {
     (e.diffusion?.statut === "confirmee" ? experiencesAutorisees : experiencesInterdites).push(e.slug);
   }
 }
-const attendues = new Set(["/", ...sitemap, ...(modePublic ? [] : experiencesAutorisees.concat(experiencesInterdites).map((s) => `/experience/${s}/`))]);
-if (modePublic) for (const s of experiencesAutorisees) attendues.add(`/experience/${s}/`);
+const attendues = new Set(["/", ...sitemap, ...(!experienceVisible || modePublic ? [] : experiencesAutorisees.concat(experiencesInterdites).map((s) => `/experience/${s}/`))]);
+if (experienceVisible && modePublic) for (const s of experiencesAutorisees) attendues.add(`/experience/${s}/`);
 
 let html = "";
 for (const chemin of [...attendues].sort()) {
@@ -73,6 +74,12 @@ const absente = await lire("/page-qui-n-existe-pas/");
 ok(absente.statut === 404, "page inexistante : 404");
 if (absente.statut === 404) ok(/noindex/.test(absente.corps), "page 404 : noindex");
 
+if (!experienceVisible) {
+  for (const chemin of ["/experience/", ...experiencesAutorisees.concat(experiencesInterdites).map(s => `/experience/${s}/`)]) {
+    ok((await lire(chemin)).statut === 404, `${chemin} : activité désactivée, 404`);
+  }
+}
+
 // Confidentialité : une expérience non confirmée ne doit pas être servie en mode public.
 if (modePublic) {
   for (const s of experiencesInterdites) {
@@ -87,3 +94,4 @@ if (motifsPrives.length === 0) console.log("(aucun FORBIDDEN_FILE : contrôle de
 console.log(`Test de fumée sur ${base}${modePublic ? " (mode public)" : ""} : ${verifs.length - echecs.length}/${verifs.length} vérifications.`);
 if (echecs.length) { console.error("ÉCHECS :\n- " + echecs.join("\n- ")); process.exit(1); }
 console.log("Test de fumée réussi.");
+

@@ -1,0 +1,85 @@
+---
+import BoutonRdv from "./BoutonRdv.astro";
+import { site } from "../content/site";
+interface Props { pro?: boolean; }
+const { pro = false } = Astro.props;
+const action = pro ? "Parler d’un projet client" : "Faire le point sur mon projet";
+---
+
+<section class="section papier-2 premier-echange" id="premier-echange" aria-labelledby="t-echange">
+  <div class="conteneur duo">
+    <div>
+      <p class="surtitre">Votre prochaine étape</p>
+      <h2 id="t-echange" class="titre-l">30 minutes pour savoir<br />par où commencer.</h2>
+      <p class="chapo">{pro ? "Décrivez la situation de votre client, sans partager ses coordonnées. Je vérifie avec vous comment l’accompagnement hemea peut répondre à son besoin travaux." : "Parlez-moi du bien, des travaux envisagés et de votre calendrier. Je vérifie avec vous si l’accompagnement hemea correspond à votre projet et quelles étapes envisager."}</p>
+      <ul class="liste-simple">
+        <li>Un échange téléphonique avec Kevin De Vlieger.</li>
+        <li>Aucun plan ni devis nécessaire pour ce premier contact.</li>
+        <li>Sans engagement. Les modalités de la suite sont précisées avant toute prestation.</li>
+      </ul>
+      <div class="actions"><BoutonRdv bouton="conversion.rdv" parcours={pro ? "pro" : "renover"}>{action}</BoutonRdv></div>
+      <p class="note">Choisissez un créneau sur Calendly. Vous préférez appeler ? <a href={site.telephoneLien}>{site.telephone}</a></p>
+    </div>
+    <div class="preparation">
+      <p class="surtitre">Vous préférez écrire ?</p>
+      <h3 class="titre-m">Présentez votre projet en quelques mots.</h3>
+      <p>Préparez un message à adresser à <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <form hidden data-preparation data-public={pro ? "prescripteur" : "particulier"} data-email={site.email}>
+        <label>Commune du bien <input name="commune" autocomplete="address-level2" maxlength="100" required /></label>
+        <label>Votre situation
+          <select name="situation" required>
+            <option value="">Choisir une situation</option>
+            {pro ? <option>J’accompagne un client</option> : <><option>Je rénove mon logement</option><option>J’envisage un achat avec travaux</option></>}
+            <option>Je souhaite préciser mon projet</option>
+          </select>
+        </label>
+        <label>Calendrier envisagé
+          <select name="calendrier"><option>À définir</option><option>Dès que possible</option><option>Dans les 3 mois</option><option>Dans les 6 mois</option><option>Plus tard</option></select>
+        </label>
+        <label>Travaux envisagés <textarea name="travaux" rows="3" maxlength="1000" placeholder="Par exemple : rénovation intérieure d’une maison…"></textarea></label>
+        <p class="note">Ne renseignez pas les coordonnées d’un tiers. Rien n’est envoyé par ce formulaire : vous relisez puis envoyez le message depuis votre messagerie.</p>
+        <button type="submit" class="btn btn-contour">Préparer mon message</button>
+        <div data-resultat hidden>
+          <p role="status">Votre brouillon est prêt. Ouvrez votre messagerie pour le relire et l’envoyer, ou copiez ce texte.</p>
+          <label>Message préparé <textarea data-resume rows="7" readonly></textarea></label>
+          <a class="btn btn-action" data-message href={`mailto:${site.email}`}>Ouvrir ma messagerie</a>
+        </div>
+      </form>
+      <noscript><p>Pour écrire directement : <a href={`mailto:${site.email}`}>{site.email}</a>. Précisez la commune, les travaux envisagés et votre calendrier.</p></noscript>
+    </div>
+  </div>
+</section>
+<style>
+  .premier-echange { scroll-margin-top:24px; }
+  h2, h3 { margin-top:20px; }
+  .chapo, .liste-simple, .preparation > p { margin-top:24px; }
+  .preparation { padding:28px; background:var(--dvk-background); border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-md); }
+  form[hidden] { display:none; }
+  form { display:grid; gap:18px; margin-top:24px; }
+  label { display:grid; gap:8px; font-size:14px; font-weight:600; }
+  input, select, textarea { width:100%; min-height:44px; padding:12px; border:1px solid var(--dvk-border-strong); border-radius:var(--dvk-radius-sm); background:var(--dvk-background); color:var(--dvk-text); font:inherit; font-weight:400; }
+  textarea { resize:vertical; }
+  .note { font-size:13px; line-height:1.6; margin-top:18px; color:var(--dvk-text-muted); }
+  a:not(.btn) { text-decoration:underline; }
+  [data-resultat][hidden] { display:none; }
+  [data-resultat] > * + * { margin-top:18px; }
+  @media (max-width:720px) { .preparation { padding:20px; } }
+</style>
+<script>
+  document.querySelectorAll<HTMLFormElement>("form[data-preparation]").forEach(form => {
+    form.hidden = false;
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const message = ["Bonjour Kevin,", "", `Situation : ${data.get("situation")}`, `Commune : ${data.get("commune")}`, `Calendrier : ${data.get("calendrier")}`, `Travaux envisagés : ${data.get("travaux") || "À préciser ensemble"}`, "", "Je souhaite échanger sur ce projet travaux."] .join("\n");
+      const resultat = form.querySelector<HTMLElement>("[data-resultat]")!;
+      const resume = form.querySelector<HTMLTextAreaElement>("[data-resume]")!;
+      const lien = form.querySelector<HTMLAnchorElement>("[data-message]")!;
+      resume.value = message;
+      lien.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(form.dataset.public === "prescripteur" ? "Projet travaux d’un client — Oise / Somme" : "Mon projet travaux — Oise / Somme")}&body=${encodeURIComponent(message)}`;
+      resultat.hidden = false;
+      resume.focus();
+      window.dispatchEvent(new CustomEvent("dvk:conversion", { detail:{ evenement:"brouillon_prepare", page:document.body.dataset.page } }));
+    });
+  });
+</script>

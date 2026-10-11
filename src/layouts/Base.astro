@@ -53,6 +53,19 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <script>
       // Origine du visiteur (sans cookie) et liens de rendez-vous. Chargé sur toutes les pages.
       import { CALENDLY_BASE, construireLienRdv, fusionnerOrigine, lireAttribution, offreDepuisChemin, type Attribution } from "../lib/calendly";
+      import { signalConversion } from "../lib/conversion.mjs";
+      const signaler = (evenement: string, bouton?: string) => {
+        const detail = signalConversion(evenement, document.body.dataset.page, bouton);
+        if (detail) window.dispatchEvent(new CustomEvent("dvk:conversion", { detail }));
+      };
+      signaler("page_vue");
+      document.addEventListener("click", event => {
+        const cible = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null;
+        if (!cible) return;
+        if (cible.hasAttribute("data-rdv")) signaler("rdv_ouvert", cible.dataset.rdv);
+        else if (cible.protocol === "tel:") signaler("appel_ouvert");
+        else if (cible.protocol === "mailto:") signaler("email_ouvert");
+      });
       const CLE = "dvk_origine";
       let origine: Attribution | null = null;
       try {
@@ -79,3 +92,4 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     </script>
   </body>
 </html>
+

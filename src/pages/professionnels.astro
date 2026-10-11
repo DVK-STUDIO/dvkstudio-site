@@ -1,51 +1,51 @@
 ---
+import PremierEchange from "../components/PremierEchange.astro";
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
 import Processus from "../components/Processus.astro";
+import Faq from "../components/Faq.astro";
 import { site } from "../content/site";
-const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Annonce à présenter avec DVK Expérience")}`;
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Projet travaux d'un client — Oise / Somme")}`;
+const faq = [
+  { q: "Dois-je déjà avoir des plans ou des devis ?", r: "Non. Pour commencer, la commune du bien, une description du besoin et votre calendrier suffisent. Les informations à approfondir sont précisées pendant l’échange." },
+  { q: "Comment connaître le coût de l’accompagnement ?", r: "Le périmètre et les modalités sont précisés selon votre projet avant toute prestation. Le premier échange ne vous engage pas pour la suite." },
+  { q: "À qui s'adresse ce parcours ?", r: "Aux agents immobiliers, chasseurs immobiliers, courtiers et autres professionnels qui accompagnent un client ayant un projet de rénovation dans l'Oise ou la Somme." },
+  { q: "Quand vous solliciter ?", r: "Dès qu'une question travaux se pose : bien à rénover, enveloppe à préciser ou besoin d'un interlocuteur pour préparer la suite. Je vérifie avec vous si l'accompagnement hemea correspond au projet." },
+  { q: "Que vous envoyer au premier contact ?", r: "La commune du bien, une description des travaux et le calendrier envisagé suffisent pour commencer. Pour transmettre les coordonnées ou des documents de votre client, obtenez d'abord son accord ; vous pouvez aussi lui transmettre directement mes coordonnées." },
+  { q: "Remplacez-vous mon rôle auprès du client ?", r: "Vous conservez votre rôle dans son projet immobilier. Mon intervention porte sur le projet travaux, dans le cadre de l'accompagnement hemea." },
+];
 ---
-
-<Base
-  titre="Professionnels : montrer le potentiel d'un bien avec travaux"
-  description="Agents immobiliers, courtiers, prescripteurs : DVK Studio aide vos acquéreurs à comprendre le potentiel d'un bien, ses travaux et son enveloppe."
-  page="professionnels"
-  chemin="/professionnels/"
->
+<Base titre="Prescripteurs : contact travaux hemea | Oise et Somme"
+  description="Agents immobiliers, chasseurs et courtiers dans l'Oise et la Somme : Kevin De Vlieger, chef de projet travaux hemea, accompagne les projets de rénovation de vos clients."
+  page="professionnels" chemin="/professionnels/">
   <header class="conteneur page-hero">
-    <p class="surtitre">Agents immobiliers, courtiers et prescripteurs</p>
-    <h1 class="titre-xl">Un bien avec travaux qui se vend difficilement ? Envoyez-moi l'annonce.</h1>
-    <p class="chapo">Je montre à vos acquéreurs ce que le bien peut devenir : son potentiel, les travaux à prévoir et leur enveloppe, avec la source de chaque donnée. Vous gagnez du temps, ils comprennent ce qu'ils achètent.</p>
-    <div class="actions">
-      <a class="btn btn-encre" href={mailto}>Envoyer une annonce</a>
-      <BoutonRdv bouton="hero.partenariat" parcours="pro" classe="btn btn-contour">Parler partenariat</BoutonRdv>
-    </div>
+    <p class="surtitre">Prescripteurs immobiliers · {site.zone}</p>
+    <h1 class="titre-xl">Votre client hésite à cause des travaux ?<br />Donnons-lui un point de départ.</h1>
+    <p class="chapo">Un acquéreur s'interroge sur une rénovation ? Un client souhaite faire le point sur ses travaux ? Je suis votre interlocuteur local hemea pour cadrer son besoin et préparer les prochaines étapes.</p>
+    <div class="actions"><BoutonRdv bouton="hero.partenariat" parcours="pro">Parler d’un projet client</BoutonRdv><a class="lien-soulige" href="#premier-echange">Présenter le besoin par écrit</a></div>
   </header>
-
-  <section class="section conteneur" aria-labelledby="t-valeur">
-    <h2 id="t-valeur" class="titre-l" style="max-width:22ch">Ce que vous y gagnez.</h2>
+  <section class="section conteneur" aria-labelledby="t-besoin">
+    <h2 id="t-besoin" class="titre-l">Quand les travaux entrent dans la conversation.</h2>
     <div class="bloc">
-      <div><h3>Le problème</h3><p>L'incertitude sur le coût des travaux fait traîner les ventes et pousse à la négociation. Vos acquéreurs ne savent pas se projeter dans un bien daté.</p></div>
-      <div><h3>Ce que fait DVK Studio</h3><p>Analyse du potentiel, scénarios de transformation et enveloppe de travaux indicative, présentés clairement et pensés pour être transmis à un acquéreur.</p></div>
-      <div><h3>Pourquoi faire confiance à DVK Studio</h3><p>Chaque chiffre dit s'il s'agit d'un devis d'entreprise, d'un pré-chiffrage, d'une estimation ou d'une hypothèse. Rien n'est présenté comme plus certain qu'il ne l'est.</p></div>
+      <div><h3>Un achat avec rénovation</h3><p>Votre acquéreur souhaite comprendre les travaux à envisager et le budget à approfondir avant de poursuivre son projet.</p></div>
+      <div><h3>Un besoin à clarifier</h3><p>Votre client a des idées, mais doit encore définir ses priorités, son calendrier et les prochaines étapes.</p></div>
+      <div><h3>Un contact pour la suite</h3><p>Vous cherchez un interlocuteur pour préparer le projet travaux et consulter des entreprises labellisées hemea.</p></div>
     </div>
   </section>
-
   <section class="papier-2 section" aria-labelledby="t-fonctionnement">
     <div class="conteneur">
-      <h2 id="t-fonctionnement" class="titre-l" style="max-width:22ch">Comment ça se passe.</h2>
-      <div style="margin-top:40px">
-        <Processus variant="liste" etapes={[
-          { texte: "Vous m'envoyez l'annonce ou les photos du bien." },
-          { texte: "Je prépare l'étude : potentiel, scénarios, enveloppe de travaux." },
-          { texte: "Vous la présentez à vos acquéreurs." },
-        ]} />
-      </div>
-      <ul class="dispo-liste">
-        <li><span class="dvk-availability is-available">Disponible</span><span>Étude présentée en rendez-vous ou en document.</span></li>
-        <li><span class="dvk-availability is-soon">À venir</span><span>Page web partageable par lien et propre à chaque bien.</span></li>
-      </ul>
-      <div class="actions"><BoutonRdv bouton="fonctionnement.rdv" parcours="pro">Prendre rendez-vous</BoutonRdv></div>
+      <p class="surtitre">Une mise en relation simple</p>
+      <h2 id="t-fonctionnement" class="titre-l" style="margin-top:24px">De votre client à son projet travaux.</h2>
+      <div style="margin-top:40px"><Processus variant="liste" etapes={[
+        { titre: "Un premier échange", texte: "La commune, le type de bien, les travaux envisagés et le calendrier." },
+        { titre: "Vous proposez le contact", texte: "Transmettez mes coordonnées à votre client, ou proposez une mise en relation avec son accord." },
+        { titre: "Je cadre son besoin", texte: "Un premier échange permet de préciser les attentes et de vérifier l'adéquation avec l'accompagnement hemea." },
+        { titre: "Le projet avance", texte: "Les prochaines étapes sont définies selon le besoin et le périmètre convenu." },
+      ]} /></div>
+      <div class="actions"><a class="btn btn-encre" href={site.telephoneLien}>Appeler Kevin · {site.telephone}</a></div>
     </div>
   </section>
+  <section class="section conteneur" aria-labelledby="t-faq"><h2 id="t-faq" class="titre-m" style="margin-bottom:32px">Vos questions</h2><Faq questions={faq} /><div class="actions"><BoutonRdv bouton="faq.rdv" parcours="pro">Parler d’un projet client</BoutonRdv></div></section>
+  <PremierEchange pro />
 </Base>
+
