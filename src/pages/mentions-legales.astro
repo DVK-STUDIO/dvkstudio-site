@@ -5,13 +5,15 @@ import { mandataireActif } from "../content/capacites";
 import { mentions } from "../content/immobilier";
 import MentionsReglementaires from "../immobilier/MentionsReglementaires.astro";
 const e = site.editeur;
+const med = site.mediateur;
+const a = site.assurance;
 ---
 
 <Base titre="Mentions légales" description={mandataireActif ? mentions.description : "Mentions légales du site dvkstudio.fr : éditeur, accompagnement des travaux, hébergeur."} page="mentions-legales" chemin="/mentions-legales/">
   <div class="conteneur page-hero prose">
     <p class="surtitre">Légal</p>
     <h1 class="titre-xl">Mentions légales</h1>
-    <p>Version préparée le 3 octobre 2026 ; en vigueur à la mise en ligne du site.</p>
+    <p>Version mise à jour le 11 octobre 2026 ; en vigueur à la mise en ligne du site.</p>
 
     <h2>Éditeur du site</h2>
     <p>{site.nom} est le nom commercial de l'entreprise individuelle de {e.nom}, assujettie à la TVA.</p>
@@ -35,6 +37,17 @@ const e = site.editeur;
       <li>{e.nom} n'encaisse aucune somme liée aux travaux.</li>
     </ul>
     <p>{site.nom} n'intervient pas comme architecte, maître d'œuvre, assistant à maîtrise d'ouvrage, bureau d'études, conseiller financier ou conseiller en investissement immobilier, et ne réalise pas de travaux.</p>
+
+    <h2>Assurance de responsabilité civile professionnelle</h2>
+    <p>Les mandataires agissant pour le compte de {a.souscripteur} ({site.mandant.enseigne}) sont couverts par l'assurance de responsabilité civile professionnelle souscrite par {a.souscripteur} auprès de {a.assureur}, police n° {a.police}. Couverture géographique : {a.couverture}.</p>
+
+    <h2>Médiation de la consommation</h2>
+    <p>Conformément aux articles L.612-1 et suivants du Code de la consommation, en cas de litige non résolu par une réclamation écrite préalable, le client consommateur peut recourir gratuitement au médiateur de la consommation dont relève {site.nom} :</p>
+    <ul>
+      <li>{med.nom}</li>
+      <li>Adresse : {med.adresse}</li>
+      <li>Site internet : <a href={med.site} rel="noopener">{med.site.replace("https://", "")}</a> — Téléphone : {med.telephone}</li>
+    </ul>
 
     <h2>Hébergeur</h2>
     <p>GitHub, Inc. — 88 Colin P Kelly Jr Street, San Francisco, CA 94107, États-Unis. Site hébergé sur GitHub Pages.</p>

@@ -28,6 +28,22 @@ export const site = {
     rcs: "RCS Nanterre 813 776 416",
     siege: "176 avenue Charles de Gaulle, 92200 Neuilly-sur-Seine",
   },
+  // Médiateur de la consommation : attestation d'affiliation CM2C (adhésion de 3 ans, expiration le 11/11/2028).
+  mediateur: {
+    nom: "Centre de la Médiation de la Consommation de Conciliateurs de justice (CM2C)",
+    adresse: "49 rue de Ponthieu, 75008 Paris",
+    site: "https://www.cm2c.net",
+    telephone: "01 89 47 00 14",
+    expiration: "11/11/2028",
+  },
+  // Assurance RC professionnelle : police souscrite par le mandant, qui couvre ses mandataires (attestation Hiscox).
+  // Période de l'attestation fournie : 01/09/2025 – 31/08/2026. Archiver l'attestation de la période en cours.
+  assurance: {
+    assureur: "Hiscox SA, succursale française, 12 quai des Queyries, CS 41177, 33072 Bordeaux Cedex",
+    souscripteur: "NOVARE CONSTRUCTION",
+    police: "PL-FR-PSC900388806",
+    couverture: "monde entier hors États-Unis et Canada",
+  },
   reseaux: { instagram: "https://www.instagram.com/dvk_studio_officiel/", linkedin: "https://www.linkedin.com/company/dvk-studio/", facebook: "https://www.facebook.com/profile.php?id=61575906091084" },
 };
 
