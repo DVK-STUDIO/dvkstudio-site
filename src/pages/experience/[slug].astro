@@ -1,0 +1,426 @@
+---
+// DVK Expérience : une expérience publiée, construite uniquement à partir d'une ExperiencePubliée v1.
+// Parcours : le bien > ses besoins > son potentiel > les scénarios > ce qui change > combien > énergie > suite.
+import Base from "../../layouts/Base.astro";
+import { experienceVisible } from "../../content/capacites";
+import BoutonRdv from "../../components/BoutonRdv.astro";
+import Statut from "../../components/experience/Statut.astro";
+import Donnee from "../../components/experience/Donnee.astro";
+import SourcesSection from "../../components/experience/SourcesSection.astro";
+import Matrice from "../../components/experience/Matrice.astro";
+import EchelleEnergie from "../../components/experience/EchelleEnergie.astro";
+import Plan from "../../components/Plan.astro";
+import Photo from "../../components/Photo.astro";
+import ProjectionFrame from "../../components/ProjectionFrame.astro";
+import {
+  experiencesPubliables, LIBELLE_STATUT, SENS_STATUT, LIBELLE_MATURITE, afficherValeur, afficherMois, afficherDate, formaterNombre,
+  type Statut as TStatut,
+} from "../../lib/experience/experience";
+
+export function getStaticPaths() {
+  return experienceVisible ? experiencesPubliables().map((e) => ({ params: { slug: e.slug }, props: { e } })) : [];
+}
+const { e } = Astro.props;
+
+const chapitres = [
+  ["bien", "Le bien"], ["besoins", "Ses besoins"], ["potentiel", "Son potentiel"], ["scenarios", "Les scénarios"],
+  ["change", "Ce qui change"], ["cout", "Combien"], ["energie", "Énergie"], ["suite", "La suite"],
+];
+const statuts = Object.keys(LIBELLE_STATUT) as TStatut[];
+const be = e.budget.energie;
+const nbRepond = (id: string) => e.matrice.cellules.filter((c) => c.scenario === id && c.niveau === "repond").length;
+const parEspace = { cuisine: "Cuisine", sejour: "Séjour", ensemble: "Toute la maison" } as const;
+// Plan schématique du potentiel : annotations tirées des faits publiés (jamais de donnée inventée).
+// Valable pour un projet cuisine / séjour ; à généraliser dans le contrat quand un second projet existera.
+const fait = (id: string) => e.potentiel.faits.find((f) => f.id === id);
+const sep = fait("separation");
+const cui = fait("cuisine-surface");
+const sam = fait("salle-a-manger");
+const annotationsPlan = sep && cui && sam ? [
+  { x: 42.5, y: 30, lx: 49, ly: 8, libelle: "Séparation cuisine / séjour", statut: sep.valeur.statut, focal: true },
+  { x: 22, y: 58, lx: 3, ly: 74, libelle: "Surface de la cuisine", statut: cui.valeur.statut },
+  { x: 72, y: 62, lx: 56, ly: 80, libelle: `Salle à manger, ${afficherValeur(sam.valeur)}`, statut: sam.valeur.statut },
+] : [];
+const elementsBudget = [
+  ...be.lots.map((l) => ({ libelle: l.lot, valeur: l.montant })),
+  { libelle: "Total estimé", valeur: be.total },
+  ...be.financements.map((x) => ({ libelle: x.libelle, valeur: x.montant })),
+  { libelle: "Reste à charge", valeur: be.resteACharge },
+];
+const elementsEnergie = [
+  { libelle: "Classe aujourd'hui", valeur: e.energie.classeAvant },
+  { libelle: "Classe après le scénario énergétique", valeur: e.energie.classeApres },
+  { libelle: "Consommation (énergie primaire)", valeur: e.energie.consommation },
+  { libelle: "Émissions de gaz à effet de serre", valeur: e.energie.emissions },
+  { libelle: "Facture énergétique annuelle", valeur: e.energie.factureAnnuelle },
+  { libelle: "Économie annuelle visée", valeur: e.energie.economieAnnuelle },
+];
+const MAX_LOT = Math.max(...be.lots.map((l) => Number(l.montant.valeur ?? 0)));
+---
+
+<Base
+  titre={`${e.titre} : une expérience DVK`}
+  description={e.accroche}
+  page={`experience.${e.slug}`}
+  chemin={`/experience/${e.slug}/`}
+  noindex={!e.indexable}
+>
+  <header class="conteneur hero">
+    <p class="surtitre">DVK Expérience · Projet pilote</p>
+    <h1 class="titre-xl">{e.titre}</h1>
+    <p class="chapo">{e.accroche}</p>
+
+    <section class="trente" aria-labelledby="t-trente">
+      <h2 id="t-trente" class="surtitre">En 30 secondes</h2>
+      <ul>
+        <li><strong>{e.besoins.length} besoins</strong> exprimés par la famille, pour la cuisine et le séjour.</li>
+        <li><strong>{e.scenarios.length} pistes</strong> comparées : {e.scenarios.map((s) => s.nom).join(" et ")}.</li>
+        <li><strong>Aucun devis</strong> à ce jour : l'aménagement reste à chiffrer{e.energie.classeAvant.valeur === undefined ? "." : ", seul le volet énergie est estimé."}</li>
+        {e.energie.classeAvant.valeur !== undefined && e.energie.classeApres.valeur !== undefined && (
+          <li><strong>Classe {e.energie.classeAvant.valeur}</strong> au diagnostic ; classe {e.energie.classeApres.valeur} estimée après le scénario énergétique recommandé.</li>
+        )}
+      </ul>
+    </section>
+
+    <details class="lire">
+      <summary>Comment lire cette page</summary>
+      <p>Chaque donnée porte une étiquette qui dit à quel point elle est certaine. La source de chaque section se déplie sous « Sources de cette section ».</p>
+      <ul>
+        {statuts.map((s) => <li><Statut statut={s} /> <span>{SENS_STATUT[s]}</span></li>)}
+      </ul>
+    </details>
+    {e.avertissements && <p class="avertis">{e.avertissements.join(" ")}</p>}
+  </header>
+
+  <nav class="chapitres" aria-label="Étapes de l'expérience">
+    <ol class="conteneur">
+      {chapitres.map(([id, nom], i) => <li><a href={`#${id}`} data-chap={id}><span>{String(i + 1).padStart(2, "0")}</span> {nom}</a></li>)}
+    </ol>
+  </nav>
+
+  <!-- Intensités (Design System) : Éditorial = ressentir, Équilibre = comprendre (défaut), Augmenté = décider. -->
+  <section id="bien" class="etape" aria-labelledby="t-bien" data-intensite="editorial">
+    <div class="conteneur ouverture">
+      <Photo alt="Le séjour de la maison, vu depuis l'entrée" ratio="16 / 10" />
+      <div class="ouverture-texte">
+        <p class="surtitre">01 · Le bien</p>
+        <h2 id="t-bien" class="titre-l">Le bien tel qu'il est</h2>
+        <p class="chapo">{e.bien.resume}</p>
+      </div>
+    </div>
+    <div class="conteneur" data-intensite="equilibre">
+      <dl class="faits deux-col">
+        {e.bien.faits.map((f) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} />)}
+      </dl>
+      <SourcesSection elements={e.bien.faits} sources={e.sources} />
+    </div>
+  </section>
+
+  <section id="besoins" class="etape alt" aria-labelledby="t-besoins" data-intensite="equilibre">
+    <div class="conteneur">
+      <p class="surtitre">02 · Ses besoins</p>
+      <h2 id="t-besoins" class="titre-l">Ce que la famille attend</h2>
+      <p class="chapo">Des besoins exprimés avec la famille. Ce sont eux qui servent de règle pour juger chaque scénario.</p>
+      <ol class="besoins">
+        {e.besoins.map((b, i) => (
+          <li>
+            <span class="n">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <p class="espace">{parEspace[b.espace]}</p>
+              <h3>{b.libelle}</h3>
+              {b.detail && <p>{b.detail}</p>}
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="pied"><Statut statut="reel" /> Source : {e.sources.find((s) => s.id === e.besoins[0].sources[0])?.libelle}.</p>
+    </div>
+  </section>
+
+  <section id="potentiel" class="etape" aria-labelledby="t-potentiel" data-intensite="augmente">
+    <div class="conteneur">
+      <p class="surtitre">03 · Son potentiel</p>
+      <h2 id="t-potentiel" class="titre-l">Ce que le lieu permet</h2>
+      <p class="chapo">{e.potentiel.resume}</p>
+      <div class:list={["potentiel-grille", { "sans-plan": annotationsPlan.length === 0 }]}>
+        {annotationsPlan.length > 0 && (
+          <Plan
+            alt="Plan schématique de la cuisine et du séjour, avec la séparation qui les relie et les informations à établir"
+            zones={["cuisine", "sejour"]}
+            ouverture
+            annotations={annotationsPlan}
+            legende="Plan illustratif, non à l'échelle. Les tirets montrent l'ouverture envisagée par un scénario : c'est une hypothèse, pas un constat."
+          />
+        )}
+        <dl class="faits">
+          {e.potentiel.faits.map((f) => <Donnee libelle={f.libelle} valeur={f.valeur} sources={e.sources} />)}
+        </dl>
+      </div>
+      <SourcesSection elements={e.potentiel.faits} sources={e.sources} />
+    </div>
+  </section>
+
+  <section id="scenarios" class="etape alt" aria-labelledby="t-scenarios" data-intensite="augmente">
+    <div class="conteneur">
+      <p class="surtitre">04 · Les scénarios</p>
+      <h2 id="t-scenarios" class="titre-l">Deux pistes, pas une seule</h2>
+      <p class="chapo">Comparer, c'est comprendre pourquoi une piste plus simple ou moins chère répond à moins de besoins.</p>
+      <div class="cartes">
+        {e.scenarios.map((s) => (
+          <article class="carte">
+            <p class="num">Scénario {s.numero}</p>
+            <h3>{s.nom}</h3>
+            <p class="maturite"><span class={`mat mat-${s.maturite}`}>{LIBELLE_MATURITE[s.maturite]}</span></p>
+            <p>{s.intention}</p>
+            <p class="couvre"><strong>{nbRepond(s.id)} {nbRepond(s.id) > 1 ? "besoins" : "besoin"} sur {e.besoins.length}</strong> {s.maturite === "a_etudier" ? "visés" : "couverts"} pleinement</p>
+            <dl class="mini">
+              <div><dt>Budget</dt><dd><Statut statut={s.budget.statut} libelle={s.budget.statut === "manquant" ? "À chiffrer" : undefined} /></dd></div>
+              <div><dt>Projection</dt><dd><Statut statut={s.projection.statut} /></dd></div>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="change" class="etape" aria-labelledby="t-change" data-intensite="augmente">
+    <div class="conteneur">
+      <p class="surtitre">05 · Ce qui change</p>
+      <h2 id="t-change" class="titre-l">Quels besoins chaque piste couvre</h2>
+      <p class="chapo">{e.matrice.lecture}</p>
+      <p class="pied" style="margin-top:12px"><Statut statut="hypothese" /> Lecture de DVK Studio.</p>
+      <div style="margin-top:32px">
+        <Matrice besoins={e.besoins} scenarios={e.scenarios} cellules={e.matrice.cellules} />
+      </div>
+
+      <h3 class="sous">Les travaux et les études, scénario par scénario</h3>
+      <div class="accordeons">
+        {e.scenarios.map((s) => (
+          <details>
+            <summary>Scénario {s.numero} · {s.nom}</summary>
+            <div class="corps">
+              <p class="s-titre">Ce qui change</p>
+              <ul>{s.changements.map((c) => <li>{c}</li>)}</ul>
+              {s.etudesPrealables.length > 0 && (<>
+                <p class="s-titre">À établir avant de décider</p>
+                <ul>{s.etudesPrealables.map((c) => <li>{c}</li>)}</ul>
+              </>)}
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div class="projection" data-intensite="editorial">
+        <h3>Se voir dans le résultat</h3>
+        <ProjectionFrame alt="Projection de la cuisine et du séjour transformés" message={e.projection.message} ratio="21 / 9" />
+      </div>
+    </div>
+  </section>
+
+  <section id="cout" class="etape alt" aria-labelledby="t-cout" data-intensite="equilibre">
+    <div class="conteneur">
+      <p class="surtitre">06 · Combien</p>
+      <h2 id="t-cout" class="titre-l">Ce que cela pourrait coûter</h2>
+      <p class="chapo">{e.budget.resume}</p>
+
+      <div class="cartes deux">
+        {e.scenarios.map((s) => (
+          <article class="carte">
+            <p class="num">Aménagement · Scénario {s.numero}</p>
+            <h3>{s.nom}</h3>
+            <Statut statut={s.budget.statut} libelle={s.budget.statut === "manquant" ? "À chiffrer" : undefined} />
+            {s.budget.note && <p class="note-b">{s.budget.note}</p>}
+          </article>
+        ))}
+      </div>
+
+      <h3 class="sous">{be.intitule}</h3>
+      <p class="pied"><Statut statut="estimation" /> {be.avertissement}</p>
+      <div class="budget">
+        <ul class="lots">
+          {be.lots.map((l) => (
+            <li>
+              <span class="l-nom">{l.lot}</span>
+              <span class="l-barre" aria-hidden="true"><span style={`width:${Math.max(4, Math.round((Number(l.montant.valeur) / MAX_LOT) * 100))}%`}></span></span>
+              <span class="l-val">{afficherValeur(l.montant)}</span>
+            </li>
+          ))}
+          <li class="total"><span class="l-nom">Total estimé</span><span></span><span class="l-val">{afficherValeur(be.total)}</span></li>
+        </ul>
+        <dl class="faits">
+          {be.financements.map((f) => <Donnee libelle={f.libelle} valeur={f.montant} sources={e.sources} />)}
+          <Donnee libelle="Reste à charge" valeur={be.resteACharge} sources={e.sources} grand />
+        </dl>
+      </div>
+      <SourcesSection elements={elementsBudget} sources={e.sources} />
+    </div>
+  </section>
+
+  <section id="energie" class="etape" aria-labelledby="t-energie" data-intensite="augmente">
+    <div class="conteneur">
+      <p class="surtitre">07 · Impact énergétique</p>
+      <h2 id="t-energie" class="titre-l">Ce que cela change sur l'énergie</h2>
+      <p class="chapo">{e.energie.resume}</p>
+      <div style="margin-top:32px;max-width:640px">
+        {e.energie.classeAvant.valeur !== undefined && e.energie.classeApres.valeur !== undefined && (<EchelleEnergie avant={String(e.energie.classeAvant.valeur)} apres={String(e.energie.classeApres.valeur)} />)}
+      </div>
+      <dl class="faits deux-col">
+        <Donnee libelle="Classe aujourd'hui" valeur={e.energie.classeAvant} sources={e.sources} />
+        <Donnee libelle="Classe après le scénario énergétique" valeur={e.energie.classeApres} sources={e.sources} />
+        <Donnee libelle="Consommation (énergie primaire)" valeur={e.energie.consommation} sources={e.sources} />
+        <Donnee libelle="Émissions de gaz à effet de serre" valeur={e.energie.emissions} sources={e.sources} />
+        <Donnee libelle="Facture énergétique annuelle" valeur={e.energie.factureAnnuelle} sources={e.sources} />
+        <Donnee libelle="Économie annuelle visée" valeur={e.energie.economieAnnuelle} sources={e.sources} />
+      </dl>
+      <SourcesSection elements={elementsEnergie} sources={e.sources} />
+    </div>
+  </section>
+
+  <section id="suite" class="etape sombre-fin" aria-labelledby="t-suite" data-intensite="equilibre">
+    <div class="conteneur suite">
+      <div>
+        <p class="surtitre">08 · La suite</p>
+        <h2 id="t-suite" class="titre-l">{e.prochaineAction.titre}</h2>
+        <ol class="etapes">
+          {e.prochaineAction.etapes.map((s, i) => <li><span class="n">{String(i + 1).padStart(2, "0")}</span>{s}</li>)}
+        </ol>
+        <div class="actions"><BoutonRdv bouton={e.prochaineAction.cta.bouton} parcours="experience">{e.prochaineAction.cta.libelle}</BoutonRdv></div>
+      </div>
+      <aside class="sources" aria-labelledby="t-sources">
+        <h3 id="t-sources">Sources de cette page</h3>
+        <ul>
+          {e.sources.map((s) => <li>{s.libelle}{s.date ? `, ${afficherMois(s.date)}` : ""}</li>)}
+        </ul>
+        <p>Aucun document ni aucune photo du projet n'est publié. Mis à jour le {afficherDate(e.genereLe)}.</p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-top: clamp(32px, 6vw, 72px); padding-bottom: clamp(32px, 5vw, 56px); }
+  .hero .chapo { margin-top: 22px; max-width: 62ch; }
+  .trente { margin-top: 36px; padding: 22px 24px; background: var(--papier-2); border-radius: var(--dvk-radius-md); max-width: 760px; }
+  .trente ul { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 10px; }
+  .trente li { font-size: 17px; color: var(--encre-douce); padding-left: 22px; position: relative; }
+  .trente li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 9px; height: 9px; border-radius: 50%; background: var(--terre); }
+  .trente strong { color: var(--encre); }
+  .lire { margin-top: 18px; max-width: 760px; }
+  .lire summary { cursor: pointer; color: var(--petrole); font-size: 15px; text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
+  .lire p { margin-top: 10px; font-size: 15px; color: var(--encre-douce); }
+  .lire ul { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 10px; }
+  .lire li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; font-size: 15px; color: var(--encre-douce); }
+  .avertis { margin-top: 18px; font-size: 14px; color: var(--pierre); max-width: 62ch; }
+
+  .chapitres { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--papier) 94%, transparent); backdrop-filter: blur(6px); border-block: 1px solid var(--ligne); }
+  .chapitres ol { list-style: none; display: flex; gap: 4px; overflow-x: auto; padding-block: 8px; scrollbar-width: none; }
+  .chapitres ol::-webkit-scrollbar { display: none; }
+  .chapitres a { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; min-height: 44px; padding: 0 12px; border-radius: var(--dvk-radius-pill); font-size: 14px; color: var(--encre-douce); }
+  .chapitres a span { font-size: 12px; color: var(--pierre); letter-spacing: 0.08em; }
+  .chapitres a[aria-current="true"] { background: var(--encre); color: var(--papier); }
+  .chapitres a[aria-current="true"] span { color: var(--brume); }
+
+  .etape { padding-block: clamp(56px, 8vw, 104px); scroll-margin-top: 56px; }
+  .etape.alt { background: var(--papier-2); }
+  .etape .chapo { margin-top: 18px; }
+  .etape h2 { margin-top: 12px; }
+  .faits { margin: 32px 0 0; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 48px; max-width: 820px; }
+  .faits.deux-col { max-width: none; }
+  @media (min-width: 900px) { .faits.deux-col { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .alt .faits :global(.donnee), .alt :global(.donnee) { border-top-color: #c3baa8; }
+  .pied { margin-top: 20px; font-size: 14px; color: var(--pierre); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+  .besoins { list-style: none; padding: 0; margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 56px; }
+  .besoins li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 20px 0; border-top: 1.5px solid var(--encre); }
+  .besoins .n { font-size: 13px; letter-spacing: 0.1em; color: var(--pierre); padding-top: 6px; }
+  .besoins h3 { font-size: 22px; margin-top: 2px; }
+  .besoins p { color: var(--encre-douce); font-size: 16px; margin-top: 6px; }
+  .besoins .espace { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terre-fonce); font-weight: 600; margin: 0; }
+
+  .cartes { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
+  .carte { background: var(--papier); border: 1px solid var(--ligne); border-radius: var(--dvk-radius-md); padding: 26px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .alt .carte { background: var(--papier); }
+  .carte h3 { font-size: 28px; }
+  .carte p { color: var(--encre-douce); font-size: 16px; }
+  .num { font-size: 12px !important; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pierre) !important; font-weight: 600; }
+  .mat { display: inline-block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; padding: 5px 10px; border-radius: var(--dvk-radius-pill); }
+  .mat-pre_etude { background: var(--sauge); color: var(--petrole); }
+  .mat-a_etudier { background: #f1e1d6; color: #7b2f1d; }
+  .couvre strong { color: var(--encre); }
+  .mini { width: 100%; margin: 6px 0 0; display: grid; gap: 0; }
+  .mini > div { border-top: 1px solid var(--ligne); padding: 10px 0; display: grid; grid-template-columns: 96px 1fr; gap: 8px; align-items: baseline; }
+  .mini dt { font-size: 14px; color: var(--pierre); }
+  .mini dd { margin: 0; font-size: 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .gros { font-family: var(--serif); font-size: 24px !important; }
+  .gros.vide { color: var(--pierre) !important; font-style: italic; }
+  .note-b { font-size: 15px !important; }
+  .cartes.deux { margin-bottom: 8px; }
+
+  .sous { margin-top: 56px; font-size: 26px; }
+  .accordeons { margin-top: 18px; max-width: 820px; border-top: 1.5px solid var(--encre); }
+  .accordeons details { border-bottom: 1px solid var(--ligne); }
+  .accordeons summary { cursor: pointer; padding: 16px 0; font-weight: 600; font-size: 17px; min-height: 48px; display: flex; align-items: center; }
+  .corps { padding: 0 0 18px; color: var(--encre-douce); }
+  .corps ul { padding-left: 20px; display: grid; gap: 6px; margin-top: 6px; }
+  .s-titre { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pierre); margin-top: 8px; font-weight: 600; }
+  .projection { margin-top: 48px; max-width: 820px; }
+  .projection h3 { font-size: 22px; margin-bottom: 14px; }
+
+  /* Éditorial : photographie dominante (60 % et plus), texte secondaire. */
+  .ouverture { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 48px; align-items: end; }
+  .ouverture-texte h2 { margin-top: 12px; }
+  @media (max-width: 900px) { .ouverture { grid-template-columns: 1fr; gap: 24px; } }
+  /* Augmenté : le plan prend la place, les faits restent lisibles à côté. */
+  .potentiel-grille { margin-top: 32px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .potentiel-grille .faits { margin-top: 0; }
+  .potentiel-grille.sans-plan { grid-template-columns: 1fr; }
+  @media (max-width: 900px) { .potentiel-grille { grid-template-columns: 1fr; gap: 24px; } }
+
+  .budget { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+  @media (max-width: 900px) { .budget { grid-template-columns: 1fr; gap: 24px; } }
+  .lots { list-style: none; padding: 0; display: grid; gap: 0; }
+  .lots li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 14px 0; border-top: 1px solid #c3baa8; }
+  .l-nom { font-size: 16px; }
+  .l-val { font-family: var(--serif); font-size: 22px; text-align: right; white-space: nowrap; }
+  .l-barre { grid-column: 1 / -1; grid-row: 2; height: 6px; background: var(--ligne); border-radius: var(--dvk-radius-sm); overflow: hidden; order: 3; }
+  .l-barre span { display: block; height: 100%; background: var(--petrole); }
+  .lots .total { border-top: 2px solid var(--encre); }
+  .lots .total .l-nom { font-weight: 600; }
+  .lots .total .l-barre, .lots .total > span:nth-child(2) { display: none; }
+
+  .sombre-fin { background: var(--encre); color: var(--papier); }
+  .sombre-fin .surtitre { color: #9fb4b0; }
+  .suite { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+  @media (max-width: 900px) { .suite { grid-template-columns: 1fr; gap: 40px; } }
+  .etapes { list-style: none; padding: 0; margin-top: 28px; display: grid; gap: 0; }
+  .etapes li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 16px 0; border-top: 1px solid #2f4d54; font-size: 18px; color: var(--brume); }
+  .etapes .n { font-size: 13px; letter-spacing: 0.1em; color: #9fb4b0; padding-top: 4px; }
+  .actions { margin-top: 28px; }
+  .sources { padding: 24px; border: 1px solid #2f4d54; border-radius: var(--dvk-radius-md); }
+  .sources h3 { font-size: 20px; }
+  .sources ul { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 6px; color: var(--brume); font-size: 15px; }
+  .sources p { margin-top: 14px; font-size: 14px; color: #9fb4b0; }
+</style>
+
+<script>
+  // Étape courante dans la barre de chapitres (amélioration : la page fonctionne sans).
+  const liens = Array.from(document.querySelectorAll<HTMLAnchorElement>(".chapitres a"));
+  const sections = liens.map((a) => document.getElementById(a.dataset.chap ?? "")).filter((s): s is HTMLElement => !!s);
+  if ("IntersectionObserver" in window && sections.length) {
+    const io = new IntersectionObserver(
+      (entrees) => {
+        for (const en of entrees) {
+          if (!en.isIntersecting) continue;
+          liens.forEach((a) => a.removeAttribute("aria-current"));
+          const a = liens.find((l) => l.dataset.chap === en.target.id);
+          a?.setAttribute("aria-current", "true");
+          const liste = a?.closest("ol");
+          if (a && liste) liste.scrollTo({ left: a.offsetLeft - liste.clientWidth / 2 + a.clientWidth / 2, behavior: "smooth" });
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((s) => io.observe(s));
+  }
+</script>
+

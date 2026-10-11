@@ -1,0 +1,210 @@
+---
+import PremierEchange from "../components/PremierEchange.astro";
+import Base from "../layouts/Base.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import BarreRdv from "../components/BarreRdv.astro";
+import Processus from "../components/Processus.astro";
+import Plan from "../components/Plan.astro";
+import Faq from "../components/Faq.astro";
+import { site } from "../content/site";
+import { Image } from "astro:assets";
+import { imageAmbiance } from "../lib/medias";
+
+const ambiance = imageAmbiance();
+const garanties = [
+  { titre: "Budget maîtrisé", texte: "Devis détaillés et mise en concurrence de 2 artisans minimum pour obtenir un prix au marché." },
+  { titre: "Délais respectés", texte: "Application de pénalités en cas de retard. Remplacement de l'artisan en cas d'abandon ou de défaillance." },
+  { titre: "Qualité soignée", texte: "Artisans évalués régulièrement sur 30 critères stricts de conformité, de finition et de satisfaction client." },
+  { titre: "Confiance et sérénité", texte: "Interlocuteur unique pilote votre projet et vous conseille à chaque étape. Paiements selon l'avancement réel du chantier." },
+];
+
+const entreprise = {
+  "@context": "https://schema.org", "@type": "ProfessionalService",
+  name: site.nom, url: site.url, telephone: "+33640324752", email: site.email,
+  description: "Kevin De Vlieger, chef de projet travaux hemea dans l'Oise et la Somme.",
+  address: { "@type": "PostalAddress", streetAddress: "17 Rue Machaut", postalCode: "60120", addressLocality: "Gannes", addressCountry: "FR" },
+  areaServed: ["Oise", "Somme"], sameAs: [site.reseaux.linkedin],
+};
+const faq = [
+  { q: "Dois-je déjà avoir des plans ou des devis ?", r: "Non. Pour commencer, la commune du bien, une description du besoin et votre calendrier suffisent. Les informations à approfondir sont précisées pendant l’échange." },
+  { q: "Comment connaître le coût de l’accompagnement ?", r: "Le périmètre et les modalités sont précisés selon votre projet avant toute prestation. Le premier échange ne vous engage pas pour la suite." },
+  { q: "À quel moment vous contacter ?", r: "Dès que vous envisagez des travaux, y compris avant l'achat d'un bien à rénover. Je commence par votre besoin, la commune du bien et votre calendrier." },
+  { q: "Intervenez-vous dans l'Oise et la Somme ?", r: "Oui. Je suis basé à Gannes, dans l'Oise, et j'accompagne les projets dans l'Oise (60) et la Somme (80). Je précise les modalités selon la localisation et la nature du projet." },
+  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange téléphonique dure trente minutes et se fait sans engagement." },
+  { q: "Une enveloppe de travaux est-elle un devis ?", r: "Une estimation est un premier repère, avec ses hypothèses et ses limites. Les devis sont établis par les entreprises consultées après étude du besoin." },
+  { q: "Réalisez-vous les travaux ?", r: "Les travaux sont réalisés par les entreprises retenues. Mon rôle de chef de projet travaux hemea porte sur le cadrage, le budget estimatif et la consultation d'entreprises labellisées hemea. Le périmètre de l'accompagnement est précisé pour chaque projet." },
+];
+---
+
+<Base titre="DVK Studio — Chef de projet travaux hemea | Oise et Somme"
+  description="Votre rénovation dans l'Oise et la Somme avec Kevin De Vlieger, chef de projet travaux hemea. Particuliers et prescripteurs immobiliers : parlons de votre projet."
+  page="home" chemin="/" donneesStructurees={entreprise}>
+  <header class:list={["hero-photo", { "sans-photo": !ambiance }]}>
+    {ambiance && <Image class="hero-fond" src={ambiance.src} alt="" widths={[640, 960, 1280, 1800]} sizes="100vw" loading="eager" fetchpriority="high" data-hero-ambiance />}
+    <div class="conteneur hero-texte">
+      <p class="surtitre">Chef de projet travaux hemea · Oise & Somme</p>
+      <h1 class="titre-xl">Quels travaux prévoir, quel budget envisager et par où commencer ?</h1>
+      <p class="chapo">Vous rénovez votre logement ou envisagez l’achat d’un bien à rénover ? Je vous accompagne pour clarifier vos besoins, préparer une enveloppe estimative et organiser la consultation d’entreprises labellisées hemea.</p>
+      <div class="actions">
+        <BoutonRdv bouton="hero.rdv" parcours="renover">Faire le point sur mon projet</BoutonRdv>
+        <a class="lien-soulige" href="/professionnels/">Vous accompagnez un client ?</a>
+      </div>
+      <p class="hero-note">Kevin De Vlieger · Premier échange de 30 min, par téléphone, sans engagement.</p>
+      <ul class="hero-reperes" aria-label="Votre accompagnement">
+        <li><span>01 · Un interlocuteur</span><p>Kevin De Vlieger, chef de projet travaux hemea.</p></li>
+        <li><span>02 · Deux départements</span><p>Oise (60) et Somme (80), à partir de Gannes.</p></li>
+        <li><span>03 · Un projet à cadrer</span><p>Votre besoin, votre budget et votre calendrier.</p></li>
+      </ul>
+      {ambiance && <p class="hero-credit">Photo d’illustration.</p>}
+    </div>
+  </header>
+
+  <section class="conteneur trame premier-bloc" aria-labelledby="t-contact">
+    <div class="premier-contact">
+      <p class="surtitre">Votre interlocuteur local</p>
+      <h2 id="t-contact" class="titre-m">Kevin De Vlieger</h2>
+      <p>Chef de projet travaux hemea<br />Basé à Gannes · Oise et Somme</p>
+      <div class="contact-reperes"><span>01</span><p>Votre besoin : ce que vous souhaitez changer dans le logement.</p><span>02</span><p>Votre situation : bien occupé, achat envisagé, calendrier.</p><span>03</span><p>Votre prochaine étape : vérifier l’adéquation de l’accompagnement.</p></div>
+      <p class="hero-note encadre">Le premier échange sert à cadrer le besoin. Il ne remplace ni une étude technique ni un devis.</p>
+    </div>
+  </section>
+
+  <section class="section conteneur" id="parcours" aria-labelledby="t-parcours">
+    <div class="enonce">
+      <span class="idx" aria-hidden="true">01</span>
+      <div class="tete"><p class="surtitre">Votre point de départ</p><h2 id="t-parcours" class="titre-l">Vous avez un projet.<br />Ou un client à accompagner.</h2></div>
+    </div>
+    <nav class="parcours-hemea" aria-label="Choisir votre parcours">
+      <a href="/travaux/"><span class="numero">01 · Particuliers</span><h3>J’ai un projet de rénovation</h3><p>Je rénove mon logement ou prépare un achat avec travaux. Je veux clarifier les travaux, le budget et les étapes.</p><span class="parcours-suite">Préparer mon projet <span aria-hidden="true">→</span></span></a>
+      <a class="nuit" href="/professionnels/"><span class="numero">02 · Prescripteurs</span><h3>J’accompagne un client</h3><p>Je cherche un contact local hemea pour répondre aux questions travaux de mon client.</p><span class="parcours-suite">Échanger sur un projet client <span aria-hidden="true">→</span></span></a>
+    </nav>
+  </section>
+
+  <section class="section trait" id="methode" aria-labelledby="t-methode">
+    <div class="conteneur">
+      <p class="surtitre">L'accompagnement hemea</p>
+      <h2 id="t-methode" class="titre-l methode-titre">Mettre les bonnes questions<br />dans le bon ordre.</h2>
+      <p class="chapo methode-intro">Avant les devis, clarifions ce que vous souhaitez faire. Puis construisons la suite selon votre bien, vos priorités et le cadre de l'accompagnement hemea.</p>
+      <div class="methode-etapes">
+        <Processus etapes={[
+          { titre: "Votre besoin", texte: "Un premier échange sur votre situation, la commune du bien et vos objectifs." },
+          { titre: "Votre projet", texte: "Cadrage des travaux envisagés, des priorités et des points à vérifier." },
+          { titre: "Votre budget", texte: "Une enveloppe indicative puis la consultation d'entreprises labellisées hemea." },
+          { titre: "La suite", texte: "Comparaison des propositions et accompagnement selon le périmètre convenu." },
+        ]} />
+      </div>
+      <div class="actions"><BoutonRdv bouton="methode.rdv">Faire le point sur mon projet</BoutonRdv></div>
+    </div>
+  </section>
+
+  <section class="papier-2 section" aria-labelledby="t-garanties">
+    <div class="conteneur">
+      <p class="surtitre">Le cadre hemea</p>
+      <h2 id="t-garanties" class="titre-l garanties-titre">Ce que le cadre hemea apporte à vos travaux.</h2>
+      <ul class="garanties">
+        {garanties.map((g) => (<li><h3>{g.titre}</h3><p>{g.texte}</p></li>))}
+      </ul>
+      <p class="garanties-source">Engagements présentés par hemea sur hemea.com.</p>
+    </div>
+  </section>
+
+  <section class="sombre section" aria-labelledby="t-pro">
+    <div class="conteneur duo trame">
+      <div><p class="surtitre">Prescripteurs immobiliers</p><h2 id="t-pro" class="titre-l pro-titre">Vos clients ont des questions travaux.<br />Donnons-leur un point de contact.</h2></div>
+      <div>
+        <p class="chapo">Agents immobiliers, chasseurs et courtiers : lorsqu'un achat ou un projet de votre client implique une rénovation, mettez-le en relation avec un interlocuteur local.</p>
+        <p class="pro-texte">J’échange avec votre client sur son besoin, les travaux envisagés et les prochaines étapes. Vous restez son interlocuteur immobilier ; je prends le relais sur la préparation du projet travaux hemea.</p>
+        <div class="actions"><a class="btn btn-encre" href="/professionnels/">Parlons de vos clients</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="papier-2 section" aria-labelledby="t-kevin">
+    <div class="conteneur enonce">
+      <span class="idx" aria-hidden="true">02</span>
+      <div class="tete"><p class="surtitre">Qui vous accompagne</p><h2 id="t-kevin" class="titre-l">Kevin De Vlieger,<br />chef de projet travaux hemea.</h2></div>
+      <div class="corps"><p class="chapo">J'exerce sous le nom DVK Studio, en tant que mandataire indépendant de hemea. Basé à Gannes, je suis votre point de contact pour préparer un projet de rénovation dans l'Oise et la Somme.</p><div class="actions"><a class="lien-soulige" href="/a-propos/">Découvrir mon rôle</a></div></div>
+    </div>
+  </section>
+
+  <section class="section conteneur" aria-labelledby="t-exemple"><div class="duo"><div><p class="surtitre">Comprendre la démarche</p><h2 id="t-exemple" class="titre-m">Partir de vos usages, puis vérifier les contraintes.</h2><p class="chapo">Ouvrir une cuisine sur le séjour pose plusieurs questions : usage, structure, réseaux et budget. Les hypothèses sont distinguées des points vérifiés avant de consulter les entreprises.</p></div><Plan alt="Plan illustratif d’une cuisine et d’un séjour" zones={["cuisine"]} ouverture legende="Plan illustratif, non à l'échelle. Exemple de démarche, sans réalisation de chantier présentée." /></div></section>
+
+  <section class="section conteneur" aria-labelledby="t-faq">
+    <h2 id="t-faq" class="titre-m faq-titre">Vos premières questions</h2>
+    <Faq questions={faq} />
+  </section>
+
+  <PremierEchange />
+  <BarreRdv />
+</Base>
+
+<style>
+  /* Hero : photo plein écran sous un voile sombre (textes en clair, contraste ≥ 5:1 vérifié), repli sur fond nuit sans photo. */
+  .hero-photo { position: relative; isolation: isolate; overflow: hidden; background: var(--dvk-night); color: var(--dvk-text-inverse); min-height: min(88svh, 860px); display: flex; align-items: flex-end; }
+  .hero-fond { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .hero-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(20,20,20,.62) 0%, rgba(20,20,20,.70) 45%, rgba(20,20,20,.84) 100%); }
+  .hero-texte { padding-block: clamp(56px, 9vw, 112px) clamp(40px, 6vw, 72px); width: 100%; }
+  .hero-texte .surtitre { margin-bottom: 24px; color: var(--dvk-text-inverse); }
+  .hero-texte .surtitre::before { background: var(--dvk-accent-on-night); }
+  .hero-texte h1 { font-size: clamp(36px, 4.6vw, 60px); max-width: 20ch; color: var(--dvk-text-inverse); }
+  .hero-texte .chapo { margin-top: 24px; max-width: 58ch; color: var(--dvk-text-inverse); }
+  .hero-texte .actions { margin-top: 32px; }
+  .hero-texte .lien-soulige { color: var(--dvk-text-inverse); border-bottom-color: var(--dvk-accent-on-night); }
+  .hero-texte .hero-note { color: var(--dvk-text-inverse); }
+  .hero-note { font-size: 13px; color: var(--dvk-text-muted); margin-top: 20px; max-width: 52ch; }
+  .hero-reperes { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid rgba(247,243,236,.28); padding-top: 24px; max-width: 980px; }
+  .hero-reperes span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--dvk-accent-on-night); }
+  .hero-reperes p { margin-top: 8px; font-size: 15px; color: var(--dvk-text-inverse); }
+  .hero-credit { margin-top: 24px; font-size: 12px; color: var(--dvk-inverse-muted); }
+
+  .premier-bloc { padding-block: clamp(32px, 5vw, 64px) 0; }
+  .premier-contact { padding: 32px; background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); max-width: 760px; }
+  .premier-contact h2 { margin-block: 16px 6px; }
+  .premier-contact > p:not(.surtitre):not(.hero-note) { color: var(--dvk-text-muted); }
+  .contact-reperes { display: grid; grid-template-columns: 28px 1fr; gap: 14px 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--dvk-border); }
+  .contact-reperes span { font-size: 13px; font-weight: 600; color: var(--dvk-action); }
+  .contact-reperes p { font-size: 16px; margin: 0; }
+  .encadre { padding: 12px 14px; background: var(--dvk-surface); border-radius: var(--dvk-radius-sm); max-width: none; }
+
+  .parcours-hemea { margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .parcours-hemea > a { display: flex; flex-direction: column; gap: 12px; padding: 28px; background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); transition: transform var(--dvk-duration-micro) var(--dvk-ease); }
+  .parcours-hemea > a:hover { transform: translateY(-2px); }
+  .parcours-hemea .numero { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--dvk-action); }
+  .parcours-hemea h3 { font-size: 24px; line-height: 1.2; }
+  .parcours-hemea p { font-size: 15px; color: var(--dvk-text-muted); }
+  .parcours-suite { margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600; color: var(--dvk-action); display: inline-flex; gap: 8px; }
+  .parcours-hemea > a.nuit { background: var(--dvk-night); border-color: var(--dvk-night); color: var(--dvk-text-inverse); }
+  .parcours-hemea > a.nuit .numero, .parcours-hemea > a.nuit .parcours-suite { color: var(--dvk-accent-on-night); }
+  .parcours-hemea > a.nuit p { color: var(--dvk-inverse-muted); }
+
+  .trait { border-top: 1px solid var(--dvk-border); }
+  .methode-titre { margin-top: 20px; }
+  .methode-intro { margin-top: 24px; }
+  .methode-etapes { margin-top: 40px; }
+
+  .garanties-titre { margin-top: 20px; max-width: 24ch; }
+  .garanties { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .garanties li { padding: 24px; background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-top: 3px solid var(--dvk-accent); border-radius: var(--dvk-radius-md); box-shadow: var(--dvk-shadow-card); }
+  .garanties h3 { font-size: 20px; line-height: 1.25; margin-bottom: 8px; }
+  .garanties p { font-size: 15px; color: var(--dvk-text-muted); }
+  .garanties-source { margin-top: 20px; font-size: 13px; color: var(--dvk-text-muted); }
+
+  .pro-titre { margin-top: 20px; }
+  .pro-texte { color: var(--brume); margin-top: 22px; }
+  .faq-titre { margin-bottom: 32px; }
+
+  @media (max-width: 900px) {
+    .garanties { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .parcours-hemea { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .hero-photo { min-height: 0; }
+    .hero-reperes { grid-template-columns: 1fr; gap: 16px; }
+    .hero-texte .actions { align-items: flex-start; flex-direction: column; }
+    .hero-texte .actions :global(.btn) { width: 100%; }
+    .premier-contact { padding: 24px; }
+    .garanties { grid-template-columns: 1fr; }
+    .parcours-hemea > a { padding: 24px; }
+  }
+</style>
+

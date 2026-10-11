@@ -1,0 +1,49 @@
+---
+// Bien existant dominant + repères de potentiel (3 au plus) : « Voilà un bien. Voilà ce qu'il faut regarder au-delà de son état actuel. »
+// La photographie est réelle ; les repères expliquent (Hypothèse, À chiffrer…). Le cadre prend le ratio de l'image : les repères ne dérivent pas.
+// Composant interchangeable : l'image vient du registre (src/lib/medias.ts), jamais câblée dans la page.
+import { Picture } from "astro:assets";
+import Statut from "./experience/Statut.astro";
+import type { Repere } from "../content/medias";
+
+interface Props { src: ImageMetadata; alt: string; reperes?: Repere[]; standin?: boolean; priorite?: boolean; cotes?: [string, string] }
+const { src, alt, reperes = [], standin = false, priorite = true, cotes = ["01 · Le bien", "Potentiel · 02"] } = Astro.props;
+const libStatut = (s: Repere["statut"]) => (s === "manquant" ? "À chiffrer" : undefined);
+---
+
+<figure class="photo-annotee" style={`--ratio:${src.width} / ${src.height}`}>
+  <p class="cotes" aria-hidden="true"><span>{cotes[0]}</span><span>{cotes[1]}</span></p>
+  <div class="cadre-angles">
+    <div class="cadre">
+      <Picture src={src} alt={alt} widths={[480, 720, 960, 1280, 1600]} sizes="(max-width: 900px) 100vw, 680px" formats={["avif", "webp"]} loading={priorite ? "eager" : "lazy"} decoding="async" {...(priorite ? { fetchpriority: "high" } : {})} />
+      {reperes.length > 0 && (
+        <ol class="reperes" aria-label="Repères de potentiel">
+          {reperes.map((r, i) => (
+            <li style={`left:${r.x}%;top:${r.y}%`} data-cote={r.x > 75 ? "g" : "d"}>
+              <b aria-hidden="true">{i + 1}</b>
+              <span class="lib">{r.libelle} <Statut statut={r.statut} libelle={libStatut(r.statut)} /></span>
+            </li>
+          ))}
+        </ol>
+      )}
+      {standin && <span class="marque-provisoire">STAND-IN · HORS PRODUCTION</span>}
+    </div>
+  </div>
+  <figcaption class="legende">
+    <Statut statut="reel" /> le bien{reperes.length > 0 && <> · <Statut statut="hypothese" /> <Statut statut="manquant" libelle="À chiffrer" /> ce qu'il faut regarder au-delà de son état actuel</>}
+  </figcaption>
+  {reperes.length > 0 && (
+    <ol class="liste-reperes" aria-hidden="true">
+      {reperes.map((r) => <li>{r.libelle} <Statut statut={r.statut} libelle={libStatut(r.statut)} /></li>)}
+    </ol>
+  )}
+</figure>
+
+<style>
+  .photo-annotee { margin: 0; }
+  .cadre { position: relative; aspect-ratio: var(--ratio); overflow: hidden; background: var(--dvk-surface); }
+  .cadre :global(picture), .cadre :global(img) { display: block; width: 100%; height: 100%; }
+  .cadre :global(img) { object-fit: cover; }
+  .legende { margin-top: 18px; font-size: 13px; color: var(--dvk-text-subtle); display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; }
+  @media (max-width: 720px) { .legende { display: none; } }
+</style>

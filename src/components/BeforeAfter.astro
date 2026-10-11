@@ -1,0 +1,106 @@
+---
+// Comparateur EXISTANT ↔ PROJECTION du hero : le même bien, exactement le même cadrage.
+// Les deux images sont des props (rien de câblé) : une paire définitive remplace les stand-ins sans toucher à la composition.
+// Le cadre prend le ratio exact de la paire : les repères (en % de l'image) ne dérivent jamais.
+// Natif d'abord : le curseur est un <input type="range"> (clavier, lecteurs d'écran) ; le balayage d'invitation est du CSS
+// (une seule fois, jamais avec prefers-reduced-motion). Repères : 2 au plus, uniquement sur la projection.
+import { Picture } from "astro:assets";
+import Statut from "./experience/Statut.astro";
+import type { Repere } from "../content/medias";
+
+interface Props {
+  id: string;
+  avant: ImageMetadata;
+  apres: ImageMetadata;
+  altAvant: string;
+  altApres: string;
+  reperes?: Repere[];
+  standin?: boolean;
+}
+const { id, avant, apres, altAvant, altApres, reperes = [], standin = false } = Astro.props;
+const WIDTHS = [480, 720, 960, 1280, 1600];
+const SIZES = "(max-width: 900px) 100vw, 680px";
+const FORMATS = ["avif", "webp"] as ("avif" | "webp")[];
+const libStatut = (s: Repere["statut"]) => (s === "manquant" ? "À chiffrer" : undefined);
+---
+
+<figure class="comparateur" data-comparateur style={`--ratio:${avant.width} / ${avant.height}`}>
+  <p class="cotes" aria-hidden="true"><span>01 · Existant</span><span>Projection · 02</span></p>
+  <div class="cadre-angles">
+    <div class="cadre">
+      <Picture class="base" src={avant} alt={altAvant} widths={WIDTHS} sizes={SIZES} formats={FORMATS} loading="eager" decoding="async" fetchpriority="high" data-hero-image />
+      <div class="apres">
+        <Picture src={apres} alt={altApres} widths={WIDTHS} sizes={SIZES} formats={FORMATS} loading="eager" decoding="async" data-hero-image />
+        {reperes.length > 0 && (
+          <ol class="reperes" aria-label="Repères sur la projection">
+            {reperes.map((r, i) => (
+              <li style={`left:${r.x}%;top:${r.y}%`} data-cote={r.x > 75 ? "g" : "d"}>
+                <b aria-hidden="true">{i + 1}</b>
+                <span class="lib">{r.libelle} <Statut statut={r.statut} libelle={libStatut(r.statut)} /></span>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+      <label for={`curseur-${id}`} class="sr-only">Comparer le bien existant et sa projection</label>
+      <input id={`curseur-${id}`} type="range" min="4" max="96" value="50" aria-describedby={`legende-${id}`} />
+      <div class="poignee" aria-hidden="true"></div>
+      <span class="etiq g"><Statut statut="reel" /> Existant</span>
+      <span class="etiq d"><Statut statut="projection" /> Non contractuelle</span>
+      {standin && <span class="marque-provisoire">STAND-IN · HORS PRODUCTION</span>}
+    </div>
+  </div>
+  <figcaption id={`legende-${id}`} class="legende">
+    <Statut statut="reel" /> le bien · <Statut statut="projection" /> son potentiel{reperes.length > 0 && <> · <Statut statut="hypothese" /> <Statut statut="manquant" libelle="À chiffrer" /> les repères</>}
+  </figcaption>
+  {reperes.length > 0 && (
+    <ol class="liste-reperes" aria-hidden="true">
+      {reperes.map((r) => <li>{r.libelle} <Statut statut={r.statut} libelle={libStatut(r.statut)} /></li>)}
+    </ol>
+  )}
+</figure>
+
+<style>
+  .comparateur { margin: 0; --pos: 50%; }
+  .cadre { position: relative; aspect-ratio: var(--ratio); overflow: hidden; background: var(--dvk-surface); --pos: 50%; touch-action: pan-y; user-select: none; }
+  .cadre :global(picture), .cadre :global(img) { display: block; width: 100%; height: 100%; }
+  .cadre > :global(picture) { position: absolute; inset: 0; }
+  .cadre :global(img) { object-fit: cover; }
+  .apres { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+  .apres > :global(picture) { position: absolute; inset: 0; }
+  input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; z-index: 5; }
+  input:focus-visible + .poignee::after { outline: 3px solid var(--terre); outline-offset: 2px; }
+  .poignee { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; background: #fff; z-index: 4; pointer-events: none; box-shadow: 0 0 0 1px rgba(15, 42, 48, 0.15); }
+  .poignee::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%; background: var(--dvk-background); border: 2px solid var(--dvk-text); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--dvk-text); letter-spacing: 2px; font-size: 14px; }
+  .etiq { position: absolute; top: 14px; z-index: 3; display: flex; gap: 8px; align-items: center; background: rgba(245, 241, 234, 0.94); padding: 6px 10px; border-radius: var(--dvk-radius-sm); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+  .etiq.g { left: 14px; }
+  .etiq.d { right: 14px; }
+  .legende { margin-top: 18px; font-size: 13px; color: var(--dvk-text-subtle); display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; }
+  @media (max-width: 720px) {
+    .etiq { font-size: 0; padding: 4px 6px; }
+    .etiq :global(.dvk-status) { font-size: 12px; }
+    .legende { display: none; }
+  }
+  /* Balayage d'invitation : une seule fois, jamais avec prefers-reduced-motion (la classe n'est posée que sans cette préférence). */
+  .balaie .cadre { animation: balayage 2.6s ease-in-out 0.9s 1; }
+  @keyframes balayage { 0%, 100% { --pos: 50%; } 32% { --pos: 64%; } 72% { --pos: 36%; } }
+  @media (prefers-reduced-motion: reduce) { .balaie .cadre { animation: none; } }
+</style>
+
+<script>
+  // Natif et minimal : le curseur pilote --pos ; le balayage s'arrête dès que la personne touche le comparateur.
+  document.querySelectorAll<HTMLElement>("[data-comparateur]").forEach((racine) => {
+    const curseur = racine.querySelector<HTMLInputElement>('input[type="range"]');
+    const cadre = racine.querySelector<HTMLElement>(".cadre");
+    if (!curseur || !cadre) return;
+    const arreter = () => racine.classList.remove("balaie");
+    curseur.addEventListener("pointerdown", arreter);
+    curseur.addEventListener("keydown", arreter);
+    curseur.addEventListener("input", () => {
+      arreter();
+      cadre.style.setProperty("--pos", `${curseur.value}%`);
+    });
+    const reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduit && "registerProperty" in CSS) racine.classList.add("balaie");
+  });
+</script>

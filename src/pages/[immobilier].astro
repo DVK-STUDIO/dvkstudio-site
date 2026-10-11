@@ -1,0 +1,12 @@
+---
+// Page /immobilier/ : n'existe dans le build que si la capacité immobilière n'est pas « off » (src/content/capacites.ts).
+// Le contenu vit dans src/immobilier/Page.astro ; ses variantes par mode dans src/content/immobilier.ts.
+import { immobilierVisible } from "../content/capacites";
+import Immobilier from "../immobilier/Page.astro";
+
+export function getStaticPaths() {
+  return immobilierVisible ? [{ params: { immobilier: "immobilier" } }] : [];
+}
+---
+
+<Immobilier />

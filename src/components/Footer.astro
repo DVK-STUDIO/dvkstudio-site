@@ -1,0 +1,38 @@
+---
+import { site } from "../content/site";
+const e = site.editeur;
+const m = site.mandant;
+---
+
+<footer class="pied">
+  <div class="conteneur pied-interieur">
+    <!-- Fond nuit : le logo couleur n'y est pas lisible, la marque est donc écrite (le logo reste dans l'en-tête). -->
+    <p class="pied-marque">DVK Studio<span>Oise · Somme</span></p>
+    <div class="pied-texte">
+      <p class="pied-qualite">{e.nom} — Chef de projet travaux hemea · Mandataire indépendant de {m.denomination}, exploitant sous l'enseigne {m.enseigne}.</p>
+      <p>{site.nom} — {e.forme} {e.nom} · SIRET {e.siret} · {e.adresse}</p>
+      <p class="pied-liens">
+        <a href="/mentions-legales/">Mentions légales</a>
+        <a href="/confidentialite/">Confidentialité</a>
+        <a href={site.telephoneLien}>{site.telephone}</a>
+        <a href={site.reseaux.linkedin} rel="noopener">LinkedIn</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied { background: var(--dvk-night); color: var(--dvk-inverse-muted); font-size: 13px; line-height: 1.7; }
+  .pied-interieur { padding-block: 40px; display: flex; flex-wrap: wrap; gap: 28px 56px; align-items: center; justify-content: space-between; }
+  .pied-marque { font-family: var(--dvk-font-display); font-weight: 500; font-size: 22px; color: var(--dvk-text-inverse); display: grid; gap: 4px; flex: none; }
+  .pied-marque span { font-family: var(--dvk-font); font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dvk-accent-on-night); }
+  .pied-texte { display: grid; gap: 6px; max-width: 70ch; flex: 1 1 360px; }
+  .pied-qualite { color: var(--dvk-text-inverse); }
+  .pied-liens { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 4px; }
+  .pied a { color: var(--dvk-text-inverse); text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
+  @media (max-width: 720px) {
+    .pied-interieur { padding-block: 28px; gap: 16px; align-items: flex-start; }
+    .pied-liens { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; width: 100%; }
+  }
+</style>
+

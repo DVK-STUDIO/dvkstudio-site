@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../content/site";
+const e = site.editeur;
+---
+
+<Base titre="Politique de confidentialité" description="Données personnelles, outils tiers et droits des visiteurs du site dvkstudio.fr." page="confidentialite" chemin="/confidentialite/">
+  <div class="conteneur page-hero prose">
+    <p class="surtitre">Légal</p>
+    <h1 class="titre-xl">Politique de confidentialité</h1>
+    <p>Version préparée le 3 octobre 2026 ; en vigueur à la mise en ligne du site.</p>
+
+    <h2>Responsable du traitement</h2>
+    <p>{e.nom} — {site.nom} — {e.adresse} — <a href={`mailto:${site.email}`}>{site.email}</a></p>
+
+    <h2>Ce que ce site collecte, et ce qu'il ne collecte pas</h2>
+    <p>Ce site n'utilise <strong>aucun cookie</strong>, aucun outil de mesure d'audience et aucun traceur publicitaire. Aucune police n'est chargée depuis un serveur tiers.</p>
+    <p>Pour que je sache d'où vous venez lorsque vous réservez un rendez-vous, le site garde dans votre navigateur (stockage de session, effacé à la fermeture de l'onglet) : la page d'arrivée, le site référent et les éventuels paramètres de campagne de l'adresse. Ces informations sont ajoutées au lien de rendez-vous <strong>uniquement lorsque vous l'ouvrez</strong> ; elles ne sont envoyées à personne d'autre.</p>
+
+    <p>La préparation facultative d’un message s’effectue uniquement sur votre appareil. Les champs ne sont ni enregistrés ni transmis par le site. Si vous ouvrez votre messagerie, le brouillon y est prérempli ; vous décidez ensuite de l’envoyer.</p>
+
+    <h2>Données que vous me transmettez</h2>
+    <ul>
+      <li>Par la prise de rendez-vous (Calendly) : nom, email, téléphone, réponses au questionnaire.</li>
+      <li>Par email ou téléphone : les informations que vous choisissez de communiquer sur votre projet.</li>
+    </ul>
+
+    <h2>Finalité et base légale</h2>
+    <p>Répondre à vos demandes et préparer l'échange (mesures précontractuelles ou intérêt légitime). Ces données ne sont pas cédées à des tiers à des fins commerciales.</p>
+
+    <h2>Outils et prestataires</h2>
+    <ul>
+      <li><strong>Calendly</strong> (calendly.com) : prise de rendez-vous. Le service n'est contacté qu'au moment où vous ouvrez le lien de réservation ; ses propres conditions s'appliquent.</li>
+      <li><strong>GitHub Pages</strong> : hébergement du site. L'hébergeur peut conserver des journaux techniques de connexion (adresse IP).</li>
+    </ul>
+
+    <h2>Conservation</h2>
+    <p>Les données de prospection et de contact sont conservées trois ans au plus à compter du dernier contact.</p>
+
+    <h2>Vos droits</h2>
+    <p>Accès, rectification, effacement, limitation, portabilité et opposition. Pour les exercer : <a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez aussi saisir la CNIL (<a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).</p>
+  </div>
+</Base>
+

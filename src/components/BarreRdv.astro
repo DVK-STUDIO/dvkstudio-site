@@ -1,0 +1,38 @@
+---
+// Barre fixe mobile : prise de rendez-vous et appel à un geste. Absente sur grand écran.
+// Apparaît après le premier écran, se retire près de la fin de page (le rendez-vous final prend le relais).
+// Masquée = inerte (non focalisable, ignorée des lecteurs d'écran).
+import { site } from "../content/site";
+import BoutonRdv from "./BoutonRdv.astro";
+---
+
+<div class="barre-rdv" id="barre-rdv" inert aria-label="Prendre rendez-vous">
+  <BoutonRdv bouton="home.barre.rdv">Faire le point · 30 min</BoutonRdv>
+  <a class="btn btn-contour" href={site.telephoneLien}>Appeler</a>
+</div>
+
+<style>
+  .barre-rdv { display: none; }
+  @media (max-width: 720px) {
+    .barre-rdv { display: flex; gap: 10px; position: fixed; inset: auto 0 0 0; z-index: 20; background: var(--dvk-background); border-top: 1px solid var(--dvk-border); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); transform: translateY(110%); transition: transform var(--dvk-duration-state, 200ms) var(--dvk-ease, ease); }
+    .barre-rdv.visible { transform: none; }
+    .barre-rdv :global(.btn:first-child) { flex: 1; }
+    .barre-rdv :global(.btn-contour) { flex: 0 0 auto; }
+  }
+  @media (prefers-reduced-motion: reduce) { .barre-rdv { transition: none; } }
+</style>
+
+<script>
+  const barre = document.getElementById("barre-rdv");
+  if (barre) {
+    const maj = () => {
+      const visible = window.scrollY > 500 && window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 900;
+      barre.classList.toggle("visible", visible);
+      barre.toggleAttribute("inert", !visible);
+    };
+    window.addEventListener("scroll", maj, { passive: true });
+    window.addEventListener("resize", maj);
+    maj();
+  }
+</script>
+

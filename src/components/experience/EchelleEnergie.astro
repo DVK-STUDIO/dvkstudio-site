@@ -1,0 +1,33 @@
+---
+// Échelle A à G avec la classe actuelle et la classe estimée après travaux (légende sous l'échelle).
+import { CLASSES } from "../../lib/experience/experience";
+interface Props { avant: string; apres: string }
+const { avant, apres } = Astro.props;
+// Palette conventionnelle des étiquettes énergie ; texte sombre sur les teintes claires.
+const couleurs = ["#2f8f4e", "#5aa63f", "#9dba2e", "#d2b514", "#d98a1f", "#d1571f", "#b8271f"];
+---
+
+<figure class="echelle">
+  <ol aria-label="Échelle de performance énergétique de A à G">
+    {CLASSES.map((c, i) => (
+      <li style={`--c:${couleurs[i]};--t:${i >= 2 && i <= 4 ? "#0f2a30" : "#fff"}`} class:list={{ avant: c === avant, apres: c === apres }}>
+        <span class="lettre">{c}</span>
+      </li>
+    ))}
+  </ol>
+  <ul class="legende-e">
+    <li><strong>{avant}</strong> Aujourd'hui</li>
+    <li><strong>{apres}</strong> Après le scénario recommandé (estimation)</li>
+  </ul>
+</figure>
+
+<style>
+  figure { margin: 0; }
+  ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .lettre { display: block; text-align: center; background: var(--c); color: var(--t); font-family: var(--serif); font-weight: 600; font-size: clamp(18px, 4vw, 28px); padding: 10px 0; border-radius: var(--dvk-radius-sm); }
+  /* Classes non retenues : fond atténué, lettre pleinement lisible (COL-05). */
+  li:not(.avant):not(.apres) .lettre { background: color-mix(in srgb, var(--c) 40%, var(--dvk-background)); color: var(--dvk-text); }
+  li.avant .lettre, li.apres .lettre { outline: 3px solid var(--encre); outline-offset: 2px; }
+  .legende-e { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 15px; color: var(--encre-douce); }
+  .legende-e strong { display: inline-block; min-width: 30px; text-align: center; border: 2px solid var(--encre); border-radius: var(--dvk-radius-sm); margin-right: 8px; font-family: var(--serif); color: var(--encre); }
+</style>

@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dvkstudio.fr/contracts/experience-publiee.v1.schema.json",
+  "title": "ExperiencePubliee v1",
+  "description": "Contrat public entre les projets sources (privés) et leurs consommateurs. Aucune donnée personnelle, aucun document source, aucune valeur inventée : toute donnée porte son statut et ses sources.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "slug", "titre", "accroche", "statutExperience", "indexable", "genereLe", "sources", "bien", "besoins", "potentiel", "scenarios", "matrice", "budget", "energie", "projection", "prochaineAction"],
+  "properties": {
+    "schemaVersion": { "const": "experience-publiee/1" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 60 },
+    "titre": { "type": "string", "minLength": 3, "maxLength": 90 },
+    "accroche": { "type": "string", "minLength": 10, "maxLength": 260 },
+    "statutExperience": { "enum": ["demonstration", "disponible"] },
+    "indexable": { "type": "boolean" },
+    "diffusion": { "type": "object", "additionalProperties": false, "required": ["statut"], "properties": { "statut": { "enum": ["non_confirmee", "confirmee"] }, "note": { "type": "string", "maxLength": 200 } } },
+    "genereLe": { "type": "string", "format": "date" },
+    "avertissements": { "type": "array", "items": { "type": "string", "minLength": 3 } },
+    "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/source" } },
+    "bien": { "$ref": "#/$defs/bloc-faits" },
+    "besoins": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/besoin" } },
+    "potentiel": { "$ref": "#/$defs/bloc-faits" },
+    "scenarios": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/scenario" } },
+    "matrice": { "$ref": "#/$defs/matrice" },
+    "budget": { "$ref": "#/$defs/budget" },
+    "energie": { "$ref": "#/$defs/energie" },
+    "projection": { "$ref": "#/$defs/projection" },
+    "prochaineAction": { "$ref": "#/$defs/prochaine-action" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 60 },
+    "statut": { "enum": ["reel", "estimation", "hypothese", "projection", "a_venir", "manquant"] },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "libelle", "type"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "libelle": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "type": { "enum": ["releve", "declaration", "diagnostic", "etude", "analyse"] },
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}$" }
+      }
+    },
+    "valeur": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statut"],
+      "properties": {
+        "valeur": { "type": ["string", "number"] },
+        "unite": { "type": "string", "maxLength": 20 },
+        "statut": { "$ref": "#/$defs/statut" },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/id" }, "uniqueItems": true },
+        "note": { "type": "string", "maxLength": 300 },
+        "conflits": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["valeur", "sources"],
+            "properties": {
+              "valeur": { "type": ["string", "number"] },
+              "unite": { "type": "string", "maxLength": 20 },
+              "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+              "note": { "type": "string", "maxLength": 300 }
+            }
+          }
+        }
+      },
+      "allOf": [
+        { "if": { "properties": { "statut": { "const": "manquant" } }, "required": ["statut"] }, "then": { "not": { "required": ["valeur"] } }, "else": { "if": { "properties": { "statut": { "const": "a_venir" } }, "required": ["statut"] }, "then": { "not": { "required": ["valeur"] } }, "else": { "required": ["valeur", "sources"], "properties": { "sources": { "type": "array", "minItems": 1 } } } } }
+      ]
+    },
+    "fait": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "libelle", "valeur"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "libelle": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "valeur": { "$ref": "#/$defs/valeur" }
+      }
+    },
+    "bloc-faits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resume", "faits"],
+      "properties": {
+        "resume": { "type": "string", "minLength": 10, "maxLength": 300 },
+        "faits": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/fait" } }
+      }
+    },
+    "besoin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "espace", "libelle", "statut", "sources"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "espace": { "enum": ["cuisine", "sejour", "ensemble"] },
+        "libelle": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "detail": { "type": "string", "maxLength": 300 },
+        "statut": { "enum": ["reel"] },
+        "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "numero", "nom", "maturite", "intention", "changements", "etudesPrealables", "budget", "impactEnergetique", "projection"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "numero": { "type": "integer", "minimum": 1 },
+        "nom": { "type": "string", "minLength": 3, "maxLength": 60 },
+        "maturite": { "enum": ["pre_etude", "a_etudier"] },
+        "intention": { "type": "string", "minLength": 10, "maxLength": 260 },
+        "changements": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 3, "maxLength": 200 } },
+        "etudesPrealables": { "type": "array", "items": { "type": "string", "minLength": 3, "maxLength": 200 } },
+        "budget": { "$ref": "#/$defs/valeur" },
+        "impactEnergetique": { "$ref": "#/$defs/valeur" },
+        "projection": { "$ref": "#/$defs/valeur" }
+      }
+    },
+    "matrice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statut", "sources", "lecture", "cellules"],
+      "properties": {
+        "statut": { "enum": ["hypothese"] },
+        "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "lecture": { "type": "string", "minLength": 10, "maxLength": 300 },
+        "cellules": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["besoin", "scenario", "niveau"],
+            "properties": {
+              "besoin": { "$ref": "#/$defs/id" },
+              "scenario": { "$ref": "#/$defs/id" },
+              "niveau": { "enum": ["repond", "partiel", "non"] },
+              "note": { "type": "string", "maxLength": 240 }
+            }
+          }
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resume", "energie"],
+      "properties": {
+        "resume": { "type": "string", "minLength": 10, "maxLength": 300 },
+        "energie": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["intitule", "nature", "lots", "total", "financements", "resteACharge", "avertissement"],
+          "properties": {
+            "intitule": { "type": "string", "minLength": 3, "maxLength": 120 },
+            "nature": { "enum": ["devis", "pre_chiffrage", "estimation", "hypothese", "manquant"] },
+            "lots": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["lot", "montant"],
+                "properties": {
+                  "lot": { "type": "string", "minLength": 3, "maxLength": 100 },
+                  "montant": { "$ref": "#/$defs/valeur" }
+                }
+              }
+            },
+            "total": { "$ref": "#/$defs/valeur" },
+            "financements": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["libelle", "montant"],
+                "properties": { "libelle": { "type": "string", "minLength": 2, "maxLength": 100 }, "montant": { "$ref": "#/$defs/valeur" } }
+              }
+            },
+            "resteACharge": { "$ref": "#/$defs/valeur" },
+            "avertissement": { "type": "string", "minLength": 10, "maxLength": 300 }
+          }
+        }
+      }
+    },
+    "energie": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resume", "classeAvant", "classeApres", "consommation", "emissions", "factureAnnuelle", "economieAnnuelle"],
+      "properties": {
+        "resume": { "type": "string", "minLength": 10, "maxLength": 300 },
+        "classeAvant": { "$ref": "#/$defs/valeur" },
+        "classeApres": { "$ref": "#/$defs/valeur" },
+        "consommation": { "$ref": "#/$defs/valeur" },
+        "emissions": { "$ref": "#/$defs/valeur" },
+        "factureAnnuelle": { "$ref": "#/$defs/valeur" },
+        "economieAnnuelle": { "$ref": "#/$defs/valeur" }
+      }
+    },
+    "projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statut", "message"],
+      "properties": {
+        "statut": { "enum": ["a_venir"] },
+        "message": { "type": "string", "minLength": 10, "maxLength": 300 }
+      }
+    },
+    "prochaine-action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["titre", "etapes", "cta"],
+      "properties": {
+        "titre": { "type": "string", "minLength": 3, "maxLength": 100 },
+        "etapes": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 3, "maxLength": 200 } },
+        "cta": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["libelle", "bouton"],
+          "properties": { "libelle": { "type": "string", "maxLength": 60 }, "bouton": { "type": "string", "pattern": "^[a-z0-9.-]+$" } }
+        }
+      }
+    }
+  }
+}

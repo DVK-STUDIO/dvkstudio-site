@@ -1,0 +1,20 @@
+---
+// DVKStatus : statut d'une DONNÉE (Réel / Estimation / Hypothèse / Projection / À venir / À établir).
+// Distinct du statut de DISPONIBILITÉ d'un service (voir .dvk-availability dans global.css) : règle STA-05.
+// Le texte porte toujours le sens ; couleur, filet et hachure ne sont que redondants (STA-02, HAT-03).
+import { LIBELLE_STATUT, SENS_STATUT, type Statut } from "../../lib/experience/experience";
+interface Props { statut: Statut; libelle?: string }
+const { statut, libelle } = Astro.props;
+---
+
+<span class="dvk-status" data-status={statut} title={SENS_STATUT[statut]}>{libelle ?? LIBELLE_STATUT[statut]}</span>
+
+<style>
+  .dvk-status { display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 4px 8px; border-radius: var(--dvk-radius-sm); line-height: 1.2; white-space: nowrap; vertical-align: middle; }
+  .dvk-status[data-status="reel"] { background: var(--dvk-real-bg); color: var(--dvk-real); }
+  .dvk-status[data-status="estimation"] { background: var(--dvk-estimate-bg); color: var(--dvk-estimate); }
+  .dvk-status[data-status="hypothese"] { background: transparent; color: var(--dvk-hypothesis); border: 1px solid var(--dvk-hypothesis); }
+  .dvk-status[data-status="projection"] { color: var(--dvk-projection); background: var(--dvk-projection-bg) repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 8px); }
+  .dvk-status[data-status="a_venir"] { background: transparent; color: var(--dvk-coming); border: 1px solid var(--dvk-coming); }
+  .dvk-status[data-status="manquant"] { background: transparent; color: var(--dvk-missing); border: 1px dashed var(--dvk-missing); }
+</style>

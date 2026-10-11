@@ -1,0 +1,14 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../content/site";
+---
+
+<Base titre="Merci" description="Retrouvez les informations de confirmation de votre rendez-vous." page="merci" chemin="/merci/" noindex>
+  <div class="conteneur page-hero">
+    <p class="surtitre">Merci</p>
+    <h1 class="titre-xl">Votre rendez-vous : vérifiez la confirmation.</h1>
+    <p class="chapo">Une réservation est confirmée par Calendly après le choix du créneau et la validation du formulaire. Si vous n’avez pas reçu de confirmation, vérifiez votre messagerie ou contactez-moi : <a href={site.telephoneLien}>{site.telephone}</a> ou <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    <div class="actions"><a class="btn btn-encre" href="/">Retour à l'accueil</a></div>
+  </div>
+</Base>
+

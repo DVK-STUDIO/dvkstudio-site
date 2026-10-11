@@ -1,0 +1,8 @@
+---
+import Experience from "../../experience/Page.astro";
+import { experienceVisible } from "../../content/capacites";
+export function getStaticPaths() {
+  return experienceVisible ? [{ params: { index: undefined } }] : [];
+}
+---
+<Experience />

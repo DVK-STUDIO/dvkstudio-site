@@ -1,0 +1,126 @@
+---
+// Fenêtre sur DVK Expérience (/experience/). Bande signature : la chaîne Bien actuel → … → Enveloppe indicative, puis un exemple de lecture.
+// Sans expérience publiable, on montre un plan illustratif annoté. Avec une expérience publiable, la même fenêtre
+// devient un aperçu réel (titre, accroche, lien) : le composant n'a pas à changer.
+import BoutonRdv from "./BoutonRdv.astro";
+import ChaineExperience from "./ChaineExperience.astro";
+import Plan from "./Plan.astro";
+import TransformationChaine from "./TransformationChaine.astro";
+import { chantier, paire } from "../lib/medias";
+
+interface Props { experience?: { slug: string; titre: string; accroche: string } }
+const { experience } = Astro.props;
+// Paire existant / projection autorisée : la chaîne devient la narration au défilement. Sinon, la chaîne horizontale actuelle.
+const media = paire();
+const mediaChantier = media ? chantier() : null;
+---
+
+{media ? (
+  <>
+  <section id="experience" class="sombre" aria-labelledby="titre-experience">
+    <TransformationChaine id="titre-experience" titre="Le bien, son potentiel, vos travaux, votre budget. Au même endroit." paire={media} chantier={mediaChantier} />
+  </section>
+  <section class="sombre section demo suite" aria-label="DVK Expérience : disponibilité">
+    <div class="conteneur">
+    <div class="demo-grille">
+      <div class="demo-texte">
+        <ul class="dispo-liste">
+          <li><span class="dvk-availability is-available">Disponible</span><span>Étude présentée en rendez-vous : relevé, cadrage des travaux, enveloppe indicative.</span></li>
+          <li><span class="dvk-availability is-soon">À venir</span><span>Page partageable par lien, et projection contrôlée.</span></li>
+        </ul>
+        <div class="demo-actions">
+          <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
+        </div>
+      </div>
+
+      <div class="demo-fenetre">
+        {experience
+          ? (
+            <a class="apercu" href={`/experience/${experience.slug}/`}>
+              <span class="dvk-availability is-demo">Projet pilote</span>
+              <strong>{experience.titre}</strong>
+              <span class="accroche">{experience.accroche}</span>
+              <span class="aller">Découvrir l'expérience →</span>
+            </a>
+          )
+          : (
+            <>
+              <p class="etiquette-demo"><span class="dvk-availability is-demo">Démonstration</span> Exemple de lecture, pas un projet réel.</p>
+              <Plan
+                alt="Plan schématique : cuisine, séjour et cloison"
+                zones={["cuisine"]}
+                ouverture
+                annotations={[
+                  { x: 42.5, y: 26, lx: 50, ly: 8, libelle: "Cloison : porteuse ou non ?", statut: "manquant" },
+                  { x: 42.5, y: 58, lx: 50, ly: 74, libelle: "Ouverture envisagée", statut: "hypothese", focal: true },
+                ]}
+                legende="Plan illustratif, non à l'échelle."
+              />
+            </>
+          )}
+      </div>
+    </div>
+    </div>
+  </section>
+  </>
+) : (
+<section id="experience" class="sombre section demo" aria-labelledby="titre-experience">
+  <ChaineExperience
+    id="titre-experience"
+    titre="Le bien, son potentiel, vos travaux, votre budget. Au même endroit."
+    intro="Une page propre à chaque bien : ce qu'il est, ce qu'il peut devenir et ce que cela pourrait coûter, avec la source et le niveau de certitude de chaque donnée."
+    idx="01"
+  >
+    <div class="demo-grille">
+      <div class="demo-texte">
+        <ul class="dispo-liste">
+          <li><span class="dvk-availability is-available">Disponible</span><span>Étude présentée en rendez-vous : relevé, cadrage des travaux, enveloppe indicative.</span></li>
+          <li><span class="dvk-availability is-soon">À venir</span><span>Page partageable par lien, et projection contrôlée.</span></li>
+        </ul>
+        <div class="demo-actions">
+          <BoutonRdv bouton="experience.rdv" parcours="experience">Je veux la même pour mon bien</BoutonRdv>
+        </div>
+      </div>
+
+      <div class="demo-fenetre">
+        {experience
+          ? (
+            <a class="apercu" href={`/experience/${experience.slug}/`}>
+              <span class="dvk-availability is-demo">Projet pilote</span>
+              <strong>{experience.titre}</strong>
+              <span class="accroche">{experience.accroche}</span>
+              <span class="aller">Découvrir l'expérience →</span>
+            </a>
+          )
+          : (
+            <>
+              <p class="etiquette-demo"><span class="dvk-availability is-demo">Démonstration</span> Exemple de lecture, pas un projet réel.</p>
+              <Plan
+                alt="Plan schématique : cuisine, séjour et cloison"
+                zones={["cuisine"]}
+                ouverture
+                annotations={[
+                  { x: 42.5, y: 26, lx: 50, ly: 8, libelle: "Cloison : porteuse ou non ?", statut: "manquant" },
+                  { x: 42.5, y: 58, lx: 50, ly: 74, libelle: "Ouverture envisagée", statut: "hypothese", focal: true },
+                ]}
+                legende="Plan illustratif, non à l'échelle."
+              />
+            </>
+          )}
+      </div>
+    </div>
+  </ChaineExperience>
+</section>
+)}
+
+<style>
+  .demo-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: start; margin-top: clamp(40px, 6vw, 72px); }
+  @media (max-width: 900px) { .demo-grille { grid-template-columns: 1fr; } }
+  .demo-actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .demo-fenetre { background: var(--dvk-background); color: var(--dvk-text); border-radius: var(--dvk-radius-md); padding: clamp(18px, 3vw, 32px); }
+  .etiquette-demo { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; margin: 0 0 16px; font-size: 14px; color: var(--dvk-text-subtle); }
+  .apercu { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .apercu strong { font-size: clamp(22px, 2.6vw, 30px); font-weight: 400; line-height: 1.15; letter-spacing: -0.03em; }
+  .accroche { color: var(--dvk-text-muted); font-size: 15px; }
+  .aller { color: var(--dvk-action); font-weight: 600; }
+</style>

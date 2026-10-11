@@ -1,0 +1,55 @@
+# Déploiement GitHub Pages par Actions (remplace le build « legacy » Jekyll, en erreur depuis le 27/06).
+# INACTIF tant que le dépôt n'est pas poussé ET que « Settings > Pages > Source » n'est pas sur « GitHub Actions ».
+name: Déploiement
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+        env:
+          DVK_PUBLIC_BUILD: "1" # une expérience non confirmée par la famille ne sort jamais en production
+      - run: npm run check:public -- --golive
+        env:
+          DVK_PUBLIC_BUILD: "1"
+      - run: npm run check:site
+      - run: npm run check:capacites
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deployer:
+    needs: construire
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4
+  # Test de fumée sur le site réellement servi. En cas d'échec : appliquer le retour arrière de docs/mise-en-ligne.md.
+  fumee:
+    needs: deployer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/smoke.mjs --base https://dvkstudio.fr --public --golive

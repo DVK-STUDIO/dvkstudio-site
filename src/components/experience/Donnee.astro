@@ -1,0 +1,41 @@
+---
+// DVKStat : une donnée lisible d'un coup d'œil : libellé, valeur, statut.
+// La provenance reste disponible à la demande, au niveau de la SECTION (SourcesSection.astro), pas répétée par donnée.
+// Ce qui ne doit jamais être masqué reste visible ici : le statut, une lacune (« À établir »), un désaccord entre sources.
+import Statut from "./Statut.astro";
+import { afficherValeur, libelleSources, type Valeur, type Source } from "../../lib/experience/experience";
+interface Props {
+  libelle: string;
+  valeur: Valeur;
+  sources: Source[];
+  grand?: boolean;
+  /** Détail individuel (source, note, valeurs en conflit) : réservé aux cas isolés, hors liste de section. */
+  detail?: boolean;
+}
+const { libelle, valeur, sources, grand = false, detail = false } = Astro.props;
+const noms = libelleSources(valeur.sources, sources);
+const conflits = valeur.conflits ?? [];
+const vide = valeur.statut === "manquant" || valeur.statut === "a_venir";
+---
+
+<div class:list={["donnee", { grand }]}>
+  <dt>{libelle}</dt>
+  <dd>
+    {!vide && <span class="val">{afficherValeur(valeur)}</span>}
+    <Statut statut={valeur.statut} />
+    {vide && valeur.note && <p class="lacune">{valeur.note}</p>}
+    {conflits.length > 0 && <p class="alerte">Les sources ne sont pas d'accord : voir les sources de cette section.</p>}
+    {detail && noms.length > 0 && <p class="src">Source : {noms.join(", ")}.</p>}
+  </dd>
+</div>
+
+<style>
+  .donnee { padding: 14px 0; border-top: 1px solid var(--dvk-border); display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  dt { font-size: 14px; color: var(--dvk-text-subtle); }
+  dd { margin: 0; }
+  .val { font-family: var(--serif); font-size: 24px; line-height: 1.2; margin-right: 8px; overflow-wrap: anywhere; }
+  .grand .val { font-size: clamp(30px, 4vw, 44px); }
+  .lacune { margin-top: 8px; font-size: 16px; color: var(--dvk-text-muted); max-width: 56ch; }
+  .alerte { margin-top: 6px; font-size: 14px; color: var(--dvk-warning); font-weight: 600; }
+  .src { margin-top: 6px; color: var(--dvk-text-subtle); font-size: 14px; }
+</style>

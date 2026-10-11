@@ -1,0 +1,45 @@
+---
+// DVKSource (niveau section) : « Sources de cette section ». La provenance est transparente et vérifiable,
+// mais repliée : elle rassure à la demande au lieu de dominer la lecture (STA-04).
+import Statut from "./Statut.astro";
+import { afficherValeur, afficherConflit, libelleSources, type Valeur, type Source } from "../../lib/experience/experience";
+
+interface Props { elements: { libelle: string; valeur: Valeur }[]; sources: Source[]; titre?: string }
+const { elements, sources, titre = "Sources de cette section" } = Astro.props;
+const lignes = elements.filter((x) => (x.valeur.sources ?? []).length > 0 || x.valeur.note || (x.valeur.conflits ?? []).length > 0);
+const nbConflits = elements.filter((x) => (x.valeur.conflits ?? []).length > 0).length;
+---
+
+{lignes.length > 0 && (
+  <details class="sources-section">
+    <summary>{titre}{nbConflits > 0 && <span class="avertis"> · {nbConflits} désaccord{nbConflits > 1 ? "s" : ""} entre sources</span>}</summary>
+    <ul>
+      {lignes.map((x) => (
+        <li>
+          <p class="t"><strong>{x.libelle}</strong> <Statut statut={x.valeur.statut} /></p>
+          {x.valeur.statut !== "manquant" && x.valeur.statut !== "a_venir" && <p>{afficherValeur(x.valeur)}{(x.valeur.sources ?? []).length > 0 ? ` : ${libelleSources(x.valeur.sources, sources).join(", ")}.` : ""}</p>}
+          {x.valeur.note && x.valeur.statut !== "manquant" && x.valeur.statut !== "a_venir" && <p class="n">{x.valeur.note}</p>}
+          {(x.valeur.conflits ?? []).length > 0 && (
+            <ul class="conflits">
+              {x.valeur.conflits!.map((c) => (
+                <li><strong>{afficherConflit(c)}</strong> : {libelleSources(c.sources, sources).join(", ")}.{c.note ? ` ${c.note}` : ""}</li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </details>
+)}
+
+<style>
+  .sources-section { margin-top: 28px; max-width: 820px; border-top: 1px solid var(--dvk-border); }
+  summary { cursor: pointer; padding: 10px 0; min-height: 44px; display: block; line-height: 24px; font-size: 15px; color: var(--dvk-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .avertis { color: var(--dvk-warning); font-weight: 600; text-decoration: none; margin-left: 4px; }
+  ul { list-style: none; padding: 0; margin: 4px 0 6px; display: grid; gap: 14px; }
+  .sources-section > ul > li { padding: 12px 14px; background: var(--dvk-surface); border-radius: var(--dvk-radius-md); font-size: 15px; color: var(--dvk-text-muted); }
+  .t { margin: 0 0 4px; color: var(--dvk-text); }
+  p { margin: 0; }
+  .n { margin-top: 4px; color: var(--dvk-text-subtle); }
+  .conflits { margin: 8px 0 0; gap: 6px; }
+</style>

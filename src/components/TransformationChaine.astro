@@ -1,0 +1,183 @@
+---
+// DVK Expérience au défilement : « Qu'y a-t-il réellement entre l'avant et l'après ? »
+// Un même bien : 01 existant (Réel) → 02 potentiel (repères, Hypothèse) → 03 projection (rideau, non contractuelle)
+// → 04 travaux (matière chantier, toujours avec sa provenance) → 05 enveloppe indicative (lots A–D, jamais de montant inventé).
+// Natif et progressif : sans JavaScript, les cinq étapes restent lisibles ; avec prefers-reduced-motion, plus d'épinglage :
+// les étapes se choisissent au clic ou au clavier. À poser dans une section .sombre.
+import { Picture } from "astro:assets";
+import Statut from "./experience/Statut.astro";
+import { jalons } from "../content/chaine";
+import { mentionChantier, type MediaImage, type MediaPaire } from "../lib/medias";
+
+interface Props { id: string; titre: string; paire: MediaPaire; chantier?: MediaImage | null }
+const { id, titre, paire, chantier = null } = Astro.props;
+const WIDTHS = [480, 720, 960, 1280, 1600];
+const SIZES = "(max-width: 900px) 100vw, 740px";
+const libStatut = (s: string) => (s === "manquant" ? "À chiffrer" : undefined);
+---
+
+<div class="transformation" id="transformation" data-transformation data-e="1" style={`--ratio:${paire.avant.width} / ${paire.avant.height};--rn:${(paire.avant.width / paire.avant.height).toFixed(4)}`}>
+  <div class="zone" data-zone>
+    <div class="epingle">
+      <div class="conteneur">
+        <p class="surtitre">DVK Expérience</p>
+        <h2 id={id} class="titre-l titre-chaine">{titre}</h2>
+        <div class="grille">
+          <div class="cadre">
+            <Picture class="l1" src={paire.avant} alt={paire.altAvant} widths={WIDTHS} sizes={SIZES} formats={["avif", "webp"]} loading="lazy" decoding="async" />
+            <Picture class="l3" src={paire.apres} alt={paire.altApres} widths={WIDTHS} sizes={SIZES} formats={["avif", "webp"]} loading="lazy" decoding="async" />
+            {chantier && <Picture class="l4" src={chantier.src} alt={chantier.alt} widths={WIDTHS} sizes={SIZES} formats={["avif", "webp"]} loading="lazy" decoding="async" />}
+            <span class="rideau" aria-hidden="true"></span>
+            {paire.reperesPotentiel.length > 0 && (
+              <ol class="reperes c2" aria-label="Interventions repérées sur le bien existant">
+                {paire.reperesPotentiel.map((r, i) => (
+                  <li style={`left:${r.x}%;top:${r.y}%`} data-cote={r.x > 75 ? "g" : "d"}>
+                    <b aria-hidden="true">{i + 1}</b>
+                    <span class="lib">{r.libelle} <Statut statut={r.statut} libelle={libStatut(r.statut)} /></span>
+                  </li>
+                ))}
+              </ol>
+            )}
+            <p class="badge b3"><Statut statut="projection" /> Illustration non contractuelle</p>
+            {chantier && <p class="badge b4"><Statut statut="hypothese" libelle="Illustration" /> {mentionChantier(chantier.provenance).replace(/^Illustration · /, "")}</p>}
+            {paire.lots.length > 0 && (
+              <div class="env">
+                <p class="env-titre">Enveloppe indicative</p>
+                <ol class="lots">
+                  {paire.lots.map((l) => (
+                    <li><span class="nom">{l.nom}</span><span class="plaque"><Statut statut={l.statut} libelle={libStatut(l.statut)} /></span><span class="note">{l.note}</span></li>
+                  ))}
+                </ol>
+                <p class="bilan"><span>Enveloppe du projet</span><span class="plaque"><Statut statut="manquant" libelle="À chiffrer" /></span></p>
+                <p class="aucun">Aucun montant inventé : chaque ligne dit son niveau de certitude.</p>
+              </div>
+            )}
+            {paire.standin && <span class="marque-provisoire">STAND-IN · HORS PRODUCTION</span>}
+          </div>
+          <ol class="rail" aria-label="Les cinq étapes">
+            {jalons.map((j, i) => (
+              <li class:list={[{ on: i === 0 }]} data-etape-li>
+                <span class="n">{j.n}</span>
+                <h3>{j.titre}</h3>
+                <span class="plaque"><Statut statut={j.statut} libelle={j.libelle} /></span>
+                <p>{j.texte}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="progres" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .titre-chaine { max-width: 24ch; margin: 14px 0 20px; }
+  /* Sans JavaScript ou avec prefers-reduced-motion : cadre fixe, étapes lisibles. Épinglage seulement si mouvement autorisé. */
+  .zone { position: relative; }
+  .epingle { padding-block: clamp(40px, 6vw, 72px); }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .zone { height: 560vh; }
+    :global(.js) .epingle { position: sticky; top: 0; height: 100vh; min-height: 640px; display: flex; flex-direction: column; justify-content: center; padding-block: 56px 36px; overflow: hidden; }
+  }
+  .grille { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(24px, 4vw, 56px); }
+  .cadre { position: relative; aspect-ratio: var(--ratio); width: min(100%, calc((100vh - 230px) * var(--rn))); border-radius: var(--dvk-radius-md); overflow: hidden; background: #0e262c; justify-self: start; }
+  .cadre :global(picture), .cadre :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .cadre :global(img) { object-fit: cover; transition: opacity 0.5s ease; }
+  .cadre :global(picture.l3), .cadre :global(.l3) { clip-path: inset(0 calc(100% - var(--rideau, 0) * 100%) 0 0); opacity: 0; transition: opacity 0.5s ease; }
+  .cadre :global(picture.l4), .cadre :global(.l4) { opacity: 0; transition: opacity 0.5s ease; }
+  [data-e="3"] .cadre :global(.l3), [data-e="4"] .cadre :global(.l3), [data-e="5"] .cadre :global(.l3) { opacity: 1; }
+  [data-e="4"] .cadre :global(.l4) { opacity: 1; }
+  [data-e="5"] .cadre :global(img) { filter: brightness(0.45); }
+  .rideau { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; left: calc(var(--rideau, 0) * 100%); opacity: 0; transition: opacity 0.3s; z-index: 2; }
+  [data-e="3"] .rideau { opacity: 0.9; }
+  .c2 { opacity: 0; transition: opacity 0.45s ease; }
+  [data-e="2"] .c2 { opacity: 1; }
+  .badge { position: absolute; left: 14px; bottom: 14px; z-index: 4; display: flex; gap: 10px; align-items: center; margin: 0; opacity: 0; transition: opacity 0.4s; font-size: 12px; background: rgba(245, 241, 234, 0.94); color: var(--dvk-text); padding: 6px 10px; border-radius: var(--dvk-radius-sm); max-width: calc(100% - 28px); }
+  [data-e="3"] .b3, [data-e="4"] .b4 { opacity: 1; }
+  .env { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; justify-content: center; padding: clamp(18px, 3vw, 40px); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
+  [data-e="5"] .env { opacity: 1; pointer-events: auto; }
+  .env-titre { font-size: clamp(22px, 2.4vw, 32px); font-weight: 400; letter-spacing: -0.03em; color: var(--dvk-background); margin-bottom: 10px; }
+  .lots { list-style: none; margin: 0; padding: 0; counter-reset: lot; }
+  .lots li { display: grid; grid-template-columns: 30px 1fr auto; column-gap: 14px; align-items: baseline; padding: 12px 0; border-top: 1px solid rgba(245, 241, 234, 0.28); }
+  .lots li::before { counter-increment: lot; content: counter(lot, upper-alpha); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; color: var(--dvk-inverse-subtle); border: 1px solid var(--dvk-inverse-subtle); width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; align-self: center; }
+  .lots .nom { font-size: clamp(18px, 2vw, 26px); font-weight: 400; letter-spacing: -0.03em; line-height: 1.15; color: var(--dvk-background); }
+  .lots .note { grid-column: 2; font-size: 12px; color: var(--dvk-inverse-muted); margin-top: 2px; }
+  .lots li > .plaque { grid-column: 3; grid-row: 1; align-self: center; }
+  .plaque { display: inline-block; background: var(--dvk-background); border-radius: var(--dvk-radius-sm); padding: 2px; line-height: 0; }
+  .bilan { margin-top: 10px; padding-top: 12px; border-top: 1.5px solid var(--dvk-background); display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dvk-background); }
+  .aucun { margin-top: 12px; font-size: 12px; color: var(--dvk-inverse-muted); }
+
+  .rail { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--dvk-inverse-subtle); }
+  .rail li { padding: 14px 0 14px 26px; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .rail li::before { content: ""; position: absolute; left: -6px; top: 22px; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--dvk-background); background: var(--dvk-night); }
+  .rail .n { font-size: 12px; letter-spacing: 0.2em; font-weight: 600; color: var(--dvk-inverse-subtle); }
+  .rail h3 { font-size: 22px; line-height: 1.2; font-weight: 400; letter-spacing: -0.02em; color: var(--dvk-background); }
+  .rail p { font-size: 14px; line-height: 1.6; color: var(--dvk-inverse-muted); }
+  /* Une fois le script actif, seule l'étape courante est développée. */
+  [data-interactif] .rail li { opacity: 0.4; transition: opacity 0.35s; }
+  [data-interactif] .rail li.on { opacity: 1; }
+  [data-interactif] .rail li.on::before { background: var(--dvk-background); }
+  [data-interactif] .rail li:not(.on) p { display: none; }
+  [data-interactif][data-mode="manuel"] .rail li { cursor: pointer; }
+  [data-interactif][data-mode="manuel"] .rail li:focus-visible { outline: 3px solid var(--terre); outline-offset: 2px; opacity: 1; }
+  .progres { display: none; gap: 6px; margin-top: 12px; }
+  .progres i { flex: 1; height: 2px; background: rgba(245, 241, 234, 0.25); }
+  .progres i.on { background: var(--dvk-background); }
+  @media (max-width: 900px) {
+    .grille { grid-template-columns: 1fr; gap: 14px; }
+    .cadre { margin-inline: calc(-1 * var(--gouttiere)); width: calc(100% + 2 * var(--gouttiere)); border-radius: 0; }
+    .rail { border-left: 0; border-top: 1px solid var(--dvk-inverse-subtle); padding-top: 12px; }
+    .rail li { padding: 8px 0; }
+    .rail li::before { display: none; }
+    [data-interactif] .rail li:not(.on) { display: none; }
+    [data-interactif] .progres { display: flex; }
+    .env { padding: 12px 16px; }
+    .env-titre { font-size: 18px; margin-bottom: 4px; }
+    .lots li { padding: 6px 0; }
+    .lots .nom { font-size: 18px; }
+    .lots .note, .aucun { display: none; }
+    .bilan { margin-top: 4px; padding-top: 8px; font-size: 12px; }
+  }
+</style>
+
+<script>
+  import { etapeDepuisProgres, progresDefilement, rideauDepuisProgres } from "../lib/transformation";
+
+  document.querySelectorAll<HTMLElement>("[data-transformation]").forEach((racine) => {
+    const zone = racine.querySelector<HTMLElement>("[data-zone]");
+    const etapes = [...racine.querySelectorAll<HTMLElement>("[data-etape-li]")];
+    const barres = [...racine.querySelectorAll<HTMLElement>(".progres i")];
+    if (!zone) return;
+    const aller = (e: number, rideau: number) => {
+      racine.dataset.e = String(e);
+      racine.style.setProperty("--rideau", String(rideau));
+      etapes.forEach((li, i) => li.classList.toggle("on", i === e - 1));
+      barres.forEach((b, i) => b.classList.toggle("on", i < e));
+    };
+    racine.dataset.interactif = "";
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Pas d'épinglage ni d'animation : les étapes se choisissent au clic ou au clavier.
+      racine.dataset.mode = "manuel";
+      etapes.forEach((li, i) => {
+        li.tabIndex = 0;
+        const choisir = () => aller(i + 1, i + 1 < 3 ? 0 : 1);
+        li.addEventListener("click", choisir);
+        li.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); choisir(); } });
+      });
+      return;
+    }
+    racine.dataset.mode = "defilement";
+    let attente = false;
+    const maj = () => {
+      attente = false;
+      const r = zone.getBoundingClientRect();
+      const p = progresDefilement(r.top, r.height, innerHeight);
+      aller(etapeDepuisProgres(p), rideauDepuisProgres(p));
+    };
+    const planifier = () => { if (!attente) { attente = true; requestAnimationFrame(maj); } };
+    addEventListener("scroll", planifier, { passive: true });
+    addEventListener("resize", planifier);
+    maj();
+  });
+</script>

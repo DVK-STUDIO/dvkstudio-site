@@ -1,0 +1,99 @@
+---
+import "@fontsource-variable/montserrat";
+import "@fontsource/fraunces/latin-500.css";
+import "@fontsource/fraunces/latin-600.css";
+import "../styles/global.css";
+import montserratLatin from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
+import frauncesLatin from "@fontsource/fraunces/files/fraunces-latin-500-normal.woff2?url";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../content/site";
+
+interface Props {
+  titre: string;
+  description: string;
+  page: string; // identifiant d'attribution : home, immobilier, travaux…
+  chemin: string;
+  noindex?: boolean;
+  /** Données structurées (schema.org), sérialisées en JSON-LD. Uniquement des faits publics déjà affichés sur le site. */
+  donneesStructurees?: Record<string, unknown>;
+}
+const { titre, description, page, chemin, noindex = false, donneesStructurees } = Astro.props;
+const canonique = new URL(chemin, site.url).toString();
+const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Studio`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titreComplet}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonique} />
+    <!-- Polices du premier écran (latin) préchargées : moins de décalage au chargement. Le reste se charge à la demande. -->
+    <link rel="preload" href={montserratLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    {donneesStructurees && <script type="application/ld+json" set:html={JSON.stringify(donneesStructurees)} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonique} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="theme-color" content="#1c1c1c" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/favicon-180.png" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+  </head>
+  <body data-page={page}>
+    <a class="aller-contenu" href="#contenu">Aller au contenu</a>
+    <Header page={page} />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Origine du visiteur (sans cookie) et liens de rendez-vous. Chargé sur toutes les pages.
+      import { CALENDLY_BASE, construireLienRdv, fusionnerOrigine, lireAttribution, offreDepuisChemin, type Attribution } from "../lib/calendly";
+      import { signalConversion } from "../lib/conversion.mjs";
+      const signaler = (evenement: string, bouton?: string) => {
+        const detail = signalConversion(evenement, document.body.dataset.page, bouton);
+        if (detail) window.dispatchEvent(new CustomEvent("dvk:conversion", { detail }));
+      };
+      signaler("page_vue");
+      document.addEventListener("click", event => {
+        const cible = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null;
+        if (!cible) return;
+        if (cible.hasAttribute("data-rdv")) signaler("rdv_ouvert", cible.dataset.rdv);
+        else if (cible.protocol === "tel:") signaler("appel_ouvert");
+        else if (cible.protocol === "mailto:") signaler("email_ouvert");
+      });
+      const CLE = "dvk_origine";
+      let origine: Attribution | null = null;
+      try {
+        const stockee = sessionStorage.getItem(CLE);
+        origine = stockee ? (JSON.parse(stockee) as Attribution) : null;
+        origine = fusionnerOrigine(origine, lireAttribution(location.search, document.referrer, location.pathname, location.hostname));
+        sessionStorage.setItem(CLE, JSON.stringify(origine));
+      } catch {
+        origine = lireAttribution(location.search, document.referrer, location.pathname, location.hostname);
+      }
+      const page = document.body.dataset.page ?? "page";
+      document.querySelectorAll<HTMLAnchorElement>("a[data-rdv]").forEach((a) => {
+        a.href = construireLienRdv(CALENDLY_BASE, origine, { page, bouton: a.dataset.rdv ?? "rdv", parcours: a.dataset.parcours, offre: offreDepuisChemin(location.pathname) });
+        a.target = "_blank";
+        a.rel = "noopener";
+      });
+
+      // Apparition douce au scroll (jamais bloquante).
+      const cibles = document.querySelectorAll<HTMLElement>(".reveal");
+      if ("IntersectionObserver" in window) {
+        const obs = new IntersectionObserver((entrees) => entrees.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("vu"); obs.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+        cibles.forEach((c) => obs.observe(c));
+      } else cibles.forEach((c) => c.classList.add("vu"));
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../content/site";
+import { iadActive } from "../content/capacites";
+import { iad } from "../content/iad";
+const e = site.editeur;
+---
+
+<Base titre="Conditions générales de vente" description="Conditions générales de vente des prestations de DVK Studio : objet, limites de mission, estimations non contractuelles, propriété intellectuelle et droit applicable." page="cgv" chemin="/cgv/">
+  <div class="conteneur page-hero prose">
+    <p class="surtitre">Légal</p>
+    <h1 class="titre-xl">Conditions générales de vente</h1>
+    <p>Version préparée le 3 octobre 2026 ; en vigueur à la mise en ligne du site.</p>
+
+    <h2>Article 1 – Prestataire</h2>
+    <p>{e.nom} – {site.nom} – EI assujettie à la TVA – SIRET {e.siret} – N° de TVA : {e.tva} – {e.adresse}.</p>
+
+    <h2>Article 2 – Nature des prestations</h2>
+    <p>{site.nom} propose des prestations de facilitation de projets immobiliers. <strong>{site.nom} n'est pas maître d'œuvre, ne réalise pas de travaux et n'assure pas de garantie décennale liée aux travaux de tiers.</strong> {iadActive ? iad.cgv : "Les prestations d'accompagnement de travaux relèvent de leurs propres conditions, communiquées avant tout engagement."}</p>
+
+    <h2>Article 3 – Livrables</h2>
+    <p>Les plans fournis sont des plans simplifiés d'aide à la décision. Les enveloppes budgétaires sont indicatives et ne constituent pas des devis.</p>
+
+    <h2>Article 4 – Propriété intellectuelle</h2>
+    <p>Livrables transmis pour usage personnel dans le cadre du projet. Toute diffusion commerciale requiert un accord écrit.</p>
+
+    <h2>Article 5 – Droit applicable</h2>
+    <p>Droit français. Juridiction : tribunal judiciaire d'Amiens.</p>
+  </div>
+</Base>

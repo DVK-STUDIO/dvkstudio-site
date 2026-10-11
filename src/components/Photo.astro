@@ -1,0 +1,42 @@
+---
+// DVKPhoto : photographie avec son type, ses droits et sa provenance. Prête à recevoir de vraies prises de vue.
+// Sans image (ou sans droits confirmés), le composant affiche un EMPLACEMENT à venir : jamais une fausse photo,
+// jamais une image générée pour masquer le manque (PHO-04, PHO-05).
+import { Image } from "astro:assets";
+import Statut from "./experience/Statut.astro";
+
+interface Props {
+  /** Image importée (src/assets/...). Absente : emplacement à venir. */
+  src?: ImageMetadata;
+  alt: string;
+  type?: "reelle" | "retouchee" | "chantier" | "realise";
+  /** « confirmes » seulement si le droit d'usage est archivé. Sinon l'image n'est PAS affichée. */
+  droits?: "confirmes" | "non-confirmes";
+  ratio?: string;
+  legende?: string;
+}
+const { src, alt, type = "reelle", droits = "non-confirmes", ratio = "16 / 10", legende } = Astro.props;
+const afficher = !!src && droits === "confirmes";
+const mention = { reelle: "", retouchee: "Photo retouchée", chantier: "Chantier", realise: "Projet réalisé" }[type];
+---
+
+<figure class="dvk-photo" style={`--ratio:${ratio}`}>
+  {afficher
+    ? (<>
+        <Image src={src!} alt={alt} class="img" widths={[480, 800, 1200]} sizes="(max-width: 900px) 100vw, 60vw" />
+        {mention && <span class="provenance">{mention}</span>}
+      </>)
+    : (<div class="emplacement" role="img" aria-label={`Emplacement de photographie : ${alt}`}>
+        <Statut statut="a_venir" libelle="Photographie à venir" />
+      </div>)}
+  {legende && <figcaption>{legende}</figcaption>}
+</figure>
+
+<style>
+  .dvk-photo { margin: 0; }
+  .img, .emplacement { width: 100%; aspect-ratio: var(--ratio); border-radius: var(--dvk-radius-md); display: block; object-fit: cover; }
+  .emplacement { display: flex; align-items: center; justify-content: center; background-color: var(--dvk-surface); background-image: repeating-linear-gradient(135deg, var(--dvk-hatch) 0 2px, transparent 2px 12px); }
+  .dvk-photo { position: relative; }
+  .provenance { position: absolute; left: 12px; bottom: 12px; font-size: 12px; background: rgba(245, 241, 234, 0.85); color: var(--dvk-text); padding: 4px 8px; border-radius: var(--dvk-radius-sm); }
+  figcaption { margin-top: 8px; font-size: 13px; color: var(--dvk-text-subtle); }
+</style>
