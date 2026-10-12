@@ -4,6 +4,5 @@ export const navigation: Entree[] = [
   { libelle: "Particuliers", href: "/travaux/" },
   { libelle: "Avant d'acheter", href: "/acquereurs/" },
   { libelle: "Prescripteurs", href: "/professionnels/" },
-  { libelle: "Conseils", href: "/blog/" },
   { libelle: "À propos", href: "/a-propos/" },
 ];
