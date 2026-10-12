@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PremierEchange from "../../components/PremierEchange.astro";
 import BoutonRdv from "../../components/BoutonRdv.astro";
 
-const titre = "DPE 2027 : passoires thermiques F et G dans l'Oise et la Somme";
+const titre = "DPE 2027 : passoires thermiques en Oise et Somme";
 const description = "Échéance 2027, interdiction de louer les logements F et G, audit énergétique et travaux prioritaires : les recommandations de votre chef de projet travaux hemea.";
 
 const schema = {
@@ -23,7 +23,7 @@ const schema = {
 ---
 
 <Base titre={titre} description={description} page="blog" chemin="/blog/dpe-2027-passoires-thermiques-oise-somme/" donneesStructurees={schema}>
-  <main id="contenu">
+  <article class="dvk-article-conteneur">
     <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
       <div class="conteneur" style="max-width: 860px;">
         <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
@@ -102,5 +102,5 @@ const schema = {
     </article>
 
     <PremierEchange />
-  </main>
+  </article>
 </Base>
