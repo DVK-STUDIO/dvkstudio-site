@@ -1,0 +1,109 @@
+---
+import Base from "../../layouts/Base.astro";
+import PremierEchange from "../../components/PremierEchange.astro";
+import BoutonRdv from "../../components/BoutonRdv.astro";
+
+const titre = "MaPrimeRénov' dans l'Oise et la Somme : financer ses travaux";
+const description = "Plafonds d'aides, conditions d'éligibilité, audit obligatoire et cumul d'aides locales pour financer une rénovation d'ampleur dans le 60 et le 80.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "MaPrimeRénov' et rénovation d'ampleur dans l'Oise et la Somme",
+  "author": {
+    "@type": "Person",
+    "name": "Kevin De Vlieger",
+    "jobTitle": "Chef de projet travaux hemea",
+    "telephone": "+33640324752",
+    "email": "k.devlieger@hemea.fr"
+  },
+  "datePublished": "2026-10-12",
+  "description": description
+};
+---
+
+<Base titre={titre} description={description} page="blog" chemin="/blog/maprimerenov-renovation-ampleur-oise-somme/" donneesStructurees={schema}>
+  <main id="contenu">
+    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
+      <div class="conteneur" style="max-width: 860px;">
+        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
+          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
+          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
+          <span style="color: var(--dvk-text);">MaPrimeRénov' Oise et Somme</span>
+        </nav>
+
+        <span class="surtitre">Financement &amp; Aides · Oise (60) &amp; Somme (80)</span>
+        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
+          MaPrimeRénov' : optimiser le financement d'une rénovation globale dans l'Oise et la Somme
+        </h1>
+
+        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
+          <span>Par <strong>Kevin De Vlieger</strong> · Chef de projet travaux hemea</span>
+          <span>•</span>
+          <span>Temps de lecture : 5 min</span>
+        </div>
+
+        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
+            La rénovation thermique par geste unique (changement de chaudière seul) laisse place à une priorité absolue donnée aux rénovations d'ampleur. Dans l'Oise et la Somme, les aides publiques peuvent couvrir jusqu'à 63 000 € de travaux pour les ménages éligibles réalisant un saut d'au moins deux classes DPE.
+          </p>
+        </div>
+
+        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
+          <h2>1. Le parcours « Rénovation d'ampleur » : les critères indispensables</h2>
+          <p>
+            Pour bénéficier du taux maximal de subvention, le projet de travaux doit répondre à des exigences techniques précises :
+          </p>
+          <ul>
+            <li><strong>Gain énergétique minimum :</strong> Amélioration d'au moins 2 classes DPE (par exemple, passage de F à D ou de E à C).</li>
+            <li><strong>Deux gestes d'isolation :</strong> Traiter impérativement deux postes d'isolation (toiture, murs extérieurs, plancher bas ou fenêtres).</li>
+            <li><strong>Interdiction des énergies fossiles :</strong> Le projet ne peut pas installer une chaudière fioul ou gaz.</li>
+            <li><strong>Accompagnement agréé :</strong> Réalisation préalable d'un audit énergétique et suivi par Mon Accompagnateur Rénov' (MAR).</li>
+          </ul>
+
+          <h2>2. Les barèmes de prise en charge et le reste à charge réel</h2>
+          <p>
+            Le plafond de dépenses éligibles varie selon l'ambition du gain thermique :
+          </p>
+          <ul>
+            <li><strong>Saut de 2 classes DPE :</strong> Plafond de travaux subventionnables fixé à 40 000 € HT.</li>
+            <li><strong>Saut de 3 classes DPE :</strong> Plafond fixé à 55 000 € HT.</li>
+            <li><strong>Saut de 4 classes DPE (sortie de passoire) :</strong> Plafond jusqu'à 70 000 € HT.</li>
+          </ul>
+          <p>
+            Le taux de prise en charge s'échelonne selon votre tranche de revenus (Bleu, Jaune, Violet, Rose) et peut atteindre jusqu'à 80 % à 90 % pour les foyers aux revenus très modestes, complété par l'Éco-Prêt à Taux Zéro (Éco-PTZ jusqu'à 50 000 € sur 20 ans) pour financer le reste à charge sans intérêts.
+          </p>
+
+          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
+            <p class="surtitre" style="margin-bottom: 8px;">Cumul avec les aides locales dans le 60 et le 80</p>
+            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
+              Des dispositifs complémentaires existent à l'échelle locale : primes de l'Agglomération de la Région de Compiègne (ARC), aides de la Communauté d'Agglomération du Beauvaisis (CAB), ou programme d'Amiens Métropole. Un cadrage préalable permet d'optimiser le plan de financement avant toute signature de devis.
+            </p>
+          </div>
+
+          <h2>3. Comment je vous aide à sécuriser l'obtention de vos aides</h2>
+          <p>
+            La première cause de rejet d'un dossier d'aide financière réside dans la non-conformité administrative des devis (mentions RGE incomplètes, critères de résistance thermique R non précisés). Mon rôle de chef de projet travaux hemea consiste à :
+          </p>
+          <ul>
+            <li>Vérifier rigoureusement les labels RGE de chaque entreprise retenue avant le début du chantier.</li>
+            <li>Faire valider la conformité technique des fiches produits d'isolants et de pompes à chaleur.</li>
+            <li>Encadrer les paiements via le compte séquestre hemea, garantissant que les artisans ne sont réglés qu'après validation de la bonne exécution des travaux.</li>
+          </ul>
+
+          <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
+            <h3>Vous préparez une rénovation globale dans l'Oise ou la Somme ?</h3>
+            <p>
+              Étudions la faisabilité de votre projet et l'enveloppe d'aides mobilisables lors d'un échange téléphonique de 30 minutes sans engagement.
+            </p>
+            <div style="margin-top: 24px;">
+              <BoutonRdv bouton="blog_maprimerenov">Estimer mon projet de rénovation (30 min)</BoutonRdv>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <PremierEchange />
+  </main>
+</Base>
