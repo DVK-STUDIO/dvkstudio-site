@@ -1,6 +1,6 @@
 ---
 import { navigation } from "../content/navigation";
-import { CALENDLY_BASE } from "../lib/calendly";
+import { RDV_BASE } from "../lib/rdv";
 import symbole from "../assets/logo/dvk-logo-symbole.svg?url";
 interface Props { page: string }
 const { page } = Astro.props;
@@ -26,7 +26,7 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
         ))}
       </ul>
     </nav>
-    <a href={CALENDLY_BASE} class="btn btn-action entete-cta" data-rdv="nav.rdv" target="_blank" rel="noopener">Faire le point · 30 min</a>
+    <a href={RDV_BASE} class="btn btn-action entete-cta" data-rdv="nav.rdv" target="_blank" rel="noopener">Faire le point · 30 min</a>
     <button type="button" class="menu-bouton" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu">
       <span></span><span></span>
     </button>

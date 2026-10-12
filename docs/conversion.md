@@ -9,6 +9,8 @@
 
 ## Qualification réelle
 
+Le 12 octobre 2026, la prise de rendez-vous est passée de Calendly à HubSpot (https://meetings-eu1.hubspot.com/kevin-de-vlieger). Les paragraphes ci-dessous décrivent l’ancienne configuration Calendly : questions et durée à reproduire dans la page de réunion HubSpot.
+
 Calendly a été vérifié en lecture seule le 11 octobre 2026. Le rendez-vous « Premier contact » est actif, dure 30 minutes et se fait par appel entrant au 06 40 32 47 52. Il n’est pas payant. Le site est aligné sur ces informations.
 
 Questions déjà actives : type de bien (obligatoire), localisation (obligatoire), délai (facultatif), budget indicatif (obligatoire, avec « Budget en cours de définition »), précision libre (facultative). Le stade d’avancement est désactivé. Aucun réglage Calendly n’a été modifié.

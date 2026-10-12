@@ -1,9 +1,9 @@
 ---
-// Lien de prise de rendez-vous. Le href par défaut est l'URL Calendly nue (fonctionne sans JavaScript) ;
-// le script de la page y ajoute l'origine du visiteur et le bouton cliqué (voir src/lib/calendly.ts).
-import { CALENDLY_BASE } from "../lib/calendly";
+// Lien de prise de rendez-vous. Le href par défaut est l'URL HubSpot nue (fonctionne sans JavaScript) ;
+// le script de la page y ajoute l'origine du visiteur et le bouton cliqué (voir src/lib/rdv.ts).
+import { RDV_BASE } from "../lib/rdv";
 interface Props { bouton: string; parcours?: string; classe?: string; }
 const { bouton, parcours, classe = "btn btn-action" } = Astro.props;
 ---
 
-<a class={classe} href={CALENDLY_BASE} data-rdv={bouton} data-parcours={parcours} target="_blank" rel="noopener"><slot /></a>
+<a class={classe} href={RDV_BASE} data-rdv={bouton} data-parcours={parcours} target="_blank" rel="noopener"><slot /></a>

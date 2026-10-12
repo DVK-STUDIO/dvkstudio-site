@@ -1,10 +1,10 @@
 # Attribution entrante : conventions et comportement
 
-Source : `src/lib/calendly.ts` (fonctions pures, tests dans `src/lib/calendly.test.ts`). Aucun cookie : l'origine vit dans `sessionStorage` et ne part que dans l'URL Calendly ouverte par le visiteur.
+Source : `src/lib/rdv.ts` (fonctions pures, tests dans `src/lib/rdv.test.ts`). Aucun cookie : l'origine vit dans `sessionStorage` et ne part que dans l'URL HubSpot ouverte par le visiteur.
 
-## Ce qui part vers Calendly
+## Ce qui part vers HubSpot
 
-Uniquement cinq paramètres `utm_*`. Aucun `gclid`, aucun paramètre personnalisé `a1..a10` (ils préremplissent les questions visibles du formulaire Calendly).
+Uniquement cinq paramètres `utm_*`. Aucun `gclid`, aucun paramètre personnalisé `a1..a10` (ils préremplissent les questions visibles du formulaire HubSpot).
 
 | Paramètre | Valeur |
 |---|---|
@@ -49,10 +49,10 @@ Conseil pour les annonces : nommer les campagnes directement dans le format (min
 ## Hors périmètre de ce module
 - Aucune lecture ni transmission du `gclid` tant que le consentement n'est pas en place.
 - Aucun événement navigateur, aucune intégration GA4, Ads ou Meta.
-- La remontée des réservations vers Growth (polling Calendly) est une étape distincte.
+- La remontée des réservations vers Growth (polling HubSpot) est une étape distincte.
 
 ## Sessions déjà ouvertes et désaccord campagne / page
 
 - Une origine relue depuis `sessionStorage` n'est jamais crue : chaque `utm_*` est renormalisé, les champs inconnus (`gclid`, `a1..a3`) sont supprimés et les offres sont recalculées.
 - La campagne (`utm_campaign`), la page d'arrivée (`atterrissage`) et les deux offres (`offreCampagne`, `offreAtterrissage`) restent conservées séparément. `offre` retient celle de la campagne, à défaut celle de la page. `ecartOffre()` signale un désaccord (ex. `/travaux/` avec `achat-travaux-…`).
-- Seuls les `utm_*` atteignent Calendly : la page d'arrivée n'y figure pas. Pour une annonce, l'écart ne sera donc détectable côté Growth qu'avec l'événement navigateur prévu à l'étape 3.
+- Seuls les `utm_*` atteignent HubSpot : la page d'arrivée n'y figure pas. Pour une annonce, l'écart ne sera donc détectable côté Growth qu'avec l'événement navigateur prévu à l'étape 3.

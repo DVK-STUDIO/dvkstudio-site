@@ -56,7 +56,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <Footer />
     <script>
       // Origine du visiteur (sans cookie) et liens de rendez-vous. Chargé sur toutes les pages.
-      import { CALENDLY_BASE, construireLienRdv, fusionnerOrigine, lireAttribution, offreDepuisChemin, type Attribution } from "../lib/calendly";
+      import { RDV_BASE, construireLienRdv, fusionnerOrigine, lireAttribution, offreDepuisChemin, type Attribution } from "../lib/rdv";
       import { signalConversion } from "../lib/conversion.mjs";
       const signaler = (evenement: string, bouton?: string) => {
         const detail = signalConversion(evenement, document.body.dataset.page, bouton);
@@ -82,7 +82,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
       }
       const page = document.body.dataset.page ?? "page";
       document.querySelectorAll<HTMLAnchorElement>("a[data-rdv]").forEach((a) => {
-        a.href = construireLienRdv(CALENDLY_BASE, origine, { page, bouton: a.dataset.rdv ?? "rdv", parcours: a.dataset.parcours, offre: offreDepuisChemin(location.pathname) });
+        a.href = construireLienRdv(RDV_BASE, origine, { page, bouton: a.dataset.rdv ?? "rdv", parcours: a.dataset.parcours, offre: offreDepuisChemin(location.pathname) });
         a.target = "_blank";
         a.rel = "noopener";
       });

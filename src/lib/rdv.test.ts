@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  CALENDLY_BASE,
+  RDV_BASE,
   construireLienRdv,
   ecartOffre,
   fusionnerOrigine,
@@ -9,7 +9,7 @@ import {
   offreDepuisCampagne,
   offreDepuisChemin,
   type Attribution,
-} from "./calendly";
+} from "./rdv";
 
 const HOTE = "dvkstudio.fr";
 // Format exigé par Growth/Core (core.project_origin).
@@ -104,7 +104,7 @@ describe("lireAttribution", () => {
   it("une valeur incompatible reste visible : jamais supprimée ni remplacée par le bouton", () => {
     const a = lireAttribution("?utm_source=meta&utm_content=" + encodeURIComponent("###"), "", "/travaux/", HOTE);
     expect(a.utm_content).toMatch(/^invalide-h/);
-    const u = new URL(construireLienRdv(CALENDLY_BASE, a, { page: "travaux", bouton: "hero.rdv" }));
+    const u = new URL(construireLienRdv(RDV_BASE, a, { page: "travaux", bouton: "hero.rdv" }));
     expect(u.searchParams.get("utm_content")).toBe(a.utm_content);
     expect(u.searchParams.get("utm_content")).not.toMatch(/^dvk./);
   });
@@ -202,11 +202,11 @@ describe("campagne, page d'arrivée et offre d'origine restent distinctes", () =
 
 describe("construireLienRdv", () => {
   const ctx = { page: "home", bouton: "hero.rdv", parcours: "vendre" };
-  const lien = (o: Attribution | null, c = ctx) => new URL(construireLienRdv(CALENDLY_BASE, o, c));
+  const lien = (o: Attribution | null, c = ctx) => new URL(construireLienRdv(RDV_BASE, o, c));
 
   it("conserve les utm_* d'origine, dont utm_content : le bouton ne l'écrase pas", () => {
     const u = lien(lireAttribution("?utm_source=meta&utm_medium=paid_social&utm_campaign=renovation-oct&utm_content=ad-12&utm_term=maconnerie", "", "/travaux/", HOTE));
-    expect(u.origin + u.pathname).toBe(CALENDLY_BASE);
+    expect(u.origin + u.pathname).toBe(RDV_BASE);
     expect(u.searchParams.get("utm_source")).toBe("meta");
     expect(u.searchParams.get("utm_medium")).toBe("paid_social");
     expect(u.searchParams.get("utm_campaign")).toBe("renovation-oct");

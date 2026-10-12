@@ -6,11 +6,11 @@ Site statique Astro de DVK Studio. Branche de travail : `v2/refonte`. Aucune mis
 - `npm run dev` : serveur local
 - `npm run build` : site statique dans `dist/`
 - `npm run preview` : aperçu du build
-- `npm test` : tests unitaires (liens Calendly et attribution)
+- `npm test` : tests unitaires (liens de rendez-vous HubSpot et attribution)
 - `npm run check:public` : contrôle d'hygiène du build (IBAN, trackers, polices tierces) ; `-- --golive` refuse les « à compléter »
 
 ## Principes
-- Aucun cookie, aucun traceur. L'origine de visite (page, bouton) est gardée en `sessionStorage` puis transmise à Calendly par paramètres UTM.
+- Aucun cookie, aucun traceur. L'origine de visite (page, bouton) est gardée en `sessionStorage` puis transmise à HubSpot par paramètres UTM.
 - Polices auto-hébergées. JavaScript natif, seulement où utile.
 - Statuts honnêtes : Disponible / Démonstration / À venir.
 - Ancien site conservé dans `legacy/` (non déployé).

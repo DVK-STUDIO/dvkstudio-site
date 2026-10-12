@@ -1,10 +1,10 @@
 // Attribution du visiteur jusqu'au rendez-vous : source → campagne → page → bouton → RDV.
 // Fonctions pures (testées sans réseau). Aucun cookie : l'origine vit dans sessionStorage, côté navigateur,
-// et ne part que dans l'URL Calendly que le visiteur choisit d'ouvrir. Growth la relit ensuite dans la
+// et ne part que dans l'URL HubSpot que le visiteur choisit d'ouvrir. Growth la relit ensuite dans la
 // réservation (utm_*), sans base ni CRM parallèle.
 //
 // Règles (revue technique du tracking, 2026-10) :
-// - Seuls les cinq champs utm_* voyagent vers Calendly. Les paramètres a1..a3 sont RETIRÉS : ils préremplissent
+// - Seuls les cinq champs utm_* voyagent vers HubSpot. Les paramètres a1..a3 sont RETIRÉS : ils préremplissent
 //   les questions visibles du formulaire (« Type de projet », « Localisation ») au lieu de porter du suivi.
 // - Les utm_* d'origine (Ads, Meta, newsletter...) sont conservés tels quels, seulement normalisés au format
 //   attendu par Growth/Core : ^[a-z0-9][a-z0-9._-]{0,119}$. Jamais remplacés par l'identifiant du bouton.
@@ -12,7 +12,7 @@
 //   d'origine n'existe, avec le préfixe « dvk. » qui le distingue d'une valeur publicitaire.
 // - gclid : ni lu, ni conservé, ni transmis tant que le consentement n'est pas en place.
 
-export const CALENDLY_BASE = "https://calendly.com/contact-dvkstudio/premier-contact";
+export const RDV_BASE = "https://meetings-eu1.hubspot.com/kevin-de-vlieger";
 
 /** Offres d'acquisition publiées. Toute autre capacité reste hors de ce type tant qu'elle n'est pas validée. */
 export type Offre = "renovation" | "achat_travaux";
@@ -77,7 +77,7 @@ export function normaliserUtm(v: string | null | undefined): string | undefined 
   return `${tronque === "" ? "invalide" : tronque}${marque}`;
 }
 
-// Chemin d'atterrissage : informatif (navigateur), jamais envoyé à Calendly.
+// Chemin d'atterrissage : informatif (navigateur), jamais envoyé à HubSpot.
 const nettoyerChemin = (v: string | null | undefined): string | undefined => {
   if (!v) return undefined;
   const t = v.trim().replace(/[^\w.\-/]/g, "").slice(0, 100);
@@ -162,7 +162,7 @@ export type ContexteBouton = { page: string; bouton: string; parcours?: string; 
 
 // Construit le lien de prise de rendez-vous. Les utm_* d'origine passent tels quels (normalisés). Sans utm_content
 // d'origine, il vaut « dvk.[offre.]page.bouton » : le bouton est identifié sans écraser une valeur de campagne.
-// `parcours` reste accepté (information de navigation) mais n'est plus transmis à Calendly.
+// `parcours` reste accepté (information de navigation) mais n'est plus transmis à HubSpot.
 export function construireLienRdv(base: string, origine: Attribution | null, ctx: ContexteBouton): string {
   const url = new URL(base);
   const o = origine ?? {};

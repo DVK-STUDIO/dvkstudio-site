@@ -15,7 +15,7 @@ const AUTORISES = [
   /^src[\\/]content[\\/]capacites\.ts$/,
   /^src[\\/]immobilier[\\/]/,
   /^src[\\/]lib[\\/]capacites\.test\.ts$/,
-  /^src[\\/]lib[\\/]calendly\.test\.ts$/,
+  /^src[\\/]lib[\\/]rdv\.test\.ts$/,
 ];
 function sources(d: string): string[] {
   return readdirSync(d).flatMap((n) => {
