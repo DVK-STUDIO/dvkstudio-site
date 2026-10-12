@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PremierEchange from "../../components/PremierEchange.astro";
 import BoutonRdv from "../../components/BoutonRdv.astro";
 
-const titre = "MaPrimeRénov' dans l'Oise et la Somme : financer ses travaux";
+const titre = "MaPrimeRénov' : rénovation d'ampleur en Oise et Somme";
 const description = "Plafonds d'aides, conditions d'éligibilité, audit obligatoire et cumul d'aides locales pour financer une rénovation d'ampleur dans le 60 et le 80.";
 
 const schema = {
@@ -23,7 +23,7 @@ const schema = {
 ---
 
 <Base titre={titre} description={description} page="blog" chemin="/blog/maprimerenov-renovation-ampleur-oise-somme/" donneesStructurees={schema}>
-  <main id="contenu">
+  <article class="dvk-article-conteneur">
     <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
       <div class="conteneur" style="max-width: 860px;">
         <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
@@ -105,5 +105,5 @@ const schema = {
     </article>
 
     <PremierEchange />
-  </main>
+  </article>
 </Base>
