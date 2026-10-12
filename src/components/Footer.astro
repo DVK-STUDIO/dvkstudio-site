@@ -1,7 +1,6 @@
 ---
 import { site } from "../content/site";
 const e = site.editeur;
-const m = site.mandant;
 ---
 
 <footer class="pied">
@@ -9,7 +8,7 @@ const m = site.mandant;
     <!-- Fond nuit : le logo couleur n'y est pas lisible, la marque est donc écrite (le logo reste dans l'en-tête). -->
     <p class="pied-marque">DVK Studio<span>Oise · Somme</span></p>
     <div class="pied-texte">
-      <p class="pied-qualite">{e.nom} — Chef de projet travaux hemea · Mandataire indépendant de {m.denomination}, exploitant sous l'enseigne {m.enseigne}.</p>
+      <p class="pied-qualite">{e.nom} — Chef de projet travaux hemea</p>
       <p>{site.nom} — {e.forme} {e.nom} · SIRET {e.siret} · {e.adresse}</p>
       <p class="pied-liens">
         <a href="/blog/">Guides & Conseils</a>
