@@ -1,0 +1,83 @@
+---
+import Base from "../../layouts/Base.astro";
+import PremierEchange from "../../components/PremierEchange.astro";
+import BoutonRdv from "../../components/BoutonRdv.astro";
+
+const titre = "Guides & Conseils Rénovation Oise et Somme";
+const description = "Guides pratiques pour vos travaux de rénovation dans l'Oise et la Somme : bâti ancien, rénovation énergétique, budget et aides financières.";
+
+const articles = [
+  {
+    slug: "renovation-maison-ancienne-oise",
+    titre: "Rénovation d'une maison ancienne dans l'Oise : guide complet",
+    chapo: "Pierre calcaire, brique picarde, humidité et confort thermique : les étapes clés pour rénover sans dénaturer le bâti ancien.",
+    categorie: "Typologies locales",
+    tempsLecture: "6 min",
+    date: "12 octobre 2026",
+  },
+  {
+    slug: "renovation-maison-amienoise-somme",
+    titre: "Rénover une maison amiénoise : préserver le cachet et isoler",
+    chapo: "Façade en brique, bâtisse étroite sur trois niveaux : comment réussir sa rénovation thermique et valoriser son bien à Amiens.",
+    categorie: "Typologies locales",
+    tempsLecture: "5 min",
+    date: "12 octobre 2026",
+  },
+];
+---
+
+<Base titre={titre} description={description} page="blog" chemin="/blog/">
+  <main id="contenu">
+    <!-- En-tête éditorial inspiré hemea -->
+    <section class="section" style="padding-top: 56px; padding-bottom: 32px;">
+      <div class="conteneur">
+        <p class="surtitre">Atelier conseils · hemea</p>
+        <h1 class="titre-xl" style="margin-top: 12px; margin-bottom: 20px;">Guides & Conseils Rénovation</h1>
+        <p class="chapo" style="max-width: 65ch;">
+          Des analyses claires et des repères chiffrés pour préparer vos travaux dans l'Oise et la Somme.
+          Méthode, budget, réglementation thermique et cadre sécurisé hemea.
+        </p>
+
+        <!-- Silos thématiques -->
+        <div style="display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap;">
+          <span style="background: var(--dvk-surface); color: var(--dvk-text); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 600; border: 1px solid var(--dvk-border);">Tous les articles</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Bâti ancien & local</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Énergie & DPE</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Budget & Aides</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grille des articles -->
+    <section class="section" style="padding-top: 16px; padding-bottom: 64px;">
+      <div class="conteneur">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+          {articles.map((art) => (
+            <article style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 32px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--dvk-shadow-card);">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <span class="surtitre" style="font-size: 11px;">{art.categorie}</span>
+                  <span style="font-size: 13px; color: var(--dvk-text-muted);">{art.tempsLecture}</span>
+                </div>
+                <h2 style="font-size: 22px; line-height: 1.3; margin-bottom: 14px; font-weight: 600;">
+                  <a href={`/blog/${art.slug}/`} style="color: var(--dvk-text); text-decoration: none;">
+                    {art.titre}
+                  </a>
+                </h2>
+                <p style="color: var(--dvk-text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+                  {art.chapo}
+                </p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--dvk-border);">
+                <span style="font-size: 13px; color: var(--dvk-text-muted);">{art.date}</span>
+                <a href={`/blog/${art.slug}/`} class="lien-soulige" style="min-height: auto; font-size: 14px;">Lire le guide →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <PremierEchange />
+  </main>
+</Base>

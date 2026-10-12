@@ -1,0 +1,107 @@
+---
+import Base from "../../layouts/Base.astro";
+import PremierEchange from "../../components/PremierEchange.astro";
+import BoutonRdv from "../../components/BoutonRdv.astro";
+
+const titre = "Rénovation maison ancienne dans l'Oise : guide travaux";
+const description = "Étapes, budget et précautions pour rénover une maison ancienne en pierre ou brique dans l'Oise avec l'accompagnement hemea.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Rénovation d'une maison ancienne dans l'Oise : étapes, budget et pièges à éviter",
+  "author": {
+    "@type": "Person",
+    "name": "Kevin De Vlieger",
+    "jobTitle": "Chef de projet travaux hemea",
+    "telephone": "+33640324752",
+    "email": "k.devlieger@hemea.fr"
+  },
+  "datePublished": "2026-10-12",
+  "description": description
+};
+---
+
+<Base titre={titre} description={description} page="blog" chemin="/blog/renovation-maison-ancienne-oise/" donneesStructurees={schema}>
+  <main id="contenu">
+    <!-- En-tête Article façon hemea -->
+    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
+      <div class="conteneur" style="max-width: 860px;">
+        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
+          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
+          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
+          <span style="color: var(--dvk-text);">Maison ancienne Oise</span>
+        </nav>
+
+        <span class="surtitre">Guide Bâti Ancien · Oise (60)</span>
+        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
+          Rénovation d'une maison ancienne dans l'Oise : étapes, budget et pièges à éviter
+        </h1>
+
+        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
+          <span>Par <strong>Kevin De Vlieger</strong> · Chef de projet travaux hemea</span>
+          <span>•</span>
+          <span>Temps de lecture : 6 min</span>
+        </div>
+
+        <!-- Chapô -->
+        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
+            Dans l'Oise, les maisons anciennes en pierre calcaire ou brique picarde possèdent un charme indéniable mais demandent une approche technique spécifique. Mal isolées ou restaurées avec des matériaux inadaptés, elles risquent de se dégrader rapidement. Voici la méthode éprouvée pour rénover sereinement.
+          </p>
+        </div>
+
+        <!-- Corps de l'article -->
+        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
+          <h2>1. Comprendre la respiration du bâti ancien picard</h2>
+          <p>
+            Contrairement aux constructions contemporaines en parpaing étanches à l'air, les murs anciens en pierre ou en brique de nos villages de l'Oise (de Chantilly à Clermont en passant par Compiègne et Beauvais) sont dits « perspirants ». Ils absorbent l'humidité ambiante et la restituent naturellement.
+          </p>
+          <p>
+            L'erreur la plus fréquente consiste à appliquer des enduits étanches en ciment ou des isolants synthétiques non respirants : l'eau reste alors prisonnière dans les parois, générant salpêtre et sensation de froid persistante. Pour respecter ces bâtisses, on privilégie la chaux naturelle et des isolants biosourcés (laine de bois, ouate de cellulose).
+          </p>
+
+          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
+            <p class="surtitre" style="margin-bottom: 8px;">Point de vigilance hemea</p>
+            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
+              Avant toute isolation, le traitement de l'étanchéité extérieure (toiture, solins, chéneaux) est la priorité absolue. Isoler sur une infiltration latente ruine l'investissement en quelques mois.
+            </p>
+          </div>
+
+          <h2>2. L'ordre logique des interventions pour vos travaux</h2>
+          <p>
+            Pour garantir un chantier sans surcoût, la chronologie hemea s'impose :
+          </p>
+          <ul>
+            <li><strong>Le clos et le couvert</strong> : Révision de la charpente, réfection de la toiture et remplacement des menuiseries extérieures.</li>
+            <li><strong>L'enveloppe thermique</strong> : Isolation performante des combles (jusqu'à 30 % des déperditions) et isolation intérieure perspirante.</li>
+            <li><strong>La ventilation mécanique</strong> : Mise en place d'une VMC hygroréglable ou double flux pour assainir l'air sans refroidir les pièces.</li>
+            <li><strong>Les réseaux et le confort</strong> : Rénovation électrique totale aux normes et chauffage dimensionné pour les besoins réels.</li>
+          </ul>
+
+          <h2>3. Quel budget au m² prévoir dans l'Oise et la Somme ?</h2>
+          <p>
+            Pour une maison ancienne, les enveloppes estimatives moyennes observées sur le secteur se structurent ainsi :
+          </p>
+          <ul>
+            <li><strong>Rafraîchissement & isolation simple</strong> : 800 à 1 200 € TTC / m²</li>
+            <li><strong>Rénovation complète avec réseaux et isolation</strong> : 1 400 à 1 900 € TTC / m²</li>
+            <li><strong>Restauration lourde de bâti ancien ou corps de ferme</strong> : 2 000 à 2 600 € TTC / m²</li>
+          </ul>
+
+          <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
+            <h3>Faire sécuriser votre chantier par un tiers de confiance</h3>
+            <p>
+              En tant que chef de projet travaux hemea dans l'Oise et la Somme, j'interviens à vos côtés pour cadrer votre cahier des charges, sélectionner des entreprises locales rigoureusement auditées et sécuriser vos fonds sur compte séquestre.
+            </p>
+            <div style="margin-top: 24px;">
+              <BoutonRdv bouton="blog_maison_ancienne">Faire le point sur mon projet (30 min)</BoutonRdv>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <PremierEchange />
+  </main>
+</Base>

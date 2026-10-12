@@ -1,0 +1,95 @@
+---
+import Base from "../../layouts/Base.astro";
+import PremierEchange from "../../components/PremierEchange.astro";
+import BoutonRdv from "../../components/BoutonRdv.astro";
+
+const titre = "Rénover une maison amiénoise dans la Somme : guide";
+const description = "Spécificités, isolation et aménagement d'une maison amiénoise à Amiens et dans la Somme : conseils de chef de projet travaux hemea.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Rénover une maison amiénoise : préserver le cachet tout en isolant",
+  "author": {
+    "@type": "Person",
+    "name": "Kevin De Vlieger",
+    "jobTitle": "Chef de projet travaux hemea",
+    "telephone": "+33640324752",
+    "email": "k.devlieger@hemea.fr"
+  },
+  "datePublished": "2026-10-12",
+  "description": description
+};
+---
+
+<Base titre={titre} description={description} page="blog" chemin="/blog/renovation-maison-amienoise-somme/" donneesStructurees={schema}>
+  <main id="contenu">
+    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
+      <div class="conteneur" style="max-width: 860px;">
+        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
+          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
+          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
+          <span style="color: var(--dvk-text);">Maison amiénoise Somme</span>
+        </nav>
+
+        <span class="surtitre">Guide Bâti Remarquable · Somme (80)</span>
+        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
+          Rénover une maison amiénoise : préserver le cachet tout en isolant
+        </h1>
+
+        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
+          <span>Par <strong>Kevin De Vlieger</strong> · Chef de projet travaux hemea</span>
+          <span>•</span>
+          <span>Temps de lecture : 5 min</span>
+        </div>
+
+        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
+            Emblème architectural d'Amiens et de la vallée de la Somme, l'amiénoise séduit par sa façade en brique rouge, sa hauteur et son jardin intime. Mais sa morphologie étroite et ses planchers bois posent des défis thermiques et acoustiques précis.
+          </p>
+        </div>
+
+        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
+          <h2>1. L'anatomie unique de la maison amiénoise</h2>
+          <p>
+            Qu'il s'agisse d'une simple amiénoise (deux fenêtres en façade par étage) ou d'une double amiénoise, cette maison de ville ouvrière du XIXe siècle repose sur des murs porteurs en brique pleine et des refends légers. Les planchers sur solives bois créent souvent une transmission sonore importante d'un niveau à l'autre.
+          </p>
+
+          <h2>2. Comment isoler sans abîmer la façade en brique ?</h2>
+          <p>
+            Dans l'écrasante majorité des cas, l'isolation thermique par l'extérieur (ITE) est exclue en façade sur rue pour préserver le patrimoine urbain amiénois ou par contrainte du secteur sauvegardé. La stratégie s'appuie donc sur deux piliers :
+          </p>
+          <ul>
+            <li><strong>L'isolation par l'intérieur (ITI) côté rue</strong> : Pose de doublages isolants semi-rigides et membrane régulatrice de vapeur pour laisser le mur sécher vers l'extérieur.</li>
+            <li><strong>L'isolation par l'extérieur côté jardin</strong> : Quand la configuration le permet, isoler la façade arrière par l'extérieur permet d'optimiser l'enveloppe sans rogner sur les mètres carrés intérieurs.</li>
+            <li><strong>La toiture mansardée</strong> : Traiter l'isolation sous combles avec soin pour rendre le dernier étage vivable été comme hiver.</li>
+          </ul>
+
+          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
+            <p class="surtitre" style="margin-bottom: 8px;">Astuce d'aménagement hemea</p>
+            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
+              Dans une amiénoise, la lumière est précieuse au rez-de-chaussée. Créer une verrière vers l'extension arrière ou décloisonner l'entrée transforme la sensation d'espace tout en valorisant le bien.
+            </p>
+          </div>
+
+          <h2>3. Accompagnement local dans la Somme</h2>
+          <p>
+            Rénover une amiénoise nécessite des artisans rompus aux spécificités du bâti en brique et à la rénovation en cœur urbain (stationnement, évacuation des gravats). Grâce au réseau hemea, nous sélectionnons des entreprises locales labellisées RGE pour garantir la conformité aux aides financières d'Amiens Métropole et de la Région.
+          </p>
+
+          <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
+            <h3>Vous avez un projet sur Amiens ou dans la Somme ?</h3>
+            <p>
+              Discutons de vos envies et des possibilités de votre maison lors d'un échange téléphonique de 30 minutes sans engagement.
+            </p>
+            <div style="margin-top: 24px;">
+              <BoutonRdv bouton="blog_amienoise">Faire le point sur mon projet (30 min)</BoutonRdv>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <PremierEchange />
+  </main>
+</Base>
