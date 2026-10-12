@@ -59,7 +59,7 @@
      Les deux sont auto-hébergées (aucune police chargée depuis un serveur tiers). Graisses : 400 texte, 500 titres serif, 600 libellés.
      --sans reste l'alias historique de --dvk-font ; --serif pointe désormais sur la famille des titres. */
   --dvk-font: "Montserrat Variable", Montserrat, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --dvk-font-display: "Montserrat Variable", Montserrat, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --dvk-font-display: "Fraunces", Georgia, serif;
   --serif: var(--dvk-font-display);
   --sans: var(--dvk-font);
   /* Matière graphique : trames et filets de construction, très discrets */
