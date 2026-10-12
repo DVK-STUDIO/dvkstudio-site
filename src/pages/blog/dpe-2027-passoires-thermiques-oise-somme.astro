@@ -1,0 +1,106 @@
+---
+import Base from "../../layouts/Base.astro";
+import PremierEchange from "../../components/PremierEchange.astro";
+import BoutonRdv from "../../components/BoutonRdv.astro";
+
+const titre = "DPE 2027 : passoires thermiques F et G dans l'Oise et la Somme";
+const description = "Échéance 2027, interdiction de louer les logements F et G, audit énergétique et travaux prioritaires : les recommandations de votre chef de projet travaux hemea.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Passoires thermiques et DPE 2027 dans l'Oise et la Somme : anticiper pour valoriser son bien",
+  "author": {
+    "@type": "Person",
+    "name": "Kevin De Vlieger",
+    "jobTitle": "Chef de projet travaux hemea",
+    "telephone": "+33640324752",
+    "email": "k.devlieger@hemea.fr"
+  },
+  "datePublished": "2026-10-12",
+  "description": description
+};
+---
+
+<Base titre={titre} description={description} page="blog" chemin="/blog/dpe-2027-passoires-thermiques-oise-somme/" donneesStructurees={schema}>
+  <main id="contenu">
+    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
+      <div class="conteneur" style="max-width: 860px;">
+        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
+          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
+          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
+          <span style="color: var(--dvk-text);">DPE 2027 Oise et Somme</span>
+        </nav>
+
+        <span class="surtitre">Énergie &amp; Réglementation · Oise (60) &amp; Somme (80)</span>
+        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
+          DPE 2027 : comment sortir de la passoire thermique dans l'Oise et la Somme
+        </h1>
+
+        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
+          <span>Par <strong>Kevin De Vlieger</strong> · Chef de projet travaux hemea</span>
+          <span>•</span>
+          <span>Temps de lecture : 6 min</span>
+        </div>
+
+        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
+            Dès le 1er janvier 2025 pour la classe G et dès 2027 pour la classe F, la loi Climat et Résilience interdit la mise en location des logements les plus énergivores. Pour un propriétaire bailleur ou un vendeur dans l'Oise ou la Somme, l'attentisme entraîne une décote directe. Voici comment structurer les travaux pour regagner les étiquettes D ou C.
+          </p>
+        </div>
+
+        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
+          <h2>1. Le calendrier des interdictions et son impact sur le marché local</h2>
+          <p>
+            Sur les secteurs de Compiègne, Beauvais, Creil, Senlis et Amiens, les pavillons des années 1960-1980 et les bâtisses anciennes non isolées représentent une part significative du parc locatif. Le calendrier est strict :
+          </p>
+          <ul>
+            <li><strong>1er janvier 2025 :</strong> Interdiction de louer les logements étiquetés G (consommation supérieure à 420 kWh/m²/an).</li>
+            <li><strong>1er janvier 2027 :</strong> Extension de l'interdiction aux logements classés F.</li>
+            <li><strong>1er janvier 2034 :</strong> Interdiction pour les logements de classe E.</li>
+          </ul>
+          <p>
+            Lors d'une transaction immobilière, l'audit énergétique réglementaire est obligatoire pour les biens en monopropriété classés F ou G. Ce document liste les scénarios de travaux, mais laisse souvent l'acheteur désemparé face aux devis d'artisans disparates.
+          </p>
+
+          <h2>2. Le piège du bâti ancien picard au calcul du DPE</h2>
+          <p>
+            Une erreur fréquente consiste à appliquer des isolants synthétiques étanches (polystyrène expansé) sur des murs anciens en brique pleine, moellons calcaires ou pans de bois. Si cette solution améliore théoriquement le coefficient thermique sur le logiciel du diagnostiqueur, elle piège l'humidité dans les parois et dégrade la structure du bâtiment.
+          </p>
+          <p>
+            Mon approche privilégie des isolants biosourcés perspirants (fibre de bois, laine de chanvre, ouate de cellulose) couplés à une ventilation mécanique contrôlée (VMC hygroréglable ou double flux) adaptée au volume réel.
+          </p>
+
+          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
+            <p class="surtitre" style="margin-bottom: 8px;">Le repère budgétaire de votre chef de projet travaux</p>
+            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
+              Pour faire passer un pavillon de 100 m² de la classe F à la classe C dans l'Oise, le budget moyen d'une rénovation globale se situe entre 35 000 € et 65 000 € selon le système de chauffage retenu (pompe à chaleur air/eau, poêle à granulés). Ce montant peut être amorti jusqu'à 60 % par les aides MaPrimeRénov' et les Certificats d'Économies d'Énergie (CEE).
+            </p>
+          </div>
+
+          <h2>3. Mon rôle d'accompagnement hemea pour sécuriser votre projet</h2>
+          <p>
+            En tant que chef de projet travaux hemea, j'interviens pour lever les doutes techniques et financiers :
+          </p>
+          <ul>
+            <li><strong>Analyse de l'audit énergétique :</strong> Priorisation des postes de travaux à plus fort impact thermique au mètre carré.</li>
+            <li><strong>Sélection d'entreprises RGE :</strong> Mobilisation d'artisans locaux certifiés RGE dont la santé financière et les assurances décennales sont vérifiées.</li>
+            <li><strong>Sécurisation hemea :</strong> Protection des acomptes sur compte séquestre bloqué jusqu'à la réception des travaux.</li>
+          </ul>
+
+          <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
+            <h3>Votre logement est classé F ou G dans l'Oise ou la Somme ?</h3>
+            <p>
+              Faisons le point ensemble sur les postes de travaux prioritaires et les aides mobilisables lors d'un appel conseil de 30 minutes.
+            </p>
+            <div style="margin-top: 24px;">
+              <BoutonRdv bouton="blog_dpe">Échanger sur mon logement (30 min)</BoutonRdv>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <PremierEchange />
+  </main>
+</Base>
