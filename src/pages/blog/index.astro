@@ -23,6 +23,22 @@ const articles = [
     tempsLecture: "5 min",
     date: "12 octobre 2026",
   },
+  {
+    slug: "dpe-2027-passoires-thermiques-oise-somme",
+    titre: "DPE 2027 : passoires thermiques F et G dans l'Oise et la Somme",
+    chapo: "Échéances d'interdiction de louer, audit énergétique obligatoire et travaux prioritaires pour préserver la valeur de votre bien.",
+    categorie: "Énergie & DPE",
+    tempsLecture: "6 min",
+    date: "12 octobre 2026",
+  },
+  {
+    slug: "maprimerenov-renovation-ampleur-oise-somme",
+    titre: "MaPrimeRénov' : financer une rénovation d'ampleur dans le 60 et le 80",
+    chapo: "Plafonds d'aides, critères d'éligibilité et cumul des subventions pour financer vos travaux d'isolation et de chauffage.",
+    categorie: "Budget & Aides",
+    tempsLecture: "5 min",
+    date: "12 octobre 2026",
+  },
 ];
 ---
 
@@ -32,7 +48,7 @@ const articles = [
     <section class="section" style="padding-top: 56px; padding-bottom: 32px;">
       <div class="conteneur">
         <p class="surtitre">Atelier conseils · hemea</p>
-        <h1 class="titre-xl" style="margin-top: 12px; margin-bottom: 20px;">Guides & Conseils Rénovation</h1>
+        <h1 class="titre-xl" style="margin-top: 12px; margin-bottom: 20px;">Guides &amp; Conseils Rénovation</h1>
         <p class="chapo" style="max-width: 65ch;">
           Des analyses claires et des repères chiffrés pour préparer vos travaux dans l'Oise et la Somme.
           Méthode, budget, réglementation thermique et cadre sécurisé hemea.
@@ -41,9 +57,9 @@ const articles = [
         <!-- Silos thématiques -->
         <div style="display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap;">
           <span style="background: var(--dvk-surface); color: var(--dvk-text); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 600; border: 1px solid var(--dvk-border);">Tous les articles</span>
-          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Bâti ancien & local</span>
-          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Énergie & DPE</span>
-          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Budget & Aides</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Bâti ancien &amp; local</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Énergie &amp; DPE</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Budget &amp; Aides</span>
         </div>
       </div>
     </section>
@@ -56,7 +72,7 @@ const articles = [
             <article style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 32px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--dvk-shadow-card);">
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                  <span class="surtitre" style="font-size: 11px;">{art.categorie}</span>
+                  <span class="surtitre" style="font-size: 12px;">{art.categorie}</span>
                   <span style="font-size: 13px; color: var(--dvk-text-muted);">{art.tempsLecture}</span>
                 </div>
                 <h2 style="font-size: 22px; line-height: 1.3; margin-bottom: 14px; font-weight: 600;">
