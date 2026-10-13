@@ -16,55 +16,30 @@ import { site } from '../content/site';
   p + p, button, [data-zone-formulaire] { margin-top:16px; }
   .note { font-size:13px; line-height:1.6; color:var(--dvk-text-muted); }
   [hidden] { display:none !important; }
+  [data-chargement] { opacity:0; pointer-events:none; min-height:100px; }
   a { text-decoration:underline; }
 </style>
 <script>
-  import { contexteDemande, renseignerContexte, FORMULAIRE_DVK, type FormulaireV4 } from '../lib/capture-projet';
+  import { contexteDemande, type FormulaireV4 } from '../lib/capture-projet';
+  import { installerCapture } from '../lib/chargement-formulaire';
   const racine = document.querySelector<HTMLElement>('[data-capture-projet]');
   if (racine) {
-    const bouton = racine.querySelector<HTMLButtonElement>('[data-ouvrir-formulaire]')!;
-    const zone = racine.querySelector<HTMLElement>('[data-zone-formulaire]')!;
-    const statut = racine.querySelector<HTMLElement>('[data-statut-capture]')!;
-    let ouvert = false;
-    let termine = false;
-    let delai: ReturnType<typeof setTimeout>;
-    const echec = () => {
-      if (termine) return;
-      termine = true;
-      clearTimeout(delai);
-      zone.hidden = true;
-      zone.setAttribute('aria-busy', 'false');
-      statut.textContent = 'Le formulaire ne peut pas être chargé. Votre demande n’a pas été envoyée. Contactez-nous par email ou téléphone.';
-    };
-    bouton.hidden = false;
-    bouton.addEventListener('click', () => {
-      if (ouvert) return;
-      ouvert = true;
-      bouton.disabled = true;
-      statut.textContent = 'Chargement du formulaire…';
-      let stockee: string | null = null;
-      try { stockee = sessionStorage.getItem('dvk_origine'); } catch { /* stockage indisponible */ }
-      if (!crypto.randomUUID) { echec(); return; }
-      const contexte = contexteDemande(stockee, location.search, document.referrer, location.pathname, location.hostname, crypto.randomUUID());
-      window.addEventListener('hs-form-event:on-ready', async event => {
-        if (termine || (event as CustomEvent).detail?.formId !== FORMULAIRE_DVK) return;
-        const api = (window as unknown as { HubSpotFormsV4?: { getFormFromEvent(event: Event): FormulaireV4 } }).HubSpotFormsV4;
-        try {
-          if (!api || !await renseignerContexte(api.getFormFromEvent(event), contexte)) { echec(); return; }
-          if (termine) return;
-          termine = true;
-          clearTimeout(delai);
-          zone.hidden = false;
-          zone.setAttribute('aria-busy', 'false');
-          statut.textContent = 'Le formulaire est prêt. Votre demande sera envoyée lorsque vous validerez le formulaire.';
-        } catch { echec(); }
-      });
-      delai = setTimeout(echec, 25000);
-      const script = document.createElement('script');
-      script.src = 'https://js-eu1.hsforms.net/forms/embed/148248593.js';
-      script.async = true;
-      script.addEventListener('error', echec, { once:true });
-      document.head.append(script);
+    installerCapture(racine, {
+      evenements: window,
+      contexte: () => {
+        let stockee: string | null = null;
+        try { stockee = sessionStorage.getItem('dvk_origine'); } catch { /* stockage indisponible */ }
+        if (!globalThis.crypto?.randomUUID) throw new Error('Identifiant de demande indisponible');
+        return contexteDemande(stockee, location.search, document.referrer, location.pathname, location.hostname, crypto.randomUUID());
+      },
+      formulaire: event => (window as unknown as { HubSpotFormsV4?: { getFormFromEvent(event: Event): FormulaireV4 } }).HubSpotFormsV4?.getFormFromEvent(event),
+      charger: echec => {
+        const script = document.createElement('script');
+        script.src = 'https://js-eu1.hsforms.net/forms/embed/148248593.js';
+        script.async = true;
+        script.addEventListener('error', echec, { once:true });
+        document.head.append(script);
+      },
     });
   }
 </script>
