@@ -14,8 +14,8 @@ const e = site.editeur;
     <p>{e.nom} — {site.nom} — {e.adresse} — <a href={`mailto:${site.email}`}>{site.email}</a></p>
 
     <h2>Ce que ce site collecte, et ce qu'il ne collecte pas</h2>
-    <p>Les pages du site ne chargent aucun outil de mesure d'audience ni traceur publicitaire. Les polices sont auto-hébergées. Le formulaire HubSpot et ses fonctionnalités techniques, dont reCAPTCHA, se chargent uniquement lorsque vous cliquez sur « Ouvrir le formulaire de demande ».</p>
-    <p>Pour que je sache d'où vous venez lorsque vous réservez un rendez-vous, le site garde dans votre navigateur (stockage de session, effacé à la fermeture de l'onglet) : la page d'arrivée, le site référent et les éventuels paramètres de campagne de l'adresse. Ces informations sont ajoutées au lien de rendez-vous <strong>uniquement lorsque vous l'ouvrez</strong> ; elles ne sont envoyées à personne d'autre.</p>
+    <p>Les pages du site chargent Metricool pour mesurer les visites. Les polices sont auto-hébergées. Le formulaire HubSpot et ses fonctionnalités techniques, dont reCAPTCHA, se chargent uniquement lorsque vous cliquez sur « Ouvrir le formulaire de demande ».</p>
+    <p>Pour que je sache d'où vous venez lorsque vous réservez un rendez-vous, le site garde dans votre navigateur (stockage de session, effacé à la fermeture de l'onglet) : la page d'arrivée, le site référent et les éventuels paramètres de campagne de l'adresse. Ces informations sont ajoutées au lien de rendez-vous lorsque vous l'ouvrez et au contexte de votre demande lorsque vous envoyez le formulaire.</p>
 
     <p>La préparation facultative d’un message s’effectue uniquement sur votre appareil. Les champs ne sont ni enregistrés ni transmis par le site. Si vous ouvrez votre messagerie, le brouillon y est prérempli ; vous décidez ensuite de l’envoyer.</p>
     <p>Si vous ouvrez le formulaire de demande, HubSpot et reCAPTCHA reçoivent les informations techniques nécessaires à son chargement. Lorsque vous l’envoyez, vos coordonnées et informations de projet sont enregistrées dans le CRM de DVK Studio. La demande comprend un identifiant technique, la page concernée et les paramètres de campagne UTM disponibles. Aucun identifiant publicitaire de clic n’est ajouté par ce raccordement. Le formulaire ne vous inscrit pas à une newsletter. Un transfert vers hemea pourra être proposé après qualification du projet.</p>
@@ -35,6 +35,7 @@ const e = site.editeur;
 
     <h2>Outils et prestataires</h2>
     <ul>
+      <li><strong>Metricool</strong> : mesure des visites du site. Son script est chargé depuis tracker.metricool.com à l’ouverture des pages. Aucun champ du formulaire de projet n’est ajouté par notre intégration au suivi Metricool. <a href="https://metricool.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Politique de confidentialité Metricool</a>.</li>
       <li><strong>HubSpot</strong> : prise de rendez-vous et gestion de la relation client. La page de réservation hébergée par HubSpot n'est ouverte que lorsque vous cliquez sur un lien de rendez-vous. Les informations saisies lors de la réservation sont enregistrées dans le CRM de DVK Studio. Cette page utilise ses propres fonctionnalités techniques, dont reCAPTCHA pour prévenir les réservations indésirables.</li>
       <li><strong>Google Agenda</strong> : synchronisation du rendez-vous avec l'agenda de Kevin De Vlieger.</li>
       <li><strong>GitHub Pages</strong> : hébergement du site. L'hébergeur peut conserver des journaux techniques de connexion (adresse IP).</li>

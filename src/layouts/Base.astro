@@ -54,6 +54,20 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      // Mesure des visites Metricool — identifiant fourni par DVK Studio.
+      (() => {
+        const script = document.createElement("script");
+        script.src = "https://tracker.metricool.com/resources/be.js";
+        script.async = true;
+        script.onload = () => {
+          if (window.beTracker && typeof window.beTracker.t === "function") {
+            window.beTracker.t({ hash: "c37a4ed28c436dab4dbaadc917bb1007" });
+          }
+        };
+        document.head.appendChild(script);
+      })();
+    </script>
     <script>
       // Origine du visiteur (sans cookie) et liens de rendez-vous. Chargé sur toutes les pages.
       import { RDV_BASE, construireLienRdv, fusionnerOrigine, lireAttribution, offreDepuisChemin, type Attribution } from "../lib/rdv";
