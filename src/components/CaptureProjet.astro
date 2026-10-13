@@ -1,0 +1,46 @@
+---
+import { FORMULAIRE_DVK } from '../lib/capture-projet';
+import { site } from '../content/site';
+---
+<div id="demande-projet" data-capture-projet>
+  <p>Envoyez votre demande à DVK Studio pour être recontacté. Le formulaire est hébergé par HubSpot et utilise reCAPTCHA. Il se charge uniquement lorsque vous l’ouvrez.</p>
+  <p class="note">Vos coordonnées servent au suivi de votre projet. Aucun abonnement à une newsletter. Ne renseignez pas les coordonnées d’un tiers. <a href="/confidentialite/">Utilisation de vos données</a>.</p>
+  <button type="button" class="btn btn-action" data-ouvrir-formulaire hidden>Ouvrir le formulaire de demande</button>
+  <p role="status" data-statut-capture></p>
+  <div data-zone-formulaire hidden aria-busy="true">
+    <div class="hs-form-frame" data-region="eu1" data-form-id={FORMULAIRE_DVK} data-portal-id="148248593"></div>
+  </div>
+  <p class="note">Vous pouvez aussi <a href={`mailto:${site.email}`}>écrire directement à {site.email}</a> ou appeler le <a href={site.telephoneLien}>{site.telephone}</a>.</p>
+</div>
+<style>
+  [data-capture-projet] { scroll-margin-top:100px; }
+  p + p, button, [data-zone-formulaire] { margin-top:16px; }
+  .note { font-size:13px; line-height:1.6; color:var(--dvk-text-muted); }
+  [hidden] { display:none !important; }
+  [data-chargement] { opacity:0; pointer-events:none; min-height:100px; }
+  a { text-decoration:underline; }
+</style>
+<script>
+  import { contexteDemande, type FormulaireV4 } from '../lib/capture-projet';
+  import { installerCapture } from '../lib/chargement-formulaire';
+  const racine = document.querySelector<HTMLElement>('[data-capture-projet]');
+  if (racine) {
+    installerCapture(racine, {
+      evenements: window,
+      contexte: () => {
+        let stockee: string | null = null;
+        try { stockee = sessionStorage.getItem('dvk_origine'); } catch { /* stockage indisponible */ }
+        if (!globalThis.crypto?.randomUUID) throw new Error('Identifiant de demande indisponible');
+        return contexteDemande(stockee, location.search, document.referrer, location.pathname, location.hostname, crypto.randomUUID());
+      },
+      formulaire: event => (window as unknown as { HubSpotFormsV4?: { getFormFromEvent(event: Event): FormulaireV4 } }).HubSpotFormsV4?.getFormFromEvent(event),
+      charger: echec => {
+        const script = document.createElement('script');
+        script.src = 'https://js-eu1.hsforms.net/forms/embed/148248593.js';
+        script.async = true;
+        script.addEventListener('error', echec, { once:true });
+        document.head.append(script);
+      },
+    });
+  }
+</script>

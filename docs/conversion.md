@@ -1,40 +1,29 @@
-# Conversion — version hemea
+# Conversion — demandes travaux hemea
 
-## Deux publics, une prochaine étape claire
+Les particuliers accèdent au premier échange depuis l'accueil, la page travaux ou la page acquéreurs. Les prescripteurs conservent l'email local sans coordonnées de leur client. Le rendez-vous reste accessible immédiatement : le formulaire de demande ne conditionne jamais la réservation.
 
-- Particuliers : accueil → travaux (ou acquéreurs) → premier échange.
-- Prescripteurs : lien LinkedIn ou prise de contact → professionnels → échange sur un projet client.
-- Le rendez-vous reste accessible immédiatement. La préparation d’un email est facultative et ne conditionne jamais la réservation.
-- Le premier écran précise le besoin, la zone, l’interlocuteur et l’utilité de l’échange. Le plan illustratif explique la démarche plus bas ; il n’est pas présenté comme une réalisation.
+## Rendez-vous HubSpot
 
-## Qualification réelle
+Le lien https://meetings-eu1.hubspot.com/kevin-de-vlieger est configuré depuis le 13 octobre 2026 pour un appel de 30 minutes. Questions obligatoires vérifiées : prénom, nom, email, téléphone, type de client, commune/code postal du bien, travaux/échéance. Confirmation et rappels 24 h et 1 h activés. Aucune réservation de recette effectuée.
 
-Le 12 octobre 2026, la prise de rendez-vous est passée de Calendly à HubSpot (https://meetings-eu1.hubspot.com/kevin-de-vlieger). Les paragraphes ci-dessous décrivent l’ancienne configuration Calendly : questions et durée à reproduire dans la page de réunion HubSpot.
+## Demande web
 
-Calendly a été vérifié en lecture seule le 11 octobre 2026. Le rendez-vous « Premier contact » est actif, dure 30 minutes et se fait par appel entrant au 06 40 32 47 52. Il n’est pas payant. Le site est aligné sur ces informations.
+Le formulaire DVK est proposé après un clic explicite de chargement. La valeur du champ masqué d'acquisition est relue avant affichage ; une erreur laisse les alternatives email/téléphone disponibles et ne confirme jamais une demande reçue. Le contexte contient un UUID de corrélation, la page sans query ni fragment et les cinq UTM normalisés de première origine. L'UUID client ne garantit pas l'idempotence.
 
-Questions déjà actives : type de bien (obligatoire), localisation (obligatoire), délai (facultatif), budget indicatif (obligatoire, avec « Budget en cours de définition »), précision libre (facultative). Le stade d’avancement est désactivé. Aucun réglage Calendly n’a été modifié.
+Les champs secteur/échéance ajoutés le 13 octobre sont enregistrés dans HubSpot comme modifications non publiées. Le workflow web reste désactivé jusqu'à sécurisation des exclusions de tests et des demandes répétées. L'intégration et les corrections de durée de cette proposition ne sont pas déployées. Voir `docs/raccordement-hubspot.md`.
 
-La préparation locale d’un email demande la commune, la situation, le calendrier et les travaux. Aucun enregistrement ni envoi automatique : le visiteur relit et envoie depuis sa messagerie. Ce parcours ne confirme donc jamais une demande reçue.
+## Mesure : distinguer les preuves
 
-## Mesure : bien séparer les étapes
+| Étape | Preuve |
+|---|---|
+| Visite | Aucune mesure d'audience agrégée activée |
+| Intention | Clic rendez-vous, téléphone ou email : signaux locaux sans collecteur |
+| Brouillon préparé | Texte dans le navigateur ; ne prouve pas l'envoi |
+| Demande web reçue | Soumission enregistrée dans HubSpot, jamais déduite de l'ouverture du formulaire |
+| Rendez-vous réservé | Réservation HubSpot confirmée, jamais déduite d'un clic |
+| Échange réalisé | Résultat renseigné après échange |
+| Projet qualifié | Besoin, zone, calendrier et adéquation confirmés par Kevin |
 
-| Étape | Preuve | Statut de cette version |
-|---|---|---|
-| Visite | Mesure d’audience agrégée | Non activée |
-| Intention de contact | Clic rendez-vous, téléphone, email | Signaux locaux disponibles, aucun collecteur connecté |
-| Brouillon préparé | Préparation du message dans le navigateur | Signal local, aucune preuve d’envoi |
-| Demande reçue | Email effectivement reçu ou appel pris | À enregistrer dans le suivi commercial existant |
-| Rendez-vous réservé | Réservation Calendly confirmée | Source Calendly, jamais déduite d’un clic |
-| Échange réalisé | Résultat renseigné après l’échange | À enregistrer dans le suivi commercial existant |
-| Projet qualifié | Besoin, zone, calendrier et adéquation confirmés | Décision commerciale après échange |
+Le site conserve l'attribution UTM jusqu'au lien HubSpot. Les signaux `dvk:conversion` existants ne contiennent ni coordonnées ni URL complète et ne sont pas envoyés à un collecteur. Aucun pixel publicitaire n'est ajouté par cette proposition.
 
-Le site conserve l’attribution UTM existante jusqu’au lien Calendly. Les signaux `dvk:conversion` sont limités à page_vue, rdv_ouvert, appel_ouvert, email_ouvert et brouillon_prepare. Ils ne contiennent ni données de formulaire, ni URL complète, ni identité. Ils ne sont ni stockés ni envoyés. Aucun taux de conversion agrégé ne peut être annoncé avant raccordement d’une mesure adaptée.
-
-## Exploitation après publication
-
-Chaque semaine, distinguer particuliers et prescripteurs : demandes reçues, réservations, annulations, échanges réalisés, projets qualifiés et raison de non-adéquation. Dédupliquer les demandes d’une même personne dans le suivi existant. Conserver la source lorsqu’elle est connue et laisser « inconnue » sinon.
-
-Calculer échanges réalisés / rendez-vous arrivés à échéance (annulations séparées), puis projets qualifiés / échanges réalisés. Le taux visiteurs → réservations nécessite une mesure d’audience et un périmètre temporel cohérents ; il n’est pas disponible dans cette version.
-
-Avant publication : vérifier le formulaire de préparation avec et sans JavaScript, le lien mailto dans la messagerie, la réservation sans effectuer de fausse réservation, les contenus et contrastes sur mobile, puis les contrôles de build. Les témoignages, photos et résultats commerciaux ne seront ajoutés qu’à partir de preuves réelles et autorisées.
+Avant publication, recetter avec autorisation la nouvelle demande, le contact existant, le complément d'un projet, un deuxième projet, les erreurs et répétitions, la réception de notification, les UTM, la réservation, le report et l'annulation. La qualification et le transfert à hemea restent contrôlés manuellement. Aucun taux agrégé ne peut être annoncé sans mesure adaptée.
