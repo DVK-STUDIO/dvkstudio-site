@@ -100,3 +100,9 @@ export const standins: { paire: ConfigPaire; chantier: ConfigImage; immobilier: 
   },
   ambiance: { fichier: "standin-ambiance", alt: "", reperes: [], droits: aConfirmer },
 };
+
+/** Illustration IA dédiée au simulateur, distincte de la photo du hero. */
+export const simulateur: ConfigImage = {
+  fichier: 'simulateur-renovation', alt: '', reperes: [],
+  droits: { statut: 'confirmes', reference: 'Illustration générée avec image_gen pour DVK Studio le 13 octobre 2026 ; ne représente aucun chantier client.', date: '2026-10-13' },
+};

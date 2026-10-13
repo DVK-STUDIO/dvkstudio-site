@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import { imageAmbiance } from '../lib/medias';
-const photo = imageAmbiance();
+import { imageSimulateur } from '../lib/medias';
+const photo = imageSimulateur();
 ---
 <section id="simulateur" class="conteneur section" aria-labelledby="simulateur-titre" data-habil-simulator>
   <div class="sim-immersive">
@@ -20,7 +20,7 @@ const photo = imageAmbiance();
       </div>
       <p class="sim-reassurance">Une première estimation pour vous projeter. Aucun devis ni engagement.</p>
     </div>
-    <div class="sim-footer"><p id="simulateur-info">Recherche d’adresse : IGN. À l’ouverture, l’adresse et sa localisation sont transmises à Habil. <a href="/confidentialite/">Vos données</a></p><span>Photo d’illustration.</span></div>
+    <div class="sim-footer"><p id="simulateur-info">Recherche d’adresse : IGN. À l’ouverture, l’adresse et sa localisation sont transmises à Habil. <a href="/confidentialite/">Vos données</a></p><span>Illustration générée par IA.</span></div>
   </div>
 </section>
 <style>
@@ -104,4 +104,3 @@ const photo = imageAmbiance();
     });
   }
 </script>
-

@@ -105,3 +105,12 @@ export const imageAmbiance = (): MediaImage | null => resoudreImage("ambiance");
 /** Mention de provenance d'un chantier : jamais de fausse continuité. */
 export const mentionChantier = (p: Provenance | undefined): string =>
   p === "meme-projet" ? "Chantier du projet présenté" : "Illustration · chantier d'un autre projet";
+
+import { simulateur } from '../content/medias';
+export function imageSimulateur(): MediaImage | null {
+  if (simulateur.droits.statut !== 'confirmes') return null;
+  verifierDroits('simulateur', simulateur.droits);
+  const src = trouver(medias, simulateur.fichier);
+  if (!src) throw new Error('Image du simulateur absente');
+  return { src, alt: simulateur.alt, reperes: [], standin: false };
+}
