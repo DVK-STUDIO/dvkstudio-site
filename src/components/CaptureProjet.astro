@@ -1,0 +1,70 @@
+---
+import { FORMULAIRE_DVK } from '../lib/capture-projet';
+import { site } from '../content/site';
+---
+<div data-capture-projet>
+  <p>Envoyez votre demande à DVK Studio pour être recontacté. Le formulaire est hébergé par HubSpot et utilise reCAPTCHA. Il se charge uniquement lorsque vous l’ouvrez.</p>
+  <p class="note">Vos coordonnées servent au suivi de votre projet. Aucun abonnement à une newsletter. Ne renseignez pas les coordonnées d’un tiers. <a href="/confidentialite/">Utilisation de vos données</a>.</p>
+  <button type="button" class="btn btn-action" data-ouvrir-formulaire hidden>Ouvrir le formulaire de demande</button>
+  <p role="status" data-statut-capture></p>
+  <div data-zone-formulaire hidden aria-busy="true">
+    <div class="hs-form-frame" data-region="eu1" data-form-id={FORMULAIRE_DVK} data-portal-id="148248593"></div>
+  </div>
+  <p class="note">Vous pouvez aussi <a href={`mailto:${site.email}`}>écrire directement à {site.email}</a> ou appeler le <a href={site.telephoneLien}>{site.telephone}</a>.</p>
+</div>
+<style>
+  p + p, button, [data-zone-formulaire] { margin-top:16px; }
+  .note { font-size:13px; line-height:1.6; color:var(--dvk-text-muted); }
+  [hidden] { display:none !important; }
+  a { text-decoration:underline; }
+</style>
+<script>
+  import { contexteDemande, renseignerContexte, FORMULAIRE_DVK, type FormulaireV4 } from '../lib/capture-projet';
+  const racine = document.querySelector<HTMLElement>('[data-capture-projet]');
+  if (racine) {
+    const bouton = racine.querySelector<HTMLButtonElement>('[data-ouvrir-formulaire]')!;
+    const zone = racine.querySelector<HTMLElement>('[data-zone-formulaire]')!;
+    const statut = racine.querySelector<HTMLElement>('[data-statut-capture]')!;
+    let ouvert = false;
+    let termine = false;
+    let delai: ReturnType<typeof setTimeout>;
+    const echec = () => {
+      if (termine) return;
+      termine = true;
+      clearTimeout(delai);
+      zone.hidden = true;
+      zone.setAttribute('aria-busy', 'false');
+      statut.textContent = 'Le formulaire ne peut pas être chargé. Votre demande n’a pas été envoyée. Contactez-nous par email ou téléphone.';
+    };
+    bouton.hidden = false;
+    bouton.addEventListener('click', () => {
+      if (ouvert) return;
+      ouvert = true;
+      bouton.disabled = true;
+      statut.textContent = 'Chargement du formulaire…';
+      let stockee: string | null = null;
+      try { stockee = sessionStorage.getItem('dvk_origine'); } catch { /* stockage indisponible */ }
+      if (!crypto.randomUUID) { echec(); return; }
+      const contexte = contexteDemande(stockee, location.search, document.referrer, location.pathname, location.hostname, crypto.randomUUID());
+      window.addEventListener('hs-form-event:on-ready', async event => {
+        if (termine || (event as CustomEvent).detail?.formId !== FORMULAIRE_DVK) return;
+        const api = (window as unknown as { HubSpotFormsV4?: { getFormFromEvent(event: Event): FormulaireV4 } }).HubSpotFormsV4;
+        try {
+          if (!api || !await renseignerContexte(api.getFormFromEvent(event), contexte)) { echec(); return; }
+          if (termine) return;
+          termine = true;
+          clearTimeout(delai);
+          zone.hidden = false;
+          zone.setAttribute('aria-busy', 'false');
+          statut.textContent = 'Le formulaire est prêt. Votre demande sera envoyée lorsque vous validerez le formulaire.';
+        } catch { echec(); }
+      });
+      delai = setTimeout(echec, 25000);
+      const script = document.createElement('script');
+      script.src = 'https://js-eu1.hsforms.net/forms/embed/148248593.js';
+      script.async = true;
+      script.addEventListener('error', echec, { once:true });
+      document.head.append(script);
+    });
+  }
+</script>

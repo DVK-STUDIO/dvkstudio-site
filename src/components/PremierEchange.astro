@@ -1,5 +1,6 @@
 ---
 import BoutonRdv from "./BoutonRdv.astro";
+import CaptureProjet from "./CaptureProjet.astro";
 import { site } from "../content/site";
 interface Props { pro?: boolean; }
 const { pro = false } = Astro.props;
@@ -10,7 +11,7 @@ const action = pro ? "Parler d’un projet client" : "Faire le point sur mon pro
   <div class="conteneur duo">
     <div>
       <p class="surtitre">Votre prochaine étape</p>
-      <h2 id="t-echange" class="titre-l">20 minutes pour savoir<br />par où commencer.</h2>
+      <h2 id="t-echange" class="titre-l">30 minutes pour savoir<br />par où commencer.</h2>
       <p class="chapo">{pro ? "Décrivez la situation de votre client, sans partager ses coordonnées. Je vérifie avec vous comment l’accompagnement hemea peut répondre à son besoin travaux." : "Parlez-moi du bien, des travaux envisagés et de votre calendrier. Je vérifie avec vous si l’accompagnement hemea correspond à votre projet et quelles étapes envisager."}</p>
       <ul class="liste-simple">
         <li>Un échange téléphonique avec Kevin De Vlieger.</li>
@@ -23,6 +24,9 @@ const action = pro ? "Parler d’un projet client" : "Faire le point sur mon pro
     <div class="preparation">
       <p class="surtitre">Vous préférez écrire ?</p>
       <h3 class="titre-m">Présentez votre projet en quelques mots.</h3>
+      {!pro && <CaptureProjet />}
+      <details>
+      <summary>Préparer plutôt un email depuis ma messagerie</summary>
       <p>Préparez un message à adresser à <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
       <form hidden data-preparation data-public={pro ? "prescripteur" : "particulier"} data-email={site.email}>
         <label>Commune du bien <input name="commune" autocomplete="address-level2" maxlength="100" required /></label>
@@ -46,6 +50,7 @@ const action = pro ? "Parler d’un projet client" : "Faire le point sur mon pro
         </div>
       </form>
       <noscript><p>Pour écrire directement : <a href={`mailto:${site.email}`}>{site.email}</a>. Précisez la commune, les travaux envisagés et votre calendrier.</p></noscript>
+      </details>
     </div>
   </div>
 </section>
@@ -83,3 +88,4 @@ const action = pro ? "Parler d’un projet client" : "Faire le point sur mon pro
     });
   });
 </script>
+

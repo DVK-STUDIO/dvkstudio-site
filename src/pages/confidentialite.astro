@@ -14,10 +14,11 @@ const e = site.editeur;
     <p>{e.nom} — {site.nom} — {e.adresse} — <a href={`mailto:${site.email}`}>{site.email}</a></p>
 
     <h2>Ce que ce site collecte, et ce qu'il ne collecte pas</h2>
-    <p>Ce site n'utilise <strong>aucun cookie</strong>, aucun outil de mesure d'audience et aucun traceur publicitaire. Aucune police n'est chargée depuis un serveur tiers.</p>
+    <p>Les pages du site ne chargent aucun outil de mesure d'audience ni traceur publicitaire. Les polices sont auto-hébergées. Le formulaire HubSpot et ses fonctionnalités techniques, dont reCAPTCHA, se chargent uniquement lorsque vous cliquez sur « Ouvrir le formulaire de demande ».</p>
     <p>Pour que je sache d'où vous venez lorsque vous réservez un rendez-vous, le site garde dans votre navigateur (stockage de session, effacé à la fermeture de l'onglet) : la page d'arrivée, le site référent et les éventuels paramètres de campagne de l'adresse. Ces informations sont ajoutées au lien de rendez-vous <strong>uniquement lorsque vous l'ouvrez</strong> ; elles ne sont envoyées à personne d'autre.</p>
 
     <p>La préparation facultative d’un message s’effectue uniquement sur votre appareil. Les champs ne sont ni enregistrés ni transmis par le site. Si vous ouvrez votre messagerie, le brouillon y est prérempli ; vous décidez ensuite de l’envoyer.</p>
+    <p>Si vous ouvrez le formulaire de demande, HubSpot et reCAPTCHA reçoivent les informations techniques nécessaires à son chargement. Lorsque vous l’envoyez, vos coordonnées et informations de projet sont enregistrées dans le CRM de DVK Studio. La demande comprend un identifiant technique, la page concernée et les paramètres de campagne UTM disponibles. Aucun identifiant publicitaire de clic n’est ajouté par ce raccordement. Le formulaire ne vous inscrit pas à une newsletter. Un transfert vers hemea pourra être proposé après qualification du projet.</p>
 
     <h2>Recherche d’adresse et simulation Habil</h2>
     <p>À partir de quatre caractères saisis dans le widget, votre recherche est transmise à la Géoplateforme (IGN) pour proposer des adresses. DVK Studio n’enregistre pas cette recherche.</p>
@@ -25,6 +26,7 @@ const e = site.editeur;
     <h2>Données que vous me transmettez</h2>
     <ul>
       <li>Par la prise de rendez-vous (HubSpot) : prénom, nom, email, téléphone, créneau choisi et informations que vous communiquez.</li>
+      <li>Par le formulaire de demande : coordonnées, localisation du bien, travaux souhaités et autres informations de projet que vous choisissez de communiquer.</li>
       <li>Par email ou téléphone : les informations que vous choisissez de communiquer sur votre projet.</li>
     </ul>
 
@@ -45,5 +47,6 @@ const e = site.editeur;
     <p>Accès, rectification, effacement, limitation, portabilité et opposition. Pour les exercer : <a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez aussi saisir la CNIL (<a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).</p>
   </div>
 </Base>
+
 
 

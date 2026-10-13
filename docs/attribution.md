@@ -46,6 +46,10 @@ Garanties :
 
 Conseil pour les annonces : nommer les campagnes directement dans le format (minuscules, chiffres, `.`, `_`, `-`) pour ne jamais produire de marque.
 
+## Formulaire de demande DVK
+
+`CaptureProjet.astro` réutilise la première origine de session pour les cinq UTM normalisés et les transmet dans le champ masqué de contexte. Il ajoute un UUID de corrélation et le chemin courant sans query ni fragment. Il n'ajoute ni identifiants publicitaires de clic ni identité. Le formulaire se charge après clic ; la valeur masquée est relue avant affichage. Le contexte client ne garantit ni idempotence ni conservation multi-projet. Voir `docs/raccordement-hubspot.md` avant activation.
+
 ## Hors périmètre de ce module
 - Aucune lecture ni transmission du `gclid` tant que le consentement n'est pas en place.
 - Aucun événement navigateur, aucune intégration GA4, Ads ou Meta.
