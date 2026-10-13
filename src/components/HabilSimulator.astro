@@ -1,25 +1,75 @@
 <section id="simulateur" class="conteneur section" aria-labelledby="simulateur-titre" data-habil-simulator>
-  <p class="surtitre">Simulateur rénovation</p>
-  <h2 id="simulateur-titre" class="titre-l">Explorez le potentiel de votre logement</h2>
-  <p>Recherchez l’adresse de votre bien pour ouvrir votre simulation Habil. Les résultats sont indicatifs et ne remplacent ni un diagnostic ni un devis.</p>
-  <label for="simulateur-adresse">Adresse du bien</label>
-  <input id="simulateur-adresse" type="search" maxlength="200" autocomplete="off" placeholder="Entrez votre adresse" aria-describedby="simulateur-info simulateur-etat" />
-  <p id="simulateur-info" class="info">La recherche est fournie par la Géoplateforme (IGN). Habil reçoit l’adresse et sa localisation uniquement lorsque vous ouvrez la simulation.</p>
-  <div data-results aria-label="Adresses proposées"></div>
-  <p id="simulateur-etat" role="status" aria-live="polite"></p>
-  <div data-selected hidden><p data-address></p><a href="https://app.habil.fr/dvk-studio/simulation" data-simulation class="btn btn-encre" target="_blank" rel="noopener noreferrer">Ouvrir ma simulation Habil ↗</a></div>
-  <p class="info"><a href="https://app.habil.fr/dvk-studio/simulation" target="_blank" rel="noopener noreferrer">Accéder directement au simulateur Habil</a> · <a href="/confidentialite/">Utilisation de vos données</a></p>
+  <div class="sim-shell">
+    <div class="sim-story">
+      <p class="surtitre">Votre maison. Ses possibilités.</p>
+      <h2 id="simulateur-titre">Et si votre rénovation<br />commençait <em>ici ?</em></h2>
+      <p class="sim-intro">Isolation, chauffage, énergie… Explorez les pistes de rénovation de votre logement et donnez une première direction à votre projet.</p>
+      <div class="sim-house" aria-hidden="true">
+        <svg viewBox="0 0 460 210" fill="none"><path d="M24 184H436M93 184V95L216 28L339 95V184M216 28V184M93 95L216 160L339 95M216 160L389 151V184M339 95L389 122V151M129 119V151L171 173V141ZM253 99V130L298 107V76ZM253 152V184M298 130V184" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M85 91L216 19L347 91M103 81L216 143L328 82M117 73L216 128L314 74M133 65L216 111L299 65" stroke="currentColor" stroke-width="1" opacity=".45"/><circle cx="389" cy="54" r="22" stroke="currentColor"/><path d="M380 55L387 62L400 47" stroke="currentColor" stroke-width="2"/><path d="M53 157V184M43 169L53 157L63 169M407 172V184" stroke="currentColor"/><circle cx="53" cy="144" r="15" stroke="currentColor"/></svg>
+        <span>Un premier regard sur votre futur chez-vous.</span>
+      </div>
+      <ul class="sim-benefits"><li>Votre logement</li><li>Vos pistes de travaux</li><li>Votre prochain pas</li></ul>
+    </div>
+    <div class="sim-form">
+      <div class="sim-top"><span class="sim-step">01 / VOTRE POINT DE DÉPART</span><span class="sim-partner">Avec Habil ↗</span></div>
+      <h3>Tout part de<br />votre adresse.</h3>
+      <p>Retrouvez votre logement, puis laissez-vous guider dans le simulateur.</p>
+      <label for="simulateur-adresse">Où se situe votre bien ?</label>
+      <div class="sim-input"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg><input id="simulateur-adresse" type="search" maxlength="200" autocomplete="off" placeholder="Numéro, rue, commune…" aria-describedby="simulateur-info simulateur-etat" /></div>
+      <div data-results aria-label="Adresses proposées"></div>
+      <p id="simulateur-etat" class="sim-status" role="status" aria-live="polite">Saisissez votre adresse pour commencer.</p>
+      <div data-selected hidden class="sim-selected"><p data-address></p><a href="https://app.habil.fr/dvk-studio/simulation" data-simulation class="btn btn-action" target="_blank" rel="noopener noreferrer">Découvrir ma simulation <span aria-hidden="true">↗</span></a></div>
+      <p class="sim-direct"><a href="https://app.habil.fr/dvk-studio/simulation" target="_blank" rel="noopener noreferrer">Ouvrir le simulateur sans recherche <span aria-hidden="true">↗</span></a></p>
+      <div class="sim-bottom"><p>Un repère pour avancer, pas un devis.</p><p id="simulateur-info">Recherche d’adresse : IGN. À l’ouverture du simulateur, seuls l’adresse et son emplacement sont transmis à Habil. <a href="/confidentialite/">Vos données</a></p></div>
+    </div>
+  </div>
 </section>
 <style>
-  section { scroll-margin-top: 100px; }
-  h2 { margin-block: 16px 24px; }
-  label { display:block; margin-top:24px; font-weight:600; }
-  input { display:block; width:100%; max-width:480px; box-sizing:border-box; padding:14px 16px; font:inherit; border:2px solid var(--dvk-border); border-radius:var(--dvk-radius-sm); background:var(--dvk-surface-raised); color:var(--dvk-text); }
-  .info { font-size:13px; max-width:65ch; margin-block:12px; }
-  [data-results] { display:grid; gap:6px; max-width:480px; }
-  [data-results] :global(button) { padding:12px 14px; font:inherit; text-align:left; cursor:pointer; border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-sm); background:var(--dvk-surface-raised); color:inherit; }
-  input:focus-visible, :global([data-habil-simulator] button:focus-visible) { outline:3px solid var(--dvk-action); outline-offset:3px; }
-  [data-selected] p { margin-bottom:16px; }
+  section { scroll-margin-top:90px; }
+  .sim-shell { display:grid; grid-template-columns:1.08fr 1fr; border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-md); overflow:hidden; box-shadow:var(--dvk-shadow-card); }
+  .sim-story { position:relative; overflow:hidden; padding:clamp(28px,4.5vw,64px); background:var(--dvk-primary); color:var(--dvk-text-inverse); display:flex; flex-direction:column; }
+  .sim-story::before { content:""; position:absolute; inset:0; background-image:linear-gradient(var(--dvk-trame-inverse) 1px,transparent 1px),linear-gradient(90deg,var(--dvk-trame-inverse) 1px,transparent 1px); background-size:44px 44px; opacity:.3; pointer-events:none; }
+  .sim-story > * { position:relative; }
+  .sim-story .surtitre { color:var(--dvk-text-inverse); font-size:12px; letter-spacing:.16em; }
+  .sim-story .surtitre::before { background:var(--dvk-accent-on-night); }
+  h2 { font-size:clamp(32px,3.3vw,48px); line-height:1.12; margin-block:26px 20px; color:var(--dvk-text-inverse); letter-spacing:-.035em; }
+  h2 em { color:var(--dvk-accent-on-night); }
+  .sim-intro { font-size:15px; line-height:1.8; max-width:44ch; color:var(--dvk-text-inverse); opacity:.9; }
+  .sim-house { margin-top:auto; padding-top:28px; color:var(--dvk-text-inverse); }
+  .sim-house svg { display:block; width:100%; max-height:210px; color:var(--dvk-accent-on-night); }
+  .sim-house span { display:block; font-size:12px; letter-spacing:.03em; opacity:.75; margin-top:8px; }
+  .sim-benefits { display:flex; flex-wrap:wrap; gap:10px 18px; padding:22px 0 0; margin:22px 0 0; list-style:none; border-top:1px solid var(--dvk-trame-inverse); }
+  .sim-benefits li { font-size:12px; letter-spacing:.04em; }
+  .sim-benefits li::before { content:"✓"; color:var(--dvk-accent-on-night); margin-right:6px; }
+  .sim-form { background:var(--dvk-surface-raised); padding:clamp(28px,4.5vw,64px); }
+  .sim-top { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+  .sim-step { font-size:12px; font-weight:600; letter-spacing:.12em; color:var(--dvk-action); }
+  .sim-partner { font-size:12px; white-space:nowrap; color:var(--dvk-text-muted); }
+  h3 { font-size:clamp(30px,3vw,42px); line-height:1.15; margin-block:30px 16px; letter-spacing:-.03em; }
+  .sim-form > p { font-size:14px; color:var(--dvk-text-muted); line-height:1.7; }
+  label { display:block; margin:30px 0 10px; font-size:12px; font-weight:600; }
+  .sim-input { display:flex; align-items:center; gap:12px; padding:0 16px; border:1px solid var(--dvk-border-strong); border-radius:var(--dvk-radius-sm); background:var(--dvk-background); transition:border-color var(--dvk-duration-state); }
+  .sim-input:focus-within { outline:2px solid var(--dvk-action); outline-offset:3px; }
+  .sim-input svg { flex:none; width:20px; height:20px; color:var(--dvk-action); }
+  input { display:block; width:100%; min-width:0; height:58px; padding:0; border:0; outline:none; background:transparent; color:var(--dvk-text); font:inherit; font-size:14px; }
+  input:focus-visible { outline:none; }
+  [data-results] { display:grid; gap:6px; margin-top:8px; }
+  [data-results] :global(button) { padding:13px 14px; font:inherit; font-size:12px; text-align:left; line-height:1.6; cursor:pointer; border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-sm); background:var(--dvk-background); color:var(--dvk-text); transition:background var(--dvk-duration-micro); }
+  [data-results] :global(button:hover) { background:var(--dvk-action-soft); border-color:var(--dvk-action); }
+  .sim-status { min-height:20px; font-size:12px!important; margin-top:8px; }
+  .sim-selected { margin-top:18px; }
+  .sim-selected p { font-size:12px; font-weight:600; margin-bottom:12px; }
+  .sim-selected .btn { width:100%; justify-content:space-between; font-size:13px; }
+  .sim-direct { margin-top:22px; font-size:12px!important; }
+  .sim-direct a { border-bottom:1px solid var(--dvk-border); padding-bottom:4px; }
+  .sim-direct span { margin-left:6px; }
+  .sim-bottom { margin-top:32px; padding-top:20px; border-top:1px solid var(--dvk-border); }
+  .sim-bottom p:first-child { font-size:12px; font-weight:600; margin-bottom:8px; }
+  #simulateur-info { font-size:12px; line-height:1.8; color:var(--dvk-text-muted); }
+  #simulateur-info a { text-decoration:underline; }
+  :global([data-habil-simulator] button:focus-visible) { outline:3px solid var(--dvk-action); outline-offset:3px; }
+  @media(max-width:900px) { .sim-shell { grid-template-columns:1fr; } .sim-house { display:none; } .sim-benefits { margin-top:24px; } .sim-story,.sim-form { padding:32px 24px; } h2 { font-size:36px; } h3 { margin-top:22px; } }
+  @media(prefers-reduced-motion:reduce) { .sim-input,[data-results] :global(button) { transition:none; } }
 </style>
 <script>
   import { adressesHabil, lienHabil, rechercheAdresse } from '../lib/habil';
@@ -64,3 +114,4 @@
     });
   }
 </script>
+
