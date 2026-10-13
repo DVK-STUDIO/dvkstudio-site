@@ -2,7 +2,7 @@
 import { FORMULAIRE_DVK } from '../lib/capture-projet';
 import { site } from '../content/site';
 ---
-<div data-capture-projet>
+<div id="demande-projet" data-capture-projet>
   <p>Envoyez votre demande à DVK Studio pour être recontacté. Le formulaire est hébergé par HubSpot et utilise reCAPTCHA. Il se charge uniquement lorsque vous l’ouvrez.</p>
   <p class="note">Vos coordonnées servent au suivi de votre projet. Aucun abonnement à une newsletter. Ne renseignez pas les coordonnées d’un tiers. <a href="/confidentialite/">Utilisation de vos données</a>.</p>
   <button type="button" class="btn btn-action" data-ouvrir-formulaire hidden>Ouvrir le formulaire de demande</button>
@@ -13,6 +13,7 @@ import { site } from '../content/site';
   <p class="note">Vous pouvez aussi <a href={`mailto:${site.email}`}>écrire directement à {site.email}</a> ou appeler le <a href={site.telephoneLien}>{site.telephone}</a>.</p>
 </div>
 <style>
+  [data-capture-projet] { scroll-margin-top:100px; }
   p + p, button, [data-zone-formulaire] { margin-top:16px; }
   .note { font-size:13px; line-height:1.6; color:var(--dvk-text-muted); }
   [hidden] { display:none !important; }

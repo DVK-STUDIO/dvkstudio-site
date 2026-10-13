@@ -30,3 +30,11 @@ Le workflow web 5096053976 reste désactivé : il crée une transaction puis une
 ## Point séparé à examiner
 
 Le groupe Meta « [DVK] Ciblage Oise & Somme - 28-65 ans » affiche dans HubSpot « Picardie, France » et 18–65 ans. Vérifier le ciblage natif Meta avant modification ; cette proposition ne change ni ciblage ni budget.
+
+## Incident signalé : Habil affiche « Demande envoyée » avant la saisie
+
+Le 13 octobre 2026, l’utilisateur signale ce blocage dans le simulateur accessible depuis dvkstudio.fr. Le site publié contient une recherche d’adresse IGN puis un lien vers app.habil.fr/dvk-studio/simulation ; il ne contient pas le formulaire final ni son état de confirmation. Le dépôt DVK ne permet donc pas de corriger cet état externe.
+
+Un parcours navigateur neuf, sur un lieu public avec des caractéristiques fictives, a affiché les champs prénom, nom, téléphone, email et consentement aux résultats. Aucun formulaire de contact n’a été envoyé. Le blocage signalé reste non reproduit ; une persistance de session est une hypothèse, pas une cause établie.
+
+Mesure de repli dans cette PR : lien visible sous le simulateur vers /contact/#demande-projet, indépendant de Habil. Il ne récupère pas automatiquement le résultat de simulation. La correction de l’état « Demande envoyée » doit être vérifiée côté Habil, avec la page exacte concernée et les étapes de reproduction. Aucune publication du site effectuée.

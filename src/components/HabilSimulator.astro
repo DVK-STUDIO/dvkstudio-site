@@ -19,6 +19,7 @@ const photo = imageSimulateur();
         <div class="sim-card-bottom"><span>Simulateur Habil</span><a href="https://app.habil.fr/dvk-studio/simulation" target="_blank" rel="noopener noreferrer">Accès direct ↗</a></div>
       </div>
       <p class="sim-reassurance">Une première estimation pour vous projeter. Aucun devis ni engagement.</p>
+      <p class="sim-contact">Vous souhaitez être recontacté, ou le simulateur ne vous permet pas de saisir vos coordonnées ? <a href="/contact/#demande-projet">Laisser mes coordonnées à DVK Studio</a>. Ce formulaire est indépendant de la simulation.</p>
     </div>
     <div class="sim-footer"><p id="simulateur-info">Recherche d’adresse : IGN. À l’ouverture, l’adresse et sa localisation sont transmises à Habil. <a href="/confidentialite/">Vos données</a></p><span>Illustration générée par IA.</span></div>
   </div>
@@ -53,6 +54,8 @@ const photo = imageSimulateur();
   .sim-card-bottom span { color:var(--dvk-text-muted); }
   .sim-card-bottom a { color:var(--dvk-action); }
   .sim-reassurance { font-size:12px; margin-top:18px; color:var(--dvk-text-inverse); }
+  .sim-contact { font-size:14px; line-height:1.7; margin-top:16px; color:var(--dvk-text-inverse); max-width:65ch; }
+  .sim-contact a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
   .sim-footer { display:flex; justify-content:space-between; gap:24px; padding:12px clamp(24px,5vw,72px) 24px; margin-top:auto; font-size:12px; color:var(--dvk-text-inverse); }
   .sim-footer p { max-width:68ch; font-size:12px; line-height:1.7; }
   .sim-footer a { text-decoration:underline; }
@@ -104,3 +107,4 @@ const photo = imageSimulateur();
     });
   }
 </script>
+
