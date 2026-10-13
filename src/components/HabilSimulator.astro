@@ -1,75 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import { imageAmbiance } from '../lib/medias';
+const photo = imageAmbiance();
+---
 <section id="simulateur" class="conteneur section" aria-labelledby="simulateur-titre" data-habil-simulator>
-  <div class="sim-shell">
-    <div class="sim-story">
-      <p class="surtitre">Votre maison. Ses possibilités.</p>
-      <h2 id="simulateur-titre">Et si votre rénovation<br />commençait <em>ici ?</em></h2>
-      <p class="sim-intro">Isolation, chauffage, énergie… Explorez les pistes de rénovation de votre logement et donnez une première direction à votre projet.</p>
-      <div class="sim-house" aria-hidden="true">
-        <svg viewBox="0 0 460 210" fill="none"><path d="M24 184H436M93 184V95L216 28L339 95V184M216 28V184M93 95L216 160L339 95M216 160L389 151V184M339 95L389 122V151M129 119V151L171 173V141ZM253 99V130L298 107V76ZM253 152V184M298 130V184" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M85 91L216 19L347 91M103 81L216 143L328 82M117 73L216 128L314 74M133 65L216 111L299 65" stroke="currentColor" stroke-width="1" opacity=".45"/><circle cx="389" cy="54" r="22" stroke="currentColor"/><path d="M380 55L387 62L400 47" stroke="currentColor" stroke-width="2"/><path d="M53 157V184M43 169L53 157L63 169M407 172V184" stroke="currentColor"/><circle cx="53" cy="144" r="15" stroke="currentColor"/></svg>
-        <span>Un premier regard sur votre futur chez-vous.</span>
+  <div class="sim-immersive">
+    {photo && <Image class="sim-photo" src={photo.src} alt="" widths={[640,960,1280,1800]} sizes="(max-width: 900px) 100vw, 1120px" loading="lazy" />}
+    <div class="sim-content">
+      <p class="surtitre">Votre prochain chapitre commence chez vous</p>
+      <h2 id="simulateur-titre">Imaginez la suite.<br /><em>Explorez les possibilités.</em></h2>
+      <p class="sim-intro">Votre adresse, un premier regard sur votre rénovation.</p>
+      <div class="sim-search-card">
+        <label for="simulateur-adresse">Quelle est l’adresse de votre bien ?</label>
+        <div class="sim-input"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg><input id="simulateur-adresse" type="search" maxlength="200" autocomplete="off" placeholder="Saisissez votre adresse…" aria-describedby="simulateur-info simulateur-etat" /><span aria-hidden="true" class="sim-arrow">→</span></div>
+        <div data-results aria-label="Adresses proposées"></div>
+        <p id="simulateur-etat" role="status" aria-live="polite">Sélectionnez votre logement pour commencer.</p>
+        <div data-selected hidden class="sim-selected"><p data-address></p><a href="https://app.habil.fr/dvk-studio/simulation" data-simulation class="btn btn-action" target="_blank" rel="noopener noreferrer">Découvrir ma simulation <span aria-hidden="true">↗</span></a></div>
+        <div class="sim-card-bottom"><span>Simulateur Habil</span><a href="https://app.habil.fr/dvk-studio/simulation" target="_blank" rel="noopener noreferrer">Accès direct ↗</a></div>
       </div>
-      <ul class="sim-benefits"><li>Votre logement</li><li>Vos pistes de travaux</li><li>Votre prochain pas</li></ul>
+      <p class="sim-reassurance">Une première estimation pour vous projeter. Aucun devis ni engagement.</p>
     </div>
-    <div class="sim-form">
-      <div class="sim-top"><span class="sim-step">01 / VOTRE POINT DE DÉPART</span><span class="sim-partner">Avec Habil ↗</span></div>
-      <h3>Tout part de<br />votre adresse.</h3>
-      <p>Retrouvez votre logement, puis laissez-vous guider dans le simulateur.</p>
-      <label for="simulateur-adresse">Où se situe votre bien ?</label>
-      <div class="sim-input"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg><input id="simulateur-adresse" type="search" maxlength="200" autocomplete="off" placeholder="Numéro, rue, commune…" aria-describedby="simulateur-info simulateur-etat" /></div>
-      <div data-results aria-label="Adresses proposées"></div>
-      <p id="simulateur-etat" class="sim-status" role="status" aria-live="polite">Saisissez votre adresse pour commencer.</p>
-      <div data-selected hidden class="sim-selected"><p data-address></p><a href="https://app.habil.fr/dvk-studio/simulation" data-simulation class="btn btn-action" target="_blank" rel="noopener noreferrer">Découvrir ma simulation <span aria-hidden="true">↗</span></a></div>
-      <p class="sim-direct"><a href="https://app.habil.fr/dvk-studio/simulation" target="_blank" rel="noopener noreferrer">Ouvrir le simulateur sans recherche <span aria-hidden="true">↗</span></a></p>
-      <div class="sim-bottom"><p>Un repère pour avancer, pas un devis.</p><p id="simulateur-info">Recherche d’adresse : IGN. À l’ouverture du simulateur, seuls l’adresse et son emplacement sont transmis à Habil. <a href="/confidentialite/">Vos données</a></p></div>
-    </div>
+    <div class="sim-footer"><p id="simulateur-info">Recherche d’adresse : IGN. À l’ouverture, l’adresse et sa localisation sont transmises à Habil. <a href="/confidentialite/">Vos données</a></p><span>Photo d’illustration.</span></div>
   </div>
 </section>
 <style>
   section { scroll-margin-top:90px; }
-  .sim-shell { display:grid; grid-template-columns:1.08fr 1fr; border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-md); overflow:hidden; box-shadow:var(--dvk-shadow-card); }
-  .sim-story { position:relative; overflow:hidden; padding:clamp(28px,4.5vw,64px); background:var(--dvk-primary); color:var(--dvk-text-inverse); display:flex; flex-direction:column; }
-  .sim-story::before { content:""; position:absolute; inset:0; background-image:linear-gradient(var(--dvk-trame-inverse) 1px,transparent 1px),linear-gradient(90deg,var(--dvk-trame-inverse) 1px,transparent 1px); background-size:44px 44px; opacity:.3; pointer-events:none; }
-  .sim-story > * { position:relative; }
-  .sim-story .surtitre { color:var(--dvk-text-inverse); font-size:12px; letter-spacing:.16em; }
-  .sim-story .surtitre::before { background:var(--dvk-accent-on-night); }
-  h2 { font-size:clamp(32px,3.3vw,48px); line-height:1.12; margin-block:26px 20px; color:var(--dvk-text-inverse); letter-spacing:-.035em; }
-  h2 em { color:var(--dvk-accent-on-night); }
-  .sim-intro { font-size:15px; line-height:1.8; max-width:44ch; color:var(--dvk-text-inverse); opacity:.9; }
-  .sim-house { margin-top:auto; padding-top:28px; color:var(--dvk-text-inverse); }
-  .sim-house svg { display:block; width:100%; max-height:210px; color:var(--dvk-accent-on-night); }
-  .sim-house span { display:block; font-size:12px; letter-spacing:.03em; opacity:.75; margin-top:8px; }
-  .sim-benefits { display:flex; flex-wrap:wrap; gap:10px 18px; padding:22px 0 0; margin:22px 0 0; list-style:none; border-top:1px solid var(--dvk-trame-inverse); }
-  .sim-benefits li { font-size:12px; letter-spacing:.04em; }
-  .sim-benefits li::before { content:"✓"; color:var(--dvk-accent-on-night); margin-right:6px; }
-  .sim-form { background:var(--dvk-surface-raised); padding:clamp(28px,4.5vw,64px); }
-  .sim-top { display:flex; justify-content:space-between; gap:12px; align-items:center; }
-  .sim-step { font-size:12px; font-weight:600; letter-spacing:.12em; color:var(--dvk-action); }
-  .sim-partner { font-size:12px; white-space:nowrap; color:var(--dvk-text-muted); }
-  h3 { font-size:clamp(30px,3vw,42px); line-height:1.15; margin-block:30px 16px; letter-spacing:-.03em; }
-  .sim-form > p { font-size:14px; color:var(--dvk-text-muted); line-height:1.7; }
-  label { display:block; margin:30px 0 10px; font-size:12px; font-weight:600; }
-  .sim-input { display:flex; align-items:center; gap:12px; padding:0 16px; border:1px solid var(--dvk-border-strong); border-radius:var(--dvk-radius-sm); background:var(--dvk-background); transition:border-color var(--dvk-duration-state); }
+  .sim-immersive { position:relative; isolation:isolate; overflow:hidden; min-height:650px; display:flex; flex-direction:column; justify-content:center; background:var(--dvk-night); border-radius:var(--dvk-radius-md); color:var(--dvk-text-inverse); }
+  .sim-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:-3; }
+  .sim-immersive::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(20,20,20,.84),rgba(20,20,20,.56) 65%,rgba(20,20,20,.3)); z-index:-2; }
+  .sim-content { padding:64px clamp(24px,5vw,72px) 36px; max-width:850px; }
+  .surtitre { color:var(--dvk-text-inverse); font-size:12px; letter-spacing:.13em; }
+  .surtitre::before { background:var(--dvk-accent-on-night); }
+  h2 { color:var(--dvk-text-inverse); font-size:clamp(36px,4.2vw,56px); line-height:1.1; letter-spacing:-.035em; margin:26px 0 20px; }
+  h2 em { color:var(--dvk-text-inverse); font-weight:400; }
+  .sim-intro { font-size:16px; line-height:1.7; color:var(--dvk-text-inverse); margin-bottom:28px; }
+  .sim-search-card { color:var(--dvk-text); background:var(--dvk-surface-raised); padding:24px; border-radius:var(--dvk-radius-md); box-shadow:var(--dvk-shadow-card); max-width:600px; }
+  label { display:block; font-size:13px; font-weight:600; margin-bottom:12px; }
+  .sim-input { display:flex; align-items:center; gap:12px; padding:0 16px; background:var(--dvk-background); border:1px solid var(--dvk-border-strong); border-radius:var(--dvk-radius-sm); }
   .sim-input:focus-within { outline:2px solid var(--dvk-action); outline-offset:3px; }
-  .sim-input svg { flex:none; width:20px; height:20px; color:var(--dvk-action); }
-  input { display:block; width:100%; min-width:0; height:58px; padding:0; border:0; outline:none; background:transparent; color:var(--dvk-text); font:inherit; font-size:14px; }
+  .sim-input svg { width:21px; height:21px; flex:none; color:var(--dvk-action); }
+  input { min-width:0; width:100%; height:58px; background:transparent; border:0; font:inherit; font-size:15px; color:var(--dvk-text); outline:none; padding:0; }
   input:focus-visible { outline:none; }
+  .sim-arrow { font-size:24px; color:var(--dvk-action); }
   [data-results] { display:grid; gap:6px; margin-top:8px; }
-  [data-results] :global(button) { padding:13px 14px; font:inherit; font-size:12px; text-align:left; line-height:1.6; cursor:pointer; border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-sm); background:var(--dvk-background); color:var(--dvk-text); transition:background var(--dvk-duration-micro); }
+  [data-results] :global(button) { padding:12px 14px; font:inherit; font-size:13px; line-height:1.6; text-align:left; cursor:pointer; border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-sm); background:var(--dvk-background); color:var(--dvk-text); }
   [data-results] :global(button:hover) { background:var(--dvk-action-soft); border-color:var(--dvk-action); }
-  .sim-status { min-height:20px; font-size:12px!important; margin-top:8px; }
+  [role="status"] { font-size:12px; line-height:1.6; margin:8px 0 0; color:var(--dvk-text-muted); }
   .sim-selected { margin-top:18px; }
-  .sim-selected p { font-size:12px; font-weight:600; margin-bottom:12px; }
-  .sim-selected .btn { width:100%; justify-content:space-between; font-size:13px; }
-  .sim-direct { margin-top:22px; font-size:12px!important; }
-  .sim-direct a { border-bottom:1px solid var(--dvk-border); padding-bottom:4px; }
-  .sim-direct span { margin-left:6px; }
-  .sim-bottom { margin-top:32px; padding-top:20px; border-top:1px solid var(--dvk-border); }
-  .sim-bottom p:first-child { font-size:12px; font-weight:600; margin-bottom:8px; }
-  #simulateur-info { font-size:12px; line-height:1.8; color:var(--dvk-text-muted); }
-  #simulateur-info a { text-decoration:underline; }
+  .sim-selected p { font-size:13px; font-weight:600; margin-bottom:12px; }
+  .sim-selected .btn { width:100%; justify-content:space-between; font-size:14px; }
+  .sim-card-bottom { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:16px; margin-top:16px; border-top:1px solid var(--dvk-border); font-size:12px; }
+  .sim-card-bottom span { color:var(--dvk-text-muted); }
+  .sim-card-bottom a { color:var(--dvk-action); }
+  .sim-reassurance { font-size:12px; margin-top:18px; color:var(--dvk-text-inverse); }
+  .sim-footer { display:flex; justify-content:space-between; gap:24px; padding:12px clamp(24px,5vw,72px) 24px; margin-top:auto; font-size:12px; color:var(--dvk-text-inverse); }
+  .sim-footer p { max-width:68ch; font-size:12px; line-height:1.7; }
+  .sim-footer a { text-decoration:underline; }
+  .sim-footer span { flex:none; align-self:flex-end; }
   :global([data-habil-simulator] button:focus-visible) { outline:3px solid var(--dvk-action); outline-offset:3px; }
-  @media(max-width:900px) { .sim-shell { grid-template-columns:1fr; } .sim-house { display:none; } .sim-benefits { margin-top:24px; } .sim-story,.sim-form { padding:32px 24px; } h2 { font-size:36px; } h3 { margin-top:22px; } }
-  @media(prefers-reduced-motion:reduce) { .sim-input,[data-results] :global(button) { transition:none; } }
+  @media(max-width:900px) { .sim-immersive { min-height:0; } .sim-content { padding:40px 24px 24px; } .sim-photo { object-position:65% center; } .sim-immersive::after { background:rgba(20,20,20,.72); } .sim-footer { flex-direction:column; gap:8px; padding:0 24px 24px; } .sim-footer span { align-self:flex-start; } }
+  @media(max-width:720px) { h2 { font-size:36px; } .sim-search-card { padding:20px 16px; } .surtitre { letter-spacing:.08em; } .sim-content { padding-inline:20px; } .sim-footer { padding-inline:20px; } }
 </style>
 <script>
   import { adressesHabil, lienHabil, rechercheAdresse } from '../lib/habil';
