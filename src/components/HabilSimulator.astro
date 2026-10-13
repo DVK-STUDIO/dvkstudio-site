@@ -1,0 +1,66 @@
+<section id="simulateur" class="conteneur section" aria-labelledby="simulateur-titre" data-habil-simulator>
+  <p class="surtitre">Simulateur rénovation</p>
+  <h2 id="simulateur-titre" class="titre-l">Explorez le potentiel de votre logement</h2>
+  <p>Recherchez l’adresse de votre bien pour ouvrir votre simulation Habil. Les résultats sont indicatifs et ne remplacent ni un diagnostic ni un devis.</p>
+  <label for="simulateur-adresse">Adresse du bien</label>
+  <input id="simulateur-adresse" type="search" maxlength="200" autocomplete="off" placeholder="Entrez votre adresse" aria-describedby="simulateur-info simulateur-etat" />
+  <p id="simulateur-info" class="info">La recherche est fournie par la Géoplateforme (IGN). Habil reçoit l’adresse et sa localisation uniquement lorsque vous ouvrez la simulation.</p>
+  <div data-results aria-label="Adresses proposées"></div>
+  <p id="simulateur-etat" role="status" aria-live="polite"></p>
+  <div data-selected hidden><p data-address></p><a href="https://app.habil.fr/dvk-studio/simulation" data-simulation class="btn btn-encre" target="_blank" rel="noopener noreferrer">Ouvrir ma simulation Habil ↗</a></div>
+  <p class="info"><a href="https://app.habil.fr/dvk-studio/simulation" target="_blank" rel="noopener noreferrer">Accéder directement au simulateur Habil</a> · <a href="/confidentialite/">Utilisation de vos données</a></p>
+</section>
+<style>
+  section { scroll-margin-top: 100px; }
+  h2 { margin-block: 16px 24px; }
+  label { display:block; margin-top:24px; font-weight:600; }
+  input { display:block; width:100%; max-width:480px; box-sizing:border-box; padding:14px 16px; font:inherit; border:2px solid var(--dvk-border); border-radius:var(--dvk-radius-sm); background:var(--dvk-surface-raised); color:var(--dvk-text); }
+  .info { font-size:13px; max-width:65ch; margin-block:12px; }
+  [data-results] { display:grid; gap:6px; max-width:480px; }
+  [data-results] :global(button) { padding:12px 14px; font:inherit; text-align:left; cursor:pointer; border:1px solid var(--dvk-border); border-radius:var(--dvk-radius-sm); background:var(--dvk-surface-raised); color:inherit; }
+  input:focus-visible, :global([data-habil-simulator] button:focus-visible) { outline:3px solid var(--dvk-action); outline-offset:3px; }
+  [data-selected] p { margin-bottom:16px; }
+</style>
+<script>
+  import { adressesHabil, lienHabil, rechercheAdresse } from '../lib/habil';
+  const root = document.querySelector<HTMLElement>('[data-habil-simulator]');
+  if (root) {
+    const input = root.querySelector<HTMLInputElement>('input')!;
+    const results = root.querySelector<HTMLElement>('[data-results]')!;
+    const status = root.querySelector<HTMLElement>('[role="status"]')!;
+    const selected = root.querySelector<HTMLElement>('[data-selected]')!;
+    const link = root.querySelector<HTMLAnchorElement>('[data-simulation]')!;
+    let timer: ReturnType<typeof setTimeout>;
+    let controller: AbortController | undefined;
+    let generation = 0;
+    input.addEventListener('input', () => {
+      clearTimeout(timer); controller?.abort(); const version = ++generation;
+      results.replaceChildren(); selected.hidden = true; link.removeAttribute('href');
+      const query = input.value.trim();
+      status.textContent = query.length < 4 ? 'Saisissez au moins quatre caractères.' : 'Recherche…';
+      if (query.length < 4) return;
+      timer = setTimeout(async () => {
+        const requestController = new AbortController(); controller = requestController;
+        const timeout = setTimeout(() => requestController.abort(), 8000);
+        try {
+          const response = await fetch(rechercheAdresse(query), {signal:requestController.signal,credentials:'omit',referrerPolicy:'no-referrer'});
+          if (!response.ok) throw new Error('Recherche indisponible');
+          const addresses = adressesHabil(await response.json());
+          if (version !== generation) return;
+          status.textContent = addresses.length ? 'Choisissez une adresse.' : 'Aucune adresse trouvée. Précisez votre recherche.';
+          for (const address of addresses) {
+            const button = document.createElement('button'); button.type = 'button';
+            button.textContent = `${address.label}${address.context ? ' — ' + address.context : ''}`;
+            button.addEventListener('click', () => {
+              input.value = address.label; results.replaceChildren();
+              root.querySelector<HTMLElement>('[data-address]')!.textContent = address.label;
+              link.href = lienHabil(address); selected.hidden = false;
+              status.textContent = 'Adresse sélectionnée. Ouvrez votre simulation.'; link.focus();
+            }); results.append(button);
+          }
+        } catch { if (version === generation) status.textContent = 'Recherche indisponible. Réessayez ou utilisez le lien direct vers Habil.'; }
+        finally { clearTimeout(timeout); }
+      }, 350);
+    });
+  }
+</script>

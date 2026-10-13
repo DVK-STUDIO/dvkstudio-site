@@ -8,7 +8,7 @@ const e = site.editeur;
   <div class="conteneur page-hero prose">
     <p class="surtitre">Légal</p>
     <h1 class="titre-xl">Politique de confidentialité</h1>
-    <p>Version préparée le 12 octobre 2026 ; en vigueur à la mise en ligne du site.</p>
+    <p>Version préparée le 13 octobre 2026 ; en vigueur à la mise en ligne du site.</p>
 
     <h2>Responsable du traitement</h2>
     <p>{e.nom} — {site.nom} — {e.adresse} — <a href={`mailto:${site.email}`}>{site.email}</a></p>
@@ -19,6 +19,9 @@ const e = site.editeur;
 
     <p>La préparation facultative d’un message s’effectue uniquement sur votre appareil. Les champs ne sont ni enregistrés ni transmis par le site. Si vous ouvrez votre messagerie, le brouillon y est prérempli ; vous décidez ensuite de l’envoyer.</p>
 
+    <h2>Recherche d’adresse et simulation Habil</h2>
+    <p>À partir de quatre caractères saisis dans le widget, votre recherche est transmise à la Géoplateforme (IGN) pour proposer des adresses. DVK Studio n’enregistre pas cette recherche.</p>
+    <p>Le lien de simulation transmet à Habil l’adresse sélectionnée, sa latitude, sa longitude et son identifiant d’adresse, uniquement lorsque vous cliquez dessus. Aucun nom, email ou téléphone n’est ajouté à ce lien. Le service externe applique sa propre <a href="https://www.habil.fr/legal/politique-de-confidentialite" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>. Ouvrir la simulation ne constitue pas une demande de rappel auprès de DVK Studio.</p>
     <h2>Données que vous me transmettez</h2>
     <ul>
       <li>Par la prise de rendez-vous (HubSpot) : prénom, nom, email, téléphone, créneau choisi et informations que vous communiquez.</li>
@@ -42,4 +45,5 @@ const e = site.editeur;
     <p>Accès, rectification, effacement, limitation, portabilité et opposition. Pour les exercer : <a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez aussi saisir la CNIL (<a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).</p>
   </div>
 </Base>
+
 

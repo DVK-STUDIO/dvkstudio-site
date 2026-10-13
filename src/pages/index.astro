@@ -1,4 +1,5 @@
 ---
+import HabilSimulator from "../components/HabilSimulator.astro";
 import PremierEchange from "../components/PremierEchange.astro";
 import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
@@ -47,6 +48,7 @@ const faq = [
       <p class="chapo">Vous rénovez votre logement ou envisagez l’achat d’un bien à rénover ? Je vous accompagne pour clarifier vos besoins, préparer une enveloppe estimative et organiser la consultation d’entreprises labellisées hemea.</p>
       <div class="actions">
         <BoutonRdv bouton="hero.rdv" parcours="renover">Faire le point sur mon projet</BoutonRdv>
+        <a class="lien-soulige" href="#simulateur">Simuler ma rénovation</a>
         <a class="lien-soulige" href="/professionnels/">Vous accompagnez un client ?</a>
       </div>
       <p class="hero-note">Kevin De Vlieger · Premier échange de 20 min, par téléphone, sans engagement.</p>
@@ -58,6 +60,8 @@ const faq = [
       {ambiance && <p class="hero-credit">Photo d’illustration.</p>}
     </div>
   </header>
+
+  <HabilSimulator />
 
   <section class="conteneur trame premier-bloc" aria-labelledby="t-contact">
     <div class="premier-contact">
@@ -207,4 +211,5 @@ const faq = [
     .parcours-hemea > a { padding: 24px; }
   }
 </style>
+
 

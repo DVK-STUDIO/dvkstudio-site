@@ -35,7 +35,9 @@ function parcourir(dossier) {
       if (interdits.includes(nom)) problemes.push(`${chemin} : fichier interdit`);
       if (textuel.test(nom)) {
         const contenu = readFileSync(chemin, "utf8");
-        for (const [motif, libelle] of motifs) if (motif.test(contenu)) problemes.push(`${chemin} : ${libelle}`);
+        // Seule la destination du simulateur DVK explicitement demandée est autorisée.
+        const contenuControle = contenu.replace(/https:\/\/app\.habil\.fr\/dvk-studio\/simulation(?=[?"'`<\s]|$)/g, "");
+        for (const [motif, libelle] of motifs) if (motif.test(contenuControle)) problemes.push(`${chemin} : ${libelle}`);
       }
     }
   }
@@ -72,3 +74,4 @@ if (problemes.length) {
   process.exit(1);
 }
 console.log(`Contrôle réussi (${motifs.length} motifs).`);
+
