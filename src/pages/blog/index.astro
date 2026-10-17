@@ -8,6 +8,14 @@ const description = "Guides pratiques pour vos travaux de rénovation dans l'Ois
 
 const articles = [
   {
+    slug: "remplacement-chauffage-pompe-a-chaleur-aides-oise-somme",
+    titre: "Remplacement de chauffage et aides France Rénov' en 2026 : le guide pour l'Oise et la Somme",
+    chapo: "Barèmes MaPrimeRénov' 2026, primes CEE, spécificités du bâti picard et cadre sécurisé hemea pour financer et réussir l'installation de votre pompe à chaleur.",
+    categorie: "Énergie & Chauffage",
+    tempsLecture: "8 min",
+    date: "17 octobre 2026",
+  },
+  {
     slug: "renovation-maison-ancienne-oise",
     titre: "Rénovation d'une maison ancienne dans l'Oise : guide complet",
     chapo: "Pierre calcaire, brique picarde, humidité et confort thermique : les étapes clés pour rénover sans dénaturer le bâti ancien.",
@@ -48,7 +56,7 @@ const articles = [
     <section class="section" style="padding-top: 56px; padding-bottom: 32px;">
       <div class="conteneur">
         <p class="surtitre">Atelier conseils · hemea</p>
-        <h1 class="titre-xl" style="margin-top: 12px; margin-bottom: 20px;">Guides &amp; Conseils Rénovation</h1>
+        <h1 class="titre-xl" style="margin-top: 12px; margin-bottom: 20px;">Guides & Conseils Rénovation</h1>
         <p class="chapo" style="max-width: 65ch;">
           Des analyses claires et des repères chiffrés pour préparer vos travaux dans l'Oise et la Somme.
           Méthode, budget, réglementation thermique et cadre sécurisé hemea.
@@ -57,9 +65,9 @@ const articles = [
         <!-- Silos thématiques -->
         <div style="display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap;">
           <span style="background: var(--dvk-surface); color: var(--dvk-text); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 600; border: 1px solid var(--dvk-border);">Tous les articles</span>
-          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Bâti ancien &amp; local</span>
-          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Énergie &amp; DPE</span>
-          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Budget &amp; Aides</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Bâti ancien & local</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Énergie & DPE</span>
+          <span style="background: var(--dvk-surface-raised); color: var(--dvk-text-muted); padding: 8px 16px; border-radius: var(--dvk-radius-pill); font-size: 14px; font-weight: 500; border: 1px solid var(--dvk-border);">Budget & Aides</span>
         </div>
       </div>
     </section>
@@ -86,7 +94,7 @@ const articles = [
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--dvk-border);">
                 <span style="font-size: 13px; color: var(--dvk-text-muted);">{art.date}</span>
-                <a href={`/blog/${art.slug}/`} class="lien-soulige" style="min-height: auto; font-size: 14px;">Lire le guide →</a>
+                <a href={`/blog/${art.slug}/`} class="lien-souligne" style="min-height: auto; font-size: 14px;">Lire le guide →</a>
               </div>
             </article>
           ))}
