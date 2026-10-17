@@ -9,6 +9,12 @@ export const GET: APIRoute = async () => {
     <link>https://dvkstudio.fr/blog/</link>
     <language>fr</language>
     <item>
+      <title>Remplacement de chauffage et aides France Rénov' en 2026 : le guide pour l'Oise et la Somme</title>
+      <link>https://dvkstudio.fr/blog/remplacement-chauffage-pompe-a-chaleur-aides-oise-somme/</link>
+      <description>Barèmes MaPrimeRénov' 2026, primes CEE, spécificités du bâti picard et cadre sécurisé hemea pour financer et réussir l'installation de votre pompe à chaleur.</description>
+      <pubDate>Sat, 17 Oct 2026 08:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Rénover une maison ancienne dans l'Oise et la Somme : le guide pour sécuriser ses travaux, son budget et ses aides en 2026</title>
       <link>https://dvkstudio.fr/blog/renover-maison-ancienne-oise-somme-guide-2026/</link>
       <description>Rénovez votre maison ancienne en Oise et Somme en sécurité : budget au m², aides 2026 et artisans audités.</description>
