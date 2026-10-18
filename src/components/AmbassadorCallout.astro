@@ -1,0 +1,159 @@
+---
+// Composant Ambassadeur DVK Studio (Le Zèbre)
+// 4 postures officielles :
+// - 'accueil' : Portrait sobre & statutaire en blazer pétrole (accueil, hero, bio)
+// - 'conseil' : Pose signature clin d'œil / astuces (conseils malins, tips, points d'attention)
+// - 'terrain' : Inspecteur avec casque blanc, gilet matelassé et plans (chantiers, technique, garanties)
+// - 'reflexion' : Main sous le menton & regard analytique (FAQ, diagnostic, simulateur)
+
+interface Props {
+  pose?: "accueil" | "conseil" | "terrain" | "reflexion";
+  title: string;
+  quote: string;
+  badge?: string;
+  class?: string;
+}
+
+const {
+  pose = "accueil",
+  title,
+  quote,
+  badge,
+  class: className = ""
+} = Astro.props;
+
+const avatars = {
+  accueil: {
+    src: "/images/avatar/avatar-zebre-accueil.png",
+    alt: "Le Zèbre DVK Studio en blazer officiel",
+    defaultBadge: "L'ambassadeur DVK Studio",
+  },
+  conseil: {
+    src: "/images/avatar/avatar-zebre-conseil.png",
+    alt: "Le Zèbre DVK Studio, astuce et conseil",
+    defaultBadge: "Le conseil du Zèbre",
+  },
+  terrain: {
+    src: "/images/avatar/avatar-zebre-terrain.png",
+    alt: "Le Zèbre DVK Studio sur le terrain",
+    defaultBadge: "L'œil terrain",
+  },
+  reflexion: {
+    src: "/images/avatar/avatar-zebre-reflexion.png",
+    alt: "Le Zèbre DVK Studio en réflexion",
+    defaultBadge: "Point de repère",
+  },
+};
+
+const current = avatars[pose] || avatars.accueil;
+const activeBadge = badge || current.defaultBadge;
+---
+
+<aside class:list={["ambassador-callout", `pose-${pose}`, className]} aria-label={activeBadge}>
+  <div class="avatar-wrapper">
+    <img
+      src={current.src}
+      alt={current.alt}
+      width="96"
+      height="96"
+      loading="lazy"
+      decoding="async"
+      class="avatar-img"
+    />
+  </div>
+  <div class="content-wrapper">
+    <span class="ambassador-badge">{activeBadge}</span>
+    <h4 class="ambassador-title">{title}</h4>
+    <p class="ambassador-quote">{quote}</p>
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .ambassador-callout {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: var(--dvk-background, #f7f3ec);
+    border: 1px solid var(--dvk-border, #e3dccf);
+    border-left: 4px solid var(--dvk-accent, #b77a3c);
+    border-radius: var(--dvk-radius-md, 16px);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    box-shadow: var(--dvk-shadow-card, 0 4px 20px rgba(11, 75, 102, 0.05));
+    position: relative;
+  }
+
+  .pose-conseil {
+    border-left-color: var(--dvk-action, #8c5a29);
+  }
+
+  .pose-terrain {
+    border-left-color: var(--dvk-primary, #0b4b66);
+  }
+
+  .pose-reflexion {
+    border-left-color: var(--dvk-accent, #b77a3c);
+  }
+
+  .avatar-wrapper {
+    flex-shrink: 0;
+  }
+
+  .avatar-img {
+    width: 88px;
+    height: 88px;
+    border-radius: var(--dvk-radius-pill, 999px);
+    object-fit: cover;
+    background: radial-gradient(circle, rgba(11, 75, 102, 0.08) 0%, transparent 70%);
+    border: 2px solid var(--dvk-border, #e3dccf);
+    display: block;
+  }
+
+  .pose-terrain .avatar-img {
+    border-color: rgba(11, 75, 102, 0.3);
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .ambassador-badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dvk-action, #8c5a29);
+    font-weight: 700;
+  }
+
+  .pose-terrain .ambassador-badge {
+    color: var(--dvk-primary, #0b4b66);
+  }
+
+  .ambassador-title {
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: var(--dvk-primary, #0b4b66);
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .ambassador-quote {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--dvk-text, #1f2a2e);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .ambassador-callout {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      padding: 1.25rem 1rem;
+      gap: 1rem;
+    }
+  }
+</style>
