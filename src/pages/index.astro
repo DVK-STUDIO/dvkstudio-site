@@ -7,6 +7,7 @@ import BarreRdv from "../components/BarreRdv.astro";
 import Processus from "../components/Processus.astro";
 import Plan from "../components/Plan.astro";
 import Faq from "../components/Faq.astro";
+import AmbassadorCallout from "../components/AmbassadorCallout.astro";
 import { site } from "../content/site";
 import { Image } from "astro:assets";
 import { imageAmbiance } from "../lib/medias";
@@ -108,6 +109,11 @@ const faq = [
       <ul class="garanties">
         {garanties.map((g) => (<li><h3>{g.titre}</h3><p>{g.texte}</p></li>))}
       </ul>
+      <AmbassadorCallout
+        pose="terrain"
+        title="Pourquoi le compte séquestre hemea change tout ?"
+        quote="Dans le BTP, verser un acompte direct avant le premier coup de pioche est le risque n°1. Avec le cadre hemea, vos fonds sont sécurisés sur un compte séquestre et versés aux entreprises uniquement après validation de chaque étape de chantier."
+      />
       <p class="garanties-source">Engagements présentés par hemea sur hemea.com.</p>
     </div>
   </section>
