@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import BoutonRdv from "../components/BoutonRdv.astro";
 import Processus from "../components/Processus.astro";
 import Faq from "../components/Faq.astro";
+import AmbassadorCallout from "../components/AmbassadorCallout.astro";
 import { site } from "../content/site";
 import MatiereChantier from "../components/MatiereChantier.astro";
 import { chantier } from "../lib/medias";
@@ -47,6 +48,11 @@ const faq = [
       <div><h3>Ce que fait DVK Studio</h3><p>Cadrage des besoins, pistes de travaux, enveloppe indicative avec ses hypothèses, puis consultation d'entreprises labellisées hemea et accompagnement du projet en tant que chef de projet travaux hemea.</p></div>
       <div><h3>Pour vous, concrètement</h3><p>Des priorités explicites, une enveloppe dont les hypothèses sont expliquées et les prochaines étapes définies selon le périmètre convenu.</p></div>
     </div>
+    <AmbassadorCallout
+      pose="conseil"
+      title="Le réflexe avant de comparer des devis"
+      quote="Ne comparez jamais deux devis uniquement sur le montant total. Regardez le niveau de détail des postes, les marques de matériaux et les garanties des artisans audités."
+    />
   </section>
 
   <section class="papier-2 section" aria-labelledby="t-demarche">
