@@ -46,6 +46,27 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/favicon-180.png" />
     <script is:inline>document.documentElement.classList.add("js");</script>
+    <!-- Pixel OpenAI Ads (ChatGPT Ads) -->
+    <script is:inline>
+      (function (w, d, s, u) {
+        if (w.oaiq) return;
+        var q = function () {
+          q.q.push(arguments);
+        };
+        q.q = [];
+        w.oaiq = q;
+        var js = d.createElement(s);
+        js.async = true;
+        js.src = u;
+        var f = d.getElementsByTagName(s)[0];
+        f.parentNode.insertBefore(js, f);
+      })(window, document, "script", "https://bzrcdn.openai.com/sdk/oaiq.min.js");
+
+      oaiq("init", {
+        pixelId: "Lekx9MQJutG5K2J1qTPb4M",
+      });
+      oaiq("measure", "page_viewed", { type: "contents" });
+    </script>
   </head>
   <body data-page={page}>
     <a class="aller-contenu" href="#contenu">Aller au contenu</a>
@@ -77,12 +98,30 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
         if (detail) window.dispatchEvent(new CustomEvent("dvk:conversion", { detail }));
       };
       signaler("page_vue");
+      if (document.body.dataset.page === "merci" && typeof (window as any).oaiq === "function") {
+        (window as any).oaiq("measure", "appointment_scheduled", { type: "customer_action" });
+      }
       document.addEventListener("click", event => {
         const cible = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null;
         if (!cible) return;
-        if (cible.hasAttribute("data-rdv")) signaler("rdv_ouvert", cible.dataset.rdv);
-        else if (cible.protocol === "tel:") signaler("appel_ouvert");
-        else if (cible.protocol === "mailto:") signaler("email_ouvert");
+        if (cible.hasAttribute("data-rdv")) {
+          signaler("rdv_ouvert", cible.dataset.rdv);
+          if (typeof (window as any).oaiq === "function") {
+            (window as any).oaiq("measure", "appointment_scheduled", { type: "customer_action" });
+          }
+        }
+        else if (cible.protocol === "tel:") {
+          signaler("appel_ouvert");
+          if (typeof (window as any).oaiq === "function") {
+            (window as any).oaiq("measure", "lead_created", { type: "customer_action" });
+          }
+        }
+        else if (cible.protocol === "mailto:") {
+          signaler("email_ouvert");
+          if (typeof (window as any).oaiq === "function") {
+            (window as any).oaiq("measure", "lead_created", { type: "customer_action" });
+          }
+        }
       });
       const CLE = "dvk_origine";
       let origine: Attribution | null = null;
@@ -110,4 +149,3 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     </script>
   </body>
 </html>
-
