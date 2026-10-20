@@ -37,7 +37,7 @@ const {
     background: var(--dvk-background, #f7f3ec);
     border: 1px solid var(--dvk-border, #e3dccf);
     padding: 0.5rem 1rem 0.5rem 0.5rem;
-    border-radius: var(--dvk-radius-pill, 999px);
+    border-radius: var(--dvk-radius-pill);
     box-shadow: var(--dvk-shadow-float, 0 1px 6px rgba(28, 28, 28, 0.08));
     margin-bottom: 1.5rem;
   }
@@ -65,7 +65,7 @@ const {
 
   .pill-cta {
     color: var(--dvk-action, #8c5a29);
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
   }
@@ -74,9 +74,9 @@ const {
     text-decoration: underline;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 720px) {
     .ambassador-hero-pill {
-      border-radius: var(--dvk-radius-md, 16px);
+      border-radius: var(--dvk-radius-md);
       padding: 0.75rem;
     }
     .pill-body {

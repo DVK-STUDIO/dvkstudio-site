@@ -8,28 +8,40 @@ import { site } from "../content/site";
 const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Projet travaux d'un client — Oise / Somme")}`;
 const faq = [
   { q: "Dois-je déjà avoir des plans ou des devis ?", r: "Non. Pour commencer, la commune du bien, une description du besoin et votre calendrier suffisent. Les informations à approfondir sont précisées pendant l’échange." },
+  { q: "Proposez-vous des prestations de relevés d'état des lieux et de plans 2D/3D ?", r: "Oui. Grâce à un scanner laser d'intérieur iMapper, je réalise des relevés précis d'état des lieux dans l'Oise et la Somme. Les livrables (plans cotés 2D, coupes, fichiers DWG, DXF ou PDF) sont immédiatement exploitables pour vos études de faisabilité, permis, déclarations préalables ou projets de conception." },
   { q: "Comment connaître le coût de l’accompagnement ?", r: "Le périmètre et les modalités sont précisés selon votre projet avant toute prestation. Le premier échange ne vous engage pas pour la suite." },
-  { q: "À qui s'adresse ce parcours ?", r: "Aux agents immobiliers, chasseurs immobiliers, courtiers et autres professionnels qui accompagnent un client ayant un projet de rénovation dans l'Oise ou la Somme." },
-  { q: "Quand vous solliciter ?", r: "Dès qu'une question travaux se pose : bien à rénover, enveloppe à préciser ou besoin d'un interlocuteur pour préparer la suite. Je vérifie avec vous si l'accompagnement hemea correspond au projet." },
+  { q: "À qui s'adresse ce parcours ?", r: "Aux agents immobiliers, chasseurs immobiliers, courtiers, architectes, décorateurs, marchands de biens et autres professionnels qui accompagnent un client ayant un projet de rénovation ou un besoin de relevé dans l'Oise ou la Somme." },
+  { q: "Quand vous solliciter ?", r: "Dès qu'une question travaux ou un besoin de relevé se pose : bien à rénover, enveloppe à préciser, plans d'état des lieux à établir ou besoin d'un interlocuteur pour préparer la suite. Je vérifie avec vous si l'accompagnement hemea ou la prestation de relevé correspond au projet." },
   { q: "Que vous envoyer au premier contact ?", r: "La commune du bien, une description des travaux et le calendrier envisagé suffisent pour commencer. Pour transmettre les coordonnées ou des documents de votre client, obtenez d'abord son accord ; vous pouvez aussi lui transmettre directement mes coordonnées." },
-  { q: "Remplacez-vous mon rôle auprès du client ?", r: "Vous conservez votre rôle dans son projet immobilier. Mon intervention porte sur le projet travaux, dans le cadre de l'accompagnement hemea." },
+  { q: "Remplacez-vous mon rôle auprès du client ?", r: "Vous conservez votre rôle dans son projet immobilier ou de conception. Mon intervention porte sur le projet travaux, dans le cadre de l'accompagnement hemea, ou sur la fourniture de relevés précis." },
 ];
 ---
-<Base titre="Prescripteurs : contact travaux hemea | Oise et Somme"
-  description="Agents immobiliers, chasseurs et courtiers dans l'Oise et la Somme : Kevin De Vlieger, chef de projet travaux hemea, accompagne les projets de rénovation de vos clients."
+<Base titre="Prescripteurs : contact travaux hemea & relevés 2D/3D | Oise et Somme"
+  description="Architectes, décorateurs, marchands de biens, agents et courtiers dans l'Oise et la Somme : relevés d'état des lieux 2D/3D iMapper et accompagnement travaux hemea par Kevin De Vlieger."
   page="professionnels" chemin="/professionnels/">
   <header class="conteneur page-hero">
-    <p class="surtitre">Prescripteurs immobiliers · {site.zone}</p>
+    <p class="surtitre">Prescripteurs & Partenaires · {site.zone}</p>
     <h1 class="titre-xl">Votre client hésite à cause des travaux ?<br />Donnons-lui un point de départ.</h1>
-    <p class="chapo">Un acquéreur s'interroge sur une rénovation ? Un client souhaite faire le point sur ses travaux ? Je suis votre interlocuteur local hemea pour cadrer son besoin et préparer les prochaines étapes.</p>
+    <p class="chapo">Un acquéreur s'interroge sur une rénovation ? Un client souhaite faire le point sur ses travaux ou obtenir un relevé précis 2D/3D de son bien ? Je suis votre interlocuteur local dans l'Oise et la Somme pour cadrer son besoin et préparer les prochaines étapes.</p>
     <div class="actions"><BoutonRdv bouton="hero.partenariat" parcours="pro">Parler d’un projet client</BoutonRdv><a class="lien-soulige" href="#premier-echange">Présenter le besoin par écrit</a></div>
   </header>
   <section class="section conteneur" aria-labelledby="t-besoin">
     <h2 id="t-besoin" class="titre-l">Quand les travaux entrent dans la conversation.</h2>
     <div class="bloc">
       <div><h3>Un achat avec rénovation</h3><p>Votre acquéreur souhaite comprendre les travaux à envisager et le budget à approfondir avant de poursuivre son projet.</p></div>
+      <div><h3>Un besoin de relevé ou de plan 2D/3D</h3><p>Vous manquez de temps pour effectuer le relevé d'état des lieux. Équipé d'un scanner laser iMapper, j'effectue le relevé complet et livre des plans 2D/3D cotés (DWG, DXF, PDF).</p></div>
       <div><h3>Un besoin à clarifier</h3><p>Votre client a des idées, mais doit encore définir ses priorités, son calendrier et les prochaines étapes.</p></div>
       <div><h3>Un contact pour la suite</h3><p>Vous cherchez un interlocuteur pour préparer le projet travaux et consulter des entreprises labellisées hemea.</p></div>
+    </div>
+  </section>
+  <section class="section conteneur" aria-labelledby="t-releve">
+    <p class="surtitre">Relevé laser & Plans d'état des lieux</p>
+    <h2 id="t-releve" class="titre-l">Gagnez du temps sur vos études avec des relevés précis.</h2>
+    <p class="chapo">Pour les architectes, décorateurs, marchands de biens et maîtres d'œuvre de l'Oise et de la Somme : confiez vos relevés d'intérieurs et disposez de fichiers directement exploitables.</p>
+    <div class="bloc">
+      <div><h3>Technologie scanner iMapper</h3><p>Relevé rapide et millimétrique par balayage laser. Prise en compte fidèle des angles atypiques, cloisons, hauteurs et ouvertures sans oubli de cote.</p></div>
+      <div><h3>Formats CAO & Plans cotés</h3><p>Livraison de plans de niveaux cotés, coupes et surfaces au format DWG, DXF ou PDF, prêts à intégrer dans vos outils de conception (AutoCAD, SketchUp, ArchiCAD, Revit).</p></div>
+      <div><h3>Réactivité sur le 60 et le 80</h3><p>Intervention rapide pour sécuriser une décision d'acquisition, monter un dossier d'urbanisme ou démarrer une phase de conception sans attendre.</p></div>
     </div>
   </section>
   <section class="papier-2 section" aria-labelledby="t-fonctionnement">
@@ -48,4 +60,3 @@ const faq = [
   <section class="section conteneur" aria-labelledby="t-faq"><h2 id="t-faq" class="titre-m" style="margin-bottom:32px">Vos questions</h2><Faq questions={faq} /><div class="actions"><BoutonRdv bouton="faq.rdv" parcours="pro">Parler d’un projet client</BoutonRdv></div></section>
   <PremierEchange pro />
 </Base>
-
