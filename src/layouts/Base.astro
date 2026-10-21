@@ -161,13 +161,17 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
             customIconUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot.png",
             size: "large",
           },
+          chatWindow: {
+            maxWidth: "440px",
+            maxHeight: "720px",
+          },
           previewMessage: {
             avatarUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot.png",
           },
         },
       });
 
-      // Style officiel Avatar Portrait circulaire pour la bulle Le Zèbre
+      // Style officiel Avatar Portrait circulaire pour la bulle Le Zèbre et correctif des boutons du chat
       const appliquerStyleAvatarZebre = () => {
         const bubble = document.querySelector("typebot-bubble");
         if (bubble && bubble.shadowRoot) {
@@ -176,21 +180,130 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
             style.id = "dvk-zebre-bubble-style";
             const rProp = "border-" + "radius";
             style.textContent = `
-              button {
+              /* 1. Bouton flottant officiel Le Zèbre (bulle de lancement) */
+              button[part="button"] {
                 ${rProp}: 50% !important;
-                border: 3px solid #C85E2C !important;
+                border: 3.5px solid #C85E2C !important;
                 box-shadow: 0 8px 24px rgba(11, 75, 102, 0.35) !important;
                 overflow: hidden !important;
-                width: 68px !important;
-                height: 68px !important;
+                width: 82px !important;
+                height: 82px !important;
                 padding: 0 !important;
+                background-color: #0B4B66 !important;
+                transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease !important;
               }
-              button img {
+              button[part="button"]:hover {
+                transform: scale(1.06) !important;
+                box-shadow: 0 10px 28px rgba(200, 94, 44, 0.45) !important;
+              }
+              button[part="button"] img[part="button-icon"] {
                 ${rProp}: 50% !important;
                 object-fit: cover !important;
                 width: 100% !important;
                 height: 100% !important;
-                transform: scale(1.05) !important;
+                transform: scale(1.08) !important;
+              }
+              button[part="button"] svg[part="button-icon"] {
+                width: 32px !important;
+                height: 32px !important;
+                color: #FFFFFF !important;
+                margin: auto !important;
+              }
+
+              /* 2. Rétablissement des boutons de choix / raccourcis dans la conversation */
+              button.typebot-button,
+              .typebot-button,
+              div[part="bot"] button:not([part="button"]) {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-height: 48px !important;
+                height: auto !important;
+                ${rProp}: 12px !important;
+                border: 1.5px solid #0B4B66 !important;
+                background-color: #0B4B66 !important;
+                color: #FFFFFF !important;
+                padding: 12px 18px !important;
+                font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                font-size: 14.5px !important;
+                font-weight: 600 !important;
+                line-height: 1.35 !important;
+                text-align: left !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+                overflow: visible !important;
+                box-shadow: 0 2px 8px rgba(11, 75, 102, 0.15) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                margin: 4px 0 !important;
+                cursor: pointer !important;
+                box-sizing: border-box !important;
+                transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+              }
+              button.typebot-button:hover,
+              .typebot-button:hover,
+              div[part="bot"] button:not([part="button"]):hover {
+                background-color: #C85E2C !important;
+                border-color: #C85E2C !important;
+                color: #FFFFFF !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 18px rgba(200, 94, 44, 0.35) !important;
+              }
+
+              /* Conteneur des boutons pour occuper toute la largeur disponible */
+              .typebot-buttons-container,
+              div[part="bot"] .typebot-buttons-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px !important;
+              }
+
+              /* 3. Avatar du Zèbre dans la conversation */
+              .typebot-avatar-container {
+                width: 44px !important;
+                min-width: 44px !important;
+                height: 44px !important;
+                margin-right: 10px !important;
+              }
+              .typebot-avatar-container > div {
+                width: 44px !important;
+                height: 44px !important;
+              }
+              .typebot-avatar-container img {
+                width: 44px !important;
+                height: 44px !important;
+                ${rProp}: 50% !important;
+                object-fit: cover !important;
+                border: 2px solid #C85E2C !important;
+                box-shadow: 0 2px 8px rgba(11, 75, 102, 0.2) !important;
+                background-color: #0B4B66 !important;
+              }
+
+              /* 4. Bulles de message Le Zèbre */
+              .typebot-host-bubble {
+                ${rProp}: 14px !important;
+                padding: 14px 18px !important;
+                font-size: 15px !important;
+                line-height: 1.55 !important;
+                box-shadow: 0 4px 16px rgba(11, 75, 102, 0.08) !important;
+                border: 1px solid #E6DEC8 !important;
+              }
+
+              /* Ajustements mobiles */
+              @media (max-width: 640px) {
+                button[part="button"] {
+                  width: 70px !important;
+                  height: 70px !important;
+                }
+                .typebot-avatar-container,
+                .typebot-avatar-container > div,
+                .typebot-avatar-container img {
+                  width: 38px !important;
+                  height: 38px !important;
+                  min-width: 38px !important;
+                }
               }
             `;
             bubble.shadowRoot.appendChild(style);
