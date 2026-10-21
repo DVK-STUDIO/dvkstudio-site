@@ -157,6 +157,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
         theme: {
           button: {
             backgroundColor: "#0B4B66",
+            customIconSrc: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot.png",
             customIconUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot.png",
             size: "large",
           },
@@ -165,6 +166,44 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
           },
         },
       });
+
+      // Style officiel Avatar Portrait circulaire pour la bulle Le Zèbre
+      const appliquerStyleAvatarZebre = () => {
+        const bubble = document.querySelector("typebot-bubble");
+        if (bubble && bubble.shadowRoot) {
+          if (!bubble.shadowRoot.querySelector("#dvk-zebre-bubble-style")) {
+            const style = document.createElement("style");
+            style.id = "dvk-zebre-bubble-style";
+            style.textContent = `
+              button {
+                border-radius: 9999px !important;
+                border: 3px solid #C85E2C !important;
+                box-shadow: 0 8px 24px rgba(11, 75, 102, 0.35) !important;
+                overflow: hidden !important;
+                width: 68px !important;
+                height: 68px !important;
+                padding: 0 !important;
+              }
+              button img {
+                border-radius: 9999px !important;
+                object-fit: cover !important;
+                width: 100% !important;
+                height: 100% !important;
+                transform: scale(1.05) !important;
+              }
+            `;
+            bubble.shadowRoot.appendChild(style);
+          }
+        }
+      };
+
+      const observer = new MutationObserver(() => {
+        appliquerStyleAvatarZebre();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+      setTimeout(appliquerStyleAvatarZebre, 100);
+      setTimeout(appliquerStyleAvatarZebre, 500);
+      setTimeout(appliquerStyleAvatarZebre, 1500);
     </script>
   </body>
 </html>
