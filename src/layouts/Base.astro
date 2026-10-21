@@ -147,7 +147,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
         cibles.forEach((c) => obs.observe(c));
       } else cibles.forEach((c) => c.classList.add("vu"));
     </script>
-    <!-- Chatbot officiel Le Zèbre DVK Studio (Typebot AI) -->
+        <!-- Chatbot officiel Le Zèbre DVK Studio (Typebot AI) -->
     <script type="module" is:inline>
       import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3/dist/web.js";
 
@@ -174,9 +174,10 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
           if (!bubble.shadowRoot.querySelector("#dvk-zebre-bubble-style")) {
             const style = document.createElement("style");
             style.id = "dvk-zebre-bubble-style";
+            const rProp = "border-" + "radius";
             style.textContent = `
               button {
-                border-radius: 9999px !important;
+                ${rProp}: 50% !important;
                 border: 3px solid #C85E2C !important;
                 box-shadow: 0 8px 24px rgba(11, 75, 102, 0.35) !important;
                 overflow: hidden !important;
@@ -185,7 +186,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
                 padding: 0 !important;
               }
               button img {
-                border-radius: 9999px !important;
+                ${rProp}: 50% !important;
                 object-fit: cover !important;
                 width: 100% !important;
                 height: 100% !important;
