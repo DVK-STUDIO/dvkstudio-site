@@ -75,6 +75,18 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
       <slot />
     </main>
     <Footer />
+
+    <!-- Silhouette latérale architecte du Zèbre (Desktop) -->
+    <aside class="dvk-zebre-lateral" aria-hidden="true">
+      <img
+        src="/images/avatar/dvk-zebre-plein-pied.png"
+        alt=""
+        width="405"
+        height="1026"
+        loading="lazy"
+        decoding="async"
+      />
+    </aside>
     <script is:inline>
       // Mesure des visites Metricool — identifiant fourni par DVK Studio.
       (() => {
