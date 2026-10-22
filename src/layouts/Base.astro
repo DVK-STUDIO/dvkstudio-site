@@ -169,8 +169,8 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
         theme: {
           button: {
             backgroundColor: "#0B4B66",
-            customIconSrc: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot.png",
-            customIconUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot.png",
+            customIconSrc: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
+            customIconUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
             size: "large",
           },
           chatWindow: {
@@ -178,7 +178,13 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
             maxHeight: "720px",
           },
           previewMessage: {
-            avatarUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot.png",
+            avatarUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
+          },
+          chat: {
+            hostAvatar: {
+              isEnabled: true,
+              url: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
+            },
           },
         },
       });
@@ -187,6 +193,10 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
       const appliquerStyleAvatarZebre = () => {
         const bubble = document.querySelector("typebot-bubble");
         if (bubble && bubble.shadowRoot) {
+          const btnImg = bubble.shadowRoot.querySelector('img[part="button-icon"]');
+          if (btnImg && (!btnImg.src || !btnImg.src.includes("-v2.png"))) {
+            btnImg.src = "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png";
+          }
           if (!bubble.shadowRoot.querySelector("#dvk-zebre-bubble-style")) {
             const style = document.createElement("style");
             style.id = "dvk-zebre-bubble-style";
