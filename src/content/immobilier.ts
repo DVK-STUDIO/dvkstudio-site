@@ -131,7 +131,7 @@ export const page = {
     titre: "Un interlocuteur, des rôles clairement séparés.",
     colonnes: [
       {
-        titre: "Kevin De Vlieger · DVK Studio",
+        titre: "Kévin DE VLIEGER · DVK Studio",
         texte: "DVK Studio est le nom sous lequel j'exerce mes activités. Je reste votre interlocuteur tout au long du parcours, avec des rôles clairement séparés entre immobilier et travaux.",
       },
       {
@@ -152,8 +152,8 @@ export const page = {
     {
       q: `Qui est mon interlocuteur ? DVK Studio est-elle une agence ${R} ?`,
       r: choisir(
-        `Votre interlocuteur, c'est moi, Kevin De Vlieger. DVK Studio est le nom sous lequel j'exerce. Je suis chef de projet travaux hemea et je rejoins le réseau ${R} pour l'immobilier. DVK Studio n'est pas une agence ${R}.`,
-        `Votre interlocuteur, c'est moi, Kevin De Vlieger. DVK Studio est le nom sous lequel j'exerce. Ce n'est pas une agence ${R}. Pour la partie immobilière, j'interviens en tant que ${Q} du réseau.`,
+        `Votre interlocuteur, c'est moi, Kévin DE VLIEGER. DVK Studio est le nom sous lequel j'exerce. Je suis chef de projet travaux hemea et je rejoins le réseau ${R} pour l'immobilier. DVK Studio n'est pas une agence ${R}.`,
+        `Votre interlocuteur, c'est moi, Kévin DE VLIEGER. DVK Studio est le nom sous lequel j'exerce. Ce n'est pas une agence ${R}. Pour la partie immobilière, j'interviens en tant que ${Q} du réseau.`,
       ),
     },
     {
@@ -220,12 +220,12 @@ export const accueil = {
 
 export const aPropos = {
   description: choisir(
-    "DVK Studio est le nom sous lequel Kevin De Vlieger exerce, en Oise, comme chef de projet travaux hemea : cadrage, budget et consultation d'entreprises.",
-    `DVK Studio est le nom sous lequel Kevin De Vlieger exerce, en Oise : ${Q} du réseau ${R} et chef de projet travaux hemea.`,
+    "DVK Studio est le nom sous lequel Kévin DE VLIEGER exerce, en Oise, comme chef de projet travaux hemea : cadrage, budget et consultation d'entreprises.",
+    `DVK Studio est le nom sous lequel Kévin DE VLIEGER exerce, en Oise : ${Q} du réseau ${R} et chef de projet travaux hemea.`,
   ),
   chapo: choisir(
-    `Kevin De Vlieger, basé à Gannes, dans l'Oise. J'accompagne les projets de rénovation, y compris l'achat d'un bien à rénover, de la décision aux travaux. Pour l'immobilier, je rejoins le réseau ${R}.`,
-    `Kevin De Vlieger, basé à Gannes, dans l'Oise. J'accompagne les projets immobiliers de la décision aux travaux : acheter, vendre, rénover. Pour l'immobilier, j'interviens en tant que ${Q} du réseau ${R}.`,
+    `Kévin DE VLIEGER, basé à Gannes, dans l'Oise. J'accompagne les projets de rénovation, y compris l'achat d'un bien à rénover, de la décision aux travaux. Pour l'immobilier, je rejoins le réseau ${R}.`,
+    `Kévin DE VLIEGER, basé à Gannes, dans l'Oise. J'accompagne les projets immobiliers de la décision aux travaux : acheter, vendre, rénover. Pour l'immobilier, j'interviens en tant que ${Q} du réseau ${R}.`,
   ),
   bloc: {
     titre: "Immobilier",

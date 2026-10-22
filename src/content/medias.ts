@@ -51,7 +51,7 @@ export const registre: { paire: ConfigPaire; chantier: ConfigImage; immobilier: 
     fichier: "ambiance",
     alt: "",
     reperes: [],
-    droits: { statut: "confirmes", reference: "Droits d'usage confirmés par Kevin De Vlieger lors de la validation de la charte (photo d'illustration du hero)", date: "2026-10-11" },
+    droits: { statut: "confirmes", reference: "Droits d'usage confirmés par Kévin DE VLIEGER lors de la validation de la charte (photo d'illustration du hero)", date: "2026-10-11" },
   },
 };
 

@@ -14,7 +14,7 @@ const action = pro ? "Parler d’un projet client" : "Faire le point sur mon pro
       <h2 id="t-echange" class="titre-l">30 minutes pour savoir<br />par où commencer.</h2>
       <p class="chapo">{pro ? "Décrivez la situation de votre client, sans partager ses coordonnées. Je vérifie avec vous comment l’accompagnement hemea peut répondre à son besoin travaux." : "Parlez-moi du bien, des travaux envisagés et de votre calendrier. Je vérifie avec vous si l’accompagnement hemea correspond à votre projet et quelles étapes envisager."}</p>
       <ul class="liste-simple">
-        <li>Un échange téléphonique avec Kevin De Vlieger.</li>
+        <li>Un échange téléphonique avec Kévin DE VLIEGER.</li>
         <li>Aucun plan ni devis nécessaire pour ce premier contact.</li>
         <li>Sans engagement. Les modalités de la suite sont précisées avant toute prestation.</li>
       </ul>
@@ -76,7 +76,7 @@ const action = pro ? "Parler d’un projet client" : "Faire le point sur mon pro
     form.addEventListener("submit", event => {
       event.preventDefault();
       const data = new FormData(form);
-      const message = ["Bonjour Kevin,", "", `Situation : ${data.get("situation")}`, `Commune : ${data.get("commune")}`, `Calendrier : ${data.get("calendrier")}`, `Travaux envisagés : ${data.get("travaux") || "À préciser ensemble"}`, "", "Je souhaite échanger sur ce projet travaux."] .join("\n");
+      const message = ["Bonjour Kévin DE VLIEGER,", "", `Situation : ${data.get("situation")}`, `Commune : ${data.get("commune")}`, `Calendrier : ${data.get("calendrier")}`, `Travaux envisagés : ${data.get("travaux") || "À préciser ensemble"}`, "", "Je souhaite échanger sur ce projet travaux."] .join("\n");
       const resultat = form.querySelector<HTMLElement>("[data-resultat]")!;
       const resume = form.querySelector<HTMLTextAreaElement>("[data-resume]")!;
       const lien = form.querySelector<HTMLAnchorElement>("[data-message]")!;

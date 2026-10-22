@@ -10,7 +10,7 @@ export const site = {
   email: "contact@dvkstudio.fr",
   editeur: {
     forme: "Entrepreneur individuel",
-    nom: "Kevin De Vlieger",
+    nom: "Kévin DE VLIEGER",
     nomCommercial: "DVK Studio",
     adresse: "17 Rue Machaut, 60120 Gannes, France",
     siret: "892 737 156 00026",

@@ -21,7 +21,7 @@ describe("mode off", () => {
     expect(analyser("off", [f("index.html", "<span>Je vends</span>")]).length).toBeGreaterThan(0);
   });
   it("autorise la qualité contractuelle de mandataire indépendant hemea", () => {
-    const t = "Kevin De Vlieger est mandataire indépendant de la société NOVARE CONSTRUCTION, exploitant sous l'enseigne hemea.";
+    const t = "Kévin DE VLIEGER est mandataire indépendant de la société NOVARE CONSTRUCTION, exploitant sous l'enseigne hemea.";
     expect(analyser("off", [f("mentions-legales/index.html", t)])).toEqual([]);
   });
   it("ne confond pas avec des mots voisins", () => expect(analyser("off", [f("index.html", "radiateur, médiation, ouvriad")])).toEqual([]));
