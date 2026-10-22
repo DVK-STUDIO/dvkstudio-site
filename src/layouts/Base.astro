@@ -196,29 +196,29 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
               /* 1. Bouton flottant officiel Le Zèbre (bulle de lancement) */
               button[part="button"] {
                 ${rProp}: 50% !important;
-                border: 3.5px solid #C85E2C !important;
+                border: 3px solid #C85E2C !important;
                 box-shadow: 0 8px 24px rgba(11, 75, 102, 0.35) !important;
                 overflow: hidden !important;
-                width: 82px !important;
-                height: 82px !important;
+                width: 66px !important;
+                height: 66px !important;
                 padding: 0 !important;
                 background-color: #0B4B66 !important;
                 transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease !important;
               }
               button[part="button"]:hover {
-                transform: scale(1.06) !important;
+                transform: scale(1.05) !important;
                 box-shadow: 0 10px 28px rgba(200, 94, 44, 0.45) !important;
               }
               button[part="button"] img[part="button-icon"] {
                 ${rProp}: 50% !important;
-                object-fit: cover !important;
+                object-fit: contain !important;
                 width: 100% !important;
                 height: 100% !important;
-                transform: scale(1.08) !important;
+                transform: none !important;
               }
               button[part="button"] svg[part="button-icon"] {
-                width: 32px !important;
-                height: 32px !important;
+                width: 28px !important;
+                height: 28px !important;
                 color: #FFFFFF !important;
                 margin: auto !important;
               }
@@ -304,18 +304,23 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
                 border: 1px solid #E6DEC8 !important;
               }
 
-              /* Ajustements mobiles */
+              /* Ajustements mobiles optimisés */
               @media (max-width: 720px) {
                 button[part="button"] {
-                  width: 70px !important;
-                  height: 70px !important;
+                  width: 58px !important;
+                  height: 58px !important;
+                  border-width: 2.5px !important;
                 }
                 .typebot-avatar-container,
                 .typebot-avatar-container > div,
                 .typebot-avatar-container img {
-                  width: 38px !important;
-                  height: 38px !important;
-                  min-width: 38px !important;
+                  width: 36px !important;
+                  height: 36px !important;
+                  min-width: 36px !important;
+                }
+                .typebot-host-bubble {
+                  padding: 12px 14px !important;
+                  font-size: 14px !important;
                 }
               }
             `;
