@@ -1,0 +1,112 @@
+---
+import Base from "../../layouts/Base.astro";
+import PremierEchange from "../../components/PremierEchange.astro";
+import BoutonRdv from "../../components/BoutonRdv.astro";
+
+const titre = "Scanner laser iMapper Racer 3 : la fin des erreurs de métré en rénovation";
+const description = "Pourquoi le relevé laser par scanner iMapper Racer 3 évite 80 % des erreurs de chantier dans l'Oise et la Somme. Précision ±2 mm, plans DWG et gain de temps.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Rénovation : pourquoi le relevé par scanner laser évite 80 % des erreurs de chantier",
+  "author": {
+    "@type": "Person",
+    "name": "Kévin DE VLIEGER",
+    "jobTitle": "Chef de projet travaux hemea",
+    "telephone": "+33640324752",
+    "email": "contact@dvkstudio.fr"
+  },
+  "datePublished": "2026-10-23",
+  "description": description
+};
+---
+
+<Base titre={titre} description={description} page="blog" chemin="/blog/releve-scanner-laser-imapper-renovation/" donneesStructurees={schema}>
+  <article class="dvk-article-conteneur">
+    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
+      <div class="conteneur" style="max-width: 860px;">
+        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
+          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
+          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
+          <span style="color: var(--dvk-text);">Relevé laser iMapper</span>
+        </nav>
+
+        <span class="surtitre">Technologie & Méthode · Oise (60) & Somme (80)</span>
+        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
+          Rénovation : pourquoi le relevé par scanner laser évite 80 % des erreurs de chantier
+        </h1>
+
+        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
+          <span>Par <strong>Kévin DE VLIEGER</strong> · Concepteur en valorisation & Chef de projet travaux</span>
+          <span>•</span>
+          <span>Temps de lecture : 6 min</span>
+        </div>
+
+        <!-- Chapô -->
+        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
+            Dans tout projet de rénovation, l'enthousiasme se porte sur le choix des matériaux, l'ouverture des cloisons ou la future cuisine. Pourtant, la solidité d'un projet ne repose pas sur les finitions, mais sur ce qui précède les premiers coups de masse : <strong>la fidélité géométrique de l'état des lieux</strong>. Une simple erreur de 5 cm sur un plan peut entraîner des milliers d'euros d'ajustements imprévus.
+          </p>
+        </div>
+
+        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
+          <h2>1. Le coût caché du mètre ruban traditionnel</h2>
+          <p>
+            Mesurer un bâtiment ancien au mètre ruban ou au télémètre laser ponctuel présente des limites structurelles bien connues des professionnels du bâtiment.
+          </p>
+          <p>
+            Dans notre région — qu'il s'agisse de corps de ferme en briques picardes dans l'Oise, de maisons amiénoises ou d'anciennes bâtisses en pierre calcaire —, aucun mur n'est parfaitement d'équerre. Un décalage de seulement 3° sur une longueur de 5 mètres crée un écart de près de 25 cm à l'arrivée. Avec un mètre ruban, ce phénomène est totalement invisible.
+          </p>
+          <p>
+            Résultat classique sur chantier : les meubles sur-mesure ne rentrent pas, les menuiseries commandées débordent, et les cloisons neuves doivent être reprises dans l'urgence.
+          </p>
+
+          <h2>2. Le scanner laser iMapper Racer 3 : la précision sans compromis</h2>
+          <p>
+            Pour éliminer ces risques, **DVK Studio** a fait le choix de s'équiper du scanner laser d'intérieur **iMapper Racer 3**. Cet outil compact monté sur trépied léger révolutionne la prise de cotes :
+          </p>
+          <ul>
+            <li><strong>Précision millimétrique (±2 mm)</strong> : Un faisceau laser haute fréquence balaie la pièce à 360° et enregistre 1 200 points par minute avec une portée de 30 mètres.</li>
+            <li><strong>Documentation photo 360°</strong> : L'appareil capture simultanément des photos grand angle pour rattacher chaque mesure à son repère visuel.</li>
+            <li><strong>Coupes verticales instantanées</strong> : En basculant la tête de l'appareil à 90°, les hauteurs sous plafond, rampants et décrochés d'escaliers sont saisis avec la même exactitude.</li>
+            <li><strong>Vitesse d'exécution</strong> : Une station prend seulement 2 minutes. Un bien complet de 150 m² est entièrement numérisé en moins de 90 minutes.</li>
+          </ul>
+
+          <h2>3. À qui s'adresse cette prestation de relevé ?</h2>
+          <h3>Pour les architectes, décorateurs et maîtres d'œuvre</h3>
+          <p>
+            Le métré sur site est chronophage et source de litiges. En externalisant vos relevés à un interlocuteur équipé dans le 60 et le 80, vous gagnez un temps précieux : vous recevez sous 48 h à 72 h des fonds de plan au format natif <strong>.DWG</strong> et <strong>.DXF</strong>, vectorisés et prêts à être importés dans AutoCAD, ArchiCAD, SketchUp ou Revit.
+          </p>
+
+          <h3>Pour les marchands de biens et investisseurs</h3>
+          <p>
+            Dans une opération de division ou de rénovation globale, chaque mètre carré compte. Le relevé iMapper Racer 3 permet de vérifier immédiatement les surfaces Carrez et habitables réelles, et de soumettre des plans irréprochables aux artisans pour éviter les avenants en cours de chantier.
+          </p>
+
+          <h3>Pour les particuliers porteurs de projets</h3>
+          <p>
+            Avant de déposer une déclaration préalable en mairie ou d'engager un artisan pour abattre un mur, disposer d'un plan d'état des lieux coté est indispensable pour sécuriser vos démarches administratives et vos devis.
+          </p>
+
+          <h2>4. Une base géométrique saine pour votre chantier</h2>
+          <p>
+            Le relevé n'est pas une simple formalité : c'est la pierre angulaire de votre budget travaux. Quand les artisans consultés s'appuient sur des métrés fiables, ils n'ont pas besoin d'intégrer une provision pour incertitude dans leurs prix.
+          </p>
+          <p>
+            En tant que Chef de projet travaux indépendant et mandataire <strong>hemea</strong>, je vous accompagne dès cette étape technique pour vous permettre, si vous le souhaitez, de poursuivre votre rénovation avec des entreprises du bâtiment rigoureusement auditées et garanties.
+          </p>
+        </div>
+
+        <div style="margin-top: 48px; padding: 32px; background: var(--dvk-surface-raised); border-radius: var(--dvk-radius-md); border: 1px solid var(--dvk-border); text-align: center;">
+          <h3 style="margin-top: 0; font-size: 22px;">Besoin d'un relevé d'état des lieux rapide et précis ?</h3>
+          <p style="color: var(--dvk-text-muted); max-width: 50ch; margin: 12px auto 24px auto; font-size: 15px;">
+            Intervention sur tout le secteur de l'Oise et de la Somme. Fichiers DWG/DXF/PDF livrés sous 48 h à 72 h.
+          </p>
+          <BoutonRdv bouton="blog.releve" parcours="pro">Échanger lors d'un cadrage de 20 minutes</BoutonRdv>
+        </div>
+      </div>
+    </article>
+    <PremierEchange />
+  </article>
+</Base>
