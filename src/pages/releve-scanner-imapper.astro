@@ -1,0 +1,204 @@
+---
+import Base from "../layouts/Base.astro";
+import PremierEchange from "../components/PremierEchange.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import Processus from "../components/Processus.astro";
+import Faq from "../components/Faq.astro";
+import { site } from "../content/site";
+
+const titre = "Relevé Scanner Laser 2D/3D iMapper Racer 3 | Oise & Somme";
+const description = "Relevés d'état des lieux par scanner laser iMapper Racer 3 dans l'Oise et la Somme. Plans cotés 2D/3D (DWG, DXF, PDF) livrés sous 48h à 72h.";
+
+const faq = [
+  {
+    q: "Quelle est la précision du scanner iMapper Racer 3 ?",
+    r: "Le scanner iMapper Racer 3 offre une précision millimétrique de ±2 mm pour une portée de 30 mètres en intérieur. Il capture 1 200 points par minute à 360°, éliminant toute incertitude de métré."
+  },
+  {
+    q: "Quels formats de fichiers me livrez-vous ?",
+    r: "Vous recevez les fichiers sources vectoriels natifs .DWG et .DXF (compatibles AutoCAD, ArchiCAD, SketchUp, Revit), ainsi que des planches PDF cotées à l'échelle et, sur demande, les nuages de points ou volumes IFC."
+  },
+  {
+    q: "Combien de temps dure l'intervention sur place ?",
+    r: "Grâce à la rapidité du balayage laser (environ 2 minutes par station), une maison de 150 m² est entièrement numérisée en 45 minutes à 1 h 30, sans perturber les occupants."
+  },
+  {
+    q: "Intervenez-vous pour les particuliers ou uniquement les professionnels ?",
+    r: "J'interviens pour les deux : pour les architectes, décorateurs et marchands de biens qui souhaitent déléguer leurs relevés, et pour les particuliers qui préparent des travaux, un permis de construire ou une déclaration préalable."
+  },
+  {
+    q: "Quelle est votre zone géographique d'intervention ?",
+    r: "J'interviens sur l'ensemble des départements de l'Oise (60) et de la Somme (80) dans leur intégralité : Beauvais, Compiègne, Chantilly, Senlis, Creil, Clermont, Amiens, Abbeville, Montdidier, etc."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Relevé d'état des lieux par scanner laser iMapper Racer 3",
+  "provider": {
+    "@type": "Person",
+    "name": "Kévin DE VLIEGER",
+    "jobTitle": "Chef de projet travaux hemea",
+    "telephone": "+33640324752",
+    "email": "contact@dvkstudio.fr"
+  },
+  "areaServed": ["Oise", "Somme"],
+  "description": description
+};
+---
+
+<Base titre={titre} description={description} page="releve" chemin="/releve-scanner-imapper/" donneesStructurees={schema}>
+  <!-- Hero Section -->
+  <header class="conteneur page-hero" style="padding-top: 56px; padding-bottom: 48px;">
+    <p class="surtitre">Relevé Laser & Plans 2D/3D · Oise (60) & Somme (80)</p>
+    <h1 class="titre-xl" style="margin-top: 14px; margin-bottom: 20px;">
+      Vos plans d'état des lieux cotés au millimètre.<br />Grâce au scanner laser iMapper Racer 3.
+    </h1>
+    <p class="chapo" style="max-width: 68ch;">
+      Numérisation 360° rapide, détection immédiate des faux-équerrages et livraison sous 48 h à 72 h de vos plans vectoriels (DWG, DXF, PDF). Gagnez du temps et sécurisez votre projet de rénovation dès le départ.
+    </p>
+    <div class="actions" style="margin-top: 28px;">
+      <BoutonRdv bouton="hero.releve" parcours="pro">Planifier un relevé ou un cadrage de 20 min</BoutonRdv>
+      <a class="lien-souligne" href="#livrables">Découvrir les livrables</a>
+    </div>
+  </header>
+
+  <!-- Section 1 : Pourquoi le Racer 3 change tout -->
+  <section class="section conteneur" aria-labelledby="t-racer3">
+    <p class="surtitre">Technologie & Précision</p>
+    <h2 id="t-racer3" class="titre-l">La fin du mètre ruban et des cotes approximatives.</h2>
+    <p class="chapo">
+      Dans les bâtisses anciennes de Picardie, les murs droits n'existent pas. Le scanner laser iMapper Racer 3 capture la réalité brute du lieu sans extrapolation.
+    </p>
+    <div class="bloc" style="margin-top: 32px;">
+      <div>
+        <h3>Précision de ±2 mm</h3>
+        <p>Un faisceau laser haute fréquence capture 1 200 points par minute avec une portée de 30 mètres pour figer chaque angle et chaque irrégularité.</p>
+      </div>
+      <div>
+        <h3>2 minutes par pièce</h3>
+        <p>L'appareil balaye l'espace en rotation continue et capture automatiquement des photos de repérage grand angle à 360°.</p>
+      </div>
+      <div>
+        <h3>Coupes verticales à 90°</h3>
+        <p>Bascule instantanée pour mesurer les hauteurs sous plafond, les allèges, les poutres et les cages d'escalier complexes au millimètre.</p>
+      </div>
+      <div>
+        <h3>Zéro oubli sur site</h3>
+        <p>L'intégralité du volume est numérisée en une seule visite. Aucun besoin de retourner sur site pour reprendre une cote manquante.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 : Parcours Cibles -->
+  <section class="papier-2 section" aria-labelledby="t-cibles">
+    <div class="conteneur">
+      <p class="surtitre">Deux approches adaptées</p>
+      <h2 id="t-cibles" class="titre-l" style="margin-top: 14px;">Une réponse sur-mesure pour chaque besoin.</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 36px;">
+        <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 32px; box-shadow: var(--dvk-shadow-card);">
+          <span class="surtitre" style="color: var(--dvk-action);">Pour les professionnels</span>
+          <h3 style="font-size: 22px; margin-top: 12px; margin-bottom: 16px;">Architectes, Décorateurs & MDB</h3>
+          <ul style="padding-left: 20px; line-height: 1.8; color: var(--dvk-text-muted); font-size: 15px;">
+            <li><strong>Déléguez le métré</strong> : Épargnez-vous des heures de relevé fastidieux sur le terrain.</li>
+            <li><strong>Fichiers sources prêts à dessiner</strong> : Intégrez directement les calques DWG/DXF dans AutoCAD, ArchiCAD ou SketchUp.</li>
+            <li><strong>Réactivité locale</strong> : Intervention rapide dans le 60 et le 80 pour lancer vos phases d'esquisse sans retard.</li>
+          </ul>
+        </div>
+
+        <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 32px; box-shadow: var(--dvk-shadow-card);">
+          <span class="surtitre" style="color: var(--dvk-action);">Pour les particuliers</span>
+          <h3 style="font-size: 22px; margin-top: 12px; margin-bottom: 16px;">Particuliers & Investisseurs</h3>
+          <ul style="padding-left: 20px; line-height: 1.8; color: var(--dvk-text-muted); font-size: 15px;">
+            <li><strong>Dossiers administratifs</strong> : Plans propres pour vos déclarations préalables (DP) ou permis de construire.</li>
+            <li><strong>Sécurisation des surfaces</strong> : Connaissance exacte des surfaces habitables réelles avant achat ou vente.</li>
+            <li><strong>Chiffrages artisans fiables</strong> : Des entreprises qui chiffrent sur des bases exactes, sans marge d'incertitude.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 : Livrables -->
+  <section class="section conteneur" id="livrables" aria-labelledby="t-livrables">
+    <p class="surtitre">Livrables complets</p>
+    <h2 id="t-livrables" class="titre-l">Ce que vous recevez sous 48 h à 72 h.</h2>
+    <div class="bloc" style="margin-top: 32px;">
+      <div>
+        <h3>Plans de niveaux 2D cotés</h3>
+        <p>Distributions des pièces, cotes d'ouvertures, épaisseurs de cloisons et surfaces de chaque espace au format PDF haute définition.</p>
+      </div>
+      <div>
+        <h3>Fichiers CAO natifs (DWG / DXF)</h3>
+        <p>Fichiers vectorisés propres, calés sur des calques distincts pour être immédiatement exploitables dans vos logiciels de dessin.</p>
+      </div>
+      <div>
+        <h3>Coupes verticales & Altimétrie</h3>
+        <p>Repérage des hauteurs sous plafond, des départs de toiture, allèges de fenêtres et décrochés de niveaux.</p>
+      </div>
+      <div>
+        <h3>Photos 360° géolocalisées</h3>
+        <p>Association visuelle de chaque point mesuré à sa photo de repérage pour vérifier un détail technique à distance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 : Tableau comparatif -->
+  <section class="papier-2 section" aria-labelledby="t-comparatif">
+    <div class="conteneur">
+      <p class="surtitre">Comparatif de performance</p>
+      <h2 id="t-comparatif" class="titre-l">Pourquoi abandonner la méthode traditionnelle ?</h2>
+      <div style="overflow-x: auto; margin-top: 32px;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; background: var(--dvk-surface); border-radius: var(--dvk-radius-md); overflow: hidden; border: 1px solid var(--dvk-border);">
+          <thead>
+            <tr style="background: var(--dvk-surface-raised); border-bottom: 2px solid var(--dvk-border);">
+              <th style="padding: 16px 20px; font-weight: 600;">Critère</th>
+              <th style="padding: 16px 20px; font-weight: 600;">Mètre ruban classique</th>
+              <th style="padding: 16px 20px; font-weight: 600; color: var(--dvk-action);">Scanner iMapper Racer 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--dvk-border);">
+              <td style="padding: 14px 20px; font-weight: 600;">Temps sur place</td>
+              <td style="padding: 14px 20px;">3 h à 5 h (souvent en binôme)</td>
+              <td style="padding: 14px 20px; font-weight: 600;">45 min à 1 h 30 (autonome)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--dvk-border);">
+              <td style="padding: 14px 20px; font-weight: 600;">Précision</td>
+              <td style="padding: 14px 20px;">Aléatoire, dérive cumulative</td>
+              <td style="padding: 14px 20px; font-weight: 600;">±2 mm, faisceau 360°</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--dvk-border);">
+              <td style="padding: 14px 20px; font-weight: 600;">Faux-équerrages</td>
+              <td style="padding: 14px 20px;">Invisibles à l'œil nu</td>
+              <td style="padding: 14px 20px; font-weight: 600;">Détectés et cotés au millimètre</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--dvk-border);">
+              <td style="padding: 14px 20px; font-weight: 600;">Livrables</td>
+              <td style="padding: 14px 20px;">Croquis papier à redessiner</td>
+              <td style="padding: 14px 20px; font-weight: 600;">Fichiers CAO prêts (DWG / DXF / PDF)</td>
+            </tr>
+            <tr>
+              <td style="padding: 14px 20px; font-weight: 600;">Risque d'oubli</td>
+              <td style="padding: 14px 20px;">Fréquent (retour sur site nécessaire)</td>
+              <td style="padding: 14px 20px; font-weight: 600;">Nul (empreinte globale figée)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 : FAQ & Contact -->
+  <section class="section conteneur" aria-labelledby="t-faq">
+    <h2 id="t-faq" class="titre-m" style="margin-bottom: 32px;">Questions fréquentes sur le relevé scanner laser</h2>
+    <Faq questions={faq} />
+    <div class="actions" style="margin-top: 36px;">
+      <BoutonRdv bouton="faq.releve" parcours="pro">Réserver mon créneau ou demander un devis</BoutonRdv>
+    </div>
+  </section>
+
+  <PremierEchange pro />
+</Base>
