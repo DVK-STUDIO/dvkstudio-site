@@ -43,8 +43,8 @@ describe("capacité Immobilier : interrupteur", () => {
     expect(mandataireActif).toBe(false);
   });
   it("la navigation ne propose que les parcours travaux hemea", () => {
-    expect(navigation.map((n) => n.href)).toEqual(["/travaux/", "/acquereurs/", "/professionnels/", "/blog/", "/a-propos/"]);
-    expect(navigation.map((n) => n.libelle)).toEqual(["Particuliers", "Avant d'acheter", "Prescripteurs", "Guides & Conseils", "À propos"]);
+    expect(navigation.map((n) => n.href)).toEqual(["/travaux/", "/acquereurs/", "/releve-scanner-imapper/", "/professionnels/", "/blog/", "/a-propos/"]);
+    expect(navigation.map((n) => n.libelle)).toEqual(["Rénovation", "Avant d'acheter", "Plans 2D/3D", "Professionnels", "Guides & Conseils", "À propos"]);
   });
 });
 
