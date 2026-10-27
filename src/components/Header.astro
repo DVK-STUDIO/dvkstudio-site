@@ -40,13 +40,16 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
   .marque-symbole { height: 34px; width: auto; flex: none; }
   .marque-nom { font-size: 15px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; white-space: nowrap; }
   .marque-zone { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pierre); font-weight: 600; padding-left: 12px; border-left: 1px solid var(--dvk-border); }
-  .nav ul { list-style: none; display: flex; gap: 22px; }
+  .nav ul { list-style: none; display: flex; gap: clamp(14px, 1.4vw, 22px); }
   .nav a { font-size: 13.5px; letter-spacing: 0.01em; font-weight: 400; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding-block: 8px; }
   .nav a[aria-current="page"] { border-bottom: 2px solid var(--dvk-accent); font-weight: 600; }
   .badge { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--dvk-action-soft); color: var(--dvk-action-deep); padding: 3px 8px; border-radius: var(--dvk-radius-pill); }
   .entete-cta { min-height: 44px; padding: 0 20px; font-size: 13.5px; white-space: nowrap; }
   .menu-bouton { display: none; width: 44px; height: 44px; border: 1px solid var(--dvk-border-strong); background: transparent; border-radius: var(--dvk-radius-sm); flex-direction: column; gap: 5px; align-items: center; justify-content: center; cursor: pointer; }
   .menu-bouton span { width: 18px; height: 1.5px; background: var(--encre); display: block; }
+  @media (max-width: 1040px) {
+    .marque-zone { display: none; }
+  }
   @media (max-width: 900px) {
     .menu-bouton { display: flex; }
     .entete-cta { display: none; }
@@ -70,5 +73,3 @@ const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
     bouton.setAttribute("aria-label", ouvert ? "Fermer le menu" : "Ouvrir le menu");
   });
 </script>
-
-

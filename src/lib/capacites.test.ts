@@ -43,8 +43,8 @@ describe("capacité Immobilier : interrupteur", () => {
     expect(mandataireActif).toBe(false);
   });
   it("la navigation ne propose que les parcours travaux hemea", () => {
-    expect(navigation.map((n) => n.href)).toEqual(["/travaux/", "/acquereurs/", "/professionnels/", "/a-propos/"]);
-    expect(navigation.map((n) => n.libelle)).toEqual(["Particuliers", "Avant d'acheter", "Prescripteurs", "À propos"]);
+    expect(navigation.map((n) => n.href)).toEqual(["/travaux/", "/acquereurs/", "/professionnels/", "/blog/", "/a-propos/"]);
+    expect(navigation.map((n) => n.libelle)).toEqual(["Particuliers", "Avant d'acheter", "Prescripteurs", "Guides & Conseils", "À propos"]);
   });
 });
 
@@ -66,4 +66,3 @@ describe("mode mandataire : verrou des données réglementaires", () => {
     expect(verrouMandataire({ ...complet, mediateur: "[à compléter]" })).toMatch(/mediateur/);
   });
 });
-
