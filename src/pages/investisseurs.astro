@@ -1,0 +1,216 @@
+---
+import Base from "../layouts/Base.astro";
+import PremierEchange from "../components/PremierEchange.astro";
+import BoutonRdv from "../components/BoutonRdv.astro";
+import Faq from "../components/Faq.astro";
+import { site } from "../content/site";
+
+const titre = "Investisseurs & Marchands de biens : Cadrer et sécuriser vos travaux (60/80) | DVK Studio";
+const description = "Marchands de biens et investisseurs dans l'Oise et la Somme : cadrez vos travaux (80k-120k€+), sécurisez vos délais et budgets avec Kévin DE VLIEGER, chef de projet travaux hemea.";
+
+const faq = [
+  {
+    q: "Quelle est la typologie de chantiers que vous accompagnez ?",
+    r: "Le cœur de cible se situe sur des opérations de rénovation globale entre 80 000 € et 120 000 € et plus : immeubles de rapport, divisions de plateaux, transformation de commerces en logements, réhabilitation complète de maisons anciennes ou réaménagements locatifs à forte valeur ajoutée."
+  },
+  {
+    q: "Êtes-vous maître d'œuvre ou entreprise de bâtiment ?",
+    r: "Non. Kévin DE VLIEGER est chef de projet travaux indépendant partenaire du réseau hemea. Je ne réalise pas les travaux et n'interviens ni en maîtrise d'œuvre ni en bureau d'études. Mon rôle est d'être votre interlocuteur unique et tiers de confiance : cadrer le cahier des charges, sélectionner des entreprises partenaires rigoureusement auditées et assurer le suivi de chantier dans le cadre sécurisé hemea."
+  },
+  {
+    q: "Comment fonctionne la garantie de respect des délais ?",
+    r: "Le cadre contractuel hemea intègre des pénalités journalières de retard inscrites noir sur blanc dans les contrats des entreprises sélectionnées. Le calendrier est verrouillé avant signature, limitant le risque de dérive qui pèse sur vos coûts de portage financier."
+  },
+  {
+    q: "Comment sont protégés les fonds et acomptes versés ?",
+    r: "La protection financière hemea repose sur un compte séquestre dédié. Vos acomptes ne sont jamais versés directement à l'entreprise : ils restent bloqués sur un compte tiers et ne sont débloqués qu'au démarrage réel et à l'avancement validé de chaque jalon."
+  },
+  {
+    q: "Peut-on obtenir un relevé d'état des lieux laser avant achat ?",
+    r: "Oui. Équipé d'un scanner laser 360° iMapper Racer 3, je peux intervenir rapidement sur votre bien dans le 60 ou le 80 pour figer les surfaces exactes et vous livrer des plans cotés 2D/3D (DWG, DXF, PDF). De plus, ce relevé est intégralement déduit du chantier si les travaux sont réalisés avec le cadre hemea."
+  },
+  {
+    q: "Quelle est votre zone géographique d'intervention ?",
+    r: "J'interviens exclusivement sur l'ensemble des départements de l'Oise (60) et de la Somme (80) dans leur intégralité : Compiègne, Beauvais, Senlis, Chantilly, Creil, Clermont, Amiens, Abbeville, Montdidier et les communes avoisinantes."
+  },
+  {
+    q: "Que faut-il préparer pour le premier échange de 20 minutes ?",
+    r: "La commune du bien, la typologie du projet (achat/revente, déficit foncier, colocation, immeuble de rapport), l'enveloppe budgétaire prévisionnelle estimée et votre calendrier d'acquisition. Aucun plan finalisé n'est requis pour démarrer."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Accompagnement travaux pour Investisseurs & Marchands de biens",
+  "provider": {
+    "@type": "Person",
+    "name": "Kévin DE VLIEGER",
+    "jobTitle": "Chef de projet travaux hemea",
+    "telephone": "+33640324752",
+    "email": "contact@dvkstudio.fr"
+  },
+  "areaServed": ["Oise", "Somme"],
+  "description": description
+};
+---
+
+<Base titre={titre} description={description} page="investisseurs" chemin="/investisseurs/" donneesStructurees={schema}>
+  <!-- Hero Section -->
+  <header class="conteneur page-hero" style="padding-top: 56px; padding-bottom: 48px;">
+    <p class="surtitre">Investisseurs & Marchands de Biens · Oise (60) & Somme (80)</p>
+    <h1 class="titre-xl" style="margin-top: 14px; margin-bottom: 20px;">
+      Un bien à rénover dans l'Oise ou la Somme ?<br />Cadrez les travaux avant de vous engager.
+    </h1>
+    <p class="chapo" style="max-width: 68ch;">
+      Sécurisez la rentabilité de votre prochaine opération. Cadrage du périmètre travaux, estimation budgétaire prévisionnelle indicative (cœur de cible 80 000 € à 120 000 €+), calendrier contractuel avec pénalités de retard et artisans locaux rigoureusement audités hemea.
+    </p>
+    <div class="actions" style="margin-top: 28px;">
+      <BoutonRdv bouton="hero.investisseurs" parcours="investisseur">Réserver mon cadrage projet · 20 min</BoutonRdv>
+      <a class="lien-souligne" href="#risques">Sécuriser mon opération</a>
+      <a class="lien-souligne" href="#garanties">Garanties hemea</a>
+    </div>
+    <p class="hero-note" style="margin-top: 20px; font-size: 14px; color: var(--dvk-text-muted);">
+      Kévin DE VLIEGER · Premier échange de 20 min, par téléphone, sans engagement.
+    </p>
+  </header>
+
+  <!-- Section 1 : Les 4 pièges qui menacent la rentabilité d'une opération -->
+  <section class="section conteneur" id="risques" aria-labelledby="t-risques">
+    <p class="surtitre">Maîtrise du risque financier</p>
+    <h2 id="t-risques" class="titre-l">Les 4 aléas qui menacent la rentabilité de votre chantier.</h2>
+    <p class="chapo">
+      En opération de marchand de biens ou investissement locatif, chaque semaine d'imprévu impacte directement votre coût de portage bancaire et votre marge nette.
+    </p>
+    <div class="bloc" style="margin-top: 32px;">
+      <div>
+        <h3>01 · Dérive du calendrier</h3>
+        <p>Un chantier qui traîne, ce sont des intérêts intercalaires qui s'accumulent et une mise en vente ou en location reportée. Avec hemea, le calendrier prévoit des <strong>pénalités de retard journalières</strong>.</p>
+      </div>
+      <div>
+        <h3>02 · Dépassements de budget</h3>
+        <p>Les devis imprécis ou les postes omis en amont créent des avenants à répétition. Nous établissons un <strong>pré-chiffrage indicatif rigoureux</strong> et mettons en concurrence au moins deux entreprises auditées sur devis fermes.</p>
+      </div>
+      <div>
+        <h3>03 · Faillites et litiges d'acomptes</h3>
+        <p>Payer un acompte à une entreprise qui dépose le bilan est le cauchemar de l'investisseur. Grâce au <strong>compte séquestre hemea</strong>, vos fonds sont bloqués et sécurisés jusqu'au démarrage réel des travaux.</p>
+      </div>
+      <div>
+        <h3>04 · Charge mentale de coordination</h3>
+        <p>Relancer les artisans, arbitrer les imprévus et contrôler les interventions chronophages vous détournent de votre cœur de métier : sourcer et closer de nouvelles opportunités immobilières.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 : La méthodologie technique structurée -->
+  <section class="papier-2 section" aria-labelledby="t-methode">
+    <div class="conteneur">
+      <p class="surtitre">Rigueur d'exécution</p>
+      <h2 id="t-methode" class="titre-l" style="margin-top: 14px;">Une méthodologie technique en 4 étapes clés.</h2>
+      <p class="chapo" style="max-width: 68ch;">
+        Une rénovation performante respecte un ordre technique immuable. Nous appliquons ce standard pour fiabiliser chaque étape de votre opération.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 36px;">
+        <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; box-shadow: var(--dvk-shadow-card);">
+          <span style="font-size: 12px; font-weight: 700; color: var(--dvk-action); text-transform: uppercase;">Étape 1</span>
+          <h3 style="font-size: 19px; margin-top: 8px; margin-bottom: 12px;">Structure & Gros Œuvre</h3>
+          <p style="font-size: 14px; color: var(--dvk-text-muted); line-height: 1.6;">Vérification de la stabilité du bâtiment, toitures, charpentes, ouvertures et murs porteurs avant toute intervention secondaire.</p>
+        </div>
+
+        <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; box-shadow: var(--dvk-shadow-card);">
+          <span style="font-size: 12px; font-weight: 700; color: var(--dvk-action); text-transform: uppercase;">Étape 2</span>
+          <h3 style="font-size: 19px; margin-top: 8px; margin-bottom: 12px;">Isolation & Enveloppe</h3>
+          <p style="font-size: 14px; color: var(--dvk-text-muted); line-height: 1.6;">Performance thermique globale, étanchéité à l'air, menuiseries et traitement des ponts thermiques pour optimiser la note DPE finale.</p>
+        </div>
+
+        <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; box-shadow: var(--dvk-shadow-card);">
+          <span style="font-size: 12px; font-weight: 700; color: var(--dvk-action); text-transform: uppercase;">Étape 3</span>
+          <h3 style="font-size: 19px; margin-top: 8px; margin-bottom: 12px;">Fluides & Réseaux</h3>
+          <p style="font-size: 14px; color: var(--dvk-text-muted); line-height: 1.6;">Remise aux normes intégrale plomberie, électricité, VMC et systèmes de chauffage performants (pompes à chaleur, radiateurs inertie).</p>
+        </div>
+
+        <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; box-shadow: var(--dvk-shadow-card);">
+          <span style="font-size: 12px; font-weight: 700; color: var(--dvk-action); text-transform: uppercase;">Étape 4</span>
+          <h3 style="font-size: 19px; margin-top: 8px; margin-bottom: 12px;">Finitions & Valorisation</h3>
+          <p style="font-size: 14px; color: var(--dvk-text-muted); line-height: 1.6;">Agencements durables, revêtements soignés, cuisines et pièces d'eau prêtes à louer ou à revendre au prix fort.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 : Les 4 piliers de protection hemea -->
+  <section class="section conteneur" id="garanties" aria-labelledby="t-garanties">
+    <p class="surtitre">Tiers de confiance</p>
+    <h2 id="t-garanties" class="titre-l">Les 4 garanties officielles du cadre hemea.</h2>
+    <p class="chapo">
+      En tant que mandataire hemea sur l'Oise et la Somme, je vous fais bénéficier d'un cadre contractuel conçu pour éliminer l'insécurité des chantiers.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 36px;">
+      <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 28px;">
+        <h3 style="font-size: 20px; color: var(--dvk-action); margin-bottom: 10px;">1. Budget maîtrisé</h3>
+        <p style="font-size: 14.5px; color: var(--dvk-text-muted); line-height: 1.6;">Mise en concurrence systématique d'au moins deux entreprises auditées. Devis clairs, sans coûts cachés ni mauvaises surprises.</p>
+      </div>
+
+      <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 28px;">
+        <h3 style="font-size: 20px; color: var(--dvk-action); margin-bottom: 10px;">2. Délais respectés</h3>
+        <p style="font-size: 14.5px; color: var(--dvk-text-muted); line-height: 1.6;">Planning contractuel contraignant avec pénalités de retard journalières intégrées au marché de travaux.</p>
+      </div>
+
+      <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 28px;">
+        <h3 style="font-size: 20px; color: var(--dvk-action); margin-bottom: 10px;">3. Qualité soignée</h3>
+        <p style="font-size: 14.5px; color: var(--dvk-text-muted); line-height: 1.6;">Entreprises du bâtiment indépendantes et locales auditées sur 30 critères stricts : santé financière, assurances décennales vérifiées et qualité de finition.</p>
+      </div>
+
+      <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 28px;">
+        <h3 style="font-size: 20px; color: var(--dvk-action); margin-bottom: 10px;">4. Protection financière</h3>
+        <p style="font-size: 14.5px; color: var(--dvk-text-muted); line-height: 1.6;">Acomptes sécurisés sur compte séquestre bloqué et garantie d'achèvement / reprise hemea pour une sérénité totale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 : Relevé Laser Scanner iMapper -->
+  <section class="papier-2 section" aria-labelledby="t-scanner">
+    <div class="conteneur">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 36px; align-items: center;">
+        <div>
+          <p class="surtitre">Gain de temps à l'acquisition</p>
+          <h2 id="t-scanner" class="titre-l" style="margin-top: 12px; margin-bottom: 16px;">Sécurisez vos surfaces et vos bilans avant d'acheter.</h2>
+          <p style="color: var(--dvk-text); line-height: 1.7; font-size: 15px;">
+            Grâce à mon équipement <strong>scanner laser 3D iMapper Racer 3</strong>, j'interviens sur votre futur bien pour figer les surfaces réelles au millimètre (±2 mm) et vous livrer des plans cotés 2D/3D (DWG, DXF, PDF) sous 48 h à 72 h.
+          </p>
+          <ul style="padding-left: 20px; line-height: 1.8; color: var(--dvk-text-muted); font-size: 14.5px; margin-top: 16px;">
+            <li>Vérification immédiate des surfaces habitables et carrez réelles.</li>
+            <li>Plans d'état des lieux prêts pour les architectes, décorateurs ou déclarations préalables.</li>
+            <li><strong>Relevé 100 % déduit des travaux</strong> si le chantier est confié aux entreprises partenaires hemea via DVK Studio.</li>
+          </ul>
+          <div style="margin-top: 24px;">
+            <a class="btn btn-contour" href="/releve-scanner-imapper/">En savoir plus sur le relevé laser iMapper</a>
+          </div>
+        </div>
+
+        <div style="background: var(--dvk-surface); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 32px; box-shadow: var(--dvk-shadow-card);">
+          <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dvk-action);">Cadrage Direct</span>
+          <h3 style="font-size: 22px; margin-top: 10px; margin-bottom: 14px;">Une opération en vue dans le 60 ou le 80 ?</h3>
+          <p style="font-size: 14px; color: var(--dvk-text-muted); line-height: 1.6; margin-bottom: 24px;">
+            Faisons le point pendant 20 minutes sur la faisabilité, les points de vigilance techniques et l'enveloppe indicative à prévoir.
+          </p>
+          <BoutonRdv bouton="encart.investisseurs" parcours="investisseur" classe="btn btn-action">Réserver mon cadrage 20 min</BoutonRdv>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 : FAQ Spécifique Investisseurs -->
+  <section class="section conteneur" aria-labelledby="t-faq">
+    <h2 id="t-faq" class="titre-m" style="margin-bottom: 32px;">Questions fréquentes des investisseurs & marchands de biens</h2>
+    <Faq questions={faq} />
+    <div class="actions" style="margin-top: 36px;">
+      <BoutonRdv bouton="faq.investisseurs" parcours="investisseur">Échanger sur mon opération (20 min)</BoutonRdv>
+    </div>
+  </section>
+
+  <!-- Contact & Préparation -->
+  <PremierEchange pro />
+</Base>
