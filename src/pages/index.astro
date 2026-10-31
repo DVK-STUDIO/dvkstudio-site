@@ -32,7 +32,7 @@ const faq = [
   { q: "Comment connaître le coût de l’accompagnement ?", r: "Le périmètre et les modalités sont précisés selon votre projet avant toute prestation. Le premier échange ne vous engage pas pour la suite." },
   { q: "À quel moment vous contacter ?", r: "Dès que vous envisagez des travaux, y compris avant l'achat d'un bien à rénover. Je commence par votre besoin, la commune du bien et votre calendrier." },
   { q: "Intervenez-vous dans l'Oise et la Somme ?", r: "Oui. Je suis basé à Gannes, dans l'Oise, et j'accompagne les projets dans l'Oise (60) et la Somme (80). Je précise les modalités selon la localisation et la nature du projet." },
-  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange téléphonique dure vingt minutes et se fait sans engagement." },
+  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange dure trente minutes en visio Google Meet (ou téléphone) et se fait sans engagement." },
   { q: "Une enveloppe de travaux est-elle un devis ?", r: "Une estimation est un premier repère, avec ses hypothèses et ses limites. Les devis sont établis par les entreprises consultées après étude du besoin." },
   { q: "Réalisez-vous les travaux ?", r: "Les travaux sont réalisés par les entreprises retenues. Mon rôle de chef de projet travaux hemea porte sur le cadrage, le budget estimatif et la consultation d'entreprises labellisées hemea. Le périmètre de l'accompagnement est précisé pour chaque projet." },
   { q: "Réalisez-vous des relevés et plans 2D/3D avant travaux ?", r: "Oui. Équipé d'un scanner laser iMapper, je réalise des relevés d'état des lieux et des plans cotés 2D/3D (DWG, DXF, PDF) pour particuliers et professionnels dans l'Oise et la Somme." },
@@ -46,18 +46,18 @@ const faq = [
     {ambiance && <Image class="hero-fond" src={ambiance.src} alt="" widths={[640, 960, 1280, 1800]} sizes="100vw" loading="eager" fetchpriority="high" data-hero-ambiance />}
     <div class="conteneur hero-texte">
       <p class="surtitre">Chef de projet travaux hemea · Oise & Somme</p>
-      <h1 class="titre-xl">Quels travaux prévoir, quel budget envisager et par où commencer ?</h1>
-      <p class="chapo">Vous rénovez votre logement ou envisagez l’achat d’un bien à rénover ? Je vous accompagne pour clarifier vos besoins, préparer une enveloppe estimative et organiser la consultation d’entreprises labellisées hemea.</p>
+      <h1 class="titre-xl">Sécurisez vos travaux, maîtrisez votre budget et vos délais.</h1>
+      <p class="chapo">Particuliers, marchands de biens et investisseurs dans l’Oise et la Somme : de la numérisation laser 2D/3D jusqu'à la livraison du chantier, je vous accompagne avec les garanties du cadre hemea (artisans audités, pénalités de retard contractuelles, compte séquestre).</p>
       <div class="actions">
-        <BoutonRdv bouton="hero.rdv" parcours="renover">Faire le point sur mon projet</BoutonRdv>
-        <a class="lien-soulige" href="#simulateur">Simuler ma rénovation</a>
-        <a class="lien-soulige" href="/professionnels/">Vous accompagnez un client ?</a>
+        <BoutonRdv bouton="hero.rdv" parcours="renover">Faire le point · Échange 30 min</BoutonRdv>
+        <a class="lien-soulige" href="#parcours">Choisir mon profil</a>
+        <a class="lien-soulige" href="/releve-scanner-imapper/">Relevé 3D iMapper dès 300 € HT</a>
       </div>
-      <p class="hero-note">Kévin DE VLIEGER · Premier échange de 20 min, par téléphone, sans engagement.</p>
+      <p class="hero-note">Kévin DE VLIEGER · Échange découverte de 30 min en visio Google Meet, sans engagement.</p>
       <ul class="hero-reperes" aria-label="Votre accompagnement">
-        <li><span>01 · Un interlocuteur</span><p>Kévin DE VLIEGER, chef de projet travaux hemea.</p></li>
-        <li><span>02 · Deux départements</span><p>Oise (60) et Somme (80), à partir de Gannes.</p></li>
-        <li><span>03 · Un projet à cadrer</span><p>Relevé d'état des lieux 2D/3D, budget et calendrier.</p></li>
+        <li><span>01 · Tiers de confiance</span><p>Kévin DE VLIEGER, mandataire hemea indépendant.</p></li>
+        <li><span>02 · Deux départements</span><p>Oise (60) et Somme (80), réactivité sous 48h.</p></li>
+        <li><span>03 · Technologie & cadre</span><p>Relevé laser iMapper Racer 3 et garanties hemea.</p></li>
       </ul>
       {ambiance && <p class="hero-credit">Photo d’illustration.</p>}
     </div>
@@ -96,8 +96,30 @@ const faq = [
       <div class="tete"><p class="surtitre">Votre point de départ</p><h2 id="t-parcours" class="titre-l">Vous avez un projet.<br />Ou un client à accompagner.</h2></div>
     </div>
     <nav class="parcours-hemea" aria-label="Choisir votre parcours">
-      <a href="/travaux/"><span class="numero">01 · Particuliers</span><h3>J’ai un projet de rénovation</h3><p>Je rénove mon logement ou prépare un achat avec travaux. Je veux clarifier les travaux, le budget et les étapes.</p><span class="parcours-suite">Préparer mon projet <span aria-hidden="true">→</span></span></a>
-      <a class="nuit" href="/professionnels/"><span class="numero">02 · Prescripteurs</span><h3>J’accompagne un client</h3><p>Je cherche un contact local hemea pour répondre aux questions travaux de mon client.</p><span class="parcours-suite">Échanger sur un projet client <span aria-hidden="true">→</span></span></a>
+      <a href="/travaux/">
+        <span class="numero">01 · Particuliers</span>
+        <h3>Rénovation & Achat</h3>
+        <p>Je rénove mon logement ou prépare un achat avec travaux. Je veux clarifier mon enveloppe et sécuriser mes artisans avec hemea.</p>
+        <span class="parcours-suite">Préparer mon projet <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="/investisseurs/">
+        <span class="numero">02 · Investisseurs & MDB</span>
+        <h3>Marchand de biens ou investisseur</h3>
+        <p>Opération lourde (80k–120k€+). Je veux sécuriser ma marge, optimiser la fiscalité/DPE et imposer des délais garantis sous pénalités.</p>
+        <span class="parcours-suite">Sécuriser mon opération <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="/releve-scanner-imapper/">
+        <span class="numero">03 · Relevé 2D/3D iMapper</span>
+        <h3>Scanner Laser & Plans cotés sous 48h</h3>
+        <p>Plans DWG/DXF/PDF dès 300 € HT. 100 % déduit des travaux en cas de contractualisation avec le réseau hemea.</p>
+        <span class="parcours-suite">Découvrir les relevés 3D <span aria-hidden=true>→</span></span>
+      </a>
+      <a class="nuit" href="/professionnels/">
+        <span class="numero">04 · Professionnels</span>
+        <h3>Prescripteurs & Partenaires</h3>
+        <p>Agents immobiliers, architectes, notaires : orientez vos clients vers un relais travaux hemea de confiance dans l'Oise et la Somme.</p>
+        <span class="parcours-suite">Échanger sur un partenariat <span aria-hidden="true">→</span></span>
+      </a>
     </nav>
   </section>
 
