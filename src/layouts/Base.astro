@@ -21,6 +21,19 @@ interface Props {
 const { titre, description, page, chemin, noindex = false, donneesStructurees } = Astro.props;
 const canonique = new URL(chemin, site.url).toString();
 const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Studio`;
+
+const schemaFinal = donneesStructurees ?? {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "DVK Studio",
+  "url": "https://dvkstudio.fr",
+  "telephone": "+33640324752",
+  "email": "contact@dvkstudio.fr",
+  "description": "Kévin DE VLIEGER, mandataire indépendant hemea et facilitateur de projets de rénovation dans l'Oise et la Somme.",
+  "areaServed": ["Oise", "Somme", "Beauvais", "Compiègne", "Amiens", "Creil", "Senlis", "Chantilly"],
+  "address": { "@type": "PostalAddress", "streetAddress": "17 Rue Machaut", "postalCode": "60120", "addressLocality": "Gannes", "addressCountry": "FR" },
+  "image": "https://dvkstudio.fr/images/avatar-zebre-dvk-studio.jpg"
+};
 ---
 
 <!doctype html>
@@ -35,21 +48,7 @@ const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Stud
     <link rel="preload" href={montserratLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
-    {donneesStructurees && <script type="application/ld+json" set:html={JSON.stringify(donneesStructurees)} />}
-    {!donneesStructurees && (
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "DVK Studio",
-        "url": "https://dvkstudio.fr",
-        "telephone": "+33640324752",
-        "email": "contact@dvkstudio.fr",
-        "description": "Kévin DE VLIEGER, mandataire indépendant hemea et facilitateur de projets de rénovation dans l'Oise et la Somme.",
-        "areaServed": ["Oise", "Somme", "Beauvais", "Compiègne", "Amiens", "Creil", "Senlis", "Chantilly"],
-        "address": { "@type": "PostalAddress", "streetAddress": "17 Rue Machaut", "postalCode": "60120", "addressLocality": "Gannes", "addressCountry": "FR" },
-        "image": "https://dvkstudio.fr/images/avatar-zebre-dvk-studio.jpg"
-      })} />
-    )}
+    <script type="application/ld+json" set:html={JSON.stringify(schemaFinal)}></script>
     <meta property="og:type" content="website" />
     <meta property="og:title" content={titreComplet} />
     <meta property="og:description" content={description} />
