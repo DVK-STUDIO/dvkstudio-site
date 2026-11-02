@@ -4,7 +4,7 @@ import { RDV_BASE } from "../lib/rdv";
 import symbole from "../assets/logo/dvk-logo-symbole.svg?url";
 interface Props { page: string }
 const { page } = Astro.props;
-const courant = (href: string) => (href ===  ? "page" : undefined);
+const courant = (href: string) => (href === `/${page}/` ? "page" : undefined);
 ---
 
 <header class="entete">
@@ -47,10 +47,8 @@ const courant = (href: string) => (href ===  ? "page" : undefined);
   .entete-cta { min-height: 44px; padding: 0 18px; font-size: 13px; white-space: nowrap; }
   .menu-bouton { display: none; width: 44px; height: 44px; border: 1px solid var(--dvk-border-strong); background: transparent; border-radius: var(--dvk-radius-sm); flex-direction: column; gap: 5px; align-items: center; justify-content: center; cursor: pointer; }
   .menu-bouton span { width: 18px; height: 1.5px; background: var(--encre); display: block; }
-  @media (max-width: 1120px) {
+  @media (max-width: 900px) {
     .marque-zone { display: none; }
-  }
-  @media (max-width: 960px) {
     .menu-bouton { display: flex; }
     .entete-cta { display: none; }
     .nav { position: absolute; inset: 100% 0 auto 0; background: var(--dvk-surface-raised); border-bottom: 1px solid var(--dvk-border); display: none; padding: 8px var(--gouttiere) 20px; }
