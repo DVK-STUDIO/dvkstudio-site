@@ -1,8 +1,11 @@
 ---
-interface Props { questions: { q: string; r: string }[]; }
-const { questions } = Astro.props;
+interface Props { questions: { q: string; r: string }[]; structure?: boolean; }
+// structure : publie aussi les questions en données structurées (FAQPage), lues par Google et les moteurs de réponse IA.
+const { questions, structure = true } = Astro.props;
+const faqPage = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": questions.map((i) => ({ "@type": "Question", "name": i.q, "acceptedAnswer": { "@type": "Answer", "text": i.r } })) };
 ---
 
+{structure && <script type="application/ld+json" set:html={JSON.stringify(faqPage)}></script>}
 <div class="faq">
   {questions.map((item) => (
     <details>
