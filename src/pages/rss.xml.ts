@@ -9,6 +9,30 @@ export const GET: APIRoute = async () => {
     <link>https://dvkstudio.fr/blog/</link>
     <language>fr</language>
     <item>
+      <title>Visiter une maison ancienne dans l'Oise ou la Somme : ce qu'il faut vérifier avant de faire une offre</title>
+      <link>https://dvkstudio.fr/blog/premiere-visite-maison-ancienne-oise-somme/</link>
+      <description>Humidité, charpente, électricité, réseaux : ce qu'il faut regarder lors de la visite d'une maison ancienne dans l'Oise et la Somme avant de faire une offre.</description>
+      <pubDate>Thu, 12 Nov 2026 08:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Votre budget travaux prévoit-il une réserve pour imprévus ? Le guide pour les investisseurs et propriétaires</title>
+      <link>https://dvkstudio.fr/blog/reserve-imprevus-budget-travaux-renovation/</link>
+      <description>Pourquoi prévoir une réserve pour imprévus dans un budget de rénovation de bâti ancien, comment la construire et la séparer des devis. Oise et Somme.</description>
+      <pubDate>Thu, 12 Nov 2026 08:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Ouvrir sa cuisine sur le salon : ce qu'il faut vérifier avant d'abattre une cloison</title>
+      <link>https://dvkstudio.fr/blog/abattre-cloison-ouvrir-cuisine-mur-porteur/</link>
+      <description>Ouvrir sa cuisine sur le salon : mur porteur ou non, réseaux cachés, autorisations en copropriété. Les vérifications avant d'abattre une cloison.</description>
+      <pubDate>Thu, 12 Nov 2026 08:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Courtiers en crédit : comment un volet travaux bien cadré débloque le dossier de vos emprunteurs</title>
+      <link>https://dvkstudio.fr/blog/courtiers-volet-travaux-dossier-pret-immobilier/</link>
+      <description>Courtiers de l'Oise et de la Somme : comment un volet travaux bien cadré (enveloppe, devis détaillés, éco-PTZ) accélère le dossier de financement de vos emprunteurs.</description>
+      <pubDate>Thu, 12 Nov 2026 08:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Remplacement de chauffage et aides France Rénov' en 2026 : le guide pour l'Oise et la Somme</title>
       <link>https://dvkstudio.fr/blog/remplacement-chauffage-pompe-a-chaleur-aides-oise-somme/</link>
       <description>Barèmes MaPrimeRénov' 2026, primes CEE, spécificités du bâti picard et cadre sécurisé hemea pour financer et réussir l'installation de votre pompe à chaleur.</description>
