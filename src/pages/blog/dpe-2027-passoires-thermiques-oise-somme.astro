@@ -3,38 +3,39 @@ import Base from "../../layouts/Base.astro";
 import PremierEchange from "../../components/PremierEchange.astro";
 import BoutonRdv from "../../components/BoutonRdv.astro";
 
-const titre = "DPE 2027 : passoires thermiques en Oise et Somme";
-const description = "Échéance 2027, interdiction de louer les logements F et G, audit énergétique et travaux prioritaires : les recommandations de votre chef de projet travaux hemea.";
+const titre = "Passoires thermiques et DPE : échéance 2028 en Oise et Somme";
+const description = "G interdit à la location depuis 2025, F au 1er janvier 2028 : calendrier, audit et travaux prioritaires pour les bailleurs de l'Oise et la Somme.";
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Passoires thermiques et DPE 2027 dans l'Oise et la Somme : anticiper pour valoriser son bien",
+  "headline": "Passoires thermiques et DPE : anticiper l'échéance 2028 dans l'Oise et la Somme",
   "author": {
     "@type": "Person",
     "name": "Kévin DE VLIEGER",
     "jobTitle": "Chef de projet travaux hemea",
     "telephone": "+33640324752",
-    "email": "k.devlieger@hemea.fr"
+    "email": "contact@dvkstudio.fr"
   },
   "datePublished": "2026-10-12",
+  "dateModified": "2026-11-11",
   "description": description
 };
 ---
 
 <Base titre={titre} description={description} page="blog" chemin="/blog/dpe-2027-passoires-thermiques-oise-somme/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
+  <div class="dvk-article-conteneur">
     <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
       <div class="conteneur" style="max-width: 860px;">
         <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
           <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
           <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
-          <span style="color: var(--dvk-text);">DPE 2027 Oise et Somme</span>
+          <span style="color: var(--dvk-text);">DPE et passoires thermiques</span>
         </nav>
 
         <span class="surtitre">Énergie &amp; Réglementation · Oise (60) &amp; Somme (80)</span>
         <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          DPE 2027 : comment sortir de la passoire thermique dans l'Oise et la Somme
+          Passoires thermiques : comment préparer l'échéance de 2028 dans l'Oise et la Somme
         </h1>
 
         <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
@@ -45,7 +46,7 @@ const schema = {
 
         <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
           <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Dès le 1er janvier 2025 pour la classe G et dès 2027 pour la classe F, la loi Climat et Résilience interdit la mise en location des logements les plus énergivores. Pour un propriétaire bailleur ou un vendeur dans l'Oise ou la Somme, l'attentisme entraîne une décote directe. Voici comment structurer les travaux pour regagner les étiquettes D ou C.
+            Depuis le 1er janvier 2025 pour la classe G, et à partir du 1er janvier 2028 pour la classe F, la loi Climat et Résilience interdit la mise en location des logements les plus énergivores. Pour un propriétaire bailleur ou un vendeur dans l'Oise ou la Somme, l'attentisme entraîne une décote directe. Voici comment structurer les travaux pour regagner les étiquettes D ou C.
           </p>
         </div>
 
@@ -56,9 +57,12 @@ const schema = {
           </p>
           <ul>
             <li><strong>1er janvier 2025 :</strong> Interdiction de louer les logements étiquetés G (consommation supérieure à 420 kWh/m²/an).</li>
-            <li><strong>1er janvier 2027 :</strong> Extension de l'interdiction aux logements classés F.</li>
+            <li><strong>1er janvier 2028 :</strong> Extension de l'interdiction aux logements classés F.</li>
             <li><strong>1er janvier 2034 :</strong> Interdiction pour les logements de classe E.</li>
           </ul>
+          <p>
+            Depuis le 1er janvier 2026, le coefficient appliqué à l'électricité dans le calcul du DPE est passé de 2,3 à 1,9 : un logement chauffé à l'électricité peut gagner une classe sans travaux. Avant de chiffrer quoi que ce soit, il vaut donc la peine de vérifier que votre diagnostic est à jour.
+          </p>
           <p>
             Lors d'une transaction immobilière, l'audit énergétique réglementaire est obligatoire pour les biens en monopropriété classés F ou G. Ce document liste les scénarios de travaux, mais laisse souvent l'acheteur désemparé face aux devis d'artisans disparates.
           </p>
@@ -91,10 +95,10 @@ const schema = {
           <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
             <h3>Votre logement est classé F ou G dans l'Oise ou la Somme ?</h3>
             <p>
-              Faisons le point ensemble sur les postes de travaux prioritaires et les aides mobilisables lors d'un appel conseil de 20 minutes.
+              Faisons le point ensemble sur les postes de travaux prioritaires et les aides mobilisables lors d'un échange de 30 minutes en visio.
             </p>
             <div style="margin-top: 24px;">
-              <BoutonRdv bouton="blog_dpe">Échanger sur mon logement (20 min)</BoutonRdv>
+              <BoutonRdv bouton="blog_dpe">Échanger sur mon logement (30 min)</BoutonRdv>
             </div>
           </div>
         </div>
@@ -102,6 +106,6 @@ const schema = {
     </article>
 
     <PremierEchange />
-  </article>
+  </div>
 </Base>
 

@@ -105,8 +105,9 @@ body {
   transition: opacity 0.3s ease;
   display: block;
 }
+/* Le Zèbre se dimensionne sur la marge latérale libre : il ne passe jamais par-dessus le contenu (0 px de marge = invisible). */
 .dvk-zebre-lateral img {
-  height: clamp(280px, 32vh, 440px);
+  height: clamp(0px, calc((100vw - 1340px) * 2.4), min(440px, 32vh));
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 10px 24px rgba(11, 75, 102, 0.12));
