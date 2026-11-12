@@ -1,96 +1,109 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Encadre from "../../components/fiche/Encadre.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
-const titre = "Visite d'une maison ancienne (Oise, Somme) : quoi vérifier";
-const description = "Humidité, charpente, électricité, réseaux : ce qu'il faut regarder en visitant une maison ancienne dans l'Oise et la Somme avant de faire une offre.";
+const enResume = [
+  "<strong>L'essentiel est caché :</strong> humidité, charpente, électricité et réseaux pèsent plus sur le budget que les finitions.",
+  "<strong>Six points à vérifier :</strong> humidité, charpente et couverture, électricité, plomberie et chauffage, assainissement, menuiseries et isolation.",
+  "<strong>Diagnostics :</strong> DPE (et audit énergétique si E, F ou G), plomb avant 1949, amiante avant juillet 1997, électricité et gaz de plus de 15 ans…",
+  "<strong>Avant l'offre :</strong> demandez les diagnostics dès la visite, pas seulement au compromis.",
+  "<strong>Méthode :</strong> contre-visite technique, enveloppe travaux poste par poste, puis devis d'entreprises auditées.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Visiter une maison ancienne dans l'Oise ou la Somme : ce qu'il faut vérifier avant de faire une offre",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr",
-    "url": "https://dvkstudio.fr/a-propos/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "DVK Studio",
-    "url": "https://dvkstudio.fr/"
-  },
-  "datePublished": "2026-11-12",
-  "dateModified": "2026-11-12",
-  "description": description,
-  "mainEntityOfPage": "https://dvkstudio.fr/blog/premiere-visite-maison-ancienne-oise-somme/"
-};
+const sommaire = [
+  { id: "cache", libelle: "Pourquoi l'essentiel ne se voit pas" },
+  { id: "points", libelle: "Les points à vérifier" },
+  { id: "diagnostics", libelle: "Les diagnostics du vendeur" },
+  { id: "cadrer", libelle: "Cadrer les travaux avant l'offre" },
+];
+
+const faq = [
+  { q: "Peut-on demander les diagnostics avant de faire une offre ?", r: "Oui, et c'est conseillé : ils donnent déjà une bonne partie de la liste des travaux à prévoir. Le vendeur doit de toute façon les annexer à la promesse ou à l'acte de vente." },
+  { q: "L'audit énergétique est-il obligatoire ?", r: "Pour une maison classée E, F ou G, oui : il doit être fourni dès la première visite. Il propose des scénarios de travaux pour améliorer la performance du logement." },
+  { q: "Faut-il venir avec un professionnel à la première visite ?", r: "Pas forcément. La première visite sert à repérer les indices ; une contre-visite technique permet ensuite de les confirmer et de chiffrer une enveloppe travaux." },
+  { q: "Comment intégrer les travaux dans le prêt ?", r: "Avec une enveloppe travaux documentée poste par poste et des devis détaillés, présentée à la banque ou au courtier avec le dossier de financement." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/premiere-visite-maison-ancienne-oise-somme/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt;
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt;
-          <span style="color: var(--dvk-text);">Visite d'une maison ancienne</span>
-        </nav>
+<FicheConseil
+  titre="Visiter une maison ancienne : quoi vérifier | DVK Studio"
+  description="Humidité, charpente, électricité, réseaux : ce qu'il faut regarder en visitant une maison ancienne dans l'Oise et la Somme avant de faire une offre."
+  chemin="/blog/premiere-visite-maison-ancienne-oise-somme/"
+  h1="Visiter une maison ancienne dans l'Oise ou la Somme : ce qu'il faut vérifier avant de faire une offre"
+  surtitre="Achat & visite · Oise & Somme"
+  fil="Visite d'une maison ancienne"
+  publie="2026-11-12"
+  majLe="2026-11-12"
+  lecture={6}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_premiere_visite"
+  appel="Une visite prévue dans l'Oise ou la Somme ? Échangeons 30 minutes en visio avant votre offre pour cadrer les travaux du bien."
+  zebre={{ pose: "terrain", titre: "Demandez à monter dans les combles", texte: "C'est la pièce qu'on ne fait presque jamais visiter, et celle qui en dit le plus : état de la charpente, traces d'infiltration, isolation. Une lampe de poche suffit." }}
+>
+  <p slot="chapo">
+    Une maison ancienne se visite rarement avec un œil technique : on regarde la lumière, les volumes, la cuisine.
+    Or ce qui pèse le plus lourd dans l'enveloppe travaux se voit peu : l'humidité des murs, la charpente, l'électricité, les réseaux.
+    Voici les points à observer, les diagnostics que le vendeur doit fournir, et la méthode que j'applique avec les acquéreurs pour chiffrer les travaux avant l'offre.
+  </p>
 
-        <span class="surtitre">Achat &amp; visite · Oise &amp; Somme</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          Visiter une maison ancienne dans l'Oise ou la Somme : ce qu'il faut vérifier avant de faire une offre
-        </h1>
+  <h2 id="cache">Pourquoi les postes coûteux ne se voient-ils pas à la visite ?</h2>
+  <p>
+    Dans le bâti ancien de Picardie (brique, craie, silex, pans de bois et torchis), les désordres les plus coûteux sont souvent masqués par une décoration récente :
+    un doublage posé sur un mur humide, un faux plafond sous une charpente fatiguée, un tableau électrique remplacé alors que les circuits sont d'origine.
+    La visite sert d'abord à repérer des indices, que les diagnostics et un relevé technique confirmeront ou écarteront.
+  </p>
 
-        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 6 min</span>
-        </div>
+  <h2 id="points">Quels points vérifier pendant la visite ?</h2>
+  <Tableau
+    legende="Les points à observer pendant la visite d'une maison ancienne"
+    entetes={["Poste", "Ce qu'il faut regarder"]}
+    lignes={[
+      ["Humidité", "Traces en pied de mur, salpêtre, peintures qui cloquent, odeur de cave, enduit ciment sur mur ancien"],
+      ["Charpente et couverture", "Accès aux combles, traces d'infiltration, bois attaqués, tuiles ou ardoises déplacées, gouttières"],
+      ["Électricité", "Prise de terre, disjoncteur différentiel, prises d'époque, fils apparents"],
+      ["Plomberie et chauffage", "Type et âge de la chaudière, canalisations visibles, pression d'eau, cuve de fioul"],
+      ["Assainissement", "Tout-à-l'égout ou installation autonome, emplacement de la fosse"],
+      ["Menuiseries et isolation", "Simple ou double vitrage, état des bois, combles isolés ou non"],
+    ]}
+    note="Prenez des photos de chaque point et notez vos questions : elles serviront à interroger le vendeur et à préparer la contre-visite."
+  />
 
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Une maison ancienne se visite rarement avec un œil technique : on regarde la lumière, les volumes, la cuisine. Or ce qui pèse le plus lourd dans l'enveloppe travaux se voit peu à la visite : l'humidité des murs, l'état de la charpente et de la couverture, l'électricité, les réseaux d'eau et d'assainissement. Ce guide liste les points à observer pièce par pièce, les diagnostics que le vendeur doit fournir, et la méthode que j'applique avec les acquéreurs pour chiffrer les travaux avant l'offre.
-          </p>
-        </div>
+  <AmbassadorCallout
+    pose="reflexion"
+    title="Un mur fraîchement repeint mérite une question"
+    quote="Une peinture neuve sur un seul pan de mur, en bas d'une pièce, cache parfois une tache d'humidité. Demandez simplement pourquoi : la réponse est souvent instructive."
+  />
 
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>Pourquoi les postes coûteux ne se voient pas à la visite ?</h2>
-          <p>Dans le bâti ancien de Picardie (brique, craie, silex, pans de bois et torchis), les désordres les plus coûteux sont souvent cachés par une décoration récente : un doublage posé sur un mur humide, un faux plafond sous une charpente fatiguée, un tableau électrique remplacé alors que les circuits sont d'origine. Ce ne sont pas les finitions qui font varier un budget, mais la structure, l'enveloppe et les réseaux. La visite sert donc d'abord à repérer des indices, que les diagnostics et un relevé technique viendront ensuite confirmer ou écarter.</p>
-          <h2>Quels points vérifier pendant la visite ?</h2>
-          <ul><li><strong>Humidité :</strong> traces en pied de mur, salpêtre, peintures qui cloquent, odeur de cave, enduits ciment sur des murs anciens qui empêchent la maçonnerie de sécher.</li><li><strong>Charpente et couverture :</strong> demandez à accéder aux combles ; regardez les traces d'infiltration, les bois attaqués, les tuiles ou ardoises déplacées, l'état des gouttières.</li><li><strong>Électricité :</strong> présence d'une prise de terre, tableau avec disjoncteur différentiel, prises et interrupteurs d'époque, fils apparents.</li><li><strong>Plomberie et chauffage :</strong> type et âge de la chaudière, canalisations visibles, pression d'eau, présence d'une cuve de fioul.</li><li><strong>Assainissement :</strong> raccordement au tout-à-l'égout ou installation autonome, emplacement de la fosse.</li><li><strong>Menuiseries et isolation :</strong> simple ou double vitrage, état des bois, combles isolés ou non.</li></ul>
-          <p>Prenez des photos de chaque point et notez vos questions : elles serviront à interroger le vendeur et à préparer la contre-visite.</p>
-          <h2>Quels diagnostics le vendeur doit-il fournir ?</h2>
-          <p>Le vendeur doit remettre un dossier de diagnostic technique (DDT), annexé à la promesse ou à l'acte de vente. Pour une maison, il comprend notamment, selon les cas (<a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10798" target="_blank" rel="noopener">service-public.fr</a>) :</p>
-          <ul><li>le diagnostic de performance énergétique (DPE), et un audit énergétique si l'étiquette est E, F ou G ;</li><li>le constat de risque d'exposition au plomb si la maison a été construite avant le 1er janvier 1949 ;</li><li>l'état relatif à l'amiante si le permis de construire a été délivré avant le 1er juillet 1997 ;</li><li>l'état des installations électrique et de gaz si elles ont plus de 15 ans ;</li><li>le diagnostic assainissement pour une installation autonome ;</li><li>l'état relatif aux termites et l'état des risques selon les zones définies par arrêté.</li></ul>
-          <p>Demandez ces documents avant de faire une offre, pas seulement au compromis : ils donnent déjà une bonne partie de la liste des travaux à prévoir.</p>
-          <h2>Comment cadrer l'enveloppe travaux avant de signer ?</h2>
-          <p>Ma méthode avec les acquéreurs tient en trois temps. D'abord une <strong>lecture technique du bien</strong> lors d'une contre-visite, en croisant ce qu'on observe avec les diagnostics. Ensuite une <strong>enveloppe travaux indicative</strong>, poste par poste, avec une réserve distincte pour les imprévus du bâti ancien. Enfin, si le projet se confirme, des <strong>devis détaillés d'artisans locaux audités</strong> par le réseau hemea. Vous faites ainsi votre offre en connaissant l'ordre de grandeur des travaux, au lieu de le découvrir après l'achat.</p>
-          <p>Pendant le chantier, les paiements passent par le compte séquestre hemea et sont débloqués étape par étape, à l'avancement validé.</p>
+  <h2 id="diagnostics">Quels diagnostics le vendeur doit-il fournir ?</h2>
+  <p>Le vendeur remet un dossier de diagnostic technique (DDT), annexé à la promesse ou à l'acte de vente. Pour une maison, il comprend notamment, selon les cas :</p>
+  <Tableau
+    legende="Principaux diagnostics à fournir pour la vente d'une maison"
+    entetes={["Diagnostic", "Quand il est obligatoire"]}
+    lignes={[
+      ["DPE", "Toujours ; audit énergétique en plus si la maison est classée E, F ou G"],
+      ["Plomb (CREP)", "Maison construite avant le 1er janvier 1949"],
+      ["Amiante", "Permis de construire délivré avant le 1er juillet 1997"],
+      ["Électricité et gaz", "Installations de plus de 15 ans"],
+      ["Assainissement", "Installation autonome (non raccordée au tout-à-l'égout)"],
+      ["Termites, état des risques", "Selon les zones définies par arrêté"],
+    ]}
+  />
+  <Encadre source="Service-public.fr, diagnostics immobiliers en cas de vente (F10798)" lien="https://www.service-public.gouv.fr/particuliers/vosdroits/F10798">
+    <p>Demandez ces documents avant de faire une offre, pas seulement au compromis : ils donnent déjà une bonne partie de la liste des travaux à prévoir.</p>
+  </Encadre>
 
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Une visite prévue dans l'Oise ou la Somme ?</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Échangeons 30 minutes en visio avant votre offre pour cadrer les travaux du bien que vous visitez.
-            </p>
-            <div style="margin-top: 20px;">
-              <BoutonRdv bouton="blog_premiere_visite">Réserver mon cadrage 30 min</BoutonRdv>
-            </div>
-          </div>
-
-          <div style="font-size: 14px; color: var(--dvk-text-muted); border-top: 1px solid var(--dvk-border); padding-top: 16px; margin-top: 32px;">
-            <p style="margin-bottom: 8px;"><strong>Sources</strong> (consultées le 11 novembre 2026)</p>
-            <ul>
-              <li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10798" target="_blank" rel="noopener">Service-public.fr — Diagnostics immobiliers à fournir en cas de vente d'un logement (F10798)</a></li>
-              <li><a href="https://france-renov.gouv.fr/" target="_blank" rel="noopener">France Rénov' — service public de la rénovation de l'habitat</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
-    <PremierEchange />
-  </article>
-</Base>
+  <h2 id="cadrer">Comment cadrer l'enveloppe travaux avant de signer ?</h2>
+  <ol>
+    <li><strong>Lecture technique du bien</strong> lors d'une contre-visite, en croisant ce qu'on observe avec les diagnostics.</li>
+    <li><strong>Enveloppe travaux indicative</strong>, poste par poste, avec une réserve distincte pour les imprévus du bâti ancien.</li>
+    <li><strong>Devis détaillés</strong> d'entreprises locales auditées par hemea, si le projet se confirme.</li>
+  </ol>
+  <p>
+    Vous faites ainsi votre offre en connaissant l'ordre de grandeur des travaux, au lieu de le découvrir après l'achat.
+    Pour les budgets au m², consultez <a href="/blog/renover-maison-ancienne-oise-somme-guide-2026/">mon guide sur la rénovation d'une maison ancienne</a>.
+  </p>
+</FicheConseil>

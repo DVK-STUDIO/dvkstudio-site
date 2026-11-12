@@ -1,94 +1,105 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Encadre from "../../components/fiche/Encadre.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
-const titre = "Abattre une cloison pour ouvrir sa cuisine : les vérifications";
-const description = "Ouvrir sa cuisine sur le salon : mur porteur ou non, réseaux cachés, autorisations en copropriété. Les vérifications avant d'abattre une cloison.";
+const enResume = [
+  "<strong>Première question :</strong> que porte cette paroi ? Une cloison légère se dépose ; un mur porteur ou semi-porteur exige une étude et un renfort.",
+  "<strong>Réseaux cachés :</strong> électricité, eau, parfois gaz ou ventilation passent souvent dans une cloison de cuisine.",
+  "<strong>Maison individuelle :</strong> supprimer une cloison intérieure ne figure pas parmi les travaux soumis à déclaration préalable.",
+  "<strong>Copropriété :</strong> un mur porteur est une partie commune ; l'accord de l'assemblée générale est obligatoire avant les travaux.",
+  "<strong>Devis complet :</strong> étaiement, renfort, démolition, évacuation et reprises de sols, murs et plafonds.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Ouvrir sa cuisine sur le salon : ce qu'il faut vérifier avant d'abattre une cloison",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr",
-    "url": "https://dvkstudio.fr/a-propos/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "DVK Studio",
-    "url": "https://dvkstudio.fr/"
-  },
-  "datePublished": "2026-11-12",
-  "dateModified": "2026-11-12",
-  "description": description,
-  "mainEntityOfPage": "https://dvkstudio.fr/blog/abattre-cloison-ouvrir-cuisine-mur-porteur/"
-};
+const sommaire = [
+  { id: "porteur", libelle: "Cloison ou mur porteur ?" },
+  { id: "reseaux", libelle: "Les réseaux cachés" },
+  { id: "autorisations", libelle: "Les autorisations" },
+  { id: "ordre", libelle: "L'ordre du projet" },
+];
+
+const faq = [
+  { q: "Comment savoir si un mur est porteur ?", r: "Les indices (épaisseur, matériau, position sous les solives, mur aligné à l'étage) ne suffisent pas, surtout dans une maison ancienne. Seul un professionnel de la structure peut le confirmer et dimensionner le renfort." },
+  { q: "Faut-il une autorisation de la mairie pour abattre une cloison ?", r: "En maison individuelle, la suppression d'une cloison intérieure ne fait pas partie des travaux soumis à déclaration préalable. En secteur protégé ou si la façade est modifiée, renseignez-vous auprès du service urbanisme de la mairie." },
+  { q: "En copropriété, quelle majorité faut-il ?", r: "Des travaux touchant les parties communes doivent être autorisés par l'assemblée générale, en principe à la majorité de l'article 25, et à la double majorité de l'article 26 s'ils entraînent une appropriation ou une destruction de parties communes." },
+  { q: "Peut-on visualiser la pièce ouverte avant les travaux ?", r: "Oui. Un relevé et une projection en 3D permettent de valider l'aménagement de la future pièce avant de lancer la démolition." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/abattre-cloison-ouvrir-cuisine-mur-porteur/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt;
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt;
-          <span style="color: var(--dvk-text);">Abattre une cloison</span>
-        </nav>
+<FicheConseil
+  titre="Abattre une cloison, ouvrir sa cuisine | DVK Studio"
+  description="Ouvrir sa cuisine sur le salon : mur porteur ou non, réseaux cachés, autorisations en copropriété. Les vérifications avant d'abattre une cloison."
+  chemin="/blog/abattre-cloison-ouvrir-cuisine-mur-porteur/"
+  h1="Ouvrir sa cuisine sur le salon : ce qu'il faut vérifier avant d'abattre une cloison"
+  surtitre="Aménagement · Structure"
+  fil="Abattre une cloison"
+  publie="2026-11-12"
+  majLe="2026-11-12"
+  lecture={5}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_cloison_cuisine"
+  appel="Vous voulez ouvrir votre cuisine ? Échangeons 30 minutes en visio pour vérifier la faisabilité et organiser les étapes dans le bon ordre."
+  zebre={{ pose: "reflexion", titre: "On regarde au-dessus avant de casser", texte: "Montez à l'étage ou dans les combles : un mur aligné au-dessus, des solives qui reposent sur la cloison… ce sont des indices qu'elle porte. Mais seul un professionnel de la structure tranche." }}
+>
+  <p slot="chapo">
+    Ouvrir la cuisine sur le salon est l'un des projets les plus demandés en rénovation. Avant de casser, une question décide de tout : que porte cette paroi ?
+    Viennent ensuite les réseaux cachés et, en copropriété, l'accord de l'assemblée générale. Voici les vérifications à faire, dans l'ordre.
+  </p>
 
-        <span class="surtitre">Aménagement · Structure</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          Ouvrir sa cuisine sur le salon : ce qu'il faut vérifier avant d'abattre une cloison
-        </h1>
+  <h2 id="porteur">Cloison, mur porteur ou semi-porteur : comment savoir ?</h2>
+  <p>
+    Dans une maison ancienne, les indices ne suffisent pas : épaisseur du mur, matériau, position par rapport aux solives de l'étage, présence d'un mur aligné au niveau supérieur.
+    Certaines cloisons d'origine reprennent aussi une partie des charges au fil des années, après le fléchissement d'un plancher.
+    Seul un professionnel de la structure peut confirmer la nature de la paroi et, si elle porte, dimensionner le renfort (poutre, poteaux, appuis) à mettre en place avant toute démolition.
+  </p>
+  <Tableau
+    legende="Cloison ou mur porteur : ce qui change"
+    entetes={["Type de paroi", "Ce qu'il faut prévoir"]}
+    lignes={[
+      ["Cloison légère", "Dépose, déviation des réseaux, reprises de sols, murs et plafonds"],
+      ["Mur semi-porteur", "Avis d'un professionnel de la structure, renfort possible, étaiement pendant les travaux"],
+      ["Mur porteur", "Étude de structure, renfort dimensionné (poutre, poteaux, appuis), étaiement, autorisation en copropriété"],
+    ]}
+  />
 
-        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 5 min</span>
-        </div>
+  <h2 id="reseaux">Quels réseaux peuvent passer dans la cloison ?</h2>
+  <p>
+    Une cloison de cuisine cache souvent des gaines électriques, des arrivées et évacuations d'eau, parfois une conduite de gaz ou un conduit de ventilation.
+    Il faut les repérer, les consigner et prévoir leur déviation dans le chiffrage. C'est aussi le bon moment pour vérifier le circuit électrique de la cuisine, qui sera de toute façon repris.
+  </p>
 
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Ouvrir la cuisine sur le salon est l'un des projets les plus demandés en rénovation. Avant de casser, une question décide de tout : que porte cette paroi ? Une cloison légère se dépose simplement ; un mur porteur ou semi-porteur exige une étude et un renfort. Viennent ensuite les réseaux cachés et, en copropriété, l'accord de l'assemblée générale. Voici les vérifications à faire dans l'ordre.
-          </p>
-        </div>
+  <AmbassadorCallout
+    pose="terrain"
+    title="Le gaz se coupe avant tout le reste"
+    quote="Si une conduite de gaz traverse la cloison, elle se consigne et se dévie par un professionnel qualifié avant la moindre démolition. C'est non négociable."
+  />
 
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>Cloison, mur porteur ou semi-porteur : comment savoir ?</h2>
-          <p>Dans une maison ancienne, les indices ne suffisent pas : épaisseur du mur, matériau, position par rapport aux solives de l'étage, présence d'un mur aligné au niveau supérieur. Certaines cloisons d'origine reprennent aussi une partie des charges au fil des années, après le fléchissement d'un plancher. Seul un professionnel de la structure peut confirmer la nature de la paroi et, si elle porte, dimensionner le renfort (poutre, poteaux, appuis) à mettre en place avant toute démolition.</p>
-          <h2>Quels réseaux peuvent passer dans la cloison ?</h2>
-          <p>Une cloison de cuisine cache souvent des gaines électriques, des arrivées et évacuations d'eau, parfois une conduite de gaz ou un conduit de ventilation. Il faut les repérer, les consigner et prévoir leur déviation dans le chiffrage. C'est aussi le bon moment pour vérifier la conformité du circuit électrique de la cuisine, qui sera de toute façon repris.</p>
-          <h2>Faut-il une autorisation ?</h2>
-          <p><strong>En maison individuelle</strong>, la suppression d'une simple cloison intérieure ne figure pas parmi les travaux soumis à déclaration préalable listés par <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F17578" target="_blank" rel="noopener">service-public.fr</a>. En cas de doute (secteur protégé, modification de façade, changement de destination), le service urbanisme de la mairie tranche.</p>
-          <p><strong>En copropriété</strong>, un mur porteur fait partie du gros œuvre, donc des parties communes. Les travaux qui touchent aux parties communes doivent être autorisés par l'assemblée générale avant de commencer, en principe à la majorité de l'article 25, et à la double majorité de l'article 26 s'ils entraînent une appropriation ou une destruction de parties communes (<a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F31513" target="_blank" rel="noopener">service-public.fr</a>). Des travaux réalisés sans autorisation sont irréguliers et le syndicat peut exiger la remise en état.</p>
-          <h2>Dans quel ordre mener le projet ?</h2>
-          <ol><li>Faire confirmer la nature de la paroi par un professionnel de la structure.</li><li>Repérer les réseaux et prévoir leur déviation.</li><li>Obtenir les autorisations nécessaires (assemblée générale en copropriété, mairie si besoin).</li><li>Faire établir des devis détaillés incluant l'étayage, le renfort, la démolition, l'évacuation et les reprises de sols, murs et plafonds.</li><li>Confier les travaux à des artisans assurés pour ces ouvrages.</li></ol>
-          <p>Avec DVK Studio, le projet peut aussi être visualisé en 3D avant les travaux, pour valider l'aménagement de la future pièce ouverte. L'exécution est ensuite confiée à des artisans audités du réseau hemea, avec des paiements protégés sur compte séquestre.</p>
+  <h2 id="autorisations">Faut-il une autorisation ?</h2>
+  <p>
+    <strong>En maison individuelle</strong>, la suppression d'une simple cloison intérieure ne figure pas parmi les travaux soumis à déclaration préalable.
+    En cas de doute (secteur protégé, modification de façade, changement de destination), le service urbanisme de la mairie tranche.
+  </p>
+  <p>
+    <strong>En copropriété</strong>, un mur porteur fait partie du gros œuvre, donc des parties communes. Les travaux qui y touchent doivent être autorisés par l'assemblée générale avant de commencer.
+    Des travaux réalisés sans autorisation sont irréguliers et le syndicat peut exiger la remise en état.
+  </p>
+  <Encadre source="Service-public.fr, travaux dans l'appartement du propriétaire occupant (F31513)" lien="https://www.service-public.gouv.fr/particuliers/vosdroits/F31513">
+    <p>L'autorisation de l'assemblée générale se vote en principe à la majorité de l'article 25, et à la double majorité de l'article 26 si les travaux entraînent une appropriation ou une destruction de parties communes.</p>
+  </Encadre>
 
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Vous voulez ouvrir votre cuisine ?</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Échangeons 30 minutes en visio pour vérifier la faisabilité et organiser les étapes dans le bon ordre.
-            </p>
-            <div style="margin-top: 20px;">
-              <BoutonRdv bouton="blog_abattre_cloison">Réserver mon cadrage 30 min</BoutonRdv>
-            </div>
-          </div>
-
-          <div style="font-size: 14px; color: var(--dvk-text-muted); border-top: 1px solid var(--dvk-border); padding-top: 16px; margin-top: 32px;">
-            <p style="margin-bottom: 8px;"><strong>Sources</strong> (consultées le 11 novembre 2026)</p>
-            <ul>
-              <li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F31513" target="_blank" rel="noopener">Service-public.fr — Copropriété : travaux dans l'appartement du propriétaire occupant (F31513)</a></li>
-              <li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F17578" target="_blank" rel="noopener">Service-public.fr — Déclaration préalable de travaux (F17578)</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
-    <PremierEchange />
-  </article>
-</Base>
+  <h2 id="ordre">Dans quel ordre mener le projet ?</h2>
+  <ol>
+    <li>Faire confirmer la nature de la paroi par un professionnel de la structure.</li>
+    <li>Repérer les réseaux et prévoir leur déviation.</li>
+    <li>Obtenir les autorisations nécessaires (assemblée générale en copropriété, mairie si besoin).</li>
+    <li>Faire établir des devis détaillés incluant l'étaiement, le renfort, la démolition, l'évacuation et les reprises de sols, murs et plafonds.</li>
+    <li>Confier les travaux à des entreprises assurées pour ces ouvrages.</li>
+  </ol>
+  <p>
+    Le projet peut aussi être visualisé en 3D avant les travaux, pour valider l'aménagement de la future pièce ouverte.
+    Dans le cadre hemea, au moins deux entreprises auditées sont consultées et les paiements sont protégés sur compte séquestre.
+  </p>
+</FicheConseil>
