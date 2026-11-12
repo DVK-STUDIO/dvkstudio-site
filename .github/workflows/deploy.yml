@@ -43,7 +43,7 @@ jobs:
     steps:
       - id: deploiement
         uses: actions/deploy-pages@v4
-  # Test de fumée sur le site réellement servi. En cas d'échec : appliquer le retour arrière de docs/mise-en-ligne.md.
+  # Test de fumée sur le site réellement servi. En cas d'échec : revenir au commit précédent de main (git revert) pour republier la version d'avant.
   fumee:
     needs: deployer
     runs-on: ubuntu-latest

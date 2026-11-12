@@ -14,6 +14,5 @@ Site statique Astro de DVK Studio, en ligne sur https://dvkstudio.fr. Toute fusi
 - Services tiers chargés sur les pages : Metricool (mesure d'audience) et Typebot (assistant « Le Zèbre »). Tout nouveau service doit être ajouté à la page Confidentialité.
 - Polices auto-hébergées. JavaScript natif, seulement où utile.
 - Statuts honnêtes : Disponible / Démonstration / À venir.
-- Ancien site conservé dans `legacy/` (non déployé).
 
-Avant mise en ligne : `docs/avant-mise-en-ligne.md`.
+Les notes internes (mise en ligne, HubSpot, feuille de route) sont conservées hors de ce dépôt public.
