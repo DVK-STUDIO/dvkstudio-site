@@ -32,7 +32,7 @@ const faq = [
   { q: "Comment connaître le coût de l’accompagnement ?", r: "Le périmètre et les modalités sont précisés selon votre projet avant toute prestation. Le premier échange ne vous engage pas pour la suite." },
   { q: "À quel moment vous contacter ?", r: "Dès que vous envisagez des travaux, y compris avant l'achat d'un bien à rénover. Je commence par votre besoin, la commune du bien et votre calendrier." },
   { q: "Intervenez-vous dans l'Oise et la Somme ?", r: "Oui. Je suis basé à Gannes, dans l'Oise, et j'accompagne les projets dans l'Oise (60) et la Somme (80). Je précise les modalités selon la localisation et la nature du projet." },
-  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange dure trente minutes en visio Google Meet (ou téléphone) et se fait sans engagement." },
+  { q: "Le premier échange m'engage-t-il ?", r: "Non. Le premier échange dure trente minutes en visio Google Meet et se fait sans engagement." },
   { q: "Une enveloppe de travaux est-elle un devis ?", r: "Une estimation est un premier repère, avec ses hypothèses et ses limites. Les devis sont établis par les entreprises consultées après étude du besoin." },
   { q: "Réalisez-vous les travaux ?", r: "Les travaux sont réalisés par les entreprises retenues. Mon rôle de chef de projet travaux hemea porte sur le cadrage, le budget estimatif et la consultation d'entreprises labellisées hemea. Le périmètre de l'accompagnement est précisé pour chaque projet." },
   { q: "Réalisez-vous des relevés et plans 2D/3D avant travaux ?", r: "Oui. Équipé d'un scanner laser iMapper, je réalise des relevés d'état des lieux et des plans cotés 2D/3D (DWG, DXF, PDF) pour particuliers et professionnels dans l'Oise et la Somme." },
@@ -40,7 +40,7 @@ const faq = [
 ---
 
 <Base titre="DVK Studio — Chef de projet travaux hemea | Oise et Somme"
-  description="Votre rénovation dans l'Oise et la Somme avec Kévin DE VLIEGER, chef de projet travaux hemea. Particuliers et prescripteurs immobiliers : parlons de votre projet."
+  description="Rénovation dans l'Oise et la Somme : Kévin DE VLIEGER, chef de projet travaux hemea, cadre votre projet, votre budget et consulte des entreprises auditées."
   page="home" chemin="/" donneesStructurees={entreprise}>
   <header class:list={["hero-photo", { "sans-photo": !ambiance }]}>
     {ambiance && <Image class="hero-fond" src={ambiance.src} alt="" widths={[640, 960, 1280, 1800]} sizes="100vw" loading="eager" fetchpriority="high" data-hero-ambiance />}
@@ -55,7 +55,7 @@ const faq = [
       </div>
       <p class="hero-note">Kévin DE VLIEGER · Échange découverte de 30 min en visio Google Meet, sans engagement.</p>
       <ul class="hero-reperes" aria-label="Votre accompagnement">
-        <li><span>01 · Tiers de confiance</span><p>Kévin DE VLIEGER, mandataire hemea indépendant.</p></li>
+        <li><span>01 · Tiers de confiance</span><p>Kévin DE VLIEGER, chef de projet travaux hemea.</p></li>
         <li><span>02 · Deux départements</span><p>Oise (60) et Somme (80), réactivité sous 48h.</p></li>
         <li><span>03 · Technologie & cadre</span><p>Relevé laser iMapper Racer 3 et sécurisation du cadre hemea.</p></li>
       </ul>
@@ -75,7 +75,7 @@ const faq = [
     </div>
     <div class="premier-ambassadeur" aria-hidden="true">
       <img
-        src="/images/avatar/dvk-zebre-plein-pied.png"
+        src="/images/avatar/dvk-zebre-plein-pied.webp"
         alt="Le Zèbre, ambassadeur et tiers de confiance"
         width="405"
         height="1026"

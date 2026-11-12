@@ -21,18 +21,62 @@ interface Props {
 const { titre, description, page, chemin, noindex = false, donneesStructurees } = Astro.props;
 const canonique = new URL(chemin, site.url).toString();
 const titreComplet = titre.includes("DVK Studio") ? titre : `${titre} | DVK Studio`;
-const schemaFinal = donneesStructurees ?? {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "DVK Studio",
-  "url": "https://dvkstudio.fr",
-  "telephone": "+33640324752",
-  "email": "contact@dvkstudio.fr",
-  "description": "Kévin DE VLIEGER, chef de projet travaux hemea et facilitateur de projets de rénovation dans l'Oise et la Somme.",
-  "areaServed": ["Oise", "Somme", "Beauvais", "Compiègne", "Amiens", "Creil", "Senlis", "Chantilly"],
-  "address": { "@type": "PostalAddress", "streetAddress": "17 Rue Machaut", "postalCode": "60120", "addressLocality": "Gannes", "addressCountry": "FR" },
-  "image": "https://dvkstudio.fr/images/avatar-zebre-dvk-studio.jpg"
-};
+// Données structurées communes à toutes les pages : l'entreprise, la personne et le site, reliés par identifiants.
+// Une page peut ajouter les siennes (Article, Service…) ; elles sont rattachées à ce socle.
+const ORG = `${site.url}/#organisation`;
+const PERSONNE = `${site.url}/#kevin-de-vlieger`;
+const SITE = `${site.url}/#site`;
+const IMAGE_PARTAGE = "https://dvkstudio.fr/images/og-dvk-studio.jpg";
+const socle = [
+  {
+    "@type": "ProfessionalService",
+    "@id": ORG,
+    "name": site.nom,
+    "url": `${site.url}/`,
+    "logo": `${site.url}/images/logo-dvk-studio.png`,
+    "image": IMAGE_PARTAGE,
+    "telephone": "+33640324752",
+    "email": site.email,
+    "description": "Kévin DE VLIEGER, chef de projet travaux hemea dans l'Oise et la Somme : cadrage, budget indicatif et consultation d'entreprises pour vos travaux de rénovation, relevés laser et plans 2D/3D.",
+    "address": { "@type": "PostalAddress", "streetAddress": "17 Rue Machaut", "postalCode": "60120", "addressLocality": "Gannes", "addressRegion": "Hauts-de-France", "addressCountry": "FR" },
+    "areaServed": [{ "@type": "AdministrativeArea", "name": "Oise" }, { "@type": "AdministrativeArea", "name": "Somme" }, ...["Beauvais", "Compiègne", "Amiens", "Creil", "Senlis", "Chantilly"].map((name) => ({ "@type": "City", name }))],
+    "founder": { "@id": PERSONNE },
+    "sameAs": [site.reseaux.linkedin, site.reseaux.instagram, site.reseaux.facebook],
+  },
+  {
+    "@type": "Person",
+    "@id": PERSONNE,
+    "name": "Kévin DE VLIEGER",
+    "jobTitle": "Chef de projet travaux hemea",
+    "url": `${site.url}/a-propos/`,
+    "worksFor": { "@id": ORG },
+    "sameAs": ["https://www.linkedin.com/in/kevin-de-vlieger-88b261364/"],
+  },
+  { "@type": "WebSite", "@id": SITE, "url": `${site.url}/`, "name": site.nom, "inLanguage": "fr-FR", "publisher": { "@id": ORG } },
+];
+// Schéma propre à la page : l'auteur et l'éditeur pointent vers le socle ; un article reçoit image, page et date de mise à jour.
+const propre = (() => {
+  if (!donneesStructurees) return [];
+  const { "@context": _c, ...s } = donneesStructurees as Record<string, any>;
+  if (s["@type"] === "ProfessionalService") return []; // déjà décrit par le socle
+  if (s["@type"] === "Article") {
+    return [{ ...s, "author": { "@id": PERSONNE }, "publisher": { "@id": ORG }, "image": s.image ?? IMAGE_PARTAGE,
+      "mainEntityOfPage": canonique, "dateModified": s.dateModified ?? s.datePublished, "inLanguage": "fr-FR" }];
+  }
+  if (s["@type"] === "Service") return [{ ...s, "provider": { "@id": ORG } }];
+  return [s];
+})();
+// Fil d'Ariane déduit de l'adresse de la page.
+const segments = chemin.split("/").filter(Boolean);
+const fil = segments.length === 0 ? [] : [{
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": `${site.url}/` },
+    ...(segments[0] === "blog" && segments.length > 1 ? [{ "@type": "ListItem", "position": 2, "name": "Guides & Conseils", "item": `${site.url}/blog/` }] : []),
+    { "@type": "ListItem", "position": segments[0] === "blog" && segments.length > 1 ? 3 : 2, "name": titre.replace(/\s*\|\s*DVK Studio$/, ""), "item": canonique },
+  ],
+}];
+const schemaFinal = { "@context": "https://schema.org", "@graph": [...socle, ...propre, ...fil] };
 
 ---
 
@@ -55,41 +99,19 @@ const schemaFinal = donneesStructurees ?? {
     <meta property="og:url" content={canonique} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="DVK Studio" />
-    <meta property="og:image" content="https://dvkstudio.fr/images/avatar-zebre-dvk-studio.jpg" />
+    <meta property="og:image" content="https://dvkstudio.fr/images/og-dvk-studio.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="DVK Studio — Kévin DE VLIEGER, chef de projet travaux hemea" />
+    <meta property="og:image:alt" content="DVK Studio — Kévin DE VLIEGER, chef de projet travaux hemea dans l'Oise et la Somme" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={titreComplet} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://dvkstudio.fr/images/avatar-zebre-dvk-studio.jpg" />
+    <meta name="twitter:image" content="https://dvkstudio.fr/images/og-dvk-studio.jpg" />
     <meta name="theme-color" content="#1c1c1c" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/favicon-180.png" />
     <script is:inline>document.documentElement.classList.add("js");</script>
-    <!-- Pixel OpenAI Ads (ChatGPT Ads) -->
-    <script is:inline>
-      (function (w, d, s, u) {
-        if (w.oaiq) return;
-        var q = function () {
-          q.q.push(arguments);
-        };
-        q.q = [];
-        w.oaiq = q;
-        var js = d.createElement(s);
-        js.async = true;
-        js.src = u;
-        var f = d.getElementsByTagName(s)[0];
-        f.parentNode.insertBefore(js, f);
-      })(window, document, "script", "https://bzrcdn.openai.com/sdk/oaiq.min.js");
-
-      oaiq("init", {
-        pixelId: "KPGdypJaH8B7gehPf9epNB",
-        debug: true,
-      });
-      oaiq("measure", "page_viewed", { type: "contents" });
-    </script>
   </head>
   <body data-page={page}>
     <a class="aller-contenu" href="#contenu">Aller au contenu</a>
@@ -102,7 +124,7 @@ const schemaFinal = donneesStructurees ?? {
     <!-- Silhouette latérale architecte du Zèbre (Desktop) -->
     <aside class="dvk-zebre-lateral" aria-hidden="true">
       <img
-        src="/images/avatar/dvk-zebre-plein-pied.png"
+        src="/images/avatar/dvk-zebre-plein-pied.webp"
         alt=""
         width="405"
         height="1026"
@@ -133,29 +155,17 @@ const schemaFinal = donneesStructurees ?? {
         if (detail) window.dispatchEvent(new CustomEvent("dvk:conversion", { detail }));
       };
       signaler("page_vue");
-      if (document.body.dataset.page === "merci" && typeof (window as any).oaiq === "function") {
-        (window as any).oaiq("measure", "appointment_scheduled", { type: "customer_action" });
-      }
       document.addEventListener("click", event => {
         const cible = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null;
         if (!cible) return;
         if (cible.hasAttribute("data-rdv")) {
           signaler("rdv_ouvert", cible.dataset.rdv);
-          if (typeof (window as any).oaiq === "function") {
-            (window as any).oaiq("measure", "appointment_scheduled", { type: "customer_action" });
-          }
         }
         else if (cible.protocol === "tel:") {
           signaler("appel_ouvert");
-          if (typeof (window as any).oaiq === "function") {
-            (window as any).oaiq("measure", "lead_created", { type: "customer_action" });
-          }
         }
         else if (cible.protocol === "mailto:") {
           signaler("email_ouvert");
-          if (typeof (window as any).oaiq === "function") {
-            (window as any).oaiq("measure", "lead_created", { type: "customer_action" });
-          }
         }
       });
       const CLE = "dvk_origine";
@@ -192,8 +202,8 @@ const schemaFinal = donneesStructurees ?? {
         theme: {
           button: {
             backgroundColor: "#0B4B66",
-            customIconSrc: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
-            customIconUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
+            customIconSrc: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2-192.webp",
+            customIconUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2-192.webp",
             size: "large",
           },
           chatWindow: {
@@ -201,12 +211,12 @@ const schemaFinal = donneesStructurees ?? {
             maxHeight: "720px",
           },
           previewMessage: {
-            avatarUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
+            avatarUrl: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2-192.webp",
           },
           chat: {
             hostAvatar: {
               isEnabled: true,
-              url: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png",
+              url: "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2-192.webp",
             },
           },
         },
@@ -218,7 +228,7 @@ const schemaFinal = donneesStructurees ?? {
         if (bubble && bubble.shadowRoot) {
           const btnImg = bubble.shadowRoot.querySelector('img[part="button-icon"]');
           if (btnImg && (!btnImg.src || !btnImg.src.includes("-v2.png"))) {
-            btnImg.src = "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2.png";
+            btnImg.src = "https://dvkstudio.fr/images/dvk-zebre-avatar-chatbot-v2-192.webp";
           }
           if (!bubble.shadowRoot.querySelector("#dvk-zebre-bubble-style")) {
             const style = document.createElement("style");

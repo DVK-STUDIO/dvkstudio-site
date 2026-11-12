@@ -1,6 +1,6 @@
 # dvkstudio-site (V2)
 
-Site statique Astro de DVK Studio. Branche de travail : `v2/refonte`. Aucune mise en ligne tant que le jalon 3 n'est pas autorisé.
+Site statique Astro de DVK Studio, en ligne sur https://dvkstudio.fr. Toute fusion dans `main` est construite, contrôlée puis publiée sur GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Commandes
 - `npm run dev` : serveur local
@@ -10,7 +10,8 @@ Site statique Astro de DVK Studio. Branche de travail : `v2/refonte`. Aucune mis
 - `npm run check:public` : contrôle d'hygiène du build (IBAN, trackers, polices tierces) ; `-- --golive` refuse les « à compléter »
 
 ## Principes
-- Aucun cookie, aucun traceur. L'origine de visite (page, bouton) est gardée en `sessionStorage` puis transmise à HubSpot par paramètres UTM.
+- Aucun cookie déposé par le site lui-même. L'origine de visite (page, bouton) est gardée en `sessionStorage` puis transmise à HubSpot par paramètres UTM.
+- Services tiers chargés sur les pages : Metricool (mesure d'audience) et Typebot (assistant « Le Zèbre »). Tout nouveau service doit être ajouté à la page Confidentialité.
 - Polices auto-hébergées. JavaScript natif, seulement où utile.
 - Statuts honnêtes : Disponible / Démonstration / À venir.
 - Ancien site conservé dans `legacy/` (non déployé).
