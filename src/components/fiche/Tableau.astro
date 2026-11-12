@@ -12,7 +12,7 @@ const { legende, entetes, lignes, note } = Astro.props;
       <tbody>{lignes.map((l) => <tr>{l.map((c, i) => (i === 0 ? <th scope="row" set:html={c} /> : <td data-col={entetes[i]} set:html={c} />))}</tr>)}</tbody>
     </table>
   </div>
-  {note && <figcaption>{note}</figcaption>}
+  {note && <figcaption set:html={note} />}
 </figure>
 
 <style>
