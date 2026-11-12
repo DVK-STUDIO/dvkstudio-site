@@ -1,96 +1,86 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
-const titre = "Rénover une maison amiénoise dans la Somme : guide";
-const description = "Spécificités, isolation et aménagement d'une maison amiénoise à Amiens et dans la Somme : conseils de chef de projet travaux hemea.";
+const enResume = [
+  "<strong>L'amiénoise :</strong> maison de ville du XIXe siècle, étroite et en hauteur, en brique rouge, avec planchers sur solives bois et jardin à l'arrière.",
+  "<strong>Côté rue :</strong> l'isolation par l'extérieur est souvent exclue pour préserver la façade ; on isole par l'intérieur avec des matériaux perspirants.",
+  "<strong>Côté jardin :</strong> l'isolation par l'extérieur est envisageable quand la configuration et les règles d'urbanisme le permettent.",
+  "<strong>Confort :</strong> la toiture et les planchers bois (bruit entre étages) sont les deux autres chantiers prioritaires.",
+  "<strong>Lumière :</strong> décloisonner l'entrée ou créer une verrière vers l'arrière change la perception de l'espace.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Rénover une maison amiénoise : préserver le cachet tout en isolant",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr"
-  },
-  "datePublished": "2026-10-12",
-  "description": description
-};
+const sommaire = [
+  { id: "anatomie", libelle: "L'anatomie de l'amiénoise" },
+  { id: "isoler", libelle: "Isoler sans abîmer la façade" },
+  { id: "amenager", libelle: "Aménager et faire entrer la lumière" },
+  { id: "chantier", libelle: "Un chantier en cœur de ville" },
+];
+
+const faq = [
+  { q: "Peut-on isoler une amiénoise par l'extérieur ?", r: "Côté rue, c'est rarement possible : la façade en brique participe au paysage urbain et peut être protégée. Côté jardin, c'est envisageable selon la configuration et les règles d'urbanisme ; renseignez-vous auprès du service urbanisme d'Amiens ou de votre commune." },
+  { q: "Quel isolant choisir pour un mur en brique pleine ?", r: "Un isolant perspirant (fibre de bois, chanvre) associé à une membrane régulatrice de vapeur, pour que le mur continue de sécher. Les isolants étanches posés contre la brique piègent l'humidité." },
+  { q: "Comment limiter le bruit entre les étages ?", r: "En traitant les planchers bois : isolant acoustique entre solives, désolidarisation du revêtement de sol, et faux plafond si la hauteur le permet." },
+  { q: "Quelles aides pour rénover une amiénoise ?", r: "Les aides nationales (MaPrimeRénov', éco-PTZ, TVA réduite) s'appliquent selon le projet et vos revenus. Pour les aides locales, l'Espace Conseil France Rénov' d'Amiens Métropole ou de votre secteur indique celles en vigueur." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/renovation-maison-amienoise-somme/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
-          <span style="color: var(--dvk-text);">Maison amiénoise Somme</span>
-        </nav>
+<FicheConseil
+  titre="Rénover une maison amiénoise (Somme) | DVK Studio"
+  description="Spécificités, isolation et aménagement d'une maison amiénoise à Amiens et dans la Somme : les conseils d'un chef de projet travaux hemea."
+  chemin="/blog/renovation-maison-amienoise-somme/"
+  h1="Rénover une maison amiénoise : préserver le cachet tout en isolant"
+  surtitre="Bâti remarquable · Somme (80)"
+  fil="Maison amiénoise"
+  publie="2026-10-12"
+  majLe="2026-11-12"
+  lecture={5}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_amienoise"
+  appel="Vous avez un projet à Amiens ou dans la Somme ? Parlons de votre maison lors d'un échange de 30 minutes en visio, sans engagement."
+  zebre={{ pose: "conseil", titre: "La façade se garde, le confort se gagne dedans", texte: "Une amiénoise vaut aussi par sa brique. On isole par l'intérieur côté rue, on soigne la toiture, et on traite les planchers : le confort change sans toucher au cachet." }}
+>
+  <p slot="chapo">
+    Emblème d'Amiens et de la vallée de la Somme, l'amiénoise séduit par sa façade en brique rouge, sa hauteur et son jardin intime.
+    Mais sa forme étroite et ses planchers bois posent des défis thermiques et acoustiques précis. Voici comment les aborder.
+  </p>
 
-        <span class="surtitre">Guide Bâti Remarquable · Somme (80)</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          Rénover une maison amiénoise : préserver le cachet tout en isolant
-        </h1>
+  <h2 id="anatomie">Qu'est-ce qui caractérise une maison amiénoise ?</h2>
+  <p>
+    Simple ou double, l'amiénoise est une maison de ville du XIXe siècle construite en profondeur sur une parcelle étroite, avec un jardin à l'arrière.
+    Elle repose sur des murs porteurs en brique pleine et des refends plus légers. Ses planchers sur solives bois transmettent facilement le bruit d'un niveau à l'autre.
+  </p>
 
-        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 5 min</span>
-        </div>
+  <h2 id="isoler">Comment isoler sans abîmer la façade en brique ?</h2>
+  <Tableau
+    legende="Stratégie d'isolation d'une maison amiénoise"
+    entetes={["Partie de la maison", "Solution courante", "Point de vigilance"]}
+    lignes={[
+      ["Façade sur rue", "Isolation par l'intérieur, isolant perspirant et membrane régulatrice de vapeur", "Laisser le mur sécher vers l'extérieur"],
+      ["Façade sur jardin", "Isolation par l'extérieur si possible", "Règles d'urbanisme à vérifier"],
+      ["Toiture et combles", "Isolation soignée sous rampants ou en combles", "Confort d'été du dernier étage"],
+      ["Planchers bois", "Isolant acoustique entre solives, désolidarisation des sols", "Hauteur sous plafond"],
+    ]}
+  />
 
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Emblème architectural d'Amiens et de la vallée de la Somme, l'amiénoise séduit par sa façade en brique rouge, sa hauteur et son jardin intime. Mais sa morphologie étroite et ses planchers bois posent des défis thermiques et acoustiques précis.
-          </p>
-        </div>
+  <AmbassadorCallout
+    pose="terrain"
+    title="Méfiez-vous des enduits ciment en pied de façade"
+    quote="Beaucoup d'amiénoises ont reçu un enduit ciment en soubassement. Il bloque l'humidité dans la brique : avant d'isoler à l'intérieur, on vérifie l'état du bas des murs."
+  />
 
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>1. L'anatomie unique de la maison amiénoise</h2>
-          <p>
-            Qu'il s'agisse d'une simple amiénoise (deux fenêtres en façade par étage) ou d'une double amiénoise, cette maison de ville ouvrière du XIXe siècle repose sur des murs porteurs en brique pleine et des refends légers. Les planchers sur solives bois créent souvent une transmission sonore importante d'un niveau à l'autre.
-          </p>
+  <h2 id="amenager">Comment aménager et faire entrer la lumière ?</h2>
+  <p>
+    Dans une amiénoise, la lumière est précieuse au rez-de-chaussée. Décloisonner l'entrée, ouvrir la cuisine sur la pièce de vie ou créer une verrière vers l'arrière
+    transforme la sensation d'espace. Avant d'ouvrir un mur, lisez <a href="/blog/abattre-cloison-ouvrir-cuisine-mur-porteur/">les vérifications à faire avant d'abattre une cloison</a>.
+  </p>
 
-          <h2>2. Comment isoler sans abîmer la façade en brique ?</h2>
-          <p>
-            Dans l'écrasante majorité des cas, l'isolation thermique par l'extérieur (ITE) est exclue en façade sur rue pour préserver le patrimoine urbain amiénois ou par contrainte du secteur sauvegardé. La stratégie s'appuie donc sur deux piliers :
-          </p>
-          <ul>
-            <li><strong>L'isolation par l'intérieur (ITI) côté rue</strong> : Pose de doublages isolants semi-rigides et membrane régulatrice de vapeur pour laisser le mur sécher vers l'extérieur.</li>
-            <li><strong>L'isolation par l'extérieur côté jardin</strong> : Quand la configuration le permet, isoler la façade arrière par l'extérieur permet d'optimiser l'enveloppe sans rogner sur les mètres carrés intérieurs.</li>
-            <li><strong>La toiture mansardée</strong> : Traiter l'isolation sous combles avec soin pour rendre le dernier étage vivable été comme hiver.</li>
-          </ul>
-
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Astuce d'aménagement hemea</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Dans une amiénoise, la lumière est précieuse au rez-de-chaussée. Créer une verrière vers l'extension arrière ou décloisonner l'entrée transforme la sensation d'espace tout en valorisant le bien.
-            </p>
-          </div>
-
-          <h2>3. Accompagnement local dans la Somme</h2>
-          <p>
-            Rénover une amiénoise nécessite des artisans rompus aux spécificités du bâti en brique et à la rénovation en cœur urbain (stationnement, évacuation des gravats). Grâce au réseau hemea, je sélectionne des entreprises locales labellisées RGE pour garantir la conformité aux aides financières d'Amiens Métropole et de la Région.
-          </p>
-
-          <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
-            <h3>Vous avez un projet sur Amiens ou dans la Somme ?</h3>
-            <p>
-              Discutons de vos envies et des possibilités de votre maison lors d'un échange de 30 minutes en visio, sans engagement.
-            </p>
-            <div style="margin-top: 24px;">
-              <BoutonRdv bouton="blog_amienoise">Faire le point sur mon projet (30 min)</BoutonRdv>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <PremierEchange />
-  </article>
-</Base>
-
+  <h2 id="chantier">Que faut-il prévoir pour un chantier en cœur de ville ?</h2>
+  <p>
+    Rénover une amiénoise demande des entreprises habituées au bâti en brique et aux contraintes d'un chantier urbain : stationnement, évacuation des gravats par la façade, voisinage mitoyen.
+    Dans le cadre hemea, au moins deux entreprises locales qualifiées sont consultées et les paiements sont protégés sur compte séquestre, débloqué par étapes.
+  </p>
+</FicheConseil>

@@ -1,93 +1,100 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Encadre from "../../components/fiche/Encadre.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
-const titre = "Réserve pour imprévus : sécuriser son budget travaux";
-const description = "Pourquoi prévoir une réserve pour imprévus dans un budget de rénovation de bâti ancien, comment la construire et la séparer des devis. Oise et Somme.";
+const enResume = [
+  "<strong>Un imprévu n'est pas une erreur :</strong> c'est ce qui ne se voit qu'en ouvrant murs, sols et plafonds.",
+  "<strong>Réserve distincte :</strong> une ligne à part du plan de financement, mobilisée seulement sur constat et devis complémentaire écrit.",
+  "<strong>Pas de pourcentage universel :</strong> la réserve dépend de l'âge du bien, de son état et de ce qui a été vérifié avant l'achat.",
+  "<strong>Réduire l'inconnu :</strong> contre-visite, relevé, lecture des diagnostics, devis détaillés poste par poste.",
+  "<strong>Avenants :</strong> toute découverte se traite par un devis complémentaire validé avant exécution.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Votre budget travaux prévoit-il une réserve pour imprévus ? Le guide pour les investisseurs et propriétaires",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr",
-    "url": "https://dvkstudio.fr/a-propos/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "DVK Studio",
-    "url": "https://dvkstudio.fr/"
-  },
-  "datePublished": "2026-11-12",
-  "dateModified": "2026-11-12",
-  "description": description,
-  "mainEntityOfPage": "https://dvkstudio.fr/blog/reserve-imprevus-budget-travaux-renovation/"
-};
+const sommaire = [
+  { id: "origine", libelle: "D'où viennent les imprévus" },
+  { id: "separer", libelle: "Pourquoi séparer la réserve" },
+  { id: "dimensionner", libelle: "Dimensionner la réserve" },
+  { id: "reduire", libelle: "Réduire les imprévus" },
+];
+
+const faq = [
+  { q: "Quel pourcentage prévoir pour les imprévus ?", r: "Il n'y a pas de chiffre universel. La réserve dépend de l'âge du bien, de son état et de ce qui a été vérifié avant l'achat : plus le diagnostic initial est complet, plus elle peut être réduite." },
+  { q: "Que devient la réserve si elle n'est pas utilisée ?", r: "Si elle est inscrite comme une ligne distincte, ce qui n'est pas consommé reste disponible à la fin du chantier." },
+  { q: "Comment est traitée une découverte en cours de chantier ?", r: "Par un constat partagé et un devis complémentaire écrit, validé avant l'exécution des travaux supplémentaires." },
+  { q: "La banque finance-t-elle la réserve ?", r: "Elle peut l'intégrer au plan de financement si elle est présentée clairement dès le départ, à côté des devis. C'est souvent plus simple que de revenir vers elle en cours de chantier." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/reserve-imprevus-budget-travaux-renovation/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt;
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt;
-          <span style="color: var(--dvk-text);">Réserve pour imprévus</span>
-        </nav>
+<FicheConseil
+  titre="Réserve pour imprévus : budget travaux | DVK Studio"
+  description="Pourquoi prévoir une réserve pour imprévus dans un budget de rénovation de bâti ancien, comment la construire et la séparer des devis. Oise et Somme."
+  chemin="/blog/reserve-imprevus-budget-travaux-renovation/"
+  h1="Votre budget travaux prévoit-il une réserve pour imprévus ? Le guide pour les investisseurs et propriétaires"
+  surtitre="Budget & méthode · Bâti ancien"
+  fil="Réserve pour imprévus"
+  publie="2026-11-12"
+  majLe="2026-11-12"
+  lecture={5}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_reserve_imprevus"
+  appel="Un projet d'achat ou de rénovation à chiffrer ? Échangeons 30 minutes en visio pour construire une enveloppe travaux avec une réserve distincte."
+  zebre={{ pose: "conseil", titre: "Chiffrer large, puis sécuriser", texte: "Au départ, on prévoit large. Chaque vérification (combles, caves, sondages, relevé) réduit ensuite l'inconnu, et donc la réserve nécessaire." }}
+>
+  <p slot="chapo">
+    Sur une rénovation de bâti ancien, une partie des travaux ne se découvre qu'en ouvrant les murs, les sols ou les plafonds.
+    Sans réserve prévue, chaque surprise se finance sur la marge d'une opération locative ou sur le reste à vivre d'un propriétaire occupant.
+    Voici d'où viennent ces imprévus, comment construire une réserve distincte et comment limiter leur ampleur dès l'étude.
+  </p>
 
-        <span class="surtitre">Budget &amp; méthode · Bâti ancien</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          Votre budget travaux prévoit-il une réserve pour imprévus ? Le guide pour les investisseurs et propriétaires
-        </h1>
+  <h2 id="origine">D'où viennent les imprévus d'une rénovation de bâti ancien ?</h2>
+  <p>Les imprévus ne sont pas des erreurs de chiffrage : ce sont des éléments impossibles à voir avant démolition. Dans les maisons anciennes de l'Oise et de la Somme, on rencontre notamment :</p>
+  <Tableau
+    legende="Imprévus fréquents dans le bâti ancien"
+    entetes={["Découverte", "Où elle se cache"]}
+    lignes={[
+      ["Solives ou planchers affaiblis", "Sous un revêtement de sol récent"],
+      ["Réseaux électriques ou d'eau hors d'usage", "Derrière les doublages"],
+      ["Maçonneries fragilisées", "Sous d'anciens enduits ciment, en pied de mur humide"],
+      ["Linteaux et appuis à reprendre", "Lors de la création ou de l'agrandissement d'ouvertures"],
+    ]}
+  />
 
-        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 5 min</span>
-        </div>
+  <h2 id="separer">Pourquoi séparer la réserve des devis ?</h2>
+  <p>
+    Une réserve noyée dans les devis se dépense sans qu'on le voie. Une réserve distincte, inscrite comme une ligne à part du plan de financement, permet de garder la maîtrise :
+    elle n'est mobilisée que sur un constat partagé, avec un devis complémentaire écrit. Ce qui n'est pas consommé reste disponible à la fin du chantier.
+    Pour un investisseur, c'est aussi ce qui permet de présenter à la banque un plan de financement cohérent dès le départ.
+  </p>
 
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Sur une rénovation de bâti ancien, une partie des travaux ne se découvre qu'en ouvrant les murs, les sols ou les plafonds. Ces découvertes ne figurent pas dans les devis de départ. Sans réserve prévue pour elles, chaque surprise se finance sur la marge d'une opération locative, ou sur le reste à vivre d'un propriétaire occupant. Ce guide explique d'où viennent ces imprévus, comment construire une réserve distincte et comment limiter leur ampleur dès la phase d'étude.
-          </p>
-        </div>
+  <AmbassadorCallout
+    pose="reflexion"
+    title="Une ligne à part, toujours"
+    quote="Si la réserve est mélangée aux devis, personne ne sait plus ce qui a été consommé. Une ligne séparée, c'est un tableau de bord."
+  />
 
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>D'où viennent les imprévus d'une rénovation de bâti ancien ?</h2>
-          <p>Les imprévus ne sont pas des erreurs de chiffrage : ce sont des éléments impossibles à voir avant démolition. Dans les maisons anciennes de l'Oise et de la Somme, on rencontre notamment des solives ou planchers affaiblis sous un revêtement récent, des réseaux électriques ou d'eau hors d'usage derrière les doublages, des maçonneries fragilisées par l'humidité ou par d'anciens enduits ciment, ou encore des linteaux et appuis à reprendre lors de la création d'ouvertures.</p>
-          <h2>Pourquoi séparer la réserve des devis ?</h2>
-          <p>Une réserve noyée dans les devis se dépense sans qu'on le voie. Une réserve <strong>distincte</strong>, inscrite comme une ligne à part du plan de financement, permet de garder la maîtrise : elle n'est mobilisée que sur un constat partagé, avec un devis complémentaire écrit. Ce qui n'est pas consommé reste disponible à la fin du chantier. Pour un investisseur, c'est aussi ce qui permet de présenter à la banque un plan de financement cohérent dès le départ.</p>
-          <h2>Comment dimensionner la réserve ?</h2>
-          <p>Il n'existe pas de pourcentage universel : la réserve dépend de l'âge du bien, de son état et de ce qui a pu être vérifié avant l'achat. Plus le diagnostic initial est complet (diagnostics réglementaires, accès aux combles et aux caves, sondages ponctuels, relevé précis des surfaces), plus la part d'inconnu se réduit. À l'inverse, un bien acheté sans contre-visite technique justifie une réserve plus large. L'objectif est de chiffrer large au départ, puis de sécuriser.</p>
-          <h2>Comment réduire les imprévus avant de lancer les travaux ?</h2>
-          <ul><li><strong>Relever le bâti avant l'offre :</strong> une contre-visite technique et un relevé des surfaces évitent les mauvaises surprises de métré.</li><li><strong>Lire les diagnostics comme une liste de travaux :</strong> électricité, gaz, plomb, amiante, assainissement donnent déjà des indications sur les postes à prévoir.</li><li><strong>Demander des devis détaillés :</strong> poste par poste, avec les quantités, plutôt que des forfaits globaux.</li><li><strong>Prévoir le circuit des avenants :</strong> toute découverte donne lieu à un constat et à un devis complémentaire validé avant exécution.</li></ul>
-          <p>Dans le cadre hemea, les artisans sont audités et les paiements transitent par un compte séquestre, débloqué étape par étape. Un imprévu se traite donc par un avenant validé, pas par un acompte versé dans l'urgence.</p>
+  <h2 id="dimensionner">Comment dimensionner la réserve ?</h2>
+  <p>
+    Il n'existe pas de pourcentage universel : la réserve dépend de l'âge du bien, de son état et de ce qui a pu être vérifié avant l'achat.
+    Plus le diagnostic initial est complet (diagnostics réglementaires, accès aux combles et aux caves, sondages ponctuels, relevé précis des surfaces), plus la part d'inconnu se réduit.
+    À l'inverse, un bien acheté sans contre-visite technique justifie une réserve plus large.
+  </p>
 
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Un projet d'achat ou de rénovation à chiffrer ?</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Échangeons 30 minutes en visio pour construire une enveloppe travaux indicative avec une réserve distincte.
-            </p>
-            <div style="margin-top: 20px;">
-              <BoutonRdv bouton="blog_reserve_imprevus">Réserver mon cadrage 30 min</BoutonRdv>
-            </div>
-          </div>
-
-          <div style="font-size: 14px; color: var(--dvk-text-muted); border-top: 1px solid var(--dvk-border); padding-top: 16px; margin-top: 32px;">
-            <p style="margin-bottom: 8px;"><strong>Sources</strong> (consultées le 11 novembre 2026)</p>
-            <ul>
-              <li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10798" target="_blank" rel="noopener">Service-public.fr — Diagnostics immobiliers à fournir en cas de vente d'un logement (F10798)</a></li>
-              <li><a href="https://france-renov.gouv.fr/" target="_blank" rel="noopener">France Rénov' — service public de la rénovation de l'habitat</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
-    <PremierEchange />
-  </article>
-</Base>
+  <h2 id="reduire">Comment réduire les imprévus avant de lancer les travaux ?</h2>
+  <ol>
+    <li><strong>Relever le bâti avant l'offre :</strong> une contre-visite technique et un <a href="/blog/releve-scanner-laser-imapper-renovation/">relevé des surfaces</a> évitent les mauvaises surprises de métré.</li>
+    <li><strong>Lire les diagnostics comme une liste de travaux :</strong> électricité, gaz, plomb, amiante, assainissement donnent déjà des indications sur les postes à prévoir.</li>
+    <li><strong>Demander des devis détaillés :</strong> poste par poste, avec les quantités, plutôt que des forfaits globaux.</li>
+    <li><strong>Prévoir le circuit des avenants :</strong> toute découverte donne lieu à un constat et à un devis complémentaire validé avant exécution.</li>
+  </ol>
+  <Encadre source="Service-public.fr, diagnostics immobiliers en cas de vente (F10798)" lien="https://www.service-public.gouv.fr/particuliers/vosdroits/F10798">
+    <p>Le dossier de diagnostic technique remis par le vendeur (DPE, plomb, amiante, électricité, gaz, assainissement…) est la première source d'information sur les travaux à prévoir.</p>
+  </Encadre>
+  <p>
+    Dans le cadre hemea, les entreprises sont auditées et les paiements transitent par un compte séquestre, débloqué étape par étape.
+    Un imprévu se traite donc par un avenant validé, pas par un acompte versé dans l'urgence.
+  </p>
+</FicheConseil>
