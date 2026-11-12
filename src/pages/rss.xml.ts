@@ -39,16 +39,10 @@ export const GET: APIRoute = async () => {
       <pubDate>Sat, 17 Oct 2026 08:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>Rénover une maison ancienne dans l'Oise et la Somme : le guide pour sécuriser ses travaux, son budget et ses aides en 2026</title>
+      <title>Rénover une maison ancienne dans l'Oise et la Somme : prix au m², étapes et aides en 2026</title>
       <link>https://dvkstudio.fr/blog/renover-maison-ancienne-oise-somme-guide-2026/</link>
-      <description>Rénovez votre maison ancienne en Oise et Somme en sécurité : budget au m², aides 2026 et artisans audités.</description>
+      <description>Prix au m², ordre des travaux, isolation du bâti picard et aides 2026 pour rénover une maison ancienne dans l'Oise et la Somme.</description>
       <pubDate>Tue, 13 Oct 2026 08:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>Rénovation d'une maison ancienne dans l'Oise : étapes, budget et pièges à éviter</title>
-      <link>https://dvkstudio.fr/blog/renovation-maison-ancienne-oise/</link>
-      <description>Étapes, budget et précautions pour rénover une maison ancienne en pierre ou brique dans l'Oise avec l'accompagnement hemea.</description>
-      <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
     </item>
     <item>
       <title>MaPrimeRénov' et rénovation d'ampleur dans l'Oise et la Somme</title>
