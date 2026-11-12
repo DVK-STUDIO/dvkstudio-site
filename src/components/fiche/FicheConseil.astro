@@ -1,0 +1,107 @@
+---
+// Modèle de fiche conseil (blog). Structure inspirée des guides de référence du secteur :
+// titre-question, auteur et dates, chapô, « En résumé », sommaire, corps en questions, FAQ balisée, appel à l'action.
+// Le contenu reste propre à DVK Studio : bâti local, prix constatés, sources publiques citées.
+import Base from "../../layouts/Base.astro";
+import Faq from "../Faq.astro";
+import BoutonRdv from "../BoutonRdv.astro";
+import PremierEchange from "../PremierEchange.astro";
+
+interface Props {
+  titre: string;            // balise <title> (≤ 60 caractères conseillés)
+  description: string;      // méta-description (≤ 155 caractères)
+  chemin: string;           // ex. "/blog/mon-article/"
+  h1: string;               // titre affiché, formulé comme la question du lecteur
+  surtitre: string;         // ex. "Guide bâti ancien · Oise & Somme"
+  fil: string;              // libellé court du fil d'Ariane
+  publie: string;           // AAAA-MM-JJ
+  majLe?: string;           // AAAA-MM-JJ
+  lecture: number;          // minutes
+  enResume: string[];       // 4 à 6 points clés, chiffrés quand c'est possible
+  sommaire: { id: string; libelle: string }[];
+  faq: { q: string; r: string }[];
+  bouton: string;           // identifiant de suivi du bouton de rendez-vous
+  appel?: string;           // phrase de l'encadré final
+}
+const { titre, description, chemin, h1, surtitre, fil, publie, majLe, lecture, enResume, sommaire, faq, bouton,
+  appel = "Vous avez un projet dans l'Oise ou la Somme ? Échangeons 30 minutes en visio pour le cadrer, sans engagement." } = Astro.props;
+
+const date = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+const schema = { "@type": "Article", "headline": h1, "description": description, "datePublished": publie, ...(majLe ? { "dateModified": majLe } : {}) };
+---
+
+<Base titre={titre} description={description} page="blog" chemin={chemin} donneesStructurees={schema}>
+  <div class="section fiche">
+    <div class="conteneur fiche-colonne">
+      <nav aria-label="Fil d'Ariane" class="fil">
+        <a href="/">Accueil</a> › <a href="/blog/">Guides & Conseils</a> › <span>{fil}</span>
+      </nav>
+
+      <p class="surtitre">{surtitre}</p>
+      <h1 class="titre-l fiche-titre">{h1}</h1>
+
+      <p class="auteur">
+        Par <a href="/a-propos/"><strong>Kévin DE VLIEGER</strong></a>, chef de projet travaux hemea
+        <span aria-hidden="true">·</span> Publié le <time datetime={publie}>{date(publie)}</time>
+        {majLe && <><span aria-hidden="true">·</span> Mis à jour le <time datetime={majLe}>{date(majLe)}</time></>}
+        <span aria-hidden="true">·</span> {lecture} min de lecture
+      </p>
+
+      <div class="chapo-fiche"><slot name="chapo" /></div>
+
+      <aside class="resume" aria-labelledby="t-resume">
+        <h2 id="t-resume">En résumé</h2>
+        <ul>{enResume.map((p) => <li set:html={p} />)}</ul>
+      </aside>
+
+      <nav class="sommaire" aria-labelledby="t-sommaire">
+        <h2 id="t-sommaire">Sommaire</h2>
+        <ol>
+          {sommaire.map((s) => <li><a href={`#${s.id}`}>{s.libelle}</a></li>)}
+          <li><a href="#questions">Questions fréquentes</a></li>
+        </ol>
+      </nav>
+
+      <div class="prose fiche-corps"><slot /></div>
+
+      <section class="fiche-faq" aria-labelledby="questions">
+        <h2 id="questions" class="titre-m">Questions fréquentes</h2>
+        <Faq questions={faq} />
+      </section>
+
+      <div class="appel">
+        <p>{appel}</p>
+        <BoutonRdv bouton={bouton}>Faire le point · 30 min</BoutonRdv>
+      </div>
+    </div>
+  </div>
+  <PremierEchange />
+</Base>
+
+<style>
+  .fiche { padding-top: 48px; padding-bottom: 56px; }
+  .fiche-colonne { max-width: 860px; }
+  .fil { font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px; }
+  .fil a { color: var(--dvk-text-muted); text-decoration: none; }
+  .fiche-titre { margin: 14px 0 18px; }
+  .auteur { font-size: 14px; color: var(--dvk-text-muted); padding-bottom: 20px; border-bottom: 1px solid var(--dvk-border); }
+  .auteur a { color: inherit; }
+  .chapo-fiche { font-size: 17px; line-height: 1.7; margin: 28px 0; }
+  .resume, .sommaire { background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px 28px; margin: 24px 0; }
+  .resume { border: 1px solid var(--dvk-border); }
+  .resume h2, .sommaire h2 { font-size: 18px; margin: 0 0 12px; }
+  .resume ul { padding-left: 20px; margin: 0; }
+  .resume li { margin-top: 8px; line-height: 1.6; }
+  .sommaire { background: transparent; border: 1px dashed var(--dvk-border); }
+  .sommaire ol { padding-left: 22px; margin: 0; columns: 2 260px; }
+  .sommaire li { margin-top: 6px; }
+  .fiche-corps { max-width: none; font-size: 16px; line-height: 1.8; }
+  .fiche-corps :global(h2) { scroll-margin-top: 96px; }
+  .fiche-corps :global(ol) { padding-left: 22px; }
+  .fiche-corps :global(li) { margin-top: 8px; }
+  .fiche-corps :global(h3) { font-size: 20px; margin: 28px 0 8px; }
+  .fiche-faq { margin-top: 48px; }
+  .fiche-faq h2 { margin-bottom: 16px; scroll-margin-top: 96px; }
+  .appel { background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin-top: 40px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+  .appel p { margin: 0; font-weight: 500; max-width: 52ch; }
+</style>

@@ -1,0 +1,18 @@
+---
+// Encadré « Le saviez-vous ? » : un fait utile, toujours accompagné de sa source publique.
+interface Props { titre?: string; source: string; lien: string; }
+const { titre = "Le saviez-vous ?", source, lien } = Astro.props;
+---
+
+<aside class="encadre">
+  <p class="encadre-titre">{titre}</p>
+  <div class="encadre-texte"><slot /></div>
+  <p class="encadre-source">Source : <a href={lien} target="_blank" rel="noopener noreferrer">{source}</a></p>
+</aside>
+
+<style>
+  .encadre { background: var(--dvk-surface); border-left: 4px solid var(--dvk-action); border-radius: var(--dvk-radius-sm); padding: 20px 24px; margin: 28px 0; }
+  .encadre-titre { margin: 0 0 6px; font-weight: 600; color: var(--dvk-text); }
+  .encadre-texte :global(p) { margin: 0; }
+  .encadre-source { margin: 10px 0 0; font-size: 13px; color: var(--dvk-text-muted); }
+</style>

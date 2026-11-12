@@ -1,99 +1,128 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Encadre from "../../components/fiche/Encadre.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
 
-const titre = "Rénover en Oise et Somme : guide travaux et aides 2026";
-const description = "Rénovez votre maison ancienne en Oise et Somme en sécurité : budget au m², aides 2026 et artisans audités. Prenez rendez-vous pour votre projet.";
+const enResume = [
+  "<strong>Budget indicatif :</strong> de 400 € à 3 200 € TTC/m² selon l'ampleur des travaux, soit environ 40 000 € à 320 000 € pour une maison de 100 m².",
+  "<strong>Bâti picard :</strong> brique, craie, silex et torchis doivent rester « respirants » : pas de ciment ni d'isolant étanche contre ces murs.",
+  "<strong>Ordre des travaux :</strong> clos et couvert, puis réseaux, puis isolation et chauffage, puis finitions.",
+  "<strong>Aides 2026 :</strong> MaPrimeRénov' rénovation d'ampleur réservée aux logements classés E, F ou G, avec un gain d'au moins deux classes.",
+  "<strong>Sécurité :</strong> au moins deux entreprises auditées consultées, paiements par étapes sur compte séquestre, pénalités de retard au contrat.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Rénover une maison ancienne dans l'Oise et la Somme : le guide pour sécuriser ses travaux, son budget et ses aides en 2026",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr"
-  },
-  "datePublished": "2026-10-13",
-  "description": description
-};
+const sommaire = [
+  { id: "bati", libelle: "Les particularités du bâti ancien picard" },
+  { id: "prix", libelle: "Le prix au m² en 2026" },
+  { id: "ordre", libelle: "L'ordre des travaux" },
+  { id: "isolation", libelle: "Isoler sans piéger l'humidité" },
+  { id: "aides", libelle: "Les aides en 2026" },
+  { id: "etapes", libelle: "Les étapes de l'accompagnement" },
+];
+
+const faq = [
+  { q: "Ma maison est classée D : puis-je obtenir MaPrimeRénov' pour une rénovation d'ampleur ?", r: "Non. En 2026, le parcours accompagné de MaPrimeRénov' est réservé aux logements classés E, F ou G avant travaux et occupés en résidence principale. D'autres leviers restent possibles : éco-prêt à taux zéro, TVA à taux réduit sur les travaux d'économie d'énergie, primes CEE." },
+  { q: "Peut-on isoler un mur en brique ou en torchis par l'intérieur ?", r: "Oui, à condition d'utiliser des isolants perspirants (laine de bois, chanvre, béton de chanvre) associés à un frein-vapeur hygrovariable, et de traiter d'abord les causes d'humidité. Un isolant étanche posé contre un mur ancien enferme l'eau dans la maçonnerie." },
+  { q: "Les prix au m² indiqués valent-ils devis ?", r: "Non. Ce sont des fourchettes indicatives pour préparer un budget. Seuls les devis détaillés des entreprises consultées engagent un prix, après visite du bien." },
+  { q: "Combien d'entreprises sont consultées pour mon projet ?", r: "Au moins deux entreprises labellisées hemea, auditées sur 30 critères. Vous comparez des devis détaillés poste par poste avant de choisir." },
+  { q: "Comment se passe le premier échange ?", r: "C'est un échange de 30 minutes en visio, sans engagement. Il sert à comprendre votre projet, votre bien et votre budget, et à définir la suite : visite, relevé, consultation d'entreprises." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/renover-maison-ancienne-oise-somme-guide-2026/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
-          <span style="color: var(--dvk-text);">Maison ancienne Oise &amp; Somme</span>
-        </nav>
+<FicheConseil
+  titre="Maison ancienne Oise, Somme : prix et aides 2026 | DVK Studio"
+  description="Prix au m², ordre des travaux, isolation du bâti picard et aides 2026 : le guide pour rénover une maison ancienne dans l'Oise et la Somme."
+  chemin="/blog/renover-maison-ancienne-oise-somme-guide-2026/"
+  h1="Rénover une maison ancienne dans l'Oise et la Somme : prix au m², étapes et aides en 2026"
+  surtitre="Guide bâti ancien · Oise (60) & Somme (80)"
+  fil="Maison ancienne Oise & Somme"
+  publie="2026-10-13"
+  majLe="2026-11-12"
+  lecture={9}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_guide_2026"
+>
+  <p slot="chapo">
+    Longère, corps de ferme, maison de bourg en brique : le bâti ancien de l'Oise et de la Somme a du caractère, mais il ne se rénove pas comme une maison récente.
+    Ce guide rassemble ce qu'il faut savoir avant de se lancer : le budget à prévoir, l'ordre des travaux, la façon d'isoler sans abîmer les murs et les aides disponibles en 2026.
+    Je suis Kévin DE VLIEGER, chef de projet travaux hemea basé à Gannes, dans l'Oise : j'aide les propriétaires à cadrer leur projet et à consulter des entreprises auditées.
+  </p>
 
-        <span class="surtitre">Guide Bâti Ancien · Oise &amp; Somme</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          Rénover une maison ancienne dans l'Oise et la Somme : le guide pour sécuriser ses travaux, son budget et ses aides en 2026
-        </h1>
+  <h2 id="bati">Quelles sont les particularités du bâti ancien en Picardie ?</h2>
+  <p>
+    Dans l'Oise et la Somme, les maisons construites avant 1948 associent souvent briques rouges, moellons de craie, silex et pans de bois hourdés de torchis.
+    Ces murs fonctionnent en équilibre avec l'humidité : ils absorbent l'eau du sol et la vapeur intérieure, puis la restituent vers l'extérieur.
+    Un enduit ciment ou une peinture étanche bloque ce mouvement : l'eau reste piégée dans le mur, les joints se dégradent, les briques éclatent au gel et les bois pourrissent.
+  </p>
+  <Encadre source="CREBA, centre de ressources pour la réhabilitation responsable du bâti ancien (Cerema)" lien="https://www.rehabilitation-bati-ancien.fr">
+    <p>Le bâti d'avant 1948 représente une part importante des logements à rénover. Le CREBA publie des fiches techniques gratuites sur les bons matériaux et les erreurs à éviter pour chaque type de mur.</p>
+  </Encadre>
 
-        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 8 min</span>
-        </div>
+  <h2 id="prix">Combien coûte la rénovation d'une maison ancienne au m² en 2026 ?</h2>
+  <p>
+    Le budget dépend avant tout de l'état du bien : charpente, couverture, humidité des murs et âge des réseaux pèsent plus que la surface.
+    Les fourchettes ci-dessous sont celles que j'utilise pour un premier cadrage dans l'Oise et la Somme.
+  </p>
+  <Tableau
+    legende="Budget indicatif selon l'ampleur des travaux (maison ancienne, Oise et Somme, 2026)"
+    entetes={["Ampleur", "Travaux types", "Prix TTC / m²", "Maison de 100 m²"]}
+    lignes={[
+      ["Rafraîchissement", "Peintures, sols, remise en sécurité électrique partielle", "400 à 900 €", "40 000 à 90 000 €"],
+      ["Rénovation complète", "Électricité et plomberie neuves, cloisons, pièces d'eau, isolation biosourcée, menuiseries", "1 000 à 1 800 €", "100 000 à 180 000 €"],
+      ["Rénovation lourde", "Charpente, couverture, assainissement des maçonneries, isolation globale, pompe à chaleur", "1 900 à 3 200 €", "190 000 à 320 000 €"],
+    ]}
+    note="Fourchettes indicatives, hors aides. Elles ne remplacent pas les devis détaillés des entreprises, établis après visite."
+  />
+  <h3>Ce qui fait varier le prix</h3>
+  <ul>
+    <li><strong>L'état de la charpente et de la couverture</strong> : c'est le premier poste à vérifier avant tout le reste.</li>
+    <li><strong>L'humidité des murs</strong> : drainage, reprise d'enduits à la chaux, traitement des remontées capillaires.</li>
+    <li><strong>Les réseaux</strong> : une électricité ou un assainissement d'origine se refont souvent entièrement.</li>
+    <li><strong>Les matériaux</strong> : les isolants biosourcés adaptés au bâti ancien sont plus coûteux que les isolants courants.</li>
+  </ul>
 
-        <!-- Chapeau -->
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Rénover une maison ancienne dans l'Oise ou la Somme consiste à réhabiliter un bâti traditionnel en brique picarde, pierre ou torchis en améliorant son efficacité énergétique sans compromettre la respiration de ses parois. En 2026, la réussite d'une telle rénovation repose sur trois piliers : adapter les isolants à la perspirance des maçonneries anciennes, prévoir un budget prévisionnel moyen compris entre 400 € et 3 200 € TTC par mètre carré selon l'état du bien, et solliciter les aides de l'Anah comme MaPrimeRénov' ou le Pass Rénovation Hauts-de-France. Concepteur DVK Studio et chef de projet travaux hemea basé à Gannes dans l'Oise, j'agis comme tiers de confiance indépendant aux côtés des propriétaires. Mon accompagnement sécurise l'intégralité de votre projet grâce à la sélection d'artisans locaux rigoureusement audités, la protection de vos acomptes via un compte séquestre et un suivi d'étapes attentif sur le terrain.
-          </p>
-        </div>
+  <h2 id="ordre">Dans quel ordre faire les travaux ?</h2>
+  <p>Respecter cet ordre évite de défaire ce qui vient d'être fait, et donc de payer deux fois.</p>
+  <ol>
+    <li><strong>Clos et couvert :</strong> charpente, toiture, menuiseries extérieures. Une maison doit être hors d'eau avant tout.</li>
+    <li><strong>Assainissement des murs :</strong> causes d'humidité traitées, enduits et joints repris à la chaux.</li>
+    <li><strong>Réseaux :</strong> électricité, plomberie, ventilation, pendant que les murs sont encore ouverts.</li>
+    <li><strong>Isolation et chauffage :</strong> isoler d'abord, puis dimensionner le chauffage sur les besoins réduits.</li>
+    <li><strong>Finitions :</strong> sols, peintures, cuisine et salle de bains.</li>
+  </ol>
 
-        <!-- Corps de l'article -->
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>Quelles sont les particularités architecturales du bâti ancien en Picardie ?</h2>
-          <p>
-            Le patrimoine bâti de l'Oise et de la Somme se distingue par des corps de ferme, longères et maisons de village construits avant 1948 mêlant briques foraines rouges, moellons de craie calcaire, silex et pans de bois hourdés de torchis. Contrairement aux constructions contemporaines étanches en béton, ces édifices traditionnels fonctionnent en équilibre hygrométrique continu avec leur environnement naturel. Les maçonneries anciennes captent naturellement l'humidité du sol par capillarité et la vapeur intérieure pour les restituer progressivement vers l'extérieur. Selon les études techniques du CREBA, appliquer du ciment ou des peintures imperméables sur ces façades piège l'eau au cœur des parois, entraînant la dégradation prématurée des mortiers, l'éclatement des briques sous le gel et le pourrissement des ossatures en chêne.
-          </p>
+  <h2 id="isolation">Comment isoler un mur en brique, pierre ou torchis sans piéger l'humidité ?</h2>
+  <p>
+    Sur un mur ancien, l'isolant doit laisser passer la vapeur d'eau. Les isolants étanches comme le polystyrène sont à proscrire : l'humidité condense contre la maçonnerie froide.
+    Par l'intérieur, on privilégie la laine de bois, le chanvre ou le béton de chanvre, avec une membrane frein-vapeur hygrovariable posée en continu.
+    En façade et en soubassement, les joints se refont au mortier de chaux aérienne ou de chaux hydraulique naturelle (NHL), jamais au ciment.
+  </p>
 
-          <h2>Comment isoler et gérer l'humidité d'un mur en brique, pierre ou torchis ?</h2>
-          <p>
-            Isoler un mur ancien en brique ou en torchis en Picardie exige des matériaux biosourcés à forte capillarité et une mise en œuvre respectant la perspirance de la paroi. Les solutions synthétiques étanches comme le polystyrène expansé sont formellement proscrites car elles condensent l'humidité interne contre la maçonnerie froide. Il convient de privilégier des complexes perspirants d'isolation thermique par l'intérieur tels que la laine de bois, le chanvre en vrac ou le béton de chanvre banché, associés à une membrane frein-vapeur hygrovariable continue. Pour les façades et les soubassements en pierre de taille, la réfection des joints s'effectue exclusivement avec un mortier traditionnel de chaux aérienne ou de chaux hydraulique naturelle (NHL).
-          </p>
+  <h2 id="aides">Quelles aides mobiliser en 2026 ?</h2>
+  <Tableau
+    legende="Principales aides pour rénover une maison ancienne en 2026"
+    entetes={["Aide", "Pour qui, pour quoi", "Points clés"]}
+    lignes={[
+      ["MaPrimeRénov' Parcours accompagné", "Logements classés E, F ou G, occupés en résidence principale", "Gain d'au moins 2 classes au DPE ; jusqu'à 80 % des travaux selon les revenus, dans un plafond de 30 000 à 40 000 € HT ; rendez-vous France Rénov' obligatoire"],
+      ["Éco-prêt à taux zéro", "Propriétaires, travaux de rénovation énergétique", "Jusqu'à 50 000 € pour une rénovation globale, sans intérêts"],
+      ["TVA à taux réduit", "Logements de plus de 2 ans", "5,5 % sur les travaux d'économie d'énergie, 10 % sur les autres travaux de rénovation"],
+      ["Hauts-de-France Pass Rénovation", "Tous propriétaires de la région, quel que soit le revenu", "Accompagnement technique et financier public, possibilité de préfinancer les travaux"],
+    ]}
+    note="Conditions au 12 novembre 2026, susceptibles d'évoluer : vérifiez votre éligibilité auprès de France Rénov' avant tout engagement."
+  />
+  <Encadre source="Anah, panorama des aides 2026" lien="https://www.anah.gouv.fr/document/panorama-des-aides-2026">
+    <p>Depuis 2026, la rénovation d'ampleur aidée par MaPrimeRénov' ne concerne plus que les logements classés E, F ou G. Un DPE à jour est donc la première pièce à réunir.</p>
+  </Encadre>
 
-          <h2>Quel est le budget prévisionnel moyen au m² pour rénover dans l'Oise et la Somme en 2026 ?</h2>
-          <p>
-            Dans l'Oise et la Somme, le budget prévisionnel moyen pour rénover une bâtisse ancienne s'établit en 2026 entre 400 € et 3 200 € TTC par mètre carré selon l'ampleur des travaux. <em>Rappel important : ces montants demeurent strictement prévisionnels et indicatifs s'appuyant sur les devis d'artisans locaux audités ; ils ne constituent aucun chiffrage contractuel ni prix garanti.</em>
-          </p>
-          <ul>
-            <li><strong>Rénovation légère (rafraîchissement) :</strong> 400 € à 900 € TTC / m² (peintures écologiques, sols, remise en sécurité électrique partielle).</li>
-            <li><strong>Rénovation complète :</strong> 1 000 € à 1 800 € TTC / m² (électricité complète aux normes, plomberie neuve, cloisons, pièces d'eau, isolation biosourcée, menuiseries double vitrage).</li>
-            <li><strong>Rénovation lourde &amp; réhabilitation globale :</strong> 1 900 € à 3 200 € TTC / m² (charpente en chêne, couverture, assainissement complet des maçonneries, isolation globale performante, pompe à chaleur décarbonée).</li>
-          </ul>
-
-          <h2>Quelles aides financières de l'Anah et dispositifs locaux mobiliser en 2026 ?</h2>
-          <p>
-            En 2026, l'État finance les projets d'ampleur via le parcours accompagné de MaPrimeRénov' (Anah), qui s'applique aux logements de plus de 15 ans visant un saut d'au moins deux classes énergétiques au DPE (avec exclusion des chaudières au gaz). Ce dispositif se combine parfaitement avec le <strong>Pass Rénovation Hauts-de-France</strong>, accessible à tous les ménages pour financer le reste à charge, ainsi que l'Éco-PTZ jusqu'à 50 000 € et la TVA à taux réduit de 5,5 %.
-          </p>
-
-          <h2>Quels piliers de sécurisation apporte l'accompagnement DVK Studio x hemea ?</h2>
-          <p>
-            Faire rénover un corps de ferme ou une bâtisse ancienne dans le 60 ou le 80 exige une protection contractuelle maximale. Mon accompagnement déploie trois piliers essentiels de l'écosystème hemea : des <strong>artisans locaux audités</strong> sur leur solvabilité et assurances décennales, la protection totale de vos fonds sur un <strong>compte séquestre</strong> (déblocage uniquement à l'avancement validé), et un suivi de proximité sur le terrain.
-          </p>
-
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Sécurisez votre projet de rénovation</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Vous envisagez l'achat ou la rénovation d'une maison ancienne dans l'Oise ou la Somme ? Échangeons lors d'un premier cadrage sans engagement.
-            </p>
-            <div style="margin-top: 20px;">
-              <BoutonRdv bouton="blog_guide_2026">Prendre rendez-vous</BoutonRdv>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-    <PremierEchange />
-  </article>
-</Base>
+  <h2 id="etapes">Comment se déroule l'accompagnement, étape par étape ?</h2>
+  <ol>
+    <li><strong>Premier échange (30 min en visio) :</strong> votre bien, votre projet, votre budget.</li>
+    <li><strong>Visite et relevé :</strong> état des lieux sur place, relevé laser et plans si besoin.</li>
+    <li><strong>Cadrage :</strong> liste des travaux par priorité et budget indicatif.</li>
+    <li><strong>Consultation :</strong> au moins deux entreprises labellisées hemea, auditées sur 30 critères ; comparaison des devis poste par poste.</li>
+    <li><strong>Chantier dans le cadre hemea :</strong> paiements sur compte séquestre débloqués par étapes selon l'avancement, pénalités de retard prévues au contrat et, en cas d'abandon ou de défaillance de l'entreprise, reprise du chantier organisée par hemea selon ses conditions.</li>
+  </ol>
+  <p>Les travaux sont réalisés par les entreprises que vous retenez ; mon rôle est de vous aider à cadrer le projet et à les choisir en connaissance de cause.</p>
+</FicheConseil>
