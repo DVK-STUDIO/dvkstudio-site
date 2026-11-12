@@ -1,111 +1,109 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Encadre from "../../components/fiche/Encadre.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
-const titre = "Passoires thermiques et DPE : échéance 2028 en Oise et Somme";
-const description = "G interdit à la location depuis 2025, F au 1er janvier 2028 : calendrier, audit et travaux prioritaires pour les bailleurs de l'Oise et la Somme.";
+const enResume = [
+  "<strong>Location :</strong> les logements classés G sont interdits à la location depuis 2025, les F le seront au 1er janvier 2028, les E en 2034.",
+  "<strong>Vente :</strong> un audit énergétique est obligatoire pour vendre une maison classée E, F ou G.",
+  "<strong>DPE 2026 :</strong> le coefficient de l'électricité est passé de 2,3 à 1,9 ; un logement chauffé à l'électricité peut gagner une classe sans travaux.",
+  "<strong>Bâti ancien :</strong> isolants perspirants indispensables sur brique, craie ou torchis, sinon l'humidité reste piégée dans les murs.",
+  "<strong>Aides :</strong> MaPrimeRénov' rénovation d'ampleur finance de 10 % à 80 % des travaux selon les revenus, pour un gain d'au moins 2 classes.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Passoires thermiques et DPE : anticiper l'échéance 2028 dans l'Oise et la Somme",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr"
-  },
-  "datePublished": "2026-10-12",
-  "dateModified": "2026-11-11",
-  "description": description
-};
+const sommaire = [
+  { id: "calendrier", libelle: "Le calendrier des interdictions" },
+  { id: "vente", libelle: "Vendre un logement énergivore" },
+  { id: "dpe-2026", libelle: "Ce qui change dans le DPE en 2026" },
+  { id: "travaux", libelle: "Les travaux prioritaires" },
+  { id: "financer", libelle: "Financer les travaux" },
+];
+
+const faq = [
+  { q: "Mon locataire est déjà en place : que se passe-t-il en 2028 si mon logement est classé F ?", r: "À partir du 1er janvier 2028, un logement classé F ne respecte plus le critère de décence énergétique. Le locataire peut alors demander la mise en conformité. Mieux vaut anticiper les travaux, qui demandent plusieurs mois entre audit, devis et chantier." },
+  { q: "Mon DPE est-il encore valable ?", r: "Un DPE est valable 10 ans, mais ceux réalisés avant le 1er juillet 2021 ne sont plus valides. Avec le changement de coefficient de l'électricité en 2026, un logement chauffé à l'électricité peut obtenir une meilleure classe : il peut être utile de faire actualiser le diagnostic." },
+  { q: "L'audit énergétique est-il à la charge du vendeur ?", r: "Oui. Pour une maison classée E, F ou G, c'est au vendeur de faire réaliser l'audit et de le remettre dès la première visite." },
+  { q: "Peut-on isoler une maison en brique par l'extérieur ?", r: "C'est possible avec des isolants et des enduits perspirants, mais souvent délicat sur une façade de caractère ou en secteur protégé. L'isolation par l'intérieur avec des matériaux biosourcés est fréquemment retenue dans le bâti picard." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/dpe-2027-passoires-thermiques-oise-somme/" donneesStructurees={schema}>
-  <div class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
-          <span style="color: var(--dvk-text);">DPE et passoires thermiques</span>
-        </nav>
+<FicheConseil
+  titre="Passoires thermiques : F interdit en 2028 | DVK Studio"
+  description="G interdit à la location depuis 2025, F au 1er janvier 2028 : calendrier, audit et travaux prioritaires pour les bailleurs de l'Oise et la Somme."
+  chemin="/blog/dpe-2027-passoires-thermiques-oise-somme/"
+  h1="Passoires thermiques : comment préparer l'échéance de 2028 dans l'Oise et la Somme"
+  surtitre="Énergie & réglementation · Oise (60) & Somme (80)"
+  fil="DPE et passoires thermiques"
+  publie="2026-10-12"
+  majLe="2026-11-12"
+  lecture={7}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_dpe"
+  appel="Votre logement est classé E, F ou G ? Faisons le point en 30 minutes en visio sur les travaux prioritaires et les aides possibles."
+  zebre={{ pose: "conseil", titre: "2028, c'est demain sur un chantier", texte: "Entre l'audit, les devis, le dossier d'aides et les travaux, il faut souvent compter plusieurs mois. Un bailleur dont le logement est classé F a intérêt à lancer le cadrage dès maintenant." }}
+>
+  <p slot="chapo">
+    La loi Climat et Résilience retire progressivement du marché locatif les logements les plus énergivores.
+    Pour un propriétaire bailleur ou un vendeur de l'Oise ou de la Somme, la classe énergétique devient un sujet patrimonial.
+    Voici le calendrier, les obligations à la vente et les travaux qui permettent de regagner des classes sans abîmer un bâti ancien.
+  </p>
 
-        <span class="surtitre">Énergie &amp; Réglementation · Oise (60) &amp; Somme (80)</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          Passoires thermiques : comment préparer l'échéance de 2028 dans l'Oise et la Somme
-        </h1>
+  <h2 id="calendrier">Quel est le calendrier des interdictions de location ?</h2>
+  <Tableau
+    legende="Calendrier des interdictions de mise en location (loi Climat et Résilience)"
+    entetes={["Date", "Logements concernés"]}
+    lignes={[
+      ["1er janvier 2025", "Classe G interdite à la location"],
+      ["1er janvier 2028", "Classe F interdite à la location"],
+      ["1er janvier 2034", "Classe E interdite à la location"],
+    ]}
+  />
+  <Encadre source="Ministère de la Transition écologique" lien="https://www.ecologie.gouv.fr/politiques-publiques/savoir-renovation-energetique">
+    <p>L'interdiction s'applique à partir de 2025 pour les logements classés G, de 2028 pour les F et de 2034 pour les E.</p>
+  </Encadre>
 
-        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 6 min</span>
-        </div>
+  <h2 id="vente">Que faut-il prévoir pour vendre un logement énergivore ?</h2>
+  <p>
+    Pour vendre une maison classée E, F ou G, le vendeur doit fournir un audit énergétique réglementaire en plus du DPE (l'obligation s'étendra aux maisons classées D en 2034).
+    L'audit propose des scénarios de travaux chiffrés pour améliorer la performance du logement.
+    Il aide l'acheteur à se projeter, mais il ne remplace pas des devis d'entreprises : c'est là qu'un cadrage des travaux devient utile.
+  </p>
 
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Depuis le 1er janvier 2025 pour la classe G, et à partir du 1er janvier 2028 pour la classe F, la loi Climat et Résilience interdit la mise en location des logements les plus énergivores. Pour un propriétaire bailleur ou un vendeur dans l'Oise ou la Somme, l'attentisme entraîne une décote directe. Voici comment structurer les travaux pour regagner les étiquettes D ou C.
-          </p>
-        </div>
+  <h2 id="dpe-2026">Qu'est-ce qui change dans le DPE en 2026 ?</h2>
+  <p>
+    Depuis le 1er janvier 2026, le coefficient appliqué à l'électricité dans le calcul du DPE est passé de 2,3 à 1,9.
+    Un logement chauffé à l'électricité peut donc gagner une classe sans travaux. Avant de chiffrer quoi que ce soit, vérifiez que votre diagnostic est à jour.
+  </p>
 
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>1. Le calendrier des interdictions et son impact sur le marché local</h2>
-          <p>
-            Sur les secteurs de Compiègne, Beauvais, Creil, Senlis et Amiens, les pavillons des années 1960-1980 et les bâtisses anciennes non isolées représentent une part significative du parc locatif. Le calendrier est strict :
-          </p>
-          <ul>
-            <li><strong>1er janvier 2025 :</strong> Interdiction de louer les logements étiquetés G (consommation supérieure à 420 kWh/m²/an).</li>
-            <li><strong>1er janvier 2028 :</strong> Extension de l'interdiction aux logements classés F.</li>
-            <li><strong>1er janvier 2034 :</strong> Interdiction pour les logements de classe E.</li>
-          </ul>
-          <p>
-            Depuis le 1er janvier 2026, le coefficient appliqué à l'électricité dans le calcul du DPE est passé de 2,3 à 1,9 : un logement chauffé à l'électricité peut gagner une classe sans travaux. Avant de chiffrer quoi que ce soit, il vaut donc la peine de vérifier que votre diagnostic est à jour.
-          </p>
-          <p>
-            Lors d'une transaction immobilière, l'audit énergétique réglementaire est obligatoire pour les biens en monopropriété classés F ou G. Ce document liste les scénarios de travaux, mais laisse souvent l'acheteur désemparé face aux devis d'artisans disparates.
-          </p>
+  <h2 id="travaux">Quels travaux prioriser dans le bâti ancien picard ?</h2>
+  <p>
+    Dans l'Oise et la Somme, beaucoup de logements concernés sont des maisons en brique pleine, en moellons de craie ou à pans de bois, et des pavillons des années 1960 à 1980.
+    Sur le bâti ancien, une erreur fréquente consiste à poser un isolant étanche (polystyrène) contre un mur qui doit respirer : le DPE s'améliore sur le papier, mais l'humidité reste piégée et dégrade le mur.
+  </p>
+  <ol>
+    <li><strong>Toiture et combles :</strong> souvent le poste le plus efficace à isoler.</li>
+    <li><strong>Murs :</strong> isolants biosourcés perspirants (fibre de bois, chanvre, ouate de cellulose).</li>
+    <li><strong>Ventilation :</strong> une VMC adaptée, indispensable dès qu'on isole.</li>
+    <li><strong>Chauffage :</strong> dimensionné après isolation, sur les besoins réduits.</li>
+  </ol>
+  <p>Pour les budgets au m², consultez <a href="/blog/renover-maison-ancienne-oise-somme-guide-2026/">mon guide sur la rénovation d'une maison ancienne</a>.</p>
 
-          <h2>2. Le piège du bâti ancien picard au calcul du DPE</h2>
-          <p>
-            Une erreur fréquente consiste à appliquer des isolants synthétiques étanches (polystyrène expansé) sur des murs anciens en brique pleine, moellons calcaires ou pans de bois. Si cette solution améliore théoriquement le coefficient thermique sur le logiciel du diagnostiqueur, elle piège l'humidité dans les parois et dégrade la structure du bâtiment.
-          </p>
-          <p>
-            Mon approche privilégie des isolants biosourcés perspirants (fibre de bois, laine de chanvre, ouate de cellulose) couplés à une ventilation mécanique contrôlée (VMC hygroréglable ou double flux) adaptée au volume réel.
-          </p>
+  <AmbassadorCallout
+    pose="terrain"
+    title="Un bon DPE sur un mur malade ne vaut rien"
+    quote="Avant d'isoler, on regarde l'état des murs : salpêtre, enduit ciment qui cloque, bas de mur humide. Traiter la cause d'abord, sinon l'isolant neuf moisit de l'intérieur."
+  />
 
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Le repère budgétaire de votre chef de projet travaux</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Pour faire passer un pavillon de 100 m² de la classe F à la classe C dans l'Oise, le budget moyen d'une rénovation globale se situe entre 35 000 € et 65 000 € selon le système de chauffage retenu (pompe à chaleur air/eau, poêle à granulés). Ce montant peut être amorti jusqu'à 60 % par les aides MaPrimeRénov' et les Certificats d'Économies d'Énergie (CEE).
-            </p>
-          </div>
-
-          <h2>3. Mon rôle d'accompagnement hemea pour sécuriser votre projet</h2>
-          <p>
-            En tant que chef de projet travaux hemea, j'interviens pour lever les doutes techniques et financiers :
-          </p>
-          <ul>
-            <li><strong>Analyse de l'audit énergétique :</strong> Priorisation des postes de travaux à plus fort impact thermique au mètre carré.</li>
-            <li><strong>Sélection d'entreprises RGE :</strong> Mobilisation d'artisans locaux certifiés RGE dont la santé financière et les assurances décennales sont vérifiées.</li>
-            <li><strong>Sécurisation hemea :</strong> Paiements sur compte séquestre, débloqués par étapes selon l'avancement validé des travaux.</li>
-          </ul>
-
-          <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
-            <h3>Votre logement est classé F ou G dans l'Oise ou la Somme ?</h3>
-            <p>
-              Faisons le point ensemble sur les postes de travaux prioritaires et les aides mobilisables lors d'un échange de 30 minutes en visio.
-            </p>
-            <div style="margin-top: 24px;">
-              <BoutonRdv bouton="blog_dpe">Échanger sur mon logement (30 min)</BoutonRdv>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <PremierEchange />
-  </div>
-</Base>
-
+  <h2 id="financer">Comment financer les travaux ?</h2>
+  <p>
+    Pour un logement classé E, F ou G, MaPrimeRénov' rénovation d'ampleur finance de 10 % à 80 % des travaux selon vos revenus, pour un gain d'au moins 2 classes.
+    Les propriétaires bailleurs peuvent aussi en bénéficier, sous conditions. Le détail des taux et des plafonds figure dans mon guide
+    <a href="/blog/maprimerenov-renovation-ampleur-oise-somme/">MaPrimeRénov' rénovation d'ampleur en 2026</a>.
+  </p>
+  <p>
+    Dans le cadre hemea, au moins deux entreprises RGE auditées sur 30 critères sont consultées, et les paiements passent par un compte séquestre débloqué par étapes selon l'avancement validé des travaux.
+  </p>
+</FicheConseil>
