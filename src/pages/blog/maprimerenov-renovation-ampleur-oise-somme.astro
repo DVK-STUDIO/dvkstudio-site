@@ -1,110 +1,112 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Encadre from "../../components/fiche/Encadre.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
-const titre = "MaPrimeRénov' : rénovation d'ampleur en Oise et Somme";
-const description = "Plafonds d'aides, conditions d'éligibilité, audit obligatoire et cumul d'aides locales pour financer une rénovation d'ampleur dans le 60 et le 80.";
+const enResume = [
+  "<strong>Pour qui :</strong> logements classés E, F ou G, occupés en résidence principale ; tous niveaux de revenus.",
+  "<strong>Condition clé :</strong> gagner au moins 2 classes au DPE, avec un audit énergétique et un Accompagnateur Rénov' agréé.",
+  "<strong>Taux 2026 :</strong> 80 % (revenus très modestes), 60 % (modestes), 45 % (intermédiaires), 10 % (supérieurs).",
+  "<strong>Plafonds de travaux :</strong> 30 000 € HT pour 2 classes gagnées, 40 000 € HT pour 3 classes ou plus, soit 32 000 € d'aide au maximum.",
+  "<strong>Reste à charge :</strong> finançable par un éco-prêt à taux zéro jusqu'à 50 000 €.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "MaPrimeRénov' et rénovation d'ampleur dans l'Oise et la Somme",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr"
-  },
-  "datePublished": "2026-10-12",
-  "description": description
-};
+const sommaire = [
+  { id: "conditions", libelle: "Les conditions d'éligibilité" },
+  { id: "montants", libelle: "Taux et plafonds 2026" },
+  { id: "etapes", libelle: "Les étapes du dossier" },
+  { id: "completer", libelle: "Compléter le financement" },
+  { id: "role", libelle: "Mon rôle dans le projet" },
+];
+
+const faq = [
+  { q: "Ma maison est classée D : suis-je éligible à la rénovation d'ampleur ?", r: "Non. En 2026, MaPrimeRénov' rénovation d'ampleur est réservée aux logements classés E, F ou G avant travaux. Pour un logement classé D, regardez l'aide par geste (selon vos revenus), la prime CEE et l'éco-prêt à taux zéro." },
+  { q: "Les revenus supérieurs ont-ils droit à MaPrimeRénov' rénovation d'ampleur ?", r: "Oui, avec un taux de 10 % des dépenses éligibles. C'est le seul parcours MaPrimeRénov' ouvert aux revenus supérieurs." },
+  { q: "Peut-on installer une chaudière au gaz dans ce parcours ?", r: "Non. Une rénovation d'ampleur aidée ne peut pas comporter l'installation d'une chaudière fonctionnant aux énergies fossiles." },
+  { q: "Qui est l'Accompagnateur Rénov' ?", r: "Un professionnel agréé, obligatoire dans ce parcours, qui réalise ou s'appuie sur l'audit énergétique, aide à monter le dossier et suit le projet. Son intervention est en partie financée par l'Anah." },
+  { q: "Faut-il attendre l'accord avant de signer les devis ?", r: "Le dossier doit être déposé avant le début des travaux. Votre Accompagnateur Rénov' vous indique à quel moment signer pour ne pas perdre l'aide." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/maprimerenov-renovation-ampleur-oise-somme/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt; 
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt; 
-          <span style="color: var(--dvk-text);">MaPrimeRénov' Oise et Somme</span>
-        </nav>
+<FicheConseil
+  titre="MaPrimeRénov' rénovation d'ampleur 2026 | DVK Studio"
+  description="Conditions, taux, plafonds et étapes de MaPrimeRénov' rénovation d'ampleur en 2026, pour les propriétaires de l'Oise et de la Somme."
+  chemin="/blog/maprimerenov-renovation-ampleur-oise-somme/"
+  h1="MaPrimeRénov' rénovation d'ampleur en 2026 : conditions, montants et étapes dans l'Oise et la Somme"
+  surtitre="Financement & aides · Oise (60) & Somme (80)"
+  fil="MaPrimeRénov' rénovation d'ampleur"
+  publie="2026-10-12"
+  majLe="2026-11-12"
+  lecture={7}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_maprimerenov"
+  appel="Vous préparez une rénovation globale ? Étudions votre projet et les aides possibles lors d'un échange de 30 minutes en visio, sans engagement."
+  zebre={{ pose: "reflexion", titre: "Le DPE d'abord, les devis ensuite", texte: "Tout part de la classe énergétique de votre logement. Avant de demander le moindre devis, vérifiez que votre DPE est récent : il décide de votre éligibilité." }}
+>
+  <p slot="chapo">
+    MaPrimeRénov' rénovation d'ampleur finance les projets qui transforment vraiment un logement énergivore : isolation, ventilation et chauffage pensés ensemble.
+    Les règles ont nettement changé depuis 2025 : plafonds abaissés, logements éligibles recentrés sur les classes E, F et G.
+    Voici les conditions et les montants en vigueur en 2026, et la façon de préparer votre dossier.
+  </p>
 
-        <span class="surtitre">Financement &amp; Aides · Oise (60) &amp; Somme (80)</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          MaPrimeRénov' : optimiser le financement d'une rénovation globale dans l'Oise et la Somme
-        </h1>
+  <h2 id="conditions">Quelles sont les conditions pour en bénéficier ?</h2>
+  <ul>
+    <li><strong>Le logement :</strong> classé E, F ou G avant travaux, construit depuis plus de 15 ans et occupé en résidence principale.</li>
+    <li><strong>Le gain :</strong> au moins 2 classes au DPE après travaux (par exemple de F à D).</li>
+    <li><strong>Les travaux :</strong> un bouquet incluant au moins deux postes d'isolation (toiture, murs, plancher bas ou menuiseries), sans installation de chaudière aux énergies fossiles.</li>
+    <li><strong>L'accompagnement :</strong> un audit énergétique et un Accompagnateur Rénov' agréé, après un premier rendez-vous avec un conseiller France Rénov'.</li>
+  </ul>
+  <Encadre source="economie.gouv.fr, aides à la rénovation énergétique" lien="https://www.economie.gouv.fr/particuliers/faire-des-economies-denergie/renovation-energetique-les-aides-auxquelles-vous-pouvez-pretendre">
+    <p>Depuis la réouverture du guichet en 2026, la rénovation d'ampleur ne concerne plus que les logements classés E, F ou G avant travaux, occupés à titre de résidence principale.</p>
+  </Encadre>
 
-        <div style="display: flex; gap: 20px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 5 min</span>
-        </div>
+  <h2 id="montants">Quels taux et quels plafonds en 2026 ?</h2>
+  <p>L'aide est un pourcentage des travaux éligibles, plafonnés selon le nombre de classes gagnées.</p>
+  <Tableau
+    legende="MaPrimeRénov' rénovation d'ampleur : taux et aide maximale en 2026"
+    entetes={["Profil de revenus", "Taux", "Aide max. (gain de 2 classes, plafond 30 000 € HT)", "Aide max. (gain de 3 classes ou plus, plafond 40 000 € HT)"]}
+    lignes={[
+      ["Très modestes (bleu)", "80 %", "24 000 €", "32 000 €"],
+      ["Modestes (jaune)", "60 %", "18 000 €", "24 000 €"],
+      ["Intermédiaires (violet)", "45 %", "13 500 €", "18 000 €"],
+      ["Supérieurs (rose)", "10 %", "3 000 €", "4 000 €"],
+    ]}
+    note="Le palier à 70 000 € HT et le bonus « sortie de passoire » ont été supprimés. Conditions au 12 novembre 2026, à vérifier sur france-renov.gouv.fr."
+  />
 
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            La rénovation thermique par geste unique (changement de chaudière seul) laisse place à une priorité absolue donnée aux rénovations d'ampleur. Dans l'Oise et la Somme, les aides publiques peuvent couvrir jusqu'à 63 000 € de travaux pour les ménages éligibles réalisant un saut d'au moins deux classes DPE.
-          </p>
-        </div>
+  <AmbassadorCallout
+    pose="terrain"
+    title="Visez 3 classes quand c'est possible"
+    quote="Passer de 2 à 3 classes gagnées fait monter le plafond de 30 000 à 40 000 € HT. Sur une maison picarde mal isolée, traiter toiture, murs et chauffage ensemble y suffit souvent."
+  />
 
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>1. Le parcours « Rénovation d'ampleur » : les critères indispensables</h2>
-          <p>
-            Pour bénéficier du taux maximal de subvention, le projet de travaux doit répondre à des exigences techniques précises :
-          </p>
-          <ul>
-            <li><strong>Gain énergétique minimum :</strong> Amélioration d'au moins 2 classes DPE (par exemple, passage de F à D ou de E à C).</li>
-            <li><strong>Deux gestes d'isolation :</strong> Traiter impérativement deux postes d'isolation (toiture, murs extérieurs, plancher bas ou fenêtres).</li>
-            <li><strong>Interdiction des énergies fossiles :</strong> Le projet ne peut pas installer une chaudière fioul ou gaz.</li>
-            <li><strong>Accompagnement agréé :</strong> Réalisation préalable d'un audit énergétique et suivi par Mon Accompagnateur Rénov' (MAR).</li>
-          </ul>
+  <h2 id="etapes">Quelles sont les étapes du dossier ?</h2>
+  <ol>
+    <li><strong>Rendez-vous France Rénov' :</strong> un premier échange gratuit avec un conseiller public, obligatoire.</li>
+    <li><strong>Audit énergétique :</strong> il décrit l'état du logement et propose des scénarios de travaux.</li>
+    <li><strong>Choix de l'Accompagnateur Rénov' :</strong> il vous aide à arrêter le scénario et à monter le dossier.</li>
+    <li><strong>Devis d'entreprises RGE :</strong> au moins deux par lot de travaux, pour comparer.</li>
+    <li><strong>Dépôt du dossier</strong> avant le début des travaux, puis réalisation et versement de l'aide sur factures.</li>
+  </ol>
 
-          <h2>2. Les barèmes de prise en charge et le reste à charge réel</h2>
-          <p>
-            Le plafond de dépenses éligibles varie selon l'ambition du gain thermique :
-          </p>
-          <ul>
-            <li><strong>Saut de 2 classes DPE :</strong> Plafond de travaux subventionnables fixé à 40 000 € HT.</li>
-            <li><strong>Saut de 3 classes DPE :</strong> Plafond fixé à 55 000 € HT.</li>
-            <li><strong>Saut de 4 classes DPE (sortie de passoire) :</strong> Plafond jusqu'à 70 000 € HT.</li>
-          </ul>
-          <p>
-            Le taux de prise en charge s'échelonne selon votre tranche de revenus (Bleu, Jaune, Violet, Rose) et peut atteindre jusqu'à 80 % à 90 % pour les foyers aux revenus très modestes, complété par l'Éco-Prêt à Taux Zéro (Éco-PTZ jusqu'à 50 000 € sur 20 ans) pour financer le reste à charge sans intérêts.
-          </p>
+  <h2 id="completer">Comment compléter le financement ?</h2>
+  <ul>
+    <li><strong>Éco-prêt à taux zéro :</strong> jusqu'à 50 000 € pour une rénovation d'ampleur, sans intérêts.</li>
+    <li><strong>TVA à 5,5 %</strong> sur les travaux d'économie d'énergie.</li>
+    <li><strong>Hauts-de-France Pass Rénovation :</strong> accompagnement public régional, avec possibilité de préfinancer les travaux.</li>
+    <li><strong>Aides locales :</strong> certaines intercommunalités de l'Oise et de la Somme complètent les aides nationales ; l'Espace Conseil France Rénov' de votre secteur vous indique celles qui s'appliquent.</li>
+  </ul>
 
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Cumul avec les aides locales dans le 60 et le 80</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Des dispositifs complémentaires existent à l'échelle locale : primes de l'Agglomération de la Région de Compiègne (ARC), aides de la Communauté d'Agglomération du Beauvaisis (CAB), ou programme d'Amiens Métropole. Un cadrage préalable permet d'optimiser le plan de financement avant toute signature de devis.
-            </p>
-          </div>
-
-          <h2>3. Comment je vous aide à sécuriser l'obtention de vos aides</h2>
-          <p>
-            La première cause de rejet d'un dossier d'aide financière réside dans la non-conformité administrative des devis (mentions RGE incomplètes, critères de résistance thermique R non précisés). Mon rôle de chef de projet travaux hemea consiste à :
-          </p>
-          <ul>
-            <li>Vérifier rigoureusement les labels RGE de chaque entreprise retenue avant le début du chantier.</li>
-            <li>Faire valider la conformité technique des fiches produits d'isolants et de pompes à chaleur.</li>
-            <li>Encadrer les paiements via le compte séquestre hemea, garantissant que les artisans ne sont réglés qu'après validation de la bonne exécution des travaux.</li>
-          </ul>
-
-          <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--dvk-border);">
-            <h3>Vous préparez une rénovation globale dans l'Oise ou la Somme ?</h3>
-            <p>
-              Étudions la faisabilité de votre projet et l'enveloppe d'aides mobilisables lors d'un échange de 30 minutes en visio, sans engagement.
-            </p>
-            <div style="margin-top: 24px;">
-              <BoutonRdv bouton="blog_maprimerenov">Estimer mon projet de rénovation (30 min)</BoutonRdv>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <PremierEchange />
-  </article>
-</Base>
-
+  <h2 id="role">Quel est mon rôle dans votre projet ?</h2>
+  <p>
+    Je ne remplace ni le conseiller France Rénov' ni l'Accompagnateur Rénov'. Mon rôle est de vous aider à cadrer le projet de travaux et à consulter des entreprises fiables :
+  </p>
+  <ul>
+    <li><strong>Vérifier les qualifications RGE</strong> des entreprises consultées, condition pour obtenir les aides.</li>
+    <li><strong>Relire les devis</strong> pour que les mentions techniques attendues (performances des isolants, des équipements) y figurent bien.</li>
+    <li><strong>Consulter au moins deux entreprises</strong> labellisées hemea, auditées sur 30 critères, et sécuriser les paiements sur compte séquestre débloqué par étapes.</li>
+  </ul>
+</FicheConseil>
