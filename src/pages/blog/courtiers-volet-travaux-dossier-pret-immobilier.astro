@@ -1,92 +1,99 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PremierEchange from "../../components/PremierEchange.astro";
-import BoutonRdv from "../../components/BoutonRdv.astro";
+import FicheConseil from "../../components/fiche/FicheConseil.astro";
+import Encadre from "../../components/fiche/Encadre.astro";
+import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
-const titre = "Courtiers : sécuriser le volet travaux d'un dossier de prêt";
-const description = "Courtiers de l'Oise et de la Somme : un volet travaux bien cadré (enveloppe, devis détaillés, éco-PTZ) accélère le dossier de vos emprunteurs.";
+const enResume = [
+  "<strong>Le constat :</strong> un poste travaux mal documenté est l'une des premières causes de dossiers qui s'enlisent.",
+  "<strong>Un volet solide :</strong> enveloppe poste par poste, devis détaillés, réserve pour imprévus distincte, calendrier cohérent.",
+  "<strong>Éco-PTZ :</strong> sans condition de ressources, pour une résidence principale de plus de 2 ans, travaux réalisés par une entreprise RGE.",
+  "<strong>Devis différés :</strong> avec un prêt d'acquisition, les devis de l'éco-PTZ peuvent être fournis au plus tard au versement du prêt.",
+  "<strong>Mon rôle :</strong> cadrer les travaux avec l'acquéreur avant le dépôt, puis consulter des entreprises auditées.",
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Courtiers en crédit : comment un volet travaux bien cadré débloque le dossier de vos emprunteurs",
-  "author": {
-    "@type": "Person",
-    "name": "Kévin DE VLIEGER",
-    "jobTitle": "Chef de projet travaux hemea",
-    "telephone": "+33640324752",
-    "email": "contact@dvkstudio.fr",
-    "url": "https://dvkstudio.fr/a-propos/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "DVK Studio",
-    "url": "https://dvkstudio.fr/"
-  },
-  "datePublished": "2026-11-12",
-  "dateModified": "2026-11-12",
-  "description": description,
-  "mainEntityOfPage": "https://dvkstudio.fr/blog/courtiers-volet-travaux-dossier-pret-immobilier/"
-};
+const sommaire = [
+  { id: "blocages", libelle: "Pourquoi le volet travaux ralentit" },
+  { id: "solide", libelle: "Un volet travaux solide" },
+  { id: "eco-ptz", libelle: "Les pièces de l'éco-PTZ" },
+  { id: "travailler", libelle: "Travailler ensemble" },
+];
+
+const faq = [
+  { q: "À quel moment intervenir dans le dossier ?", r: "Idéalement entre la visite et le compromis, ou dès la signature du compromis : c'est là qu'une enveloppe travaux cadrée évite de revoir le montant du prêt ensuite." },
+  { q: "L'éco-PTZ est-il soumis à conditions de ressources ?", r: "Non. Il est accessible sans condition de ressources, pour une résidence principale construite depuis plus de 2 ans, avec des travaux réalisés par une entreprise RGE." },
+  { q: "Faut-il les devis définitifs pour déposer le dossier ?", r: "Pour l'éco-PTZ demandé avec un prêt d'acquisition, les devis peuvent être fournis plus tard, au plus tard au versement du prêt. Une enveloppe indicative solide permet d'avancer dans l'intervalle." },
+  { q: "Qui réalise les travaux ?", r: "Des entreprises indépendantes, consultées et choisies par l'emprunteur. Dans le cadre hemea, au moins deux entreprises auditées sur 30 critères sont consultées." },
+];
 ---
 
-<Base titre={titre} description={description} page="blog" chemin="/blog/courtiers-volet-travaux-dossier-pret-immobilier/" donneesStructurees={schema}>
-  <article class="dvk-article-conteneur">
-    <article class="section" style="padding-top: 48px; padding-bottom: 56px;">
-      <div class="conteneur" style="max-width: 860px;">
-        <nav aria-label="Fil d'Ariane" style="font-size: 13px; color: var(--dvk-text-muted); margin-bottom: 24px;">
-          <a href="/" style="color: var(--dvk-text-muted); text-decoration: none;">Accueil</a> &gt;
-          <a href="/blog/" style="color: var(--dvk-text-muted); text-decoration: none;">Conseils</a> &gt;
-          <span style="color: var(--dvk-text);">Volet travaux et prêt immobilier</span>
-        </nav>
+<FicheConseil
+  titre="Courtiers : le volet travaux d'un prêt | DVK Studio"
+  description="Courtiers de l'Oise et de la Somme : un volet travaux bien cadré (enveloppe, devis détaillés, éco-PTZ) accélère le dossier de vos emprunteurs."
+  chemin="/blog/courtiers-volet-travaux-dossier-pret-immobilier/"
+  h1="Courtiers en crédit : comment un volet travaux bien cadré débloque le dossier de vos emprunteurs"
+  surtitre="Prescripteurs · Financement"
+  fil="Volet travaux et prêt immobilier"
+  publie="2026-11-12"
+  majLe="2026-11-12"
+  lecture={5}
+  enResume={enResume}
+  sommaire={sommaire}
+  faq={faq}
+  bouton="blog_courtiers"
+  appel="Des dossiers en cours avec un volet travaux ? Échangeons 30 minutes en visio sur la façon de documenter le poste travaux."
+  zebre={{ pose: "accueil", titre: "Un chiffre « à la louche » coûte cher plus tard", texte: "Le montant estimé pendant la visite finit presque toujours par bouger. Une enveloppe cadrée poste par poste, avec une réserve à part, évite de retourner voir la banque en plein chantier." }}
+>
+  <p slot="chapo">
+    Pour un achat avec travaux, la banque finance un projet global : le bien et sa remise en état. Quand le poste travaux est mal documenté, le dossier attend.
+    Ce guide s'adresse aux courtiers de l'Oise et de la Somme : ce qui rend un volet travaux solide, et la façon dont je travaille avec les prescripteurs pour le préparer avant le dépôt.
+  </p>
 
-        <span class="surtitre">Prescripteurs · Financement</span>
-        <h1 class="titre-l" style="margin-top: 14px; margin-bottom: 18px; font-weight: 600;">
-          Courtiers en crédit : comment un volet travaux bien cadré débloque le dossier de vos emprunteurs
-        </h1>
+  <h2 id="blocages">Pourquoi le volet travaux ralentit-il les dossiers ?</h2>
+  <p>
+    Les blocages les plus fréquents viennent de devis incomplets ou trop globaux, d'un montant estimé « à la louche » pendant la visite, ou de l'absence de calendrier.
+    L'emprunteur, lui, n'a souvent pas encore choisi ses entreprises au moment du dépôt. Résultat : demandes de pièces, montant à revoir, et un dossier qui s'enlise alors que le compromis court.
+  </p>
 
-        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; padding-bottom: 24px; border-bottom: 1px solid var(--dvk-border); font-size: 14px; color: var(--dvk-text-muted);">
-          <span>Par <strong>Kévin DE VLIEGER</strong> · Chef de projet travaux hemea</span>
-          <span>•</span>
-          <span>Temps de lecture : 5 min</span>
-        </div>
+  <h2 id="solide">Qu'est-ce qu'un volet travaux solide ?</h2>
+  <Tableau
+    legende="Les quatre pièces d'un volet travaux solide"
+    entetes={["Élément", "Ce qu'il apporte au dossier"]}
+    lignes={[
+      ["Enveloppe indicative poste par poste", "Un montant justifié, établi après une lecture technique du bien"],
+      ["Devis détaillés", "Des entreprises identifiées, avec quantités et prestations décrites plutôt que des forfaits"],
+      ["Réserve pour imprévus distincte", "Pas de retour vers la banque en cours de chantier"],
+      ["Calendrier", "Cohérent avec la date d'acquisition et les déblocages de fonds"],
+    ]}
+  />
+  <p>Pour dimensionner la réserve, voir <a href="/blog/reserve-imprevus-budget-travaux-renovation/">mon article sur la réserve pour imprévus</a>.</p>
 
-        <div style="background: var(--dvk-surface); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0; border-left: 4px solid var(--dvk-action);">
-          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--dvk-text);">
-            Pour un achat avec travaux, la banque finance un projet global : le bien et sa remise en état. Quand le poste travaux est mal documenté, le dossier attend : pièces manquantes, montants à justifier, questions sur le calendrier. Ce guide s'adresse aux courtiers de l'Oise et de la Somme : il détaille ce qui rend un volet travaux solide et comment je travaille avec les prescripteurs pour le préparer avant le dépôt du dossier.
-          </p>
-        </div>
+  <h2 id="eco-ptz">Quelles pièces prévoir pour un éco-PTZ ?</h2>
+  <p>
+    Quand les travaux portent sur la performance énergétique, l'éco-prêt à taux zéro peut compléter le financement.
+    Il demande les formulaires emprunteur et entreprise, ainsi que le descriptif et les devis détaillés des travaux.
+  </p>
+  <Encadre source="Service-public.fr, éco-prêt à taux zéro (F19905)" lien="https://www.service-public.gouv.fr/particuliers/vosdroits/F19905">
+    <p>L'éco-PTZ est accessible sans condition de ressources, pour une résidence principale construite depuis plus de 2 ans. Demandé avec un prêt d'acquisition, ses devis peuvent être fournis au plus tard au versement du prêt. Les travaux doivent être réalisés par une entreprise RGE.</p>
+  </Encadre>
 
-        <div class="prose" style="font-size: 16px; line-height: 1.8; color: var(--dvk-text);">
-          <h2>Pourquoi le volet travaux ralentit-il les dossiers ?</h2>
-          <p>Les blocages les plus fréquents viennent de devis incomplets ou trop globaux, d'un montant de travaux estimé « à la louche » pendant la visite, ou de l'absence de calendrier. L'emprunteur, lui, n'a souvent pas encore choisi ses entreprises au moment du dépôt. Résultat : demandes de pièces complémentaires, montant à revoir, et un dossier qui s'enlise alors que le compromis court.</p>
-          <h2>Qu'est-ce qu'un volet travaux solide ?</h2>
-          <ul><li><strong>Une enveloppe indicative cadrée en amont,</strong> poste par poste, établie après une lecture technique du bien.</li><li><strong>Des devis détaillés</strong> d'artisans identifiés, avec quantités et prestations décrites, plutôt que des forfaits.</li><li><strong>Une réserve pour imprévus</strong> distincte, pour éviter de revenir vers la banque en cours de chantier.</li><li><strong>Un calendrier</strong> cohérent avec la date d'acquisition et les déblocages de fonds.</li></ul>
-          <h2>Quelles pièces prévoir pour un éco-PTZ ?</h2>
-          <p>Quand les travaux portent sur la performance énergétique, l'éco-prêt à taux zéro peut compléter le financement, sans condition de ressources, pour une résidence principale construite depuis plus de 2 ans. Il demande les formulaires emprunteur et entreprise, ainsi que le descriptif et les devis détaillés des travaux ; s'il est demandé avec un prêt d'acquisition, ces devis peuvent être fournis plus tard, au plus tard au versement du prêt. Les travaux doivent être réalisés par une entreprise RGE (<a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F19905" target="_blank" rel="noopener">service-public.fr</a>).</p>
-          <h2>Comment je travaille avec les courtiers ?</h2>
-          <p>Chef de projet travaux hemea dans l'Oise et la Somme, j'interviens en amont du dépôt : lecture technique du bien avec l'acquéreur, enveloppe travaux indicative, puis devis détaillés d'artisans locaux audités par le réseau hemea. Pendant le chantier, les acomptes sont protégés sur compte séquestre et débloqués étape par étape, à l'avancement validé. Vous transmettez à la banque un volet travaux documenté ; votre emprunteur sait ce qu'il finance.</p>
+  <AmbassadorCallout
+    pose="conseil"
+    title="RGE : à vérifier avant le dépôt"
+    quote="Un devis d'une entreprise non RGE, et l'éco-PTZ tombe. La qualification se vérifie en deux minutes sur l'annuaire France Rénov' : autant le faire avant d'envoyer le dossier."
+  />
 
-          <div style="background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin: 32px 0;">
-            <p class="surtitre" style="margin-bottom: 8px;">Des dossiers en cours avec un volet travaux ?</p>
-            <p style="margin: 0; color: var(--dvk-text); font-weight: 500;">
-              Échangeons 30 minutes en visio sur vos dossiers en cours et la façon de documenter le poste travaux.
-            </p>
-            <div style="margin-top: 20px;">
-              <BoutonRdv bouton="blog_courtiers_volet_travaux">Réserver mon cadrage 30 min</BoutonRdv>
-            </div>
-          </div>
-
-          <div style="font-size: 14px; color: var(--dvk-text-muted); border-top: 1px solid var(--dvk-border); padding-top: 16px; margin-top: 32px;">
-            <p style="margin-bottom: 8px;"><strong>Sources</strong> (consultées le 11 novembre 2026)</p>
-            <ul>
-              <li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F19905" target="_blank" rel="noopener">Service-public.fr — Éco-prêt à taux zéro (F19905)</a></li>
-              <li><a href="https://france-renov.gouv.fr/" target="_blank" rel="noopener">France Rénov' — service public de la rénovation de l'habitat</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
-    <PremierEchange />
-  </article>
-</Base>
+  <h2 id="travailler">Comment je travaille avec les courtiers ?</h2>
+  <p>
+    Chef de projet travaux hemea dans l'Oise et la Somme, j'interviens en amont du dépôt :
+  </p>
+  <ol>
+    <li><strong>Lecture technique du bien</strong> avec l'acquéreur.</li>
+    <li><strong>Enveloppe travaux indicative</strong>, poste par poste, avec une réserve distincte.</li>
+    <li><strong>Devis détaillés</strong> d'entreprises locales auditées par hemea.</li>
+  </ol>
+  <p>
+    Pendant le chantier, les acomptes sont protégés sur compte séquestre et débloqués étape par étape, à l'avancement validé.
+    Vous transmettez à la banque un volet travaux documenté ; votre emprunteur sait ce qu'il finance.
+  </p>
+</FicheConseil>
