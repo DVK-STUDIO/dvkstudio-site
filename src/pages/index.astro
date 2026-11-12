@@ -175,7 +175,7 @@ const faq = [
     </div>
   </section>
 
-  <section class="section conteneur" aria-labelledby="t-exemple"><div class="duo"><div><p class="surtitre">Comprendre la démarche</p><h2 id="t-exemple" class="titre-m">Partir de vos usages, puis vérifier les contraintes.</h2><p class="chapo">Ouvrir une cuisine sur le séjour pose plusieurs questions : usage, structure, réseaux et budget. Les hypothèses sont distinguées des points vérifiés avant de consulter les entreprises.</p></div><Plan alt="Plan illustratif d’une cuisine et d’un séjour" zones={["cuisine"]} ouverture legende="Plan illustratif, non à l'échelle. Exemple de démarche, sans réalisation de chantier présentée." /></div></section>
+  <section class="section conteneur exemple-demarche" aria-labelledby="t-exemple"><div class="duo"><div><p class="surtitre">Comprendre la démarche</p><h2 id="t-exemple" class="titre-m">Partir de vos usages, puis vérifier les contraintes.</h2><p class="chapo">Ouvrir une cuisine sur le séjour pose plusieurs questions : usage, structure, réseaux et budget. Les hypothèses sont distinguées des points vérifiés avant de consulter les entreprises.</p></div><Plan alt="Plan illustratif d’une cuisine et d’un séjour" zones={["cuisine"]} ouverture legende="Plan illustratif, non à l'échelle. Exemple de démarche, sans réalisation de chantier présentée." /></div></section>
 
   <section class="section conteneur" aria-labelledby="t-faq">
     <h2 id="t-faq" class="titre-m faq-titre">Vos premières questions</h2>
@@ -303,6 +303,18 @@ const faq = [
     .premier-contact { padding: 24px; }
     .garanties { grid-template-columns: 1fr; }
     .parcours-hemea > a { padding: 24px; }
+    /* Accueil resserré sur mobile (12/11/2026) : on retire les redites, on garde l'essentiel et chaque appel à l'action. */
+    .hero-reperes, .hero-credit { display: none; }                 /* déjà dit dans le chapô et plus bas */
+    .premier-bloc { display: none; }                               /* Kévin est présenté dans « Qui vous accompagne » */
+    .exemple-demarche { display: none; }                           /* illustration de bureau, détaillée dans les fiches conseils */
+    .parcours-hemea { gap: 10px; margin-top: 28px; }
+    .parcours-hemea > a { padding: 18px 20px; gap: 6px; }
+    .parcours-hemea h3 { font-size: 20px; }
+    .parcours-hemea p { display: none; }                           /* le titre et le lien suffisent pour choisir */
+    .garanties { gap: 10px; margin-top: 24px; }
+    .garanties li { padding: 16px 18px; }
+    .garanties h3 { font-size: 18px; margin-bottom: 4px; }
+    .garanties p { font-size: 14px; }
   }
 </style>
 
