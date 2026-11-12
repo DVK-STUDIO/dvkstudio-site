@@ -5,7 +5,7 @@ import Tableau from "../../components/fiche/Tableau.astro";
 import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
 const enResume = [
-  "<strong>Budget indicatif :</strong> de 400 € à 3 200 € TTC/m² selon l'ampleur des travaux, soit environ 40 000 € à 320 000 € pour une maison de 100 m².",
+  "<strong>Budget indicatif :</strong> de 250 € à 2 000 € TTC/m² selon l'ampleur des travaux, soit environ 25 000 € à 200 000 € pour une maison de 100 m².",
   "<strong>Bâti picard :</strong> brique, craie, silex et torchis doivent rester « respirants » : pas de ciment ni d'isolant étanche contre ces murs.",
   "<strong>Ordre des travaux :</strong> clos et couvert, puis réseaux, puis isolation et chauffage, puis finitions.",
   "<strong>Aides 2026 :</strong> MaPrimeRénov' rénovation d'ampleur réservée aux logements classés E, F ou G, avec un gain d'au moins deux classes.",
@@ -65,17 +65,18 @@ const faq = [
   <h2 id="prix">Combien coûte la rénovation d'une maison ancienne au m² en 2026 ?</h2>
   <p>
     Le budget dépend avant tout de l'état du bien : charpente, couverture, humidité des murs et âge des réseaux pèsent plus que la surface.
-    Les fourchettes ci-dessous sont celles que j'utilise pour un premier cadrage dans l'Oise et la Somme.
+    Les fourchettes ci-dessous sont les repères publiés par hemea pour une maison ancienne ; elles servent de base à un premier cadrage, ajusté ensuite après visite du bien.
   </p>
   <Tableau
     legende="Budget indicatif selon l'ampleur des travaux (maison ancienne, Oise et Somme, 2026)"
     entetes={["Ampleur", "Travaux types", "Prix TTC / m²", "Maison de 100 m²"]}
     lignes={[
-      ["Rafraîchissement", "Peintures, sols, remise en sécurité électrique partielle", "400 à 900 €", "40 000 à 90 000 €"],
-      ["Rénovation complète", "Électricité et plomberie neuves, cloisons, pièces d'eau, isolation biosourcée, menuiseries", "1 000 à 1 800 €", "100 000 à 180 000 €"],
-      ["Rénovation lourde", "Charpente, couverture, assainissement des maçonneries, isolation globale, pompe à chaleur", "1 900 à 3 200 €", "190 000 à 320 000 €"],
+      ["Rafraîchissement", "Peintures, sols, petites reprises", "250 à 500 €", "25 000 à 50 000 €"],
+      ["Rénovation partielle", "Une ou deux pièces refaites, remise en sécurité électrique, menuiseries", "500 à 800 €", "50 000 à 80 000 €"],
+      ["Rénovation complète", "Électricité et plomberie neuves, cloisons, pièces d'eau, isolation", "800 à 1 200 €", "80 000 à 120 000 €"],
+      ["Rénovation lourde", "Charpente, couverture, assainissement des maçonneries, isolation globale, chauffage", "1 100 à 2 000 €", "110 000 à 200 000 €"],
     ]}
-    note="Fourchettes indicatives, hors aides. Elles ne remplacent pas les devis détaillés des entreprises, établis après visite."
+    note="Repères de prix publiés par hemea pour la rénovation d'une maison ancienne (<a href='https://www.hemea.com/fr/renovation/maison/ancienne' target='_blank' rel='noopener noreferrer'>hemea.com</a>). Fourchettes indicatives, hors aides : elles ne remplacent pas les devis détaillés des entreprises, établis après visite."
   />
   <h3>Ce qui fait varier le prix</h3>
   <ul>
