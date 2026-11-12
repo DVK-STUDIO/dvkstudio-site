@@ -1,6 +1,7 @@
 // Redirections des anciennes URL (GitHub Pages ne permet pas de 301) : pages minimales (sans noindex, pour transmettre leurs signaux) avec refresh,
 // canonical vers la nouvelle adresse et JavaScript de secours. Génère public/<ancien>.html.
 import { writeFileSync, mkdirSync } from "node:fs";
+import { dirname } from "node:path";
 const correspondances = {
   "particuliers.html": "/travaux/",
   "professionnels.html": "/professionnels/",
@@ -11,10 +12,13 @@ const correspondances = {
   "confidentialite.html": "/confidentialite/",
   "cgv.html": "/mentions-legales/", // page /cgv/ retirée
   "merci.html": "/merci/",
+  // Article fusionné le 12/11/2026 dans le guide maison ancienne (doublon de sujet).
+  "blog/renovation-maison-ancienne-oise/index.html": "/blog/renover-maison-ancienne-oise-somme-guide-2026/",
 };
 mkdirSync("public", { recursive: true });
 for (const [ancien, nouveau] of Object.entries(correspondances)) {
   const url = `https://dvkstudio.fr${nouveau}`;
+  mkdirSync(dirname(`public/${ancien}`), { recursive: true });
   writeFileSync(
     `public/${ancien}`,
     `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Cette page a déménagé | DVK Studio</title><link rel="canonical" href="${url}"><meta http-equiv="refresh" content="0; url=${nouveau}"><script>location.replace(${JSON.stringify(nouveau)});</script></head><body><p>Cette page a déménagé : <a href="${nouveau}">${url}</a></p></body></html>\n`
