@@ -18,10 +18,8 @@ const sitemap = [];
 if (existsSync(join(dist, "sitemap-0.xml"))) for (const m of readFileSync(join(dist, "sitemap-0.xml"), "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)) sitemap.push(m[1]);
 const robots = existsSync(join(dist, "robots.txt")) ? readFileSync(join(dist, "robots.txt"), "utf8") : "";
 
-// Anciennes URL du site V1 : chaque page doit mener quelque part. Les fichiers listés ici sont abandonnés EXPRÈS
-// (téléchargement public d'un dossier de documents : hygiène, voir docs/avant-mise-en-ligne.md).
-const ABANDONNEES = new Set(["download", "files.zip", "index.html"]);
-const ancien = existsSync("legacy") ? readdirSync("legacy").filter((f) => f.endsWith(".html") && !ABANDONNEES.has(f)) : [];
+// Anciennes URL du site V1 (l'ancien site a été retiré du dépôt le 12/11/2026) : chaque page doit mener quelque part.
+const ancien = ["a-propos.html", "cgv.html", "confidentialite.html", "contact.html", "mentions-legales.html", "merci.html", "particuliers.html", "professionnels.html", "realisations.html"];
 
 const liens = verifierLiens(pages, existeFichier);
 const seo = verifierSeo(pages, { sitemap, robots, ancien });

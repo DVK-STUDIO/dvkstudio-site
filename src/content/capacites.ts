@@ -5,7 +5,7 @@
 //                   « je rejoins le réseau » (si c'est exact), mais ne présente JAMAIS Kevin comme professionnel
 //                   immobilier, ni mandat, ni avis de valeur, ni honoraires, ni mention réglementaire.
 //   "mandataire"  : page définitive. VERROUILLÉ : le build échoue tant que `reglementaire` (src/content/iad.ts)
-//                   n'est pas complet et `valide`. Voir docs/mise-en-ligne.md, section « Activer le mode mandataire ».
+//                   n'est pas complet et `valide`. Procédure d'activation : archives internes (hors dépôt).
 //
 // Le contrôle `npm run check:capacites` lit cette valeur et vérifie le site construit selon la matrice du mode.
 export type ModeImmobilier = "off" | "orientation" | "mandataire";

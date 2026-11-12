@@ -62,7 +62,7 @@ if (/mode:\s*"orientation"/.test(readFileSync("src/content/capacites.ts", "utf8"
 humains.push("Mention officielle CM2C, conformité à la charte de communication hemea, dernière vérification visuelle, GO de déploiement");
 humains.push("Tarifs : non repris tant qu'ils ne sont pas confirmés (aucune action si non confirmés)");
 humains.push("Logos et partenaires : non repris tant que l'autorisation n'est pas obtenue");
-humains.push("Check-list de docs/mise-en-ligne.md à relire et signer");
+humains.push("Check-list de mise en ligne (archives internes) à relire et signer");
 
 const technique = etapes.every((e) => e.ok);
 console.log("\n" + "=".repeat(60));
