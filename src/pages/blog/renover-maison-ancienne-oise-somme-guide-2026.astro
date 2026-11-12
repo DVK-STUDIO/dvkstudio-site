@@ -2,6 +2,7 @@
 import FicheConseil from "../../components/fiche/FicheConseil.astro";
 import Encadre from "../../components/fiche/Encadre.astro";
 import Tableau from "../../components/fiche/Tableau.astro";
+import AmbassadorCallout from "../../components/AmbassadorCallout.astro";
 
 const enResume = [
   "<strong>Budget indicatif :</strong> de 400 € à 3 200 € TTC/m² selon l'ampleur des travaux, soit environ 40 000 € à 320 000 € pour une maison de 100 m².",
@@ -43,6 +44,7 @@ const faq = [
   sommaire={sommaire}
   faq={faq}
   bouton="blog_guide_2026"
+  zebre={{ pose: "conseil", titre: "Commencez par le toit et par l'eau", texte: "Avant de choisir un isolant ou une pompe à chaleur, faites vérifier la toiture et l'humidité des murs. C'est là que se cachent les vraies surprises de budget dans une maison ancienne." }}
 >
   <p slot="chapo">
     Longère, corps de ferme, maison de bourg en brique : le bâti ancien de l'Oise et de la Somme a du caractère, mais il ne se rénove pas comme une maison récente.
@@ -93,6 +95,12 @@ const faq = [
     <li><strong>Finitions :</strong> sols, peintures, cuisine et salle de bains.</li>
   </ol>
 
+  <AmbassadorCallout
+    pose="terrain"
+    title="Trouver la source avant de traiter"
+    quote="Une tache d'humidité en bas de mur ne se règle pas avec un enduit neuf. On cherche d'abord d'où vient l'eau : gouttière, pente du terrain, sol trop haut contre la façade."
+  />
+
   <h2 id="isolation">Comment isoler un mur en brique, pierre ou torchis sans piéger l'humidité ?</h2>
   <p>
     Sur un mur ancien, l'isolant doit laisser passer la vapeur d'eau. Les isolants étanches comme le polystyrène sont à proscrire : l'humidité condense contre la maçonnerie froide.
@@ -115,6 +123,12 @@ const faq = [
   <Encadre source="Anah, panorama des aides 2026" lien="https://www.anah.gouv.fr/document/panorama-des-aides-2026">
     <p>Depuis 2026, la rénovation d'ampleur aidée par MaPrimeRénov' ne concerne plus que les logements classés E, F ou G. Un DPE à jour est donc la première pièce à réunir.</p>
   </Encadre>
+
+  <AmbassadorCallout
+    pose="reflexion"
+    title="Un DPE à jour, en premier"
+    quote="Votre DPE date de plus de quelques années ? Faites-le refaire avant tout dossier d'aide : c'est lui qui ouvre, ou ferme, la porte de MaPrimeRénov'."
+  />
 
   <h2 id="etapes">Comment se déroule l'accompagnement, étape par étape ?</h2>
   <ol>

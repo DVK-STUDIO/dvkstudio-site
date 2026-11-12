@@ -6,6 +6,7 @@ import Base from "../../layouts/Base.astro";
 import Faq from "../Faq.astro";
 import BoutonRdv from "../BoutonRdv.astro";
 import PremierEchange from "../PremierEchange.astro";
+import AmbassadorCallout from "../AmbassadorCallout.astro";
 
 interface Props {
   titre: string;            // balise <title> (≤ 60 caractères conseillés)
@@ -22,8 +23,11 @@ interface Props {
   faq: { q: string; r: string }[];
   bouton: string;           // identifiant de suivi du bouton de rendez-vous
   appel?: string;           // phrase de l'encadré final
+  // Le Zèbre, ambassadeur DVK Studio : « l'astuce à retenir » de la fiche, affichée après le résumé.
+  // D'autres interventions du Zèbre peuvent être placées dans le corps avec <AmbassadorCallout />.
+  zebre: { pose?: "accueil" | "conseil" | "terrain" | "reflexion"; titre: string; texte: string };
 }
-const { titre, description, chemin, h1, surtitre, fil, publie, majLe, lecture, enResume, sommaire, faq, bouton,
+const { titre, description, chemin, h1, surtitre, fil, publie, majLe, lecture, enResume, sommaire, faq, bouton, zebre,
   appel = "Vous avez un projet dans l'Oise ou la Somme ? Échangeons 30 minutes en visio pour le cadrer, sans engagement." } = Astro.props;
 
 const date = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
@@ -54,6 +58,8 @@ const schema = { "@type": "Article", "headline": h1, "description": description,
         <ul>{enResume.map((p) => <li set:html={p} />)}</ul>
       </aside>
 
+      <AmbassadorCallout pose={zebre.pose ?? "conseil"} title={zebre.titre} quote={zebre.texte} />
+
       <nav class="sommaire" aria-labelledby="t-sommaire">
         <h2 id="t-sommaire">Sommaire</h2>
         <ol>
@@ -70,6 +76,7 @@ const schema = { "@type": "Article", "headline": h1, "description": description,
       </section>
 
       <div class="appel">
+        <img src="/images/avatar/avatar-zebre-accueil.webp" alt="Le Zèbre, ambassadeur DVK Studio" width="72" height="72" loading="lazy" decoding="async" class="appel-zebre" />
         <p>{appel}</p>
         <BoutonRdv bouton={bouton}>Faire le point · 30 min</BoutonRdv>
       </div>
@@ -103,5 +110,6 @@ const schema = { "@type": "Article", "headline": h1, "description": description,
   .fiche-faq { margin-top: 48px; }
   .fiche-faq h2 { margin-bottom: 16px; scroll-margin-top: 96px; }
   .appel { background: var(--dvk-surface-raised); border: 1px solid var(--dvk-border); border-radius: var(--dvk-radius-md); padding: 24px; margin-top: 40px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
-  .appel p { margin: 0; font-weight: 500; max-width: 52ch; }
+  .appel p { margin: 0; font-weight: 500; max-width: 46ch; flex: 1 1 240px; }
+  .appel-zebre { width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--dvk-border); object-fit: cover; flex: none; }
 </style>
